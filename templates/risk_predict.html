@@ -1,0 +1,202 @@
+{% extends "base.html" %}
+{% block title %}风险预测 - 智能电表质量管控系统{% endblock %}
+{% block page_title %}质量风险预测{% endblock %}
+
+{% block topbar_actions %}
+<button class="btn btn-sm btn-accent" onclick="batchPredict()"><i class="bi bi-lightning me-1"></i>批量重新预测</button>
+{% endblock %}
+
+{% block content %}
+<div class="row g-4">
+  <!-- 左侧：单次预测表单 -->
+  <div class="col-md-4">
+    <div class="card h-100">
+      <div class="card-header primary"><i class="bi bi-shield-check me-2"></i>单次风险预测</div>
+      <div class="card-body">
+        <p class="text-muted small">输入电表关键参数，实时获取风险评估</p>
+        <div class="mb-3">
+          <label class="form-label">晶振频率误差 (ppm)</label>
+          <input type="number" class="form-control" id="p_crystal_ppm" value="9" step="0.1" min="0" max="30">
+          <div class="form-text">限值：±20ppm</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">互感器比差 (%)</label>
+          <input type="number" class="form-control" id="p_ct_ratio" value="0.5" step="0.01">
+          <div class="form-text">限值：±1.0%</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">出厂时钟准确度 (s/d)</label>
+          <input type="number" class="form-control" id="p_clock" value="0.03" step="0.001">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">初始基本误差最大值 (%)</label>
+          <input type="number" class="form-control" id="p_init_err" value="0.1" step="0.001">
+        </div>
+        <div class="mb-3">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="p_fault">
+            <label class="form-check-label">出厂时有故障记录</label>
+          </div>
+        </div>
+        <button class="btn btn-primary w-100" onclick="singlePredict()">
+          <i class="bi bi-cpu me-2"></i>预测
+        </button>
+
+        <!-- 预测结果 -->
+        <div id="predictResult" class="mt-3" style="display:none;">
+          <div class="card p-3" style="background:#f8fafc;">
+            <div class="text-center mb-3">
+              <div id="riskMeter" style="height:150px;"></div>
+            </div>
+            <div class="text-center">
+              <div id="riskLevelText" class="fs-5 fw-bold mb-1"></div>
+              <div id="riskProbText" class="text-muted small"></div>
+              <div id="modelVersionText" class="text-muted" style="font-size:11px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 右侧：全体预测结果表格 -->
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header primary d-flex justify-content-between align-items-center">
+        <span>全体电表风险评估结果</span>
+        {% if active_model %}
+        <span class="badge bg-light text-primary small">{{ active_model.version_tag }}</span>
+        {% endif %}
+      </div>
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-hover mb-0">
+            <thead>
+              <tr>
+                <th>电表编号</th>
+                <th>晶振误差(ppm)</th>
+                <th>互感器比差(%)</th>
+                <th>预测概率</th>
+                <th>预测结果</th>
+                <th>实际标签</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody id="predTableBody">
+              {% for c in chain_list %}
+              <tr>
+                <td><strong>#{{ c.meter_no }}</strong></td>
+                <td>
+                  {% if c.crystal_ppm is not none %}
+                  <span class="{% if c.crystal_ppm > 15 %}text-warning fw-bold{% endif %}">{{ "%.1f"|format(c.crystal_ppm) }}</span>
+                  {% else %}--{% endif %}
+                </td>
+                <td>
+                  {% if c.ct_ratio_err is not none %}
+                  <span class="{% if c.ct_ratio_err > 0.8 %}text-danger fw-bold{% endif %}">{{ "%.2f"|format(c.ct_ratio_err) }}</span>
+                  {% else %}--{% endif %}
+                </td>
+                <td>
+                  <div style="display:flex;align-items:center;gap:6px;">
+                    <div class="risk-bar" style="width:60px;">
+                      <div class="risk-bar-fill" style="width:{{ ((c.predicted_risk or 0)*100)|int }}%;
+                        background:{% if (c.predicted_risk or 0) >= 0.7 %}#e74c3c{% elif (c.predicted_risk or 0) >= 0.4 %}#f0a500{% else %}#27ae60{% endif %}">
+                      </div>
+                    </div>
+                    <span class="small">{{ "%.1f"|format((c.predicted_risk or 0)*100) }}%</span>
+                  </div>
+                </td>
+                <td>
+                  {% set p = c.predicted_risk or 0 %}
+                  {% if c.predicted_label == 1 or p >= 0.5 %}
+                    <span class="badge-risk-high">高风险</span>
+                  {% else %}
+                    <span class="badge-risk-low">正常</span>
+                  {% endif %}
+                </td>
+                <td>
+                  {% if c.quality_label == 1 %}
+                    <span class="badge-risk-high">高风险</span>
+                  {% else %}
+                    <span class="badge-risk-low">正常</span>
+                  {% endif %}
+                </td>
+                <td>
+                  <a href="/rootcause?meter={{ c.meter_no }}" class="btn btn-sm btn-outline-primary py-0">追溯</a>
+                </td>
+              </tr>
+              {% endfor %}
+              {% if not chain_list %}
+              <tr><td colspan="7" class="text-center text-muted py-4">暂无数据</td></tr>
+              {% endif %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+let riskMeterChart = null;
+
+async function singlePredict() {
+  const features = {
+    crystal_ppm: parseFloat(document.getElementById('p_crystal_ppm').value) || 9,
+    ct_ratio_err: parseFloat(document.getElementById('p_ct_ratio').value) || 0.5,
+    clock_accuracy_sd: parseFloat(document.getElementById('p_clock').value) || 0.03,
+    initial_error_max: parseFloat(document.getElementById('p_init_err').value) || 0.1,
+    factory_fault: document.getElementById('p_fault').checked,
+  };
+  showLoading('预测中...');
+  try {
+    const res = await postJson('/predict/single', features);
+    hideLoading();
+    document.getElementById('predictResult').style.display = 'block';
+
+    // 仪表盘图
+    if (!riskMeterChart) {
+      riskMeterChart = echarts.init(document.getElementById('riskMeter'));
+    }
+    const prob = (res.risk_prob || 0) * 100;
+    riskMeterChart.setOption({
+      series: [{
+        type: 'gauge', min: 0, max: 100, radius: '90%',
+        startAngle: 200, endAngle: -20,
+        axisLine: { lineStyle: { width: 16, color: [[0.4,'#27ae60'],[0.7,'#f0a500'],[1,'#e74c3c']] } },
+        pointer: { length: '70%', width: 5 },
+        detail: { formatter: `{value}%`, fontSize: 20, color: 'auto', offsetCenter: [0, '70%'] },
+        data: [{ value: prob.toFixed(1) }],
+        axisTick: { show: false }, splitLine: { show: false },
+        axisLabel: { show: false }
+      }]
+    });
+
+    const levelMap = {'低':'badge-risk-low text-success','中':'badge-risk-mid text-warning','高':'badge-risk-high text-danger'};
+    document.getElementById('riskLevelText').innerHTML = `风险等级：<span class="${levelMap[res.risk_level] || ''}">${res.risk_level}风险</span>`;
+    document.getElementById('riskProbText').textContent = `预测概率：${(res.risk_prob*100).toFixed(1)}%`;
+    document.getElementById('modelVersionText').textContent = `模型版本：${res.model_version || '规则引擎'}`;
+  } catch(e) {
+    hideLoading();
+    alert('预测失败：' + e.message);
+  }
+}
+
+async function batchPredict() {
+  showLoading('批量预测中...');
+  try {
+    const res = await postJson('/predict/batch', {});
+    hideLoading();
+    if (res.success) {
+      alert(`批量预测完成，共 ${res.results.length} 条结果`);
+      location.reload();
+    }
+  } catch(e) {
+    hideLoading();
+    alert('预测失败：' + e.message);
+  }
+}
+</script>
+{% endblock %}

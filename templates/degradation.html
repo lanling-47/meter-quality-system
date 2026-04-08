@@ -1,0 +1,233 @@
+{% extends "base.html" %}
+{% block title %}退化分析 - 智能电表质量管控系统{% endblock %}
+{% block page_title %}退化曲线分析{% endblock %}
+
+{% block content %}
+<div class="row g-4">
+  <!-- 左侧：电表列表 -->
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header primary"><i class="bi bi-graph-down me-2"></i>电表退化概览</div>
+      <div class="card-body p-0" style="max-height:calc(100vh - 200px);overflow-y:auto;">
+        <table class="table table-hover table-sm mb-0">
+          <thead>
+            <tr>
+              <th>电表</th>
+              <th>末期误差</th>
+              <th>退化模式</th>
+              <th>状态</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for s in summaries %}
+            <tr onclick="loadDegradation({{ s.meter_no }})" style="cursor:pointer;" id="drow-{{ s.meter_no }}">
+              <td><strong>#{{ s.meter_no }}</strong></td>
+              <td>
+                {% if s.final_error_max is not none %}
+                <span class="{% if s.final_error_max > 0.5 %}text-danger fw-bold{% endif %}">
+                  {{ "%.3f"|format(s.final_error_max) }}%
+                </span>
+                {% else %}--{% endif %}
+              </td>
+              <td><span class="text-muted" style="font-size:10px;">{{ s.trend_type or '--' }}</span></td>
+              <td>
+                {% if s.risk_label == 1 %}
+                <span class="badge-risk-high" style="font-size:11px;">高风险</span>
+                {% else %}
+                <span class="badge-risk-low" style="font-size:11px;">正常</span>
+                {% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- 右侧：退化曲线 -->
+  <div class="col-md-8">
+    <div class="card mb-3">
+      <div class="card-header primary d-flex justify-content-between">
+        <span id="degTitle"><i class="bi bi-graph-down me-2"></i>退化曲线分析</span>
+        <span id="degMeta" class="text-white-50 small"></span>
+      </div>
+      <div class="card-body" id="degContent">
+        <div class="text-center text-muted py-5">
+          <i class="bi bi-graph-down fs-1 d-block mb-2 opacity-25"></i>
+          请在左侧选择电表查看退化曲线
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-3" id="chartsRow" style="display:none!important;">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header" style="background:#f8fafc;font-size:13px;font-weight:600;">
+            基本误差退化曲线（含线性趋势拟合线 & 超差阈值）
+          </div>
+          <div class="card-body p-2">
+            <div id="errorChart" style="height:260px;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header" style="background:#f8fafc;font-size:13px;font-weight:600;">
+            时钟偏差曲线（与北京时间差值 s | 警戒线 ±10s）
+          </div>
+          <div class="card-body p-2">
+            <div id="clockChart" style="height:200px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+let errorChart = null;
+let clockChart = null;
+
+async function loadDegradation(meterNo) {
+  document.querySelectorAll('tr[id^="drow-"]').forEach(r => r.style.background = '');
+  const row = document.getElementById('drow-' + meterNo);
+  if (row) row.style.background = '#eef4ff';
+
+  document.getElementById('degTitle').innerHTML = `<i class="bi bi-graph-down me-2"></i>电表 #${meterNo} 退化分析`;
+  showLoading('加载退化数据...');
+
+  try {
+    const res = await fetch('/degradation/' + meterNo);
+    const data = await res.json();
+    hideLoading();
+
+    if (data.error) {
+      document.getElementById('degContent').innerHTML = `<div class="alert alert-warning">${data.error}</div>`;
+      return;
+    }
+
+    const s = data.stats || {};
+    const trend = data.trend_type || '--';
+
+    document.getElementById('degContent').innerHTML = `
+      <div class="row g-3">
+        <div class="col-sm-3">
+          <div class="card p-3 text-center" style="background:#f8fafc;">
+            <div class="fw-bold text-primary" style="font-size:20px;">${s.initial_error ?? '--'}%</div>
+            <div class="text-muted small">初始最大误差</div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="card p-3 text-center" style="background:#f8fafc;">
+            <div class="fw-bold ${s.final_error > 0.5 ? 'text-danger' : 'text-success'}" style="font-size:20px;">${s.final_error ?? '--'}%</div>
+            <div class="text-muted small">末期最大误差</div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="card p-3 text-center" style="background:#f8fafc;">
+            <div class="fw-bold text-info" style="font-size:20px;">${s.slope != null ? (s.slope * 100).toFixed(4) : '--'}</div>
+            <div class="text-muted small">退化斜率 (%/h)</div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="card p-3 text-center" style="background:#f8fafc;">
+            <div class="fw-bold text-secondary" style="font-size:13px;line-height:1.4;">${trend}</div>
+            <div class="text-muted small">退化模式</div>
+          </div>
+        </div>
+      </div>
+      <div class="row g-3 mt-0">
+        <div class="col-sm-3">
+          <div class="card p-3 text-center" style="background:#f8fafc;">
+            <div class="fw-bold" style="font-size:20px;color:${Math.abs(s.final_clock || 0) > 10 ? '#e74c3c' : '#27ae60'};">${s.final_clock ?? '--'} s</div>
+            <div class="text-muted small">末期时钟偏差</div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="card p-3 text-center" style="background:#f8fafc;">
+            <div class="fw-bold text-warning" style="font-size:20px;">${s.max_clock ?? '--'} s</div>
+            <div class="text-muted small">最大时钟偏差</div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="card p-3 text-center" style="background:#f8fafc;">
+            <div class="fw-bold" style="font-size:18px;">${s.r2 != null ? s.r2.toFixed(3) : '--'}</div>
+            <div class="text-muted small">拟合 R²</div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="card p-3 text-center" style="background:#f8fafc;">
+            <div class="fw-bold ${s.error_change > 0 ? 'text-danger' : 'text-success'}" style="font-size:18px;">${s.error_change != null ? (s.error_change > 0 ? '+' : '') + s.error_change.toFixed(4) : '--'}%</div>
+            <div class="text-muted small">误差变化量</div>
+          </div>
+        </div>
+      </div>`;
+
+    document.getElementById('chartsRow').style.removeProperty('display');
+
+    // 误差退化曲线
+    if (!errorChart) errorChart = echarts.init(document.getElementById('errorChart'));
+    const cd = data.chart_data;
+    const series = [
+      {
+        name: '实测误差', type: 'line', data: cd.error_line, symbol: 'circle', symbolSize: 9,
+        lineStyle: { width: 2.5, color: '#1a3a5c' },
+        itemStyle: { color: v => v.value > 0.5 ? '#e74c3c' : '#1a3a5c' },
+        areaStyle: { color: 'rgba(26,58,92,0.06)' }
+      },
+      {
+        name: '超差阈值', type: 'line', data: cd.threshold_error,
+        lineStyle: { type: 'dashed', color: '#e74c3c', width: 1.5 },
+        symbol: 'none', itemStyle: { color: '#e74c3c' }
+      },
+    ];
+    if (cd.regression_line && cd.regression_line.length) {
+      series.push({
+        name: '趋势拟合', type: 'line', data: cd.regression_line,
+        lineStyle: { type: 'dotted', color: '#f0a500', width: 2 },
+        symbol: 'none', itemStyle: { color: '#f0a500' }
+      });
+    }
+    errorChart.setOption({
+      tooltip: { trigger: 'axis', formatter: p => p.map(s => `${s.seriesName}: ${s.value}%`).join('<br>') },
+      legend: { right: 0, top: 0, textStyle: { fontSize: 11 } },
+      grid: { left: 55, right: 20, top: 30, bottom: 45 },
+      xAxis: { type: 'category', data: cd.xAxis, axisLabel: { fontSize: 11 }, name: '测试时间点' },
+      yAxis: { type: 'value', name: '误差(%)', nameTextStyle: { fontSize: 11 } },
+      series
+    });
+
+    // 时钟偏差曲线
+    if (!clockChart) clockChart = echarts.init(document.getElementById('clockChart'));
+    clockChart.setOption({
+      tooltip: { trigger: 'axis' },
+      grid: { left: 55, right: 20, top: 20, bottom: 45 },
+      xAxis: { type: 'category', data: cd.xAxis, axisLabel: { fontSize: 11 }, name: '测试时间点' },
+      yAxis: { type: 'value', name: '偏差(s)', nameTextStyle: { fontSize: 11 } },
+      series: [
+        {
+          name: '时钟偏差', type: 'bar', data: data.clock_series,
+          itemStyle: { color: p => Math.abs(p.value) > 10 ? '#e74c3c' : '#5b9bd5', borderRadius: [4,4,0,0] }
+        },
+        { name: '+10s 警戒线', type: 'line', data: Array(cd.xAxis.length).fill(10), lineStyle: { type: 'dashed', color: '#e74c3c', width: 1.5 }, symbol: 'none' },
+        { name: '-10s 警戒线', type: 'line', data: Array(cd.xAxis.length).fill(-10), lineStyle: { type: 'dashed', color: '#e74c3c', width: 1.5 }, symbol: 'none' },
+      ]
+    });
+
+    document.getElementById('degMeta').textContent = `${data.time_points.length} 个检测时间点`;
+    window.addEventListener('resize', () => { errorChart?.resize(); clockChart?.resize(); });
+  } catch(e) {
+    hideLoading();
+    alert('加载失败：' + e.message);
+  }
+}
+
+const summaries = {{ summaries_json|safe }};
+if (summaries && summaries.length) {
+  window.addEventListener('load', () => loadDegradation(summaries[0].meter_no));
+}
+</script>
+{% endblock %}

@@ -1,0 +1,45 @@
+# Python 缓存
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+
+# 虚拟环境
+.venv/
+venv/
+env/
+.env
+
+# 开发工具
+.git/
+.gitignore
+.DS_Store
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# 本地数据库（Docker 中用 volume 持久化）
+meter_quality.db
+*.db-journal
+*.db-wal
+*.db-shm
+
+# 本地训练模型（Docker 中用 volume 持久化，或在容器中重新训练）
+ml_models/*.pkl
+
+# 测试
+tests/
+pytest.ini
+.pytest_cache/
+
+# 文档
+*.md
+docs/
+
+# CI/CD
+.github/

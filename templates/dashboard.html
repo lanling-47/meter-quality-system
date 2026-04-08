@@ -1,0 +1,284 @@
+{% extends "base.html" %}
+{% block title %}质量看板 - 智能电表质量管控系统{% endblock %}
+{% block page_title %}质量看板{% endblock %}
+
+{% block topbar_actions %}
+<button class="btn btn-sm btn-accent" onclick="trainModel()"><i class="bi bi-cpu me-1"></i>训练模型</button>
+{% endblock %}
+
+{% block content %}
+<!-- KPI 行 -->
+<div class="row g-3 mb-4">
+  <div class="col-md-3 col-sm-6">
+    <div class="kpi-card">
+      <div class="d-flex align-items-start justify-content-between">
+        <div>
+          <div class="kpi-value">{{ stats.total }}</div>
+          <div class="kpi-label">老化试验电表总数</div>
+        </div>
+        <div class="kpi-icon" style="background:#1a3a5c;"><i class="bi bi-speedometer2"></i></div>
+      </div>
+      <i class="bi bi-speedometer2 kpi-bg"></i>
+    </div>
+  </div>
+  <div class="col-md-3 col-sm-6">
+    <div class="kpi-card">
+      <div class="d-flex align-items-start justify-content-between">
+        <div>
+          <div class="kpi-value" style="color:#e74c3c;">{{ stats.high_risk }}</div>
+          <div class="kpi-label">高风险电表数</div>
+        </div>
+        <div class="kpi-icon" style="background:#e74c3c;"><i class="bi bi-exclamation-circle"></i></div>
+      </div>
+      <i class="bi bi-exclamation-circle kpi-bg"></i>
+    </div>
+  </div>
+  <div class="col-md-3 col-sm-6">
+    <div class="kpi-card">
+      <div class="d-flex align-items-start justify-content-between">
+        <div>
+          <div class="kpi-value" style="color:#27ae60;">{{ stats.normal }}</div>
+          <div class="kpi-label">质量正常电表数</div>
+        </div>
+        <div class="kpi-icon" style="background:#27ae60;"><i class="bi bi-check-circle"></i></div>
+      </div>
+      <i class="bi bi-check-circle kpi-bg"></i>
+    </div>
+  </div>
+  <div class="col-md-3 col-sm-6">
+    <div class="kpi-card">
+      <div class="d-flex align-items-start justify-content-between">
+        <div>
+          <div class="kpi-value" style="color:#f0a500;">{{ stats.aging_count }}</div>
+          <div class="kpi-label">老化试验记录数</div>
+        </div>
+        <div class="kpi-icon" style="background:#f0a500;"><i class="bi bi-database"></i></div>
+      </div>
+      <i class="bi bi-database kpi-bg"></i>
+    </div>
+  </div>
+</div>
+
+<!-- 数据概览行 -->
+<div class="row g-3 mb-4">
+  <div class="col-md-2 col-sm-4">
+    <div class="card text-center p-3">
+      <div class="fs-5 fw-bold text-primary">{{ stats.crystal_count }}</div>
+      <div class="text-muted small">晶振检测记录</div>
+    </div>
+  </div>
+  <div class="col-md-2 col-sm-4">
+    <div class="card text-center p-3">
+      <div class="fs-5 fw-bold text-primary">{{ stats.factory_count }}</div>
+      <div class="text-muted small">出厂检测记录</div>
+    </div>
+  </div>
+  <div class="col-md-2 col-sm-4">
+    <div class="card text-center p-3">
+      <div class="fs-5 fw-bold text-primary">{% if stats.avg_ppm %}{{ stats.avg_ppm }} ppm{% else %}--{% endif %}</div>
+      <div class="text-muted small">平均晶振频偏</div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    {% if active_model %}
+    <div class="card p-3">
+      <div class="d-flex align-items-center gap-2 mb-1">
+        <span class="badge bg-success">激活模型</span>
+        <strong class="small">{{ active_model.version_tag }}</strong>
+      </div>
+      <div class="row g-2">
+        <div class="col-4">
+          <div class="text-muted" style="font-size:11px;">类型</div>
+          <div class="fw-semibold small">{{ active_model.model_type }}</div>
+        </div>
+        <div class="col-4">
+          <div class="text-muted" style="font-size:11px;">AUC</div>
+          <div class="fw-semibold small text-success">{{ "%.3f"|format(active_model.auc_score) if active_model.auc_score else "--" }}</div>
+        </div>
+        <div class="col-4">
+          <div class="text-muted" style="font-size:11px;">F1</div>
+          <div class="fw-semibold small text-primary">{{ "%.3f"|format(active_model.f1_score) if active_model.f1_score else "--" }}</div>
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <div class="card p-3 text-center text-muted small">
+      <i class="bi bi-cpu fs-4 d-block mb-1"></i>暂无激活模型，请点击右上角「训练模型」
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<!-- 图表行 -->
+<div class="row g-3 mb-4">
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header primary">质量风险分布</div>
+      <div class="card-body">
+        <div id="pieChart" class="chart-box" style="height:220px;"></div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header primary">各电表末期最大基本误差（%）</div>
+      <div class="card-body">
+        <div id="barChart" class="chart-box" style="height:220px;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 质量链路表格 -->
+<div class="card">
+  <div class="card-header primary d-flex align-items-center justify-content-between">
+    <span>质量链路总览</span>
+    <a href="/predict" class="btn btn-sm btn-accent">查看完整预测 →</a>
+  </div>
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover mb-0">
+        <thead>
+          <tr>
+            <th>电表编号</th>
+            <th>末期误差(%)</th>
+            <th>时钟漂移(s/d)</th>
+            <th>预测风险值</th>
+            <th>风险等级</th>
+            <th>标注原因</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for c in chain_list %}
+          <tr>
+            <td><strong>#{{ c.meter_no }}</strong></td>
+            <td>
+              {% if c.final_error_max is not none %}
+                <span class="{% if c.final_error_max > 0.5 %}text-danger fw-bold{% endif %}">
+                  {{ "%.4f"|format(c.final_error_max) }}
+                </span>
+              {% else %}--{% endif %}
+            </td>
+            <td>
+              {% if c.clock_drift_rate is not none %}
+                <span class="{% if c.clock_drift_rate > 0.35 %}text-warning fw-bold{% endif %}">
+                  {{ "%.3f"|format(c.clock_drift_rate) }}
+                </span>
+              {% else %}--{% endif %}
+            </td>
+            <td>
+              {% if c.predicted_risk is not none %}
+                <div class="risk-bar" style="width:80px;display:inline-block;vertical-align:middle;">
+                  <div class="risk-bar-fill"
+                    style="width:{{ (c.predicted_risk * 100)|int }}%;
+                    background:{% if c.predicted_risk >= 0.7 %}#e74c3c{% elif c.predicted_risk >= 0.4 %}#f0a500{% else %}#27ae60{% endif %}">
+                  </div>
+                </div>
+                <span class="ms-2 small">{{ "%.1f"|format(c.predicted_risk * 100) }}%</span>
+              {% else %}
+                <span class="text-muted small">未预测</span>
+              {% endif %}
+            </td>
+            <td>
+              {% if c.quality_label == 1 %}
+                <span class="badge-risk-high">高风险</span>
+              {% else %}
+                <span class="badge-risk-low">正常</span>
+              {% endif %}
+            </td>
+            <td class="text-muted small" style="max-width:200px;">{{ c.quality_reason or "--" }}</td>
+            <td>
+              <a href="/rootcause?meter={{ c.meter_no }}" class="btn btn-sm btn-outline-primary py-0">追溯</a>
+              <a href="/degradation/{{ c.meter_no }}" class="btn btn-sm btn-outline-secondary py-0">退化</a>
+            </td>
+          </tr>
+          {% endfor %}
+          {% if not chain_list %}
+          <tr><td colspan="7" class="text-center text-muted py-4">暂无数据，请先在「数据导入」页面导入数据</td></tr>
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- 训练结果 Toast -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index:9999;">
+  <div id="resultToast" class="toast" role="alert">
+    <div class="toast-header">
+      <i class="bi bi-cpu me-2 text-primary"></i>
+      <strong class="me-auto">训练结果</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+    </div>
+    <div class="toast-body" id="toastBody"></div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+const pieData = {{ pie_data|safe }};
+const barMeters = {{ bar_meters|safe }};
+const barErrors = {{ bar_errors|safe }};
+const barColors = {{ bar_colors|safe }};
+
+// 饼图
+const pie = echarts.init(document.getElementById('pieChart'));
+pie.setOption({
+  tooltip: { trigger: 'item', formatter: '{b}: {c} ({d}%)' },
+  legend: { bottom: 0, itemWidth: 12, itemHeight: 12, textStyle: { fontSize: 12 } },
+  series: [{
+    type: 'pie', radius: ['45%', '70%'], center: ['50%', '44%'],
+    data: [
+      { value: pieData[0]?.value || 0, name: '正常', itemStyle: { color: '#27ae60' } },
+      { value: pieData[1]?.value || 0, name: '高风险', itemStyle: { color: '#e74c3c' } },
+    ],
+    label: { show: true, formatter: '{b}\n{c}台' }
+  }]
+});
+
+// 柱状图
+const bar = echarts.init(document.getElementById('barChart'));
+bar.setOption({
+  tooltip: { trigger: 'axis', formatter: p => `电表 #${p[0].name}<br>末期误差：${p[0].value}%` },
+  grid: { left: 40, right: 20, top: 20, bottom: 60 },
+  xAxis: {
+    type: 'category', data: barMeters,
+    axisLabel: { rotate: 45, fontSize: 11 }
+  },
+  yAxis: { type: 'value', name: '误差(%)', nameTextStyle: { fontSize: 11 } },
+  series: [{
+    type: 'bar', data: barErrors.map((v, i) => ({ value: v, itemStyle: { color: barColors[i] } })),
+    label: { show: false },
+    markLine: {
+      data: [{ yAxis: 0.5, lineStyle: { color: '#e74c3c', type: 'dashed' }, label: { formatter: '超差阈值 0.5%' } }]
+    }
+  }]
+});
+
+window.addEventListener('resize', () => { pie.resize(); bar.resize(); });
+
+// 训练模型
+async function trainModel() {
+  showLoading('正在训练模型，请稍候...');
+  try {
+    const res = await postJson('/train', {});
+    hideLoading();
+    if (res.success) {
+      const r = res.result;
+      document.getElementById('toastBody').innerHTML =
+        `训练完成：样本数 ${r.n_samples}，高风险样本 ${r.n_positive}<br>` +
+        `AUC: <strong>${(r.auc_score||0).toFixed(3)}</strong>，F1: <strong>${(r.f1_score||0).toFixed(3)}</strong>`;
+      new bootstrap.Toast(document.getElementById('resultToast')).show();
+      setTimeout(() => location.reload(), 2000);
+    } else {
+      alert('训练失败：' + (res.message || res.error));
+    }
+  } catch(e) {
+    hideLoading();
+    alert('请求失败：' + e.message);
+  }
+}
+</script>
+{% endblock %}

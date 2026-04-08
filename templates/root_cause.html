@@ -1,0 +1,228 @@
+{% extends "base.html" %}
+{% block title %}根因追溯 - 智能电表质量管控系统{% endblock %}
+{% block page_title %}根因追溯分析{% endblock %}
+
+{% block content %}
+<div class="row g-4">
+  <!-- 左侧：全局特征重要度 + 电表选择 -->
+  <div class="col-md-4">
+    <div class="card mb-3">
+      <div class="card-header primary"><i class="bi bi-bar-chart me-2"></i>全局特征重要度（SHAP）</div>
+      <div class="card-body p-2">
+        <div id="importanceChart" style="height:260px;"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header primary"><i class="bi bi-list-check me-2"></i>选择电表</div>
+      <div class="card-body p-0">
+        <div style="max-height:320px;overflow-y:auto;">
+          <table class="table table-hover table-sm mb-0">
+            <thead><tr><th>电表号</th><th>标签</th><th>预测</th></tr></thead>
+            <tbody>
+              {% for m in meter_list %}
+              <tr onclick="explainMeter({{ m.meter_no }})" style="cursor:pointer;" id="row-{{ m.meter_no }}">
+                <td><strong>#{{ m.meter_no }}</strong></td>
+                <td>
+                  {% if m.quality_label == 1 %}
+                  <span class="badge-risk-high">高风险</span>
+                  {% else %}
+                  <span class="badge-risk-low">正常</span>
+                  {% endif %}
+                </td>
+                <td>
+                  {% set p = m.predicted_risk or 0 %}
+                  <span class="small {% if p >= 0.5 %}text-danger{% else %}text-success{% endif %}">{{ "%.0f"|format(p*100) }}%</span>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 右侧：SHAP 分析结果 -->
+  <div class="col-md-8">
+    <div class="card mb-3">
+      <div class="card-header primary d-flex justify-content-between">
+        <span id="explainTitle"><i class="bi bi-search me-2"></i>根因追溯结果</span>
+        <span id="explainMeta" class="text-white-50 small"></span>
+      </div>
+      <div class="card-body" id="explainContent">
+        <div class="text-center text-muted py-5">
+          <i class="bi bi-search fs-1 d-block mb-2 opacity-25"></i>
+          请在左侧选择电表编号进行根因追溯分析
+        </div>
+      </div>
+    </div>
+
+    <!-- SHAP 瀑布图 -->
+    <div class="card" id="waterfallCard" style="display:none;">
+      <div class="card-header primary">SHAP 贡献瀑布图（特征对风险预测的贡献分解）</div>
+      <div class="card-body p-2">
+        <div id="waterfallChart" style="height:280px;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+const globalImportance = {{ global_importance|safe }};
+
+// 全局特征重要度横向柱状图
+const impChart = echarts.init(document.getElementById('importanceChart'));
+if (globalImportance && globalImportance.length) {
+  const labels = globalImportance.slice().reverse().map(d => d.label);
+  const vals = globalImportance.slice().reverse().map(d => d.importance);
+  impChart.setOption({
+    tooltip: { trigger: 'axis', formatter: p => `${p[0].name}: ${p[0].value.toFixed(4)}` },
+    grid: { left: 140, right: 20, top: 10, bottom: 10 },
+    xAxis: { type: 'value', show: false },
+    yAxis: { type: 'category', data: labels, axisLabel: { fontSize: 11 } },
+    series: [{
+      type: 'bar', data: vals,
+      itemStyle: { color: '#1a3a5c', borderRadius: [0, 4, 4, 0] },
+      label: { show: true, position: 'right', fontSize: 10, formatter: p => p.value.toFixed(3) }
+    }]
+  });
+} else {
+  impChart.setOption({
+    title: { text: '请先训练模型', left: 'center', top: 'center', textStyle: { color: '#aaa', fontSize: 13 } }
+  });
+}
+
+let waterfallChart = null;
+
+async function explainMeter(meterNo) {
+  // 高亮选中行
+  document.querySelectorAll('tr[id^="row-"]').forEach(r => r.style.background = '');
+  const row = document.getElementById('row-' + meterNo);
+  if (row) row.style.background = '#eef4ff';
+
+  document.getElementById('explainTitle').innerHTML = `<i class="bi bi-search me-2"></i>电表 #${meterNo} 根因分析`;
+  showLoading('SHAP 分析中...');
+
+  try {
+    const res = await fetch('/rootcause/' + meterNo);
+    const data = await res.json();
+    hideLoading();
+
+    if (data.error) {
+      document.getElementById('explainContent').innerHTML = `<div class="alert alert-warning">${data.error}</div>`;
+      return;
+    }
+
+    // 基本信息
+    const prob = ((data.risk_prob || 0) * 100).toFixed(1);
+    const labelClass = data.quality_label == 1 ? 'danger' : 'success';
+    const labelText = data.quality_label == 1 ? '高风险' : '正常';
+    document.getElementById('explainMeta').textContent = `概率：${prob}% | 模型：${data.model_version || '--'}`;
+
+    // 贡献度排序条形图（内联渲染）
+    const contribs = data.contributions || [];
+    let contribHtml = `<div class="mb-3">
+      <span class="badge bg-${labelClass} me-2">${labelText}</span>
+      <span class="text-muted small">风险概率 ${prob}%</span>
+    </div>`;
+
+    contribs.forEach(c => {
+      const pct = Math.abs(c.shap / 0.5 * 100).toFixed(0);
+      const color = c.shap > 0 ? '#e74c3c' : '#27ae60';
+      const arrow = c.shap > 0 ? '↑' : '↓';
+      contribHtml += `
+      <div class="mb-2">
+        <div class="d-flex justify-content-between align-items-center mb-1">
+          <span class="small fw-semibold" style="width:180px;">${c.label}</span>
+          <span class="small text-muted" style="width:80px;">当前值：${c.value.toFixed(2)}</span>
+          <span class="small fw-bold" style="color:${color};">${arrow} ${c.shap > 0 ? '+' : ''}${c.shap.toFixed(4)}</span>
+        </div>
+        <div class="risk-bar">
+          <div class="risk-bar-fill" style="width:${Math.min(pct,100)}%;background:${color};"></div>
+        </div>
+      </div>`;
+    });
+
+    // 追溯报告文字
+    if (data.root_cause_text) {
+      const lines = data.root_cause_text.split('\n');
+      contribHtml += `<hr><div class="mt-2 small" style="line-height:1.8;">`;
+      lines.forEach(l => {
+        if (l.startsWith('📊') || l.startsWith('**')) {
+          contribHtml += `<div class="fw-bold text-primary">${l.replace(/\*\*/g,'')}</div>`;
+        } else if (l.startsWith('•')) {
+          contribHtml += `<div class="text-muted">${l}</div>`;
+        } else if (l.match(/^\d\./)) {
+          contribHtml += `<div style="margin-left:10px;">${l}</div>`;
+        } else if (l.trim()) {
+          contribHtml += `<div>${l}</div>`;
+        }
+      });
+      contribHtml += '</div>';
+    }
+
+    document.getElementById('explainContent').innerHTML = contribHtml;
+
+    // 瀑布图
+    const wf = data.waterfall_data;
+    if (wf && wf.items && wf.items.length) {
+      document.getElementById('waterfallCard').style.display = 'block';
+      if (!waterfallChart) {
+        waterfallChart = echarts.init(document.getElementById('waterfallChart'));
+      }
+      const cats = ['基准值', ...wf.items.map(i => i.name), '预测值'];
+      const starts = [null, ...wf.items.map(i => i.start), null];
+      const barVals = [wf.base_value, ...wf.items.map(i => Math.abs(i.shap)), wf.final_value];
+      const directions = [null, ...wf.items.map(i => i.direction), null];
+
+      waterfallChart.setOption({
+        tooltip: { trigger: 'axis', formatter: p => {
+          const i = p[0].dataIndex;
+          if (i === 0) return `基准值：${wf.base_value.toFixed(3)}`;
+          if (i === cats.length - 1) return `预测值：${wf.final_value.toFixed(3)}`;
+          const item = wf.items[i - 1];
+          return `${item.name}<br>贡献：${item.shap > 0 ? '+' : ''}${item.shap.toFixed(4)}`;
+        }},
+        grid: { left: 50, right: 20, top: 20, bottom: 80 },
+        xAxis: { type: 'category', data: cats, axisLabel: { rotate: 30, fontSize: 11 } },
+        yAxis: { type: 'value', name: '风险值', nameTextStyle: { fontSize: 11 } },
+        series: [
+          {
+            type: 'bar',
+            stack: 'waterfall',
+            itemStyle: { color: 'transparent' },
+            data: starts.map((s, i) => {
+              if (i === 0 || i === cats.length - 1) return null;
+              return { value: s < 0 ? 0 : s };
+            })
+          },
+          {
+            type: 'bar',
+            stack: 'waterfall',
+            data: barVals.map((v, i) => {
+              if (i === 0) return { value: wf.base_value, itemStyle: { color: '#1a3a5c', borderRadius: [4,4,0,0] } };
+              if (i === cats.length - 1) return { value: wf.final_value, itemStyle: { color: wf.final_value > 0.5 ? '#e74c3c' : '#27ae60', borderRadius: [4,4,0,0] } };
+              return { value: v, itemStyle: { color: directions[i] === 'up' ? '#e74c3c' : '#27ae60', borderRadius: [4,4,0,0] } };
+            }),
+            label: { show: true, position: 'top', fontSize: 10, formatter: p => p.value.toFixed(3) }
+          }
+        ]
+      });
+    }
+  } catch(e) {
+    hideLoading();
+    alert('分析失败：' + e.message);
+  }
+}
+
+// 从 URL 参数自动加载
+const urlParams = new URLSearchParams(window.location.search);
+const autoMeter = urlParams.get('meter');
+if (autoMeter) {
+  window.addEventListener('load', () => explainMeter(parseInt(autoMeter)));
+}
+</script>
+{% endblock %}

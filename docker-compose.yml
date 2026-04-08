@@ -1,0 +1,37 @@
+version: "3.9"
+
+services:
+  meter-quality:
+    image: meter-quality-system:latest
+    # 或从私有仓库拉取：image: registry.yourfactory.com/meter-quality-system:1.0.0
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: meter-quality-system
+    restart: unless-stopped
+    ports:
+      - "8090:8090"          # 宿主机端口:容器端口（可按工厂网络要求修改宿主机端口）
+    volumes:
+      # 持久化存储：数据库 + 训练模型（容器重启/升级后数据不丢失）
+      - meter_storage:/app/storage
+      # 原始数据目录：工厂可将 Excel 文件放入此目录后触发导入
+      - ./data/raw:/app/data/raw:ro
+    environment:
+      - DB_PATH=/app/storage/meter_quality.db
+      - ML_MODELS_DIR=/app/storage/ml_models
+      - PYTHONUNBUFFERED=1
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8090/dashboard"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"
+
+volumes:
+  meter_storage:
+    driver: local

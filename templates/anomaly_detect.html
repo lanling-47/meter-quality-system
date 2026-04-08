@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+{% block title %}异常检测 - 智能电表质量管控系统{% endblock %}
+{% block page_title %}用电异常检测{% endblock %}
+
+{% block content %}
+{% set stats = anomaly_data.stats %}
+<div class="row g-3 mb-4">
+  <div class="col-md-3 col-6">
+    <div class="kpi-card">
+      <div class="kpi-value">{{ stats.total if stats else 0 }}</div>
+      <div class="kpi-label">参与检测电表数</div>
+    </div>
+  </div>
+  <div class="col-md-3 col-6">
+    <div class="kpi-card">
+      <div class="kpi-value" style="color:#e74c3c;">{{ stats.anomaly_count if stats else 0 }}</div>
+      <div class="kpi-label">检测到异常台数</div>
+    </div>
+  </div>
+  <div class="col-md-3 col-6">
+    <div class="kpi-card">
+      <div class="kpi-value" style="color:#f0a500;">{{ stats.anomaly_rate if stats else 0 }}%</div>
+      <div class="kpi-label">异常率</div>
+    </div>
+  </div>
+  <div class="col-md-3 col-6">
+    <div class="kpi-card">
+      <div class="kpi-value" style="font-size:20px;color:#1a3a5c;">{{ stats.threshold_3sigma if stats else '--' }}</div>
+      <div class="kpi-label">3σ 误差阈值(%)</div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-4">
+  <!-- 左侧：散点/柱状图 -->
+  <div class="col-md-7">
+    <div class="card mb-3">
+      <div class="card-header primary">各电表末期基本误差（红色=异常）</div>
+      <div class="card-body p-2">
+        <div id="errorBarChart" style="height:260px;"></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header primary">各电表末期时钟偏差 | s（红色>10s为异常）</div>
+      <div class="card-body p-2">
+        <div id="clockBarChart" style="height:220px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 右侧：异常电表列表 & 单表趋势 -->
+  <div class="col-md-5">
+    <div class="card mb-3">
+      <div class="card-header primary"><i class="bi bi-exclamation-triangle me-2"></i>异常电表列表</div>
+      <div class="card-body p-0">
+        {% set anomaly_meters = anomaly_data.anomaly_meters %}
+        {% if anomaly_meters %}
+        <table class="table table-sm table-hover mb-0">
+          <thead><tr><th>电表</th><th>误差</th><th>异常类型</th><th>操作</th></tr></thead>
+          <tbody>
+            {% for m in anomaly_meters %}
+            <tr>
+              <td><strong>#{{ m.meter_no }}</strong></td>
+              <td class="text-danger fw-bold">{{ "%.3f"|format(m.final_error) }}%</td>
+              <td>
+                {% for a in m.anomaly_type %}
+                <div class="badge bg-warning text-dark" style="font-size:10px;display:block;margin-bottom:2px;">{{ a }}</div>
+                {% endfor %}
+              </td>
+              <td>
+                <button class="btn btn-sm btn-outline-primary py-0" onclick="loadTrend({{ m.meter_no }})">趋势</button>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <div class="text-center text-muted py-4 small">
+          <i class="bi bi-check-circle fs-2 d-block mb-2 text-success opacity-50"></i>
+          未检测到异常
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- 单表趋势 -->
+    <div class="card" id="trendCard" style="display:none;">
+      <div class="card-header primary" id="trendTitle">单表趋势</div>
+      <div class="card-body p-2">
+        <div id="trendChart" style="height:200px;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 统计信息 -->
+{% if stats %}
+<div class="card mt-3">
+  <div class="card-body small text-muted">
+    统计基准：均值误差 {{ stats.mean_error }}% | 标准差 {{ stats.std_error }}% | 3σ阈值 {{ stats.threshold_3sigma }}%
+    | 基本误差超差阈值（国家标准）0.5%
+  </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script>
+const chartData = {{ chart_data_json|safe }};
+let trendChart = null;
+
+// 误差柱状图
+const errBar = echarts.init(document.getElementById('errorBarChart'));
+errBar.setOption({
+  tooltip: { trigger: 'axis', formatter: p => `电表 #${p[0].name}<br>末期误差：${p[0].value}%` },
+  grid: { left: 45, right: 20, top: 20, bottom: 60 },
+  xAxis: { type: 'category', data: chartData.meter_nos || [], axisLabel: { rotate: 45, fontSize: 11 } },
+  yAxis: { type: 'value', name: '误差(%)', nameTextStyle: { fontSize: 11 } },
+  series: [{
+    type: 'bar',
+    data: (chartData.errors || []).map((v, i) => ({
+      value: v,
+      itemStyle: { color: chartData.colors ? chartData.colors[i] : '#2ecc71', borderRadius: [4,4,0,0] }
+    })),
+    markLine: {
+      data: [{ yAxis: 0.5, lineStyle: { color: '#e74c3c', type: 'dashed' }, label: { formatter: '0.5% 超差阈值', position: 'end' } }]
+    }
+  }]
+});
+
+// 时钟柱状图
+const clkBar = echarts.init(document.getElementById('clockBarChart'));
+clkBar.setOption({
+  tooltip: { trigger: 'axis', formatter: p => `电表 #${p[0].name}<br>时钟偏差：${p[0].value}s` },
+  grid: { left: 45, right: 20, top: 20, bottom: 60 },
+  xAxis: { type: 'category', data: chartData.meter_nos || [], axisLabel: { rotate: 45, fontSize: 11 } },
+  yAxis: { type: 'value', name: '偏差(s)', nameTextStyle: { fontSize: 11 } },
+  series: [{
+    type: 'bar',
+    data: (chartData.clocks || []).map((v, i) => ({
+      value: v,
+      itemStyle: { color: v > 10 ? '#e74c3c' : '#5b9bd5', borderRadius: [4,4,0,0] }
+    })),
+    markLine: {
+      data: [{ yAxis: 10, lineStyle: { color: '#e74c3c', type: 'dashed' }, label: { formatter: '10s 阈值' } }]
+    }
+  }]
+});
+
+window.addEventListener('resize', () => { errBar.resize(); clkBar.resize(); });
+
+async function loadTrend(meterNo) {
+  showLoading('加载趋势数据...');
+  const res = await fetch('/anomaly/' + meterNo);
+  const data = await res.json();
+  hideLoading();
+
+  if (data.error) { alert(data.error); return; }
+
+  document.getElementById('trendCard').style.display = 'block';
+  document.getElementById('trendTitle').textContent = `电表 #${meterNo} 误差趋势`;
+
+  if (!trendChart) trendChart = echarts.init(document.getElementById('trendChart'));
+  trendChart.setOption({
+    tooltip: { trigger: 'axis' },
+    grid: { left: 45, right: 20, top: 20, bottom: 50 },
+    xAxis: { type: 'category', data: data.time_labels, axisLabel: { fontSize: 10 } },
+    yAxis: { type: 'value', name: '误差(%)', nameTextStyle: { fontSize: 10 } },
+    series: [
+      { name: '基本误差', type: 'line', data: data.error_series, symbol: 'circle', symbolSize: 8,
+        lineStyle: { color: '#1a3a5c' }, itemStyle: { color: p => data.anomaly_points.some(a => a.time === data.time_labels[p.dataIndex]) ? '#e74c3c' : '#1a3a5c' } },
+      { name: '阈值', type: 'line', data: Array(data.time_labels.length).fill(0.5),
+        lineStyle: { type: 'dashed', color: '#e74c3c', width: 1 }, symbol: 'none' }
+    ]
+  });
+}
+</script>
+{% endblock %}

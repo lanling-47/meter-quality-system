@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+.Python
+
+# 虚拟环境
+.venv/
+venv/
+env/
+
+# 数据库（本地运行产生，不上传）
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+
+# 训练好的模型文件（体积大，通过系统内重新训练生成）
+ml_models/*.pkl
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Docker 导出镜像（体积大）
+*.tar.gz
+*.tar
+
+# 日志
+*.log
+logs/
+
+# 环境变量
+.env
+.env.local

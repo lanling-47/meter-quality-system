@@ -153,6 +153,127 @@ class QualityChain(Base):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
 
+class ProductionInspection(Base):
+    """生产过程工序检测记录（CCD/功能测试/耐压/复校）"""
+    __tablename__ = "production_inspection"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    barcode = Column(String(30), nullable=False, index=True, comment="电表条形码 ATXM")
+    order_no = Column(String(30), index=True, comment="订单号 DDH")
+    station_no = Column(String(20), comment="表位号 BWH")
+    process = Column(String(30), nullable=False, comment="工序名称 DQGX")
+    test_count = Column(Integer, default=1, comment="测试次数 JYCS")
+    result = Column(String(10), comment="结论（合格/不合格）JYJL")
+    test_time = Column(DateTime, comment="测试时间 JYRQ")
+    device_no = Column(String(30), comment="设备编号 JYZZ")
+    remark = Column(String(500), comment="不合格项备注 BZ")
+    leak_current = Column(Float, comment="漏电流 LDL（仅耐压工序）")
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    def to_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
+
+class AoiDefect(Base):
+    """AOI不合格/缺陷记录（贴片AOI + 波峰焊AOI）"""
+    __tablename__ = "aoi_defect"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    barcode = Column(String(30), nullable=False, index=True, comment="电表条形码 TXM")
+    order_no = Column(String(30), index=True, comment="订单号 DDH")
+    device_no = Column(String(30), comment="设备编号 SBBH")
+    defect_point = Column(String(50), comment="故障点 GZD")
+    defect_desc = Column(String(100), comment="故障描述 GZMS")
+    process_no = Column(String(20), comment="当前工序 DQGX")
+    detect_time = Column(DateTime, comment="检测时间 SJ")
+    aoi_type = Column(String(20), comment="AOI类型：smt贴片/wave波峰焊")
+    quality_risk = Column(String(200), comment="质量隐患描述（来自故障字典）")
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    def to_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
+
+class RepairRecord(Base):
+    """维修记录（含故障现象/原因/工序）"""
+    __tablename__ = "repair_record"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    barcode = Column(String(30), nullable=False, index=True, comment="电表条形码 TXM")
+    order_no = Column(String(30), index=True, comment="订单号 PCBM")
+    fault_code = Column(String(20), comment="故障现象代码 GZXXDM")
+    fault_name = Column(String(100), comment="故障现象名称 GZXXMC")
+    cause_code = Column(String(20), comment="故障原因代码 GZYYDM")
+    cause_name = Column(String(100), comment="故障原因名称 GZYYMC")
+    fault_location = Column(String(100), comment="故障地点 GZDD")
+    fault_process = Column(String(20), comment="故障工序 GZGX")
+    fault_time = Column(DateTime, comment="故障记录时间 GZJLSJ")
+    repair_time = Column(DateTime, comment="维修记录时间 WXJLSJ")
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    def to_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
+
+class BoardTestDetail(Base):
+    """单板详细测试记录（按测试项目展开）"""
+    __tablename__ = "board_test_detail"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    barcode = Column(String(30), nullable=False, index=True, comment="电表条形码 CS_TXM")
+    order_no = Column(String(30), index=True, comment="订单号 DDH")
+    scheme_name = Column(String(50), comment="方案名称 CS_XMM")
+    seq_no = Column(Integer, comment="顺序号 CS_XH")
+    test_item = Column(String(100), comment="测试项目 CS_XM")
+    result = Column(String(20), comment="结论 CS_JG")
+    test_data = Column(String(200), comment="测试数据 CS_DATA")
+    test_time = Column(DateTime, comment="测试时间 CS_DATE")
+    device_no = Column(String(30), comment="设备编号 GZBH")
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    def to_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
+
+class MeterQualityTrace(Base):
+    """电表全工序质量追溯汇总（每块电表一条记录）"""
+    __tablename__ = "meter_quality_trace"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    barcode = Column(String(30), nullable=False, unique=True, index=True, comment="电表条形码")
+    order_no = Column(String(30), index=True, comment="订单号")
+    # 工序通过情况
+    ccd_pass = Column(Boolean, comment="CCD检测通过")
+    ccd_retry_count = Column(Integer, default=0, comment="CCD重测次数")
+    hipot_pass = Column(Boolean, comment="耐压测试通过")
+    leak_current_max = Column(Float, comment="最大漏电流")
+    func_pass = Column(Boolean, comment="功能测试通过")
+    func_retry_count = Column(Integer, default=0, comment="功能测试重测次数")
+    func_fail_items = Column(Text, comment="功能测试不合格项 JSON列表")
+    reverify_pass = Column(Boolean, comment="复校通过")
+    reverify_retry_count = Column(Integer, default=0, comment="复校重测次数")
+    reverify_fail_items = Column(Text, comment="复校不合格项 JSON列表")
+    # AOI情况
+    smt_aoi_defect = Column(Boolean, default=False, comment="贴片AOI发现缺陷")
+    smt_aoi_defect_types = Column(Text, comment="贴片AOI缺陷类型 JSON")
+    wave_aoi_defect = Column(Boolean, default=False, comment="波峰焊AOI发现缺陷")
+    wave_aoi_defect_types = Column(Text, comment="波峰焊AOI缺陷类型 JSON")
+    # 维修情况
+    repaired = Column(Boolean, default=False, comment="是否经过维修")
+    repair_count = Column(Integer, default=0, comment="维修次数")
+    fault_processes = Column(Text, comment="故障工序列表 JSON")
+    fault_names = Column(Text, comment="故障现象列表 JSON")
+    # 最终结果
+    final_pass = Column(Boolean, comment="最终是否合格（所有工序均通过）")
+    total_retry_count = Column(Integer, default=0, comment="总重测次数")
+    quality_risk_score = Column(Float, comment="综合质量风险评分 0-1")
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    def to_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
+
 class ModelVersion(Base):
     """AI模型版本管理"""
     __tablename__ = "model_version"
@@ -171,3 +292,75 @@ class ModelVersion(Base):
 
     def to_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
+
+class DataIngestionLog(Base):
+    """
+    数据采集日志
+    记录每次文件轮询发现的新文件及解析结果
+    """
+    __tablename__ = "data_ingestion_log"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    file_name = Column(String(255), nullable=False, comment="文件名")
+    file_path = Column(String(500), comment="文件完整路径")
+    file_hash = Column(String(64), unique=True, index=True, comment="文件 MD5，用于去重")
+    data_type = Column(String(50), comment="数据类型 ccd/functest/reverify/hipot/aoi/repair/board_test")
+    record_count = Column(Integer, default=0, comment="解析到的总记录数")
+    new_count = Column(Integer, default=0, comment="本次新增记录数（去重后）")
+    status = Column(String(20), default="pending", comment="pending/reviewed/trained/error")
+    error_msg = Column(Text, comment="解析错误信息（如有）")
+    parsed_at = Column(DateTime, default=datetime.utcnow, comment="解析完成时间")
+    reviewed_at = Column(DateTime, nullable=True, comment="审核时间")
+    reviewed_by = Column(String(50), nullable=True, comment="审核人")
+    triggered_train = Column(Boolean, default=False, comment="是否已触发重训练")
+
+    def to_dict(self):
+        d = {c.name: getattr(self, c.name) for c in self.__table__.columns}
+        if d.get("parsed_at"):
+            d["parsed_at"] = d["parsed_at"].strftime("%Y-%m-%d %H:%M:%S")
+        if d.get("reviewed_at"):
+            d["reviewed_at"] = d["reviewed_at"].strftime("%Y-%m-%d %H:%M:%S")
+        return d
+
+
+class QualityLabelReview(Base):
+    """
+    质量标注人工审核队列
+    新数据自动打标后，进入此队列等待人工确认，
+    确认后纳入训练集
+    """
+    __tablename__ = "quality_label_review"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    barcode = Column(String(50), index=True, comment="条形码（生产数据主键）")
+    meter_no = Column(Integer, nullable=True, comment="电表编号（关联老化数据，可空）")
+    source = Column(String(50), comment="数据来源：file_watch/manual/import")
+    ingestion_log_id = Column(Integer, ForeignKey("data_ingestion_log.id"), nullable=True)
+
+    # 自动打标结果（来自当前激活模型）
+    auto_label = Column(Integer, comment="自动标注结果 0=正常 1=高风险")
+    auto_confidence = Column(Float, comment="模型预测置信度")
+    auto_risk_prob = Column(Float, comment="模型预测风险概率")
+    feature_snapshot = Column(Text, comment="打标时使用的特征快照 JSON")
+
+    # 人工审核结果
+    manual_label = Column(Integer, nullable=True, comment="人工确认标注 0/1，null=未审核")
+    review_status = Column(String(20), default="pending", comment="pending/confirmed/rejected/skipped")
+    review_note = Column(Text, nullable=True, comment="审核备注（如发现异常说明原因）")
+    reviewed_by = Column(String(50), nullable=True, comment="审核人")
+
+    # 是否已加入训练集
+    added_to_train = Column(Boolean, default=False, comment="是否已加入训练集")
+
+    created_at = Column(DateTime, default=datetime.utcnow)
+    reviewed_at = Column(DateTime, nullable=True)
+
+    def to_dict(self):
+        d = {c.name: getattr(self, c.name) for c in self.__table__.columns}
+        if d.get("created_at"):
+            d["created_at"] = d["created_at"].strftime("%Y-%m-%d %H:%M:%S")
+        if d.get("reviewed_at"):
+            d["reviewed_at"] = d["reviewed_at"].strftime("%Y-%m-%d %H:%M:%S")
+        return d
+

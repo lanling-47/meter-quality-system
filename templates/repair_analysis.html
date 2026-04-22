@@ -1,0 +1,320 @@
+{% extends "base.html" %}
+{% block title %}维修闭环分析 - 智能电表质量管控系统{% endblock %}
+
+{% block extra_css %}
+<style>
+#chartFaultDist, #chartCauseDist, #chartProcessFault, #chartPropagation { height: 340px; }
+#chartDefectFlow { height: 400px; }
+.stat-item { display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid #f0f2f5; }
+.stat-item:last-child { border-bottom:none; }
+.chain-card { background:#fff; border-radius:12px; padding:16px 20px; box-shadow:0 2px 12px rgba(26,58,92,0.08); }
+.rate-badge { font-size:18px; font-weight:700; }
+</style>
+{% endblock %}
+
+{% block page_title %}维修闭环分析{% endblock %}
+{% block topbar_actions %}
+<a href="/production" class="btn btn-sm btn-outline-secondary"><i class="bi bi-arrow-left"></i> 追溯列表</a>
+{% endblock %}
+
+{% block content %}
+
+<!-- KPI 行 -->
+<div class="row g-3 mb-4" id="repairKpiRow">
+  <div class="col-6 col-md-3">
+    <div class="kpi-card">
+      <div class="d-flex align-items-center gap-3">
+        <div class="kpi-icon" style="background:#e74c3c"><i class="bi bi-tools"></i></div>
+        <div>
+          <div class="kpi-value" id="kpiTotalRepairs">--</div>
+          <div class="kpi-label">维修总次数</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="kpi-card">
+      <div class="d-flex align-items-center gap-3">
+        <div class="kpi-icon" style="background:#7b1fa2"><i class="bi bi-cpu"></i></div>
+        <div>
+          <div class="kpi-value" id="kpiUniqueMeter">--</div>
+          <div class="kpi-label">维修电表数</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="kpi-card">
+      <div class="d-flex align-items-center gap-3">
+        <div class="kpi-icon" style="background:#e65c00"><i class="bi bi-arrow-right-circle"></i></div>
+        <div>
+          <div class="kpi-value" id="kpiReverifyRepairRate">--</div>
+          <div class="kpi-label">复校失败→维修率</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="kpi-card">
+      <div class="d-flex align-items-center gap-3">
+        <div class="kpi-icon" style="background:#1a6dad"><i class="bi bi-eye"></i></div>
+        <div>
+          <div class="kpi-value" id="kpiAoiFuncFailRate">--</div>
+          <div class="kpi-label">AOI缺陷→功测失败率</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 闭环关系说明 -->
+<div class="row g-3 mb-4">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header primary"><i class="bi bi-diagram-2"></i> 质量闭环链路关系</div>
+      <div class="card-body">
+        <div class="row g-3" id="chainCards">
+          <div class="col-md-4">
+            <div class="chain-card">
+              <h6><i class="bi bi-eye text-warning"></i> AOI缺陷 → 功能测试</h6>
+              <div class="stat-item"><span>AOI缺陷电表</span><strong id="chainAoiTotal">--</strong></div>
+              <div class="stat-item"><span>其中功测失败</span><strong id="chainAoiFuncFail" class="text-danger">--</strong></div>
+              <div class="stat-item"><span>传播率</span>
+                <span class="rate-badge text-danger" id="chainAoiFuncRate">--%</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="chain-card">
+              <h6><i class="bi bi-shield-x text-danger"></i> 复校失败 → 维修</h6>
+              <div class="stat-item"><span>复校失败电表</span><strong id="chainRvFail">--</strong></div>
+              <div class="stat-item"><span>其中转维修</span><strong id="chainRvRepair" class="text-danger">--</strong></div>
+              <div class="stat-item"><span>转维修率</span>
+                <span class="rate-badge text-danger" id="chainRvRate">--%</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="chain-card">
+              <h6><i class="bi bi-bar-chart text-primary"></i> 最常见故障现象</h6>
+              <div id="topFaults">--</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 图表区 -->
+<div class="row g-3 mb-4">
+  <div class="col-md-6">
+    <div class="card h-100">
+      <div class="card-header primary"><i class="bi bi-pie-chart"></i> 故障现象分布 TOP15</div>
+      <div class="card-body p-2"><div id="chartFaultDist" class="chart-box"></div></div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card h-100">
+      <div class="card-header primary"><i class="bi bi-bar-chart-fill"></i> 故障原因分布 TOP10</div>
+      <div class="card-body p-2"><div id="chartCauseDist" class="chart-box"></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-md-6">
+    <div class="card h-100">
+      <div class="card-header primary"><i class="bi bi-diagram-3"></i> 工序→故障现象映射</div>
+      <div class="card-body p-2"><div id="chartProcessFault" class="chart-box"></div></div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card h-100">
+      <div class="card-header primary"><i class="bi bi-arrow-right-circle"></i> 工序不合格传播率矩阵</div>
+      <div class="card-body p-2"><div id="chartPropagation" class="chart-box"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 工序维修明细表 -->
+<div class="card mb-4">
+  <div class="card-header primary"><i class="bi bi-table"></i> 工序→故障现象明细</div>
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover table-sm mb-0" id="processFaultTable">
+        <thead>
+          <tr><th>故障工序</th><th>故障现象TOP5</th><th>合计</th></tr>
+        </thead>
+        <tbody id="processFaultBody">
+          <tr><td colspan="3" class="text-center text-muted py-3">加载中...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+async function loadRepairAnalysis() {
+  const data = await fetch('/production/repair-stats').then(r => r.json());
+  if (data.error) {
+    document.getElementById('kpiTotalRepairs').textContent = '无数据';
+    return;
+  }
+
+  // KPI
+  document.getElementById('kpiTotalRepairs').textContent = data.total_repairs;
+  document.getElementById('kpiUniqueMeter').textContent = data.unique_meters_repaired;
+  document.getElementById('kpiReverifyRepairRate').textContent = data.reverify_repair_rate + '%';
+  document.getElementById('kpiAoiFuncFailRate').textContent = data.aoi_func_fail_rate + '%';
+
+  // 闭环卡片
+  document.getElementById('chainAoiTotal').textContent = data.aoi_defect_count;
+  document.getElementById('chainAoiFuncFail').textContent = data.aoi_then_func_fail_count;
+  document.getElementById('chainAoiFuncRate').textContent = data.aoi_func_fail_rate + '%';
+  document.getElementById('chainRvFail').textContent = data.reverify_fail_count;
+  document.getElementById('chainRvRepair').textContent = data.reverify_then_repair_count;
+  document.getElementById('chainRvRate').textContent = data.reverify_repair_rate + '%';
+
+  // TOP故障
+  const top5 = data.fault_name_dist.slice(0, 5);
+  document.getElementById('topFaults').innerHTML = top5.map(f =>
+    `<div class="stat-item"><span>${f.name}</span><strong>${f.count}</strong></div>`
+  ).join('');
+
+  // 故障现象分布图
+  renderBarChart('chartFaultDist', data.fault_name_dist.slice(0, 15),
+    '故障现象分布', '#e74c3c');
+
+  // 故障原因分布图
+  renderBarChart('chartCauseDist', data.cause_name_dist,
+    '故障原因分布', '#7b1fa2');
+
+  // 工序→故障映射（堆叠柱状）
+  renderProcessFaultChart(data.process_top_faults);
+
+  // 工序维修明细表
+  const tbody = document.getElementById('processFaultBody');
+  tbody.innerHTML = Object.entries(data.process_top_faults).map(([proc, faults]) => {
+    const total = faults.reduce((s, f) => s + f.count, 0);
+    return `<tr>
+      <td><strong>工序 ${proc}</strong></td>
+      <td>${faults.map(f =>
+        `<span class="badge bg-secondary me-1">${f.fault}(${f.count})</span>`
+      ).join('')}</td>
+      <td><strong>${total}</strong></td>
+    </tr>`;
+  }).join('') || '<tr><td colspan="3" class="text-center text-muted">无数据</td></tr>';
+}
+
+async function loadPropagation() {
+  const data = await fetch('/production/propagation').then(r => r.json());
+  if (!data.propagation) return;
+  renderPropagationChart(data);
+}
+
+function renderBarChart(containerId, items, title, color) {
+  if (!items || items.length === 0) return;
+  const chart = echarts.init(document.getElementById(containerId));
+  chart.setOption({
+    tooltip: { trigger: 'axis' },
+    grid: { left: 160, right: 20, top: 20, bottom: 40 },
+    xAxis: { type: 'value' },
+    yAxis: {
+      type: 'category',
+      data: items.map(d => d.name).reverse(),
+      axisLabel: { fontSize: 11 }
+    },
+    series: [{
+      type: 'bar', data: items.map(d => d.count).reverse(),
+      itemStyle: { color, borderRadius: [0, 4, 4, 0] },
+      label: { show: true, position: 'right', fontSize: 11 }
+    }]
+  });
+}
+
+function renderProcessFaultChart(processTopFaults) {
+  const procs = Object.keys(processTopFaults);
+  if (procs.length === 0) return;
+
+  // 获取所有故障类型
+  const allFaults = new Set();
+  procs.forEach(p => processTopFaults[p].forEach(f => allFaults.add(f.fault)));
+  const faultList = [...allFaults];
+
+  const colors = ['#e74c3c','#f0a500','#7b1fa2','#1a6dad','#27ae60'];
+  const series = faultList.slice(0, 8).map((fault, i) => ({
+    name: fault, type: 'bar', stack: 'total',
+    itemStyle: { color: colors[i % colors.length] },
+    data: procs.map(p => {
+      const f = processTopFaults[p].find(x => x.fault === fault);
+      return f ? f.count : 0;
+    })
+  }));
+
+  const chart = echarts.init(document.getElementById('chartProcessFault'));
+  chart.setOption({
+    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+    legend: { top: 5, textStyle: { fontSize: 11 } },
+    grid: { left: 60, right: 20, top: 50, bottom: 30 },
+    xAxis: { type: 'category', data: procs.map(p => '工序' + p) },
+    yAxis: { type: 'value' },
+    series
+  });
+}
+
+function renderPropagationChart(data) {
+  // 热力图：工序传播率矩阵
+  const processes = ['CCD', '功能测试', '耐压', '复校'];
+  const heatData = [];
+  const propagation = data.propagation || [];
+
+  processes.forEach((p1, i) => {
+    processes.forEach((p2, j) => {
+      if (p1 === p2) { heatData.push([j, i, '-']); return; }
+      const item = propagation.find(x => x.from_process === p1 && x.to_process === p2);
+      heatData.push([j, i, item ? item.propagation_rate : 0]);
+    });
+  });
+
+  const chart = echarts.init(document.getElementById('chartPropagation'));
+  chart.setOption({
+    tooltip: {
+      formatter: p => {
+        const from = processes[p.data[1]];
+        const to = processes[p.data[0]];
+        if (p.data[2] === '-') return `${from} → ${to}: 同工序`;
+        const item = propagation.find(x => x.from_process === from && x.to_process === to);
+        if (!item) return `${from} → ${to}: 0%`;
+        return `${from} 不合格 → ${to} 不合格<br>概率: ${item.propagation_rate}% (${item.propagated_count}/${item.base_count})`;
+      }
+    },
+    grid: { left: 80, right: 60, top: 10, bottom: 80 },
+    xAxis: { type: 'category', data: processes, axisLabel: { rotate: 15, fontSize: 12 },
+             name: '→ 后续工序', nameLocation: 'end' },
+    yAxis: { type: 'category', data: processes, axisLabel: { fontSize: 12 },
+             name: '↓ 起始工序' },
+    visualMap: {
+      min: 0, max: 100, calculable: true, orient: 'horizontal',
+      bottom: 10, left: 'center', text: ['高', '低'],
+      inRange: { color: ['#e8f5e9','#ffe082','#e74c3c'] }
+    },
+    series: [{
+      type: 'heatmap', data: heatData,
+      label: {
+        show: true,
+        formatter: p => p.data[2] === '-' ? '-' : (p.data[2] > 0 ? p.data[2] + '%' : '0%'),
+        fontSize: 12
+      }
+    }]
+  });
+}
+
+// 初始化
+loadRepairAnalysis();
+loadPropagation();
+</script>
+{% endblock %}

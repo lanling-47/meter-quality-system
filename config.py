@@ -22,6 +22,22 @@ CRYSTAL_FILE = "晶振和互感器10个样品的检验数据26.3.11.xlsx"
 FACTORY_FILE = "样品出厂检测和数字化电路板生产过程数据26.xlsx"
 AGING_FILE = "单相表-20版正面布局的耐久性（可靠性）试验数据26.3.6.xlsx"
 
+# 生产过程数据目录（相对项目上级目录）
+PRODUCTION_DATA_DIR = BASE_DIR.parent / "电表生产数据"
+
+# ── 文件监控配置（生产线实时采集）──────────────────────────────────────────
+# 轮询监控目录：生产线 MES 系统定时导出 Excel/CSV 文件到此目录
+WATCH_DIR = Path(os.environ.get("WATCH_DIR", str(BASE_DIR.parent / "watch_dir")))
+# 轮询间隔（秒）：默认 5 分钟
+WATCH_INTERVAL_SEC = int(os.environ.get("WATCH_INTERVAL_SEC", 300))
+# 新增多少条数据后，前端显示"建议重训练"提示
+AUTO_RETRAIN_THRESHOLD = int(os.environ.get("AUTO_RETRAIN_THRESHOLD", 50))
+# 默认重训练使用的模型类型
+RETRAIN_MODEL_TYPE = os.environ.get("RETRAIN_MODEL_TYPE", "tabnet")
+
+# 确保监控目录存在
+WATCH_DIR.mkdir(parents=True, exist_ok=True)
+
 # 数据库 URL
 DATABASE_URL = f"sqlite:///{DB_PATH}"
 

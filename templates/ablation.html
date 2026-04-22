@@ -1,0 +1,479 @@
+{% extends "base.html" %}
+{% block title %}消融实验 - 智能电表质量管控系统{% endblock %}
+{% block page_title %}特征消融实验分析{% endblock %}
+
+{% block topbar_actions %}
+<button class="btn btn-sm btn-accent" onclick="runAblation()">
+  <i class="bi bi-play-circle me-1"></i>运行消融实验
+</button>
+<button class="btn btn-sm btn-outline-light ms-2" onclick="loadResults()">
+  <i class="bi bi-arrow-clockwise"></i> 刷新结果
+</button>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.ablation-card { border:1px solid #e3e8f0; border-radius:10px; padding:16px; margin-bottom:16px; background:#fff; }
+.ablation-card .card-title { font-size:14px; font-weight:600; color:#1a3a5c; margin-bottom:12px; }
+.group-badge { display:inline-flex; align-items:center; gap:6px; padding:4px 12px; border-radius:20px; font-size:12px; font-weight:600; }
+.model-badge { display:inline-block; padding:2px 10px; border-radius:4px; font-size:11px; font-weight:600; color:#fff; }
+.result-table th { font-size:12px; background:#f8fafc; }
+.result-table td { font-size:12px; vertical-align:middle; }
+.metric-highlight { font-weight:700; color:#e74c3c; }
+.progress-log { background:#0d1117; color:#c9d1d9; font-size:11px; font-family:monospace; border-radius:8px; padding:12px; height:160px; overflow-y:auto; }
+.progress-log .ok { color:#7ee787; }
+.progress-log .err { color:#f85149; }
+.progress-log .info { color:#79c0ff; }
+.insight-card { border-left:4px solid #e74c3c; background:#fff5f5; padding:12px 16px; border-radius:0 8px 8px 0; margin-bottom:10px; }
+.insight-card.blue { border-left-color:#3498db; background:#eff8ff; }
+.insight-card.green { border-left-color:#27ae60; background:#f0fff4; }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- 顶部说明 -->
+<div class="alert alert-info d-flex align-items-start gap-3 mb-4 py-3">
+  <i class="bi bi-info-circle-fill fs-5 mt-1" style="color:#1a3a5c"></i>
+  <div>
+    <strong>消融实验（Ablation Study）</strong>：通过系统地移除/替换特征组，量化每类特征对预测性能的独立贡献。
+    本实验包含 <strong>4个特征组 × 5种算法 = 20组对比实验</strong>，每组采用5折交叉验证，输出 AUC ± std 等标准指标。
+    <span class="text-danger fw-bold">TabNet（本文方法）</span> 与 LightGBM 的全面对比是核心研究问题。
+  </div>
+</div>
+
+<!-- 实验组说明 -->
+<div class="row g-3 mb-4">
+  {% set group_colors = {'A':'#3498db','B':'#27ae60','C':'#e74c3c','D':'#f0a500'} %}
+  {% set group_descs = {
+    'A': ['4维', '来料特征（晶振/互感器/时钟/出厂故障）'],
+    'B': ['14维', '来料4维 + 老化试验10维'],
+    'C': ['24维', '全特征 = 来料 + 老化 + 生产过程（本文方法）'],
+    'D': ['10维', '仅生产过程特征（验证独立贡献）']
+  } %}
+  {% for g, info in group_descs.items() %}
+  <div class="col-md-3">
+    <div class="ablation-card h-100">
+      <div class="d-flex align-items-center gap-2 mb-2">
+        <span class="group-badge" style="background:{{ group_colors[g] }}1a;color:{{ group_colors[g] }};border:1px solid {{ group_colors[g] }}40">
+          <span style="width:8px;height:8px;border-radius:50%;background:{{ group_colors[g] }};display:inline-block"></span>
+          Group-{{ g }}
+        </span>
+        <span class="badge bg-light text-dark">{{ info[0] }}</span>
+      </div>
+      <div class="small text-muted">{{ info[1] }}</div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<!-- 运行进度面板 -->
+<div id="progressPanel" class="ablation-card mb-4" style="display:none;">
+  <div class="d-flex justify-content-between align-items-center mb-2">
+    <span class="card-title mb-0"><i class="bi bi-cpu me-2"></i>实验进度</span>
+    <span id="progressBadge" class="badge bg-warning">运行中...</span>
+  </div>
+  <div class="progress mb-2" style="height:6px;">
+    <div id="ablationProgressBar" class="progress-bar bg-danger" style="width:0%;transition:width 0.3s"></div>
+  </div>
+  <div class="progress-log" id="progressLog"></div>
+</div>
+
+<!-- 结果区域 -->
+<div id="resultsArea" style="display:{{ 'block' if has_results else 'none' }};">
+
+  <!-- 洞察摘要 -->
+  <div id="insightsPanel" class="mb-4"></div>
+
+  <div class="row g-4">
+    <!-- 图1：AUC热力图矩阵 -->
+    <div class="col-md-6">
+      <div class="ablation-card">
+        <div class="card-title"><i class="bi bi-grid-3x3 me-2"></i>AUC 热力图（特征组 × 算法）</div>
+        <div id="heatmapChart" style="height:280px;"></div>
+      </div>
+    </div>
+
+    <!-- 图2：特征增益柱状图 -->
+    <div class="col-md-6">
+      <div class="ablation-card">
+        <div class="card-title"><i class="bi bi-bar-chart-steps me-2"></i>特征增量贡献（TabNet AUC 逐组对比）</div>
+        <div id="gainChart" style="height:280px;"></div>
+      </div>
+    </div>
+
+    <!-- 图3：算法对比雷达图（Group-C 全特征） -->
+    <div class="col-md-6">
+      <div class="ablation-card">
+        <div class="card-title"><i class="bi bi-hexagon me-2"></i>全特征集（Group-C）各算法综合对比</div>
+        <div id="radarChart" style="height:300px;"></div>
+      </div>
+    </div>
+
+    <!-- 图4：分组折线图（每组每种算法的AUC） -->
+    <div class="col-md-6">
+      <div class="ablation-card">
+        <div class="card-title"><i class="bi bi-graph-up me-2"></i>各算法随特征组变化的 AUC 趋势</div>
+        <div id="trendChart" style="height:300px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 完整实验结果表格（学术风格） -->
+  <div class="ablation-card mt-4">
+    <div class="card-title"><i class="bi bi-table me-2"></i>完整实验结果表（5折交叉验证 Mean ± Std）</div>
+    <div class="table-responsive">
+      <table class="table table-bordered result-table text-center" id="fullResultTable">
+        <thead>
+          <tr style="background:#f8fafc;">
+            <th rowspan="2" class="align-middle">特征组</th>
+            <th rowspan="2" class="align-middle">算法</th>
+            <th rowspan="2" class="align-middle">特征维度</th>
+            <th colspan="2">AUC-ROC</th>
+            <th colspan="2">F1 (高风险)</th>
+            <th colspan="2">Precision</th>
+            <th colspan="2">Recall</th>
+            <th colspan="2">Accuracy</th>
+          </tr>
+          <tr style="background:#f8fafc;">
+            <th>Mean</th><th>±Std</th>
+            <th>Mean</th><th>±Std</th>
+            <th>Mean</th><th>±Std</th>
+            <th>Mean</th><th>±Std</th>
+            <th>Mean</th><th>±Std</th>
+          </tr>
+        </thead>
+        <tbody id="resultTableBody">
+          <tr><td colspan="13" class="text-muted py-4 text-center">请先运行消融实验</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- 空状态 -->
+<div id="emptyState" style="display:{{ 'none' if has_results else 'block' }};">
+  <div class="text-center py-5">
+    <i class="bi bi-flask fs-1 text-muted"></i>
+    <p class="text-muted mt-3">尚未运行消融实验</p>
+    <button class="btn btn-primary" onclick="runAblation()">
+      <i class="bi bi-play-circle me-2"></i>开始运行（约 3-8 分钟）
+    </button>
+    <p class="text-muted small mt-2">将运行 4×5=20 组对比实验，每组5折交叉验证</p>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+const FEATURE_GROUPS = {{ feature_groups|safe }};
+const MODEL_REGISTRY = {{ model_registry|safe }};
+const CACHED_RESULTS = {{ cached_results|safe }};
+
+const GROUP_KEYS = Object.keys(FEATURE_GROUPS);
+const MODEL_KEYS = Object.keys(MODEL_REGISTRY);
+const GROUP_FEATURE_DIMS = {'A':4,'B':14,'C':24,'D':10};
+
+let heatmapChart, gainChart, radarChart, trendChart;
+
+// 页面加载时，若有缓存结果则渲染
+document.addEventListener('DOMContentLoaded', () => {
+  if (CACHED_RESULTS) {
+    renderAllCharts(CACHED_RESULTS);
+    renderInsights(CACHED_RESULTS.insights || {});
+    renderTable(CACHED_RESULTS);
+  }
+  initCharts();
+});
+
+function initCharts() {
+  heatmapChart = echarts.init(document.getElementById('heatmapChart'));
+  gainChart = echarts.init(document.getElementById('gainChart'));
+  radarChart = echarts.init(document.getElementById('radarChart'));
+  trendChart = echarts.init(document.getElementById('trendChart'));
+}
+
+// ─── 运行消融实验（SSE流式）──────────────────────────────────────────
+async function runAblation() {
+  document.getElementById('progressPanel').style.display = 'block';
+  document.getElementById('emptyState').style.display = 'none';
+  document.getElementById('resultsArea').style.display = 'none';
+  document.getElementById('progressBadge').textContent = '运行中...';
+  document.getElementById('progressBadge').className = 'badge bg-warning';
+  document.getElementById('ablationProgressBar').style.width = '0%';
+  document.getElementById('progressLog').innerHTML = '';
+
+  const es = new EventSource('/ablation/run-stream');
+
+  es.onmessage = (e) => {
+    const { event, data } = JSON.parse(e.data);
+    const log = document.getElementById('progressLog');
+
+    if (event === 'ablation_start') {
+      addLog(log, `info`, `🧪 ${data.message}`);
+    } else if (event === 'ablation_progress') {
+      addLog(log, 'info', `[${data.count || ''}/${data.total || ''}] ${data.message}`);
+      if (data.progress_pct !== undefined) {
+        document.getElementById('ablationProgressBar').style.width = data.progress_pct + '%';
+      }
+    } else if (event === 'ablation_exp_done') {
+      const modelName = MODEL_REGISTRY[data.model]?.name || data.model;
+      const groupName = FEATURE_GROUPS[data.group]?.name || data.group;
+      addLog(log, 'ok', `✓ ${groupName} × ${modelName}: AUC=${data.auc_mean?.toFixed(4)} (${data.elapsed}s)`);
+    } else if (event === 'ablation_done') {
+      document.getElementById('progressBadge').textContent = '完成';
+      document.getElementById('progressBadge').className = 'badge bg-success';
+      document.getElementById('ablationProgressBar').style.width = '100%';
+      addLog(log, 'ok', `✅ ${data.message}`);
+      loadResults();
+      es.close();
+    } else if (event === 'error' || event === 'ablation_error') {
+      addLog(log, 'err', `❌ ${data.message}`);
+    } else if (event === 'stream_end') {
+      es.close();
+    } else if (event === 'heartbeat') {
+      // keep alive
+    }
+  };
+
+  es.onerror = () => {
+    addLog(document.getElementById('progressLog'), 'err', '连接中断，请检查服务状态');
+    es.close();
+  };
+}
+
+function addLog(container, cls, msg) {
+  const div = document.createElement('div');
+  div.className = cls;
+  div.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+}
+
+// ─── 加载并渲染结果 ────────────────────────────────────────────────────
+async function loadResults() {
+  try {
+    const res = await fetch('/ablation/results');
+    if (!res.ok) { showToast('尚无实验结果', 'warning'); return; }
+    const data = await res.json();
+    document.getElementById('resultsArea').style.display = 'block';
+    document.getElementById('emptyState').style.display = 'none';
+    renderAllCharts(data);
+    renderInsights(data.insights || {});
+    renderTable(data);
+  } catch(e) {
+    showToast('加载失败: ' + e.message, 'error');
+  }
+}
+
+function renderAllCharts(data) {
+  renderHeatmap(data);
+  renderGainChart(data);
+  renderRadarChart(data);
+  renderTrendChart(data);
+}
+
+// ─── 图1：AUC热力图 ────────────────────────────────────────────────────
+function renderHeatmap(data) {
+  const exps = data.experiments || {};
+  const heatData = [];
+  const maxAuc = { val: 0, g: '', m: '' };
+
+  GROUP_KEYS.forEach((g, gi) => {
+    MODEL_KEYS.forEach((m, mi) => {
+      const auc = getMetric(exps, g, m, 'auc') || 0;
+      heatData.push([mi, gi, auc]);
+      if (auc > maxAuc.val) { maxAuc.val = auc; maxAuc.g = g; maxAuc.m = m; }
+    });
+  });
+
+  heatmapChart.setOption({
+    tooltip: { formatter: p => `${FEATURE_GROUPS[GROUP_KEYS[p.data[1]]]?.name}<br>${MODEL_REGISTRY[MODEL_KEYS[p.data[0]]]?.name}<br>AUC: ${p.data[2].toFixed(4)}` },
+    grid: { left: 120, right: 20, top: 10, bottom: 60 },
+    xAxis: { type: 'category', data: MODEL_KEYS.map(k => MODEL_REGISTRY[k]?.name || k), axisLabel: { fontSize: 11, rotate: 15 } },
+    yAxis: { type: 'category', data: GROUP_KEYS.map(k => `Group-${k}\n(${GROUP_FEATURE_DIMS[k]}维)`), axisLabel: { fontSize: 11 } },
+    visualMap: { min: 0.5, max: 1.0, calculable: true, orient: 'horizontal', left: 'center', bottom: 0, inRange: { color: ['#fff5f0','#fc8d59','#d73027'] }, itemWidth: 14, itemHeight: 80 },
+    series: [{
+      type: 'heatmap',
+      data: heatData,
+      label: { show: true, formatter: p => p.data[2].toFixed(3), fontSize: 12, fontWeight: 600 },
+      itemStyle: { borderColor: '#fff', borderWidth: 2 },
+    }],
+  });
+}
+
+// ─── 图2：特征增量贡献 ──────────────────────────────────────────────────
+function renderGainChart(data) {
+  const exps = data.experiments || {};
+  const groups = GROUP_KEYS;
+  const tabnetData = groups.map(g => +(getMetric(exps, g, 'tabnet', 'auc') || 0).toFixed(4));
+  const lgbmData = groups.map(g => +(getMetric(exps, g, 'lightgbm', 'auc') || 0).toFixed(4));
+
+  gainChart.setOption({
+    tooltip: { trigger: 'axis' },
+    legend: { data: ['TabNet（本文）', 'LightGBM'], bottom: 0, itemGap: 20 },
+    grid: { left: 50, right: 20, top: 20, bottom: 40 },
+    xAxis: { type: 'category', data: groups.map(g => `Group-${g}\n(${GROUP_FEATURE_DIMS[g]}维)`), axisLabel: { fontSize: 11 } },
+    yAxis: { type: 'value', min: 0.5, max: 1.0, name: 'AUC', nameTextStyle: { fontSize: 11 } },
+    series: [
+      {
+        name: 'TabNet（本文）', type: 'bar', data: tabnetData,
+        barWidth: 30,
+        itemStyle: { color: { type: 'linear', x: 0, y: 0, x2: 0, y2: 1, colorStops: [{ offset: 0, color: '#e74c3c' }, { offset: 1, color: '#c0392b' }] } },
+        label: { show: true, position: 'top', fontSize: 11, formatter: v => v.toFixed(3) },
+      },
+      {
+        name: 'LightGBM', type: 'bar', data: lgbmData,
+        barWidth: 30,
+        itemStyle: { color: '#f0a500' },
+        label: { show: true, position: 'top', fontSize: 11, formatter: v => v.toFixed(3) },
+      },
+    ],
+  });
+}
+
+// ─── 图3：Group-C 雷达图 ────────────────────────────────────────────────
+function renderRadarChart(data) {
+  const exps = data.experiments || {};
+  const metrics = ['auc', 'f1', 'precision', 'recall', 'accuracy'];
+  const metricLabels = ['AUC', 'F1', 'Precision', 'Recall', 'Accuracy'];
+
+  const seriesData = MODEL_KEYS.map(m => ({
+    name: MODEL_REGISTRY[m]?.name || m,
+    value: metrics.map(met => +(getMetric(exps, 'C', m, met) || 0).toFixed(4)),
+    lineStyle: { color: MODEL_REGISTRY[m]?.color || '#999', width: m === 'tabnet' ? 3 : 1.5 },
+    areaStyle: { color: MODEL_REGISTRY[m]?.color + '20' || '#99999920', opacity: m === 'tabnet' ? 0.3 : 0.1 },
+    itemStyle: { color: MODEL_REGISTRY[m]?.color || '#999' },
+    symbol: m === 'tabnet' ? 'circle' : 'emptyCircle',
+    symbolSize: m === 'tabnet' ? 8 : 5,
+  }));
+
+  radarChart.setOption({
+    tooltip: {},
+    legend: { data: MODEL_KEYS.map(k => MODEL_REGISTRY[k]?.name || k), bottom: 0, itemGap: 12, textStyle: { fontSize: 11 } },
+    radar: {
+      indicator: metricLabels.map(l => ({ name: l, max: 1.0 })),
+      center: ['50%', '48%'], radius: '60%',
+      splitNumber: 4, splitLine: { lineStyle: { color: '#e3e8f0' } },
+    },
+    series: [{ type: 'radar', data: seriesData }],
+  });
+}
+
+// ─── 图4：各算法 AUC 趋势折线图 ──────────────────────────────────────────
+function renderTrendChart(data) {
+  const exps = data.experiments || {};
+  const xData = GROUP_KEYS.map(g => `Group-${g}(${GROUP_FEATURE_DIMS[g]}维)`);
+
+  const series = MODEL_KEYS.map(m => ({
+    name: MODEL_REGISTRY[m]?.name || m,
+    type: 'line',
+    data: GROUP_KEYS.map(g => +(getMetric(exps, g, m, 'auc') || 0).toFixed(4)),
+    lineStyle: { color: MODEL_REGISTRY[m]?.color || '#999', width: m === 'tabnet' ? 3 : 2 },
+    itemStyle: { color: MODEL_REGISTRY[m]?.color || '#999' },
+    symbol: m === 'tabnet' ? 'diamond' : 'circle',
+    symbolSize: m === 'tabnet' ? 10 : 6,
+    label: { show: m === 'tabnet', position: 'top', fontSize: 11, formatter: v => v.toFixed(3) },
+  }));
+
+  trendChart.setOption({
+    tooltip: { trigger: 'axis' },
+    legend: { data: MODEL_KEYS.map(k => MODEL_REGISTRY[k]?.name || k), bottom: 0, itemGap: 12, textStyle: { fontSize: 11 } },
+    grid: { left: 50, right: 20, top: 20, bottom: 40 },
+    xAxis: { type: 'category', data: xData, axisLabel: { fontSize: 10 } },
+    yAxis: { type: 'value', min: 0.5, max: 1.0, name: 'AUC', nameTextStyle: { fontSize: 11 } },
+    series,
+  });
+}
+
+// ─── 洞察面板 ─────────────────────────────────────────────────────────
+function renderInsights(insights) {
+  const container = document.getElementById('insightsPanel');
+  let html = '<div class="row g-3 mb-2"><div class="col-12"><h6 class="text-muted mb-2"><i class="bi bi-lightbulb me-2"></i>关键研究洞察</h6></div>';
+
+  if (insights.production_feature_gain) {
+    const g = insights.production_feature_gain;
+    const gain = g.gain >= 0 ? `+${g.gain.toFixed(4)}` : g.gain.toFixed(4);
+    const cls = g.gain >= 0 ? '' : 'blue';
+    html += `<div class="col-md-4"><div class="insight-card ${cls}">
+      <strong>生产特征增益（Group-B→C）</strong><br>
+      <span class="small text-muted">TabNet AUC: ${g.group_b_auc.toFixed(4)} → ${g.group_c_auc.toFixed(4)}</span><br>
+      <span class="fw-bold text-danger">贡献: ${gain}</span>
+    </div></div>`;
+  }
+
+  if (insights.tabnet_vs_lgbm) {
+    const t = insights.tabnet_vs_lgbm;
+    const gain = t.gain >= 0 ? `+${t.gain.toFixed(4)}` : t.gain.toFixed(4);
+    html += `<div class="col-md-4"><div class="insight-card green">
+      <strong>TabNet vs LightGBM（全特征）</strong><br>
+      <span class="small text-muted">LightGBM: ${t.lightgbm_auc.toFixed(4)} | TabNet: ${t.tabnet_auc.toFixed(4)}</span><br>
+      <span class="fw-bold text-success">AUC 差值: ${gain}</span>
+    </div></div>`;
+  }
+
+  if (insights.best_model_on_full_features) {
+    const b = insights.best_model_on_full_features;
+    html += `<div class="col-md-4"><div class="insight-card">
+      <strong>全特征集最优模型</strong><br>
+      <span class="small text-muted">${b.model_name}</span><br>
+      <span class="fw-bold text-danger">AUC = ${b.auc.toFixed(4)}</span>
+    </div></div>`;
+  }
+
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+// ─── 完整结果表格 ─────────────────────────────────────────────────────
+function renderTable(data) {
+  const exps = data.experiments || {};
+  const tbody = document.getElementById('resultTableBody');
+  const rows = [];
+  const metrics = ['auc', 'f1', 'precision', 'recall', 'accuracy'];
+
+  GROUP_KEYS.forEach(g => {
+    MODEL_KEYS.forEach((m, mi) => {
+      const cv = exps[g]?.[m]?.cv_metrics || {};
+      const isTabNet = m === 'tabnet';
+      const isGroupC = g === 'C';
+
+      let row = `<tr ${isTabNet ? 'style="background:#fff5f5;"' : ''}>`;
+      if (mi === 0) {
+        row += `<td rowspan="${MODEL_KEYS.length}" class="align-middle fw-bold">
+          Group-${g}<br><small class="text-muted">${GROUP_FEATURE_DIMS[g]}维</small>
+        </td>`;
+      }
+      const modelColor = MODEL_REGISTRY[m]?.color || '#666';
+      row += `<td><span class="model-badge" style="background:${modelColor}">${MODEL_REGISTRY[m]?.name || m}</span></td>`;
+      row += `<td>${GROUP_FEATURE_DIMS[g]}</td>`;
+
+      metrics.forEach(met => {
+        const mean = cv[met]?.mean;
+        const std = cv[met]?.std;
+        const val = mean !== undefined ? mean.toFixed(4) : '--';
+        const stdVal = std !== undefined ? std.toFixed(4) : '--';
+        const isHighlight = isTabNet && isGroupC && met === 'auc';
+        row += `<td class="${isHighlight ? 'metric-highlight' : ''}">${val}</td>`;
+        row += `<td class="text-muted">${stdVal}</td>`;
+      });
+
+      row += '</tr>';
+      rows.push(row);
+    });
+  });
+
+  tbody.innerHTML = rows.join('') || '<tr><td colspan="13" class="text-center text-muted">暂无数据</td></tr>';
+}
+
+// ─── 工具函数 ─────────────────────────────────────────────────────────
+function getMetric(exps, group, model, metric) {
+  try { return exps[group][model]['cv_metrics'][metric]['mean']; }
+  catch { return null; }
+}
+
+function showToast(msg, type = 'info') {
+  alert(msg);
+}
+</script>
+{% endblock %}

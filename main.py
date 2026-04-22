@@ -10,6 +10,7 @@ from fastapi.responses import RedirectResponse
 
 from database import init_db
 from app.routers import dashboard, data_import, risk_predict, root_cause, degradation, anomaly_detect
+from app.routers import production, ablation, notify, retrain, data_review
 
 app = FastAPI(
     title="智能电表全周期质量管控系统",
@@ -20,7 +21,7 @@ app = FastAPI(
 # 静态文件
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-# 模板
+# 模板 (添加uru参数支持异步上下文)
 templates = Jinja2Templates(directory="templates")
 
 # 注册路由
@@ -30,11 +31,17 @@ app.include_router(risk_predict.router)
 app.include_router(root_cause.router)
 app.include_router(degradation.router)
 app.include_router(anomaly_detect.router)
+app.include_router(production.router)
+app.include_router(ablation.router)
+app.include_router(notify.router)
+app.include_router(retrain.router)
+app.include_router(data_review.router)
 
 
 @app.on_event("startup")
 async def startup_event():
-    """应用启动时初始化数据库"""
+    """应用启动时初始化数据库 + 启动文件监控服务"""
+    import asyncio
     init_db()
     print("✅ 数据库初始化完成")
     # 自动导入数据（如数据库为空）
@@ -45,6 +52,17 @@ async def startup_event():
             print(f"✅ 数据自动导入完成：{result}")
     except Exception as e:
         print(f"⚠️  数据自动导入失败（可稍后手动导入）：{e}")
+
+    # 启动文件监控服务（生产线实时采集）
+    try:
+        from app.services.file_watcher_service import get_watcher
+        from database import SessionLocal
+        watcher = get_watcher()
+        watcher.set_db_factory(SessionLocal)
+        asyncio.create_task(watcher.start())
+        print("✅ 文件监控服务已启动")
+    except Exception as e:
+        print(f"⚠️  文件监控服务启动失败：{e}")
 
 
 @app.get("/")

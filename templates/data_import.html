@@ -235,9 +235,15 @@
     <div class="card mb-3">
       <div class="card-header primary d-flex align-items-center justify-content-between">
         <span><i class="bi bi-cpu me-2"></i>AI 模型训练</span>
-        <button class="btn btn-sm btn-accent" id="trainBtn" onclick="startTrainWithViz()">
-          <i class="bi bi-play-circle me-1"></i>开始训练
-        </button>
+        <div class="d-flex gap-2 align-items-center">
+          <select id="modelTypeSelect" class="form-select form-select-sm" style="width:auto;font-size:12px;">
+            <option value="tabnet" selected>🔬 TabNet（本文方法）</option>
+            <option value="lightgbm">📊 LightGBM（对照基线）</option>
+          </select>
+          <button class="btn btn-sm btn-accent" id="trainBtn" onclick="startTrainWithViz()">
+            <i class="bi bi-play-circle me-1"></i>开始训练
+          </button>
+        </div>
       </div>
       <div class="card-body p-3">
         <!-- 进度条 -->
@@ -601,18 +607,19 @@ function setProgress(pct, text) {
 
 async function startTrainWithViz() {
   const btn = document.getElementById('trainBtn');
+  const modelType = document.getElementById('modelTypeSelect')?.value || 'tabnet';
   btn.disabled = true;
   btn.innerHTML = '<i class="bi bi-hourglass-split me-1"></i>训练中...';
 
   // 清空日志
   document.getElementById('trainLog').innerHTML = '';
   document.getElementById('trainResults').style.display = 'none';
-  setProgress(0, '初始化训练...');
+  setProgress(0, `初始化 ${modelType.toUpperCase()} 训练...`);
   initTrainCharts();
 
-  addLog('建立 SSE 连接...', 'info');
+  addLog(`使用 ${modelType === 'tabnet' ? '🔬 TabNet（前沿深度学习，含Sequential Attention）' : '📊 LightGBM（对照基线）'} 开始训练...`, 'info');
 
-  const evtSource = new EventSource('/train/stream');
+  const evtSource = new EventSource(`/train/stream?model_type=${modelType}`);
 
   evtSource.onmessage = (event) => {
     const msg = JSON.parse(event.data);

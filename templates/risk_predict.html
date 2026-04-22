@@ -38,6 +38,58 @@
             <label class="form-check-label">出厂时有故障记录</label>
           </div>
         </div>
+
+        <!-- 生产过程特征（可折叠） -->
+        <div class="mb-3">
+          <a class="text-muted small" data-bs-toggle="collapse" href="#prodFeatures">
+            <i class="bi bi-plus-circle"></i> 生产过程特征（可选）
+          </a>
+          <div class="collapse mt-2" id="prodFeatures">
+            <div class="p-2 rounded" style="background:#f8fafc;border:1px solid #e3e8f0">
+              <div class="row g-2">
+                <div class="col-6">
+                  <label class="form-label small mb-1">CCD重测次数</label>
+                  <input type="number" class="form-control form-control-sm" id="p_ccd_retry" value="0" min="0">
+                </div>
+                <div class="col-6">
+                  <label class="form-label small mb-1">功能测试重测次数</label>
+                  <input type="number" class="form-control form-control-sm" id="p_func_retry" value="0" min="0">
+                </div>
+                <div class="col-6">
+                  <label class="form-label small mb-1">复校重测次数</label>
+                  <input type="number" class="form-control form-control-sm" id="p_rv_retry" value="0" min="0">
+                </div>
+                <div class="col-6">
+                  <label class="form-label small mb-1">最大漏电流 (mA)</label>
+                  <input type="number" class="form-control form-control-sm" id="p_leak" value="0" step="0.01" min="0">
+                </div>
+                <div class="col-6">
+                  <div class="form-check mt-2">
+                    <input class="form-check-input" type="checkbox" id="p_smt_aoi">
+                    <label class="form-check-label small">贴片AOI缺陷</label>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-check mt-2">
+                    <input class="form-check-input" type="checkbox" id="p_wave_aoi">
+                    <label class="form-check-label small">波峰焊AOI缺陷</label>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-check mt-2">
+                    <input class="form-check-input" type="checkbox" id="p_repaired">
+                    <label class="form-check-label small">经过维修</label>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <label class="form-label small mb-1">维修次数</label>
+                  <input type="number" class="form-control form-control-sm" id="p_repair_cnt" value="0" min="0">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <button class="btn btn-primary w-100" onclick="singlePredict()">
           <i class="bi bi-cpu me-2"></i>预测
         </button>
@@ -52,7 +104,23 @@
               <div id="riskLevelText" class="fs-5 fw-bold mb-1"></div>
               <div id="riskProbText" class="text-muted small"></div>
               <div id="modelVersionText" class="text-muted" style="font-size:11px;"></div>
+              <!-- DQN 信息 -->
+              <div id="drlInfoText" class="mt-2 small" style="display:none;"></div>
             </div>
+          </div>
+        </div>
+        
+        <!-- DQN 统计信息 -->
+        <div id="drlStats" class="mt-3 p-3 rounded" style="background:#f0f4f8;display:none;">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <strong class="small"><i class="bi bi-brain me-1"></i>DQN 在线学习</strong>
+            <span id="drlEnabledBadge" class="badge bg-success">已启用</span>
+          </div>
+          <div class="small text-muted">
+            <div>学习步数: <span id="drlSteps">0</span></div>
+            <div>探索率 ε: <span id="drlEpsilon">0.1</span></div>
+            <div>经验池: <span id="drlBuffer">0</span></div>
+            <div>平均奖励: <span id="drlReward">0</span></div>
           </div>
         </div>
       </div>
@@ -64,9 +132,14 @@
     <div class="card">
       <div class="card-header primary d-flex justify-content-between align-items-center">
         <span>全体电表风险评估结果</span>
-        {% if active_model %}
-        <span class="badge bg-light text-primary small">{{ active_model.version_tag }}</span>
-        {% endif %}
+        <div class="d-flex gap-2">
+          {% if active_model %}
+          <span class="badge bg-light text-primary small">{{ active_model.version_tag }}</span>
+          {% endif %}
+          <button class="btn btn-sm btn-outline-light py-0" onclick="showDqnHistory()" title="DQN 学习历史">
+            <i class="bi bi-graph-up"></i>
+          </button>
+        </div>
       </div>
       <div class="card-body p-0">
         <div class="table-responsive">
@@ -79,12 +152,13 @@
                 <th>预测概率</th>
                 <th>预测结果</th>
                 <th>实际标签</th>
+                <th>反馈</th>
                 <th>操作</th>
               </tr>
             </thead>
             <tbody id="predTableBody">
               {% for c in chain_list %}
-              <tr>
+              <tr data-meter="{{ c.meter_no }}">
                 <td><strong>#{{ c.meter_no }}</strong></td>
                 <td>
                   {% if c.crystal_ppm is not none %}
@@ -122,12 +196,18 @@
                   {% endif %}
                 </td>
                 <td>
+                  <div class="btn-group btn-group-sm">
+                    <button class="btn btn-success py-0" onclick="sendFeedback('{{ c.meter_no }}', 0)" title="标记为正常">✓</button>
+                    <button class="btn btn-danger py-0" onclick="sendFeedback('{{ c.meter_no }}', 1)" title="标记为高风险">✗</button>
+                  </div>
+                </td>
+                <td>
                   <a href="/rootcause?meter={{ c.meter_no }}" class="btn btn-sm btn-outline-primary py-0">追溯</a>
                 </td>
               </tr>
               {% endfor %}
               {% if not chain_list %}
-              <tr><td colspan="7" class="text-center text-muted py-4">暂无数据</td></tr>
+              <tr><td colspan="8" class="text-center text-muted py-4">暂无数据</td></tr>
               {% endif %}
             </tbody>
           </table>
@@ -142,13 +222,48 @@
 <script>
 let riskMeterChart = null;
 
+// 页面加载时获取 DQN 统计
+document.addEventListener('DOMContentLoaded', loadDrlStats);
+
+async function loadDrlStats() {
+  try {
+    const res = await fetch('/drl/stats');
+    const data = await res.json();
+    
+    if (data.drl_enabled) {
+      document.getElementById('drlStats').style.display = 'block';
+      const stats = data.agent_stats;
+      document.getElementById('drlSteps').textContent = stats.total_steps;
+      document.getElementById('drlEpsilon').textContent = (stats.epsilon || 0.1).toFixed(3);
+      document.getElementById('drlBuffer').textContent = stats.buffer_size;
+      document.getElementById('drlReward').textContent = (stats.avg_reward || 0).toFixed(2);
+    }
+  } catch(e) {
+    console.log('DQN 未启用');
+  }
+}
+
 async function singlePredict() {
+  const prod_total_retry = (parseFloat(document.getElementById('p_ccd_retry').value)||0) +
+                           (parseFloat(document.getElementById('p_func_retry').value)||0) +
+                           (parseFloat(document.getElementById('p_rv_retry').value)||0);
   const features = {
     crystal_ppm: parseFloat(document.getElementById('p_crystal_ppm').value) || 9,
     ct_ratio_err: parseFloat(document.getElementById('p_ct_ratio').value) || 0.5,
     clock_accuracy_sd: parseFloat(document.getElementById('p_clock').value) || 0.03,
     initial_error_max: parseFloat(document.getElementById('p_init_err').value) || 0.1,
     factory_fault: document.getElementById('p_fault').checked,
+    // 生产过程特征
+    prod_ccd_retry: parseFloat(document.getElementById('p_ccd_retry').value) || 0,
+    prod_func_retry: parseFloat(document.getElementById('p_func_retry').value) || 0,
+    prod_reverify_retry: parseFloat(document.getElementById('p_rv_retry').value) || 0,
+    prod_total_retry: prod_total_retry,
+    prod_smt_aoi_defect: document.getElementById('p_smt_aoi').checked ? 1.0 : 0.0,
+    prod_wave_aoi_defect: document.getElementById('p_wave_aoi').checked ? 1.0 : 0.0,
+    prod_repaired: document.getElementById('p_repaired').checked ? 1.0 : 0.0,
+    prod_repair_count: parseFloat(document.getElementById('p_repair_cnt').value) || 0,
+    prod_leak_current_max: parseFloat(document.getElementById('p_leak').value) || 0,
+    prod_quality_risk_score: 0.0,
   };
   showLoading('预测中...');
   try {
@@ -178,6 +293,23 @@ async function singlePredict() {
     document.getElementById('riskLevelText').innerHTML = `风险等级：<span class="${levelMap[res.risk_level] || ''}">${res.risk_level}风险</span>`;
     document.getElementById('riskProbText').textContent = `预测概率：${(res.risk_prob*100).toFixed(1)}%`;
     document.getElementById('modelVersionText').textContent = `模型版本：${res.model_version || '规则引擎'}`;
+    
+    // DQN 信息
+    const drlInfo = document.getElementById('drlInfoText');
+    if (res.drl_enabled) {
+      drlInfo.style.display = 'block';
+      const agreeIcon = res.drl_agree_with_lgbm ? '✓' : '✗';
+      const agreeClass = res.drl_agree_with_lgbm ? 'text-success' : 'text-warning';
+      drlInfo.innerHTML = `
+        <div class="${agreeClass}">
+          DQN 置信度：${(res.drl_confidence * 100).toFixed(1)}% | 
+          最终置信度：${(res.final_confidence * 100).toFixed(1)}% | 
+          与 LightGBM 一致：${agreeIcon}
+        </div>
+      `;
+    } else {
+      drlInfo.style.display = 'none';
+    }
   } catch(e) {
     hideLoading();
     alert('预测失败：' + e.message);
@@ -196,6 +328,47 @@ async function batchPredict() {
   } catch(e) {
     hideLoading();
     alert('预测失败：' + e.message);
+  }
+}
+
+// 发送反馈给 DQN 学习
+async function sendFeedback(meterNo, trueLabel) {
+  if (!confirm(`确认将 #${meterNo} 标记为 ${trueLabel === 1 ? '高风险' : '正常'}？\n\nDQN 智能体将从这个反馈中学习。`)) {
+    return;
+  }
+  
+  try {
+    const res = await postJson('/drl/feedback', { meter_no: meterNo, true_label: trueLabel });
+    
+    if (res.success) {
+      const icon = trueLabel === 1 ? '✓' : '✓';
+      alert(`反馈已学习！\n奖励: ${res.reward.toFixed(2)}\n累计学习: ${res.total_learned} 步`);
+      loadDrlStats(); // 刷新 DQN 统计
+    } else {
+      alert('反馈失败：' + res.message);
+    }
+  } catch(e) {
+    alert('反馈失败：' + e.message);
+  }
+}
+
+// 显示 DQN 学习历史
+async function showDqnHistory() {
+  try {
+    const res = await fetch('/drl/history');
+    const data = await res.json();
+    
+    const msg = `DQN 学习历史：
+━━━━━━━━━━━━━━━━━━
+总学习步数: ${data.total_steps}
+探索率 ε: ${data.epsilon}
+经验池大小: ${data.buffer_size}
+平均奖励: ${data.avg_reward}
+奖励波动: ${data.reward_std}`;
+    
+    alert(msg);
+  } catch(e) {
+    alert('获取 DQN 历史失败');
   }
 }
 </script>

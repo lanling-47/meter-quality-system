@@ -27,9 +27,9 @@ def explain_meter(meter_no: int, db) -> dict:
     if not chain:
         return {"error": f"未找到电表 {meter_no} 的质量链路数据"}
 
-    model, feat_names, version = load_active_model(db)
+    model, feat_names, version, scaler, model_type = load_active_model(db)
 
-    # 构建特征向量
+    # 构建特征向量（24维，含生产过程特征）
     x = np.array([[
         chain.crystal_ppm or 9.0,
         chain.ct_ratio_err or 0.5,
@@ -39,7 +39,16 @@ def explain_meter(meter_no: int, db) -> dict:
         chain.final_error_max or 0.0,
         chain.error_degradation_rate or 0.0,
         chain.clock_drift_rate or 0.0,
+        chain.clock_daily_error_max if chain.clock_daily_error_max is not None else 0.22,
+        chain.error_variability_max if chain.error_variability_max is not None else 0.006,
+        chain.error_consistency_max if chain.error_consistency_max is not None else 0.086,
+        chain.energy_balance_ratio if chain.energy_balance_ratio is not None else 1.0,
+        chain.energy_peak_ratio if chain.energy_peak_ratio is not None else 0.246,
         float(chain.rs485_total_errors or 0),
+        # 生产过程特征（默认0）
+        0.0, 0.0, 0.0, 0.0,
+        0.0, 0.0, 0.0, 0.0,
+        0.0, 0.0,
     ]])
 
     # 当前特征值字典
@@ -135,15 +144,25 @@ def _generate_root_cause_text(contributions: list, chain, model=None) -> str:
         fname = c["name"]
         val = c["value"]
         if fname == "crystal_ppm" and val > 15:
-            lines.append(f"• 晶振频率误差 {val:.1f}ppm 接近限值(20ppm)，建议核查批次 {chain.crystal_batch} 来料检测报告")
+            lines.append(f"• 晶振频率误差 {val:.1f}ppm 接近限值(20ppm)，建议核查批次来料检测报告")
         elif fname == "ct_ratio_err" and val > 0.8:
-            lines.append(f"• 互感器比差 {val:.2f}% 偏大，建议复检批次 {chain.ct_batch} 互感器")
+            lines.append(f"• 互感器比差 {val:.2f}% 偏大，建议复检互感器批次")
         elif fname == "rs485_total_errors" and val > 0:
             lines.append(f"• RS485通信累计 {int(val)} 次异常，建议检查通信模块焊接质量或电路板设计")
         elif fname == "clock_drift_rate" and val > 0.3:
             lines.append(f"• 时钟漂移速率 {val:.3f}s/d 偏高，与晶振频偏存在强相关，建议从来料把控")
         elif fname == "final_error_max" and val > 0.3:
             lines.append(f"• 末期最大基本误差 {val:.3f}% 异常，建议分析退化曲线判断失效模式")
+        elif fname == "prod_repaired" and val > 0:
+            lines.append(f"• 该电表经过维修，建议结合维修记录分析故障根因")
+        elif fname == "prod_func_retry" and val > 0:
+            lines.append(f"• 功能测试重测 {int(val)} 次，说明生产过程中存在不稳定因素")
+        elif fname == "prod_reverify_retry" and val > 0:
+            lines.append(f"• 复校重测 {int(val)} 次，计量性能存在波动，建议核查校准设备状态")
+        elif fname == "prod_smt_aoi_defect" and val > 0:
+            lines.append(f"• 贴片AOI发现焊接缺陷，可能影响长期可靠性，建议追查缺陷类型")
+        elif fname == "prod_wave_aoi_defect" and val > 0:
+            lines.append(f"• 波峰焊AOI发现缺陷（如气孔/缺焊），建议检查波峰焊工艺参数")
 
     return "\n".join(lines)
 
@@ -158,6 +177,10 @@ def _rule_based_explain(feat_vals: dict, chain, error: str = None) -> dict:
         "rs485_total_errors": lambda v: min(v / 10, 0.3),
         "clock_drift_rate": lambda v: (v - 0.2) / 0.3 * 0.2 if v > 0.2 else 0,
         "final_error_max": lambda v: (v - 0.3) / 0.2 * 0.25 if v > 0.3 else 0,
+        "prod_repaired": lambda v: 0.2 if v > 0 else 0,
+        "prod_total_retry": lambda v: min(v * 0.05, 0.2),
+        "prod_smt_aoi_defect": lambda v: 0.15 if v > 0 else 0,
+        "prod_wave_aoi_defect": lambda v: 0.1 if v > 0 else 0,
     }
     for fname in FEATURE_NAMES:
         val = feat_vals.get(fname, 0)
@@ -191,7 +214,7 @@ def _rule_based_explain(feat_vals: dict, chain, error: str = None) -> dict:
 def get_all_shap_summary(db) -> dict:
     """获取全体电表的全局特征重要度"""
     from app.models.db_models import QualityChain, ModelVersion
-    model, feat_names, version = load_active_model(db)
+    model, feat_names, version, scaler, model_type = load_active_model(db)
     if model is None:
         return {"error": "无激活模型"}
 
@@ -210,7 +233,16 @@ def get_all_shap_summary(db) -> dict:
         c.final_error_max or 0.0,
         c.error_degradation_rate or 0.0,
         c.clock_drift_rate or 0.0,
+        c.clock_daily_error_max if c.clock_daily_error_max is not None else 0.22,
+        c.error_variability_max if c.error_variability_max is not None else 0.006,
+        c.error_consistency_max if c.error_consistency_max is not None else 0.086,
+        c.energy_balance_ratio if c.energy_balance_ratio is not None else 1.0,
+        c.energy_peak_ratio if c.energy_peak_ratio is not None else 0.246,
         float(c.rs485_total_errors or 0),
+        # 生产过程特征（默认0）
+        0.0, 0.0, 0.0, 0.0,
+        0.0, 0.0, 0.0, 0.0,
+        0.0, 0.0,
     ] for c in chains])
 
     try:

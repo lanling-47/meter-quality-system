@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}智能电表全周期质量管控系统{% endblock %}</title>
-  <!-- Bootstrap 5 -->
+  <!-- Bootstrap 5 CDN -->
   <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
-  <!-- Bootstrap Icons -->
+  <!-- Bootstrap Icons CDN -->
   <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/bootstrap-icons/1.11.0/font/bootstrap-icons.min.css">
-  <!-- ECharts -->
+  <!-- ECharts CDN -->
   <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
   <style>
     :root {
@@ -149,6 +149,25 @@
     </a>
     <a href="/anomaly" class="nav-link-item {% if page == 'anomaly' %}active{% endif %}">
       <i class="bi bi-exclamation-triangle"></i><span>异常检测</span>
+    </a>
+
+    <div class="nav-section-title" style="margin-top:12px;">生产过程</div>
+    <a href="/production" class="nav-link-item {% if page == 'production' %}active{% endif %}">
+      <i class="bi bi-diagram-3"></i><span>生产追溯</span>
+    </a>
+    <a href="/repair-analysis" class="nav-link-item {% if page == 'repair' %}active{% endif %}">
+      <i class="bi bi-tools"></i><span>维修分析</span>
+    </a>
+
+    <div class="nav-section-title" style="margin-top:12px;">AI 研究</div>
+    <a href="/ablation" class="nav-link-item {% if page == 'ablation' %}active{% endif %}">
+      <i class="bi bi-flask"></i><span>消融实验</span>
+    </a>
+
+    <div class="nav-section-title" style="margin-top:12px;">在线运营</div>
+    <a href="/data-review" class="nav-link-item {% if page == 'data_review' %}active{% endif %}">
+      <i class="bi bi-radar"></i><span>数据采集</span>
+      <span id="sidebarPendingBadge" class="badge bg-warning ms-auto" style="display:none;font-size:10px;"></span>
     </a>
   </div>
 

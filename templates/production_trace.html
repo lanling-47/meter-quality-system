@@ -1,0 +1,424 @@
+{% extends "base.html" %}
+{% block title %}生产过程追溯 - 智能电表质量管控系统{% endblock %}
+
+{% block extra_css %}
+<style>
+.process-badge { display:inline-block; padding:2px 10px; border-radius:12px; font-size:12px; font-weight:600; }
+.process-CCD { background:#e8f4fc; color:#1a6dad; }
+.process-耐压 { background:#fff3e0; color:#e65c00; }
+.process-功能测试 { background:#f3e5f5; color:#7b1fa2; }
+.process-复校 { background:#e8f5e9; color:#2e7d32; }
+.process-badge-pass { background:#e8f8f0; color:#1e8449; }
+.process-badge-fail { background:#fdecea; color:#c0392b; }
+.risk-bar-wrap { display:flex; align-items:center; gap:8px; }
+.risk-bar-sm { width:80px; height:6px; border-radius:3px; background:#e3e8f0; overflow:hidden; }
+.risk-bar-sm-fill { height:100%; border-radius:3px; }
+#traceTable td, #traceTable th { font-size:12px; }
+.step-flow { display:flex; align-items:center; gap:0; flex-wrap:wrap; }
+.step-item { text-align:center; min-width:80px; }
+.step-circle { width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 4px; font-size:16px; }
+.step-arrow { font-size:18px; color:#b0b8c1; margin:0 2px; align-self:center; }
+.step-label { font-size:11px; color:#7a8fa6; }
+.step-pass .step-circle { background:#e8f8f0; color:#1e8449; border:2px solid #27ae60; }
+.step-fail .step-circle { background:#fdecea; color:#c0392b; border:2px solid #e74c3c; }
+.step-none .step-circle { background:#f0f2f5; color:#aaa; border:2px solid #ddd; }
+</style>
+{% endblock %}
+
+{% block page_title %}生产过程追溯{% endblock %}
+{% block topbar_actions %}
+<button class="btn btn-sm btn-primary" onclick="importData()">
+  <i class="bi bi-cloud-download"></i> 导入生产数据
+</button>
+{% endblock %}
+
+{% block content %}
+
+<!-- KPI 行 -->
+<div class="row g-3 mb-4" id="kpiRow">
+  <div class="col-6 col-md-3">
+    <div class="kpi-card">
+      <div class="d-flex align-items-center gap-3">
+        <div class="kpi-icon" style="background:#1a3a5c"><i class="bi bi-cpu"></i></div>
+        <div>
+          <div class="kpi-value" id="kpiTotal">--</div>
+          <div class="kpi-label">追溯电表总数</div>
+        </div>
+      </div>
+      <i class="bi bi-cpu kpi-bg"></i>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="kpi-card">
+      <div class="d-flex align-items-center gap-3">
+        <div class="kpi-icon" style="background:#27ae60"><i class="bi bi-check-circle"></i></div>
+        <div>
+          <div class="kpi-value" id="kpiPass">--</div>
+          <div class="kpi-label">一次通过率</div>
+        </div>
+      </div>
+      <i class="bi bi-check2-all kpi-bg"></i>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="kpi-card">
+      <div class="d-flex align-items-center gap-3">
+        <div class="kpi-icon" style="background:#e74c3c"><i class="bi bi-exclamation-triangle"></i></div>
+        <div>
+          <div class="kpi-value" id="kpiHighRisk">--</div>
+          <div class="kpi-label">高风险电表</div>
+        </div>
+      </div>
+      <i class="bi bi-shield-x kpi-bg"></i>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="kpi-card">
+      <div class="d-flex align-items-center gap-3">
+        <div class="kpi-icon" style="background:#f0a500"><i class="bi bi-tools"></i></div>
+        <div>
+          <div class="kpi-value" id="kpiRepaired">--</div>
+          <div class="kpi-label">经过维修数</div>
+        </div>
+      </div>
+      <i class="bi bi-tools kpi-bg"></i>
+    </div>
+  </div>
+</div>
+
+<!-- 工序不合格率 -->
+<div class="row g-3 mb-4">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header primary">
+        <i class="bi bi-bar-chart-steps"></i> 各工序检测不合格率
+      </div>
+      <div class="card-body">
+        <div class="row g-3" id="processStatCards"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 搜索筛选 + 列表 -->
+<div class="card mb-4">
+  <div class="card-header primary d-flex align-items-center gap-3">
+    <i class="bi bi-list-check"></i> 全工序追溯列表
+    <div class="ms-auto d-flex gap-2">
+      <input type="text" class="form-control form-control-sm" id="searchBarcode"
+             placeholder="条形码搜索" style="width:150px"
+             onkeydown="if(event.key==='Enter')loadTrace()">
+      <input type="text" class="form-control form-control-sm" id="searchOrder"
+             placeholder="订单号" style="width:130px"
+             onkeydown="if(event.key==='Enter')loadTrace()">
+      <select class="form-select form-select-sm" id="filterResult" style="width:120px" onchange="loadTrace()">
+        <option value="">全部</option>
+        <option value="pass">合格</option>
+        <option value="fail">不合格</option>
+        <option value="high_risk">高风险</option>
+      </select>
+      <button class="btn btn-sm btn-primary" onclick="loadTrace()"><i class="bi bi-search"></i></button>
+    </div>
+  </div>
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover mb-0" id="traceTable">
+        <thead>
+          <tr>
+            <th>条形码</th>
+            <th>订单号</th>
+            <th>CCD</th>
+            <th>耐压</th>
+            <th>功能测试</th>
+            <th>复校</th>
+            <th>AOI</th>
+            <th>维修</th>
+            <th>重测次数</th>
+            <th>风险分</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody id="traceBody">
+          <tr><td colspan="11" class="text-center text-muted py-4">暂无数据，请先导入生产数据</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card-footer d-flex align-items-center justify-content-between">
+    <small class="text-muted" id="pageInfo">--</small>
+    <div class="d-flex gap-1">
+      <button class="btn btn-sm btn-outline-secondary" id="btnPrev" onclick="changePage(-1)">上一页</button>
+      <button class="btn btn-sm btn-outline-secondary" id="btnNext" onclick="changePage(1)">下一页</button>
+    </div>
+  </div>
+</div>
+
+<!-- 详情 Modal -->
+<div class="modal fade" id="detailModal" tabindex="-1">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header" style="background:var(--primary);color:#fff;">
+        <h5 class="modal-title"><i class="bi bi-diagram-3"></i> 全链路追溯详情</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" id="detailBody">加载中...</div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+let currentPage = 1;
+const pageSize = 50;
+
+// ── 加载概况 KPI ─────────────────────────────────────────────────────────
+async function loadKPI() {
+  const data = await fetch('/production/overview-stats').then(r => r.json());
+  document.getElementById('kpiTotal').textContent = data.total_trace.toLocaleString();
+  document.getElementById('kpiPass').textContent = data.pass_rate + '%';
+  document.getElementById('kpiHighRisk').textContent = data.high_risk_count.toLocaleString();
+  document.getElementById('kpiRepaired').textContent = data.repaired_count.toLocaleString();
+
+  // 工序不合格率卡片
+  const colors = {'CCD':'#1a6dad','功能测试':'#7b1fa2','耐压':'#e65c00','复校':'#2e7d32'};
+  const container = document.getElementById('processStatCards');
+  container.innerHTML = '';
+  for (const [proc, stat] of Object.entries(data.process_stats || {})) {
+    container.innerHTML += `
+      <div class="col-6 col-md-3">
+        <div class="p-3 rounded" style="background:#f8fafc;border:1px solid #e3e8f0">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="process-badge process-${proc}">${proc}</span>
+            <strong style="color:${stat.fail_rate > 3 ? '#c0392b' : '#27ae60'}">${stat.fail_rate}%</strong>
+          </div>
+          <div class="risk-bar" style="height:6px">
+            <div class="risk-bar-fill" style="width:${Math.min(stat.fail_rate*10,100)}%;background:${stat.fail_rate > 3 ? '#e74c3c' : '#27ae60'}"></div>
+          </div>
+          <small class="text-muted">不合格 ${stat.fail} / 共 ${stat.total}</small>
+        </div>
+      </div>`;
+  }
+}
+
+// ── 加载追溯列表 ──────────────────────────────────────────────────────────
+async function loadTrace() {
+  currentPage = 1;
+  await fetchTrace();
+}
+
+async function fetchTrace() {
+  const bc = document.getElementById('searchBarcode').value.trim();
+  const ord = document.getElementById('searchOrder').value.trim();
+  const filter = document.getElementById('filterResult').value;
+  const params = new URLSearchParams({
+    page: currentPage, page_size: pageSize,
+    barcode: bc, order_no: ord, result_filter: filter
+  });
+  const data = await fetch('/production/trace?' + params).then(r => r.json());
+  renderTraceTable(data);
+}
+
+function renderTraceTable(data) {
+  const tbody = document.getElementById('traceBody');
+  if (!data.items || data.items.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="11" class="text-center text-muted py-4">暂无数据</td></tr>';
+    document.getElementById('pageInfo').textContent = '共0条';
+    return;
+  }
+
+  tbody.innerHTML = data.items.map(r => {
+    const ccdBadge = r.ccd_pass === true ? '<span class="process-badge process-badge-pass">✓</span>'
+                   : r.ccd_pass === false ? '<span class="process-badge process-badge-fail">✗</span>'
+                   : '<span class="text-muted">-</span>';
+    const hipotBadge = r.hipot_pass === true ? '<span class="process-badge process-badge-pass">✓</span>'
+                     : r.hipot_pass === false ? '<span class="process-badge process-badge-fail">✗</span>'
+                     : '<span class="text-muted">-</span>';
+    const funcBadge = r.func_pass === true ? '<span class="process-badge process-badge-pass">✓</span>'
+                    : r.func_pass === false ? '<span class="process-badge process-badge-fail">✗</span>'
+                    : '<span class="text-muted">-</span>';
+    const rvBadge = r.reverify_pass === true ? '<span class="process-badge process-badge-pass">✓</span>'
+                  : r.reverify_pass === false ? '<span class="process-badge process-badge-fail">✗</span>'
+                  : '<span class="text-muted">-</span>';
+    const aoiBadge = (r.smt_aoi_defect || r.wave_aoi_defect)
+      ? '<span class="badge bg-warning text-dark">有缺陷</span>'
+      : '<span class="text-muted">-</span>';
+    const repairBadge = r.repaired
+      ? `<span class="badge bg-danger">维修${r.repair_count}次</span>`
+      : '<span class="text-muted">-</span>';
+    const score = r.quality_risk_score || 0;
+    const scoreColor = score >= 0.5 ? '#e74c3c' : (score >= 0.25 ? '#f0a500' : '#27ae60');
+    const riskBar = `<div class="risk-bar-wrap">
+      <div class="risk-bar-sm"><div class="risk-bar-sm-fill" style="width:${score*100}%;background:${scoreColor}"></div></div>
+      <span style="color:${scoreColor};font-weight:600">${(score*100).toFixed(0)}%</span>
+    </div>`;
+    return `<tr>
+      <td><code style="font-size:11px">${r.barcode}</code></td>
+      <td><small>${r.order_no || '-'}</small></td>
+      <td>${ccdBadge}</td>
+      <td>${hipotBadge}</td>
+      <td>${funcBadge}</td>
+      <td>${rvBadge}</td>
+      <td>${aoiBadge}</td>
+      <td>${repairBadge}</td>
+      <td><span class="badge bg-secondary">${r.total_retry_count || 0}</span></td>
+      <td>${riskBar}</td>
+      <td><button class="btn btn-xs btn-outline-primary" style="padding:1px 8px;font-size:11px"
+            onclick="showDetail('${r.barcode}')">详情</button></td>
+    </tr>`;
+  }).join('');
+
+  const total = data.total;
+  const totalPages = Math.ceil(total / pageSize);
+  document.getElementById('pageInfo').textContent =
+    `共 ${total} 条，第 ${currentPage}/${totalPages} 页`;
+  document.getElementById('btnPrev').disabled = currentPage <= 1;
+  document.getElementById('btnNext').disabled = currentPage >= totalPages;
+}
+
+async function changePage(delta) {
+  currentPage += delta;
+  await fetchTrace();
+}
+
+// ── 详情弹窗 ─────────────────────────────────────────────────────────────
+async function showDetail(barcode) {
+  const modal = new bootstrap.Modal(document.getElementById('detailModal'));
+  document.getElementById('detailBody').innerHTML = '<div class="text-center py-4"><div class="spinner-border text-primary"></div></div>';
+  modal.show();
+
+  const data = await fetch(`/production/trace/${barcode}`).then(r => r.json());
+  renderDetail(barcode, data);
+}
+
+function renderDetail(barcode, data) {
+  const t = data.trace || {};
+
+  // 流程图
+  const steps = [
+    {key:'ccd', label:'CCD检测', pass: t.ccd_pass, retry: t.ccd_retry_count},
+    {key:'hipot', label:'耐压测试', pass: t.hipot_pass, retry: 0},
+    {key:'func', label:'功能测试', pass: t.func_pass, retry: t.func_retry_count},
+    {key:'reverify', label:'复校', pass: t.reverify_pass, retry: t.reverify_retry_count},
+  ];
+  let flowHtml = '<div class="step-flow mb-4">';
+  steps.forEach((s, i) => {
+    const cls = s.pass === true ? 'step-pass' : s.pass === false ? 'step-fail' : 'step-none';
+    const icon = s.pass === true ? '✓' : s.pass === false ? '✗' : '?';
+    flowHtml += `<div class="step-item ${cls}">
+      <div class="step-circle">${icon}</div>
+      <div class="step-label">${s.label}</div>
+      ${s.retry > 0 ? `<small class="text-warning">重测${s.retry}次</small>` : ''}
+    </div>`;
+    if (i < steps.length - 1) flowHtml += '<div class="step-arrow">→</div>';
+  });
+  flowHtml += '</div>';
+
+  // AOI缺陷
+  let aoiHtml = '';
+  if (data.aoi_defects && data.aoi_defects.length > 0) {
+    aoiHtml = `<h6 class="mt-3"><i class="bi bi-search text-warning"></i> AOI缺陷记录</h6>
+    <table class="table table-sm table-bordered"><thead><tr>
+      <th>类型</th><th>故障点</th><th>故障描述</th><th>质量隐患</th><th>检测时间</th>
+    </tr></thead><tbody>` +
+    data.aoi_defects.map(r => `<tr>
+      <td><span class="badge ${r.aoi_type==='smt'?'bg-warning text-dark':'bg-info text-dark'}">${r.aoi_type==='smt'?'贴片':'波峰焊'}</span></td>
+      <td>${r.defect_point||'-'}</td>
+      <td>${r.defect_desc||'-'}</td>
+      <td><small class="text-danger">${r.quality_risk||'-'}</small></td>
+      <td><small>${r.detect_time||'-'}</small></td>
+    </tr>`).join('') + '</tbody></table>';
+  }
+
+  // 维修记录
+  let repairHtml = '';
+  if (data.repairs && data.repairs.length > 0) {
+    repairHtml = `<h6 class="mt-3"><i class="bi bi-tools text-danger"></i> 维修记录</h6>
+    <table class="table table-sm table-bordered"><thead><tr>
+      <th>故障工序</th><th>故障现象</th><th>故障原因</th><th>故障地点</th><th>维修时间</th>
+    </tr></thead><tbody>` +
+    data.repairs.map(r => `<tr>
+      <td>工序${r.fault_process||'-'}</td>
+      <td>${r.fault_name||'-'}</td>
+      <td>${r.cause_name||'-'}</td>
+      <td>${r.fault_location||'-'}</td>
+      <td><small>${r.repair_time||'-'}</small></td>
+    </tr>`).join('') + '</tbody></table>';
+  }
+
+  // 单板测试不合格
+  let boardHtml = '';
+  if (data.board_test_fails && data.board_test_fails.length > 0) {
+    boardHtml = `<h6 class="mt-3"><i class="bi bi-cpu text-purple"></i> 单板测试不合格项</h6>
+    <table class="table table-sm table-bordered"><thead><tr>
+      <th>测试项目</th><th>结论</th><th>测试数据</th><th>时间</th>
+    </tr></thead><tbody>` +
+    data.board_test_fails.map(r => `<tr>
+      <td>${r.test_item||'-'}</td>
+      <td><span class="badge bg-danger">${r.result}</span></td>
+      <td><small>${r.test_data||'-'}</small></td>
+      <td><small>${r.test_time||'-'}</small></td>
+    </tr>`).join('') + '</tbody></table>';
+  }
+
+  // 检测明细
+  let inspHtml = '';
+  if (data.inspections && data.inspections.length > 0) {
+    inspHtml = `<h6 class="mt-3"><i class="bi bi-list-check"></i> 工序检测明细</h6>
+    <table class="table table-sm table-bordered"><thead><tr>
+      <th>工序</th><th>第N次</th><th>结论</th><th>设备</th><th>备注</th><th>时间</th>
+    </tr></thead><tbody>` +
+    data.inspections.map(r => `<tr>
+      <td><span class="process-badge process-${r.process}">${r.process}</span></td>
+      <td>${r.test_count}</td>
+      <td><span class="process-badge ${r.result==='合格'||r.result==='成功'?'process-badge-pass':'process-badge-fail'}">${r.result}</span></td>
+      <td><small>${r.device_no||'-'}</small></td>
+      <td><small class="text-muted">${r.remark||''}</small></td>
+      <td><small>${r.test_time||'-'}</small></td>
+    </tr>`).join('') + '</tbody></table>';
+  }
+
+  const score = t.quality_risk_score || 0;
+  document.getElementById('detailBody').innerHTML = `
+    <div class="mb-3">
+      <h6>条形码：<code>${barcode}</code> &nbsp;
+        订单：<strong>${t.order_no||'-'}</strong> &nbsp;
+        综合风险：<strong style="color:${score>=0.5?'#e74c3c':score>=0.25?'#f0a500':'#27ae60'}">${(score*100).toFixed(0)}%</strong>
+        &nbsp;${t.repaired?'<span class="badge bg-danger">经过维修</span>':''}
+        ${(t.smt_aoi_defect||t.wave_aoi_defect)?'<span class="badge bg-warning text-dark">AOI缺陷</span>':''}
+      </h6>
+    </div>
+    ${flowHtml}
+    ${aoiHtml}
+    ${repairHtml}
+    ${boardHtml}
+    ${inspHtml}
+  `;
+}
+
+// ── 导入数据 ─────────────────────────────────────────────────────────────
+async function importData() {
+  showLoading('正在导入生产数据（约需1-3分钟）...');
+  try {
+    const data = await postJson('/production/import', {});
+    hideLoading();
+    if (data.success) {
+      const s = data.stats;
+      alert(`导入完成！\n工序检测: ${s.inspection}条\nAOI缺陷: ${s.aoi_defect}条\n维修记录: ${s.repair}条\n单板测试: ${s.board_test}条\n追溯汇总: ${s.trace}条\n${s.errors.length > 0 ? '⚠️警告: ' + s.errors.join('\n') : ''}`);
+      loadKPI();
+      loadTrace();
+    } else {
+      alert('导入失败: ' + (data.error || JSON.stringify(data)));
+    }
+  } catch(e) {
+    hideLoading();
+    alert('请求失败: ' + e);
+  }
+}
+
+// ── 初始化 ────────────────────────────────────────────────────────────────
+loadKPI();
+loadTrace();
+</script>
+{% endblock %}

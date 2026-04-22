@@ -97,25 +97,27 @@ async def train_model_api(request: Request, db: Session = Depends(get_db)):
 
 
 @router.get("/train/stream")
-async def train_stream(request: Request, db: Session = Depends(get_db)):
-    """SSE 端点：流式推送训练进度"""
+async def train_stream(request: Request, model_type: str = "tabnet", db: Session = Depends(get_db)):
+    """SSE 端点：流式推送训练进度，支持 model_type=tabnet|lightgbm"""
+    from fastapi.responses import StreamingResponse
     from app.services.predict_service import training_event_stream, train_model
 
-    # 在后台协程里启动训练，SSE 流式推送进度
-    async def run_and_stream():
-        # 先建立 SSE 流
+    async def run_train():
+        """在后台线程中运行训练"""
         loop = asyncio.get_event_loop()
-        # 在线程池中运行同步的训练函数（避免阻塞事件循环）
-        await loop.run_in_executor(None, train_model, db)
+        await loop.run_in_executor(None, lambda: train_model(db, model_type=model_type))
 
-    asyncio.create_task(run_and_stream())
+    # 启动训练任务（不等待完成）
+    asyncio.create_task(run_train())
 
+    # 返回 SSE 流
     return StreamingResponse(
         training_event_stream(),
         media_type="text/event-stream",
         headers={
             "Cache-Control": "no-cache",
             "X-Accel-Buffering": "no",
+            "Connection": "keep-alive",
         }
     )
 

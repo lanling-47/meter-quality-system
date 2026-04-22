@@ -1,0 +1,564 @@
+{% extends "base.html" %}
+{% block title %}数据采集 & 审核中心 - 智能电表质量管控{% endblock %}
+{% block page_title %}数据采集 & 审核中心{% endblock %}
+
+{% block topbar_actions %}
+<button class="btn btn-sm btn-outline-light" onclick="scanNow()">
+  <i class="bi bi-radar me-1"></i>立即扫描
+</button>
+<button class="btn btn-sm btn-accent ms-2" onclick="document.getElementById('uploadModal').style.display='flex'">
+  <i class="bi bi-upload me-1"></i>手动上传
+</button>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.status-badge { display:inline-block; padding:2px 10px; border-radius:12px; font-size:11px; font-weight:600; }
+.status-pending { background:#fff3cd; color:#856404; }
+.status-reviewed { background:#d1ecf1; color:#0c5460; }
+.status-trained { background:#d4edda; color:#155724; }
+.status-error { background:#f8d7da; color:#721c24; }
+.review-card { border:1px solid #e3e8f0; border-radius:8px; padding:12px; background:#fff; margin-bottom:8px; }
+.risk-high { color:#e74c3c; font-weight:700; }
+.risk-low { color:#27ae60; font-weight:700; }
+.watch-status { display:flex; align-items:center; gap:8px; font-size:13px; }
+.dot-online { width:8px; height:8px; border-radius:50%; background:#27ae60; animation:pulse 2s infinite; }
+.dot-offline { width:8px; height:8px; border-radius:50%; background:#e74c3c; }
+@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+.metric-box { text-align:center; padding:16px; border-radius:8px; background:#f8fafc; border:1px solid #e3e8f0; }
+.metric-box .num { font-size:28px; font-weight:700; color:#1a3a5c; }
+.metric-box .label { font-size:12px; color:#6c757d; margin-top:4px; }
+.modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:9000; align-items:center; justify-content:center; }
+.modal-box { background:#fff; border-radius:12px; padding:28px; width:460px; max-width:95vw; }
+.notify-banner { background:#1a3a5c; color:#fff; padding:10px 16px; border-radius:8px; margin-bottom:8px; font-size:13px; display:flex; align-items:center; gap:10px; }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- 通知横幅 -->
+<div id="notifyArea"></div>
+
+<!-- 监控状态栏 -->
+<div class="ablation-card mb-4">
+  <div class="row g-3 align-items-center">
+    <div class="col-md-5">
+      <div class="watch-status">
+        <span id="watchDot" class="dot-online"></span>
+        <span id="watchStatusText">文件监控运行中</span>
+      </div>
+      <div class="small text-muted mt-1">
+        <i class="bi bi-folder2-open me-1"></i>监控目录：<code>{{ watch_dir }}</code>
+      </div>
+      <div class="small text-muted">
+        <i class="bi bi-clock me-1"></i>轮询间隔：{{ interval_sec }}s（{{ (interval_sec // 60) }}分钟）
+      </div>
+    </div>
+    <div class="col-md-7">
+      <div class="row g-2">
+        <div class="col-3">
+          <div class="metric-box">
+            <div class="num text-warning" id="metPendingReview">{{ pending_reviews }}</div>
+            <div class="label">待审核</div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="metric-box">
+            <div class="num text-danger" id="metConfirmedNotTrained">{{ confirmed_not_trained }}</div>
+            <div class="label">待训练</div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="metric-box">
+            <div class="num text-primary" id="metTotalLogs">{{ total_logs }}</div>
+            <div class="label">采集文件</div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="metric-box">
+            <div class="num text-success" style="font-size:14px;">{{ active_model_tag }}</div>
+            <div class="label">激活模型</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 主体：三个 Tab -->
+<ul class="nav nav-tabs mb-3" id="reviewTabs">
+  <li class="nav-item">
+    <a class="nav-link active" onclick="switchTab('logs')" id="tab-logs">
+      <i class="bi bi-file-earmark-text me-1"></i>采集日志
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" onclick="switchTab('queue')" id="tab-queue">
+      <i class="bi bi-ui-checks me-1"></i>审核队列
+      <span class="badge bg-warning ms-1" id="pendingBadge">{{ pending_reviews }}</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" onclick="switchTab('train')" id="tab-train">
+      <i class="bi bi-cpu me-1"></i>训练管理
+    </a>
+  </li>
+</ul>
+
+<!-- Tab 1：采集日志 -->
+<div id="panel-logs">
+  <div class="d-flex justify-content-between align-items-center mb-2">
+    <span class="small text-muted">按时间倒序显示，每页20条</span>
+    <button class="btn btn-sm btn-outline-primary" onclick="loadLogs(1)">
+      <i class="bi bi-arrow-clockwise"></i> 刷新
+    </button>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-sm table-bordered text-center" style="font-size:12px;">
+      <thead style="background:#f8fafc;">
+        <tr>
+          <th>ID</th><th>文件名</th><th>类型</th><th>总记录</th><th>新增</th><th>状态</th><th>解析时间</th><th>审核人</th>
+        </tr>
+      </thead>
+      <tbody id="logsTableBody">
+        <tr><td colspan="8" class="text-muted py-3">加载中...</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="d-flex justify-content-center gap-2 mt-2" id="logsPagination"></div>
+</div>
+
+<!-- Tab 2：审核队列 -->
+<div id="panel-queue" style="display:none;">
+  <div class="d-flex gap-2 mb-3 align-items-center flex-wrap">
+    <select id="queueStatusFilter" class="form-select form-select-sm" style="width:auto;" onchange="loadQueue(1)">
+      <option value="pending">待审核</option>
+      <option value="confirmed">已确认</option>
+      <option value="rejected">已拒绝</option>
+    </select>
+    <button class="btn btn-sm btn-success" onclick="batchAction('confirm')">
+      <i class="bi bi-check-all me-1"></i>批量确认选中
+    </button>
+    <button class="btn btn-sm btn-outline-danger" onclick="batchAction('reject')">
+      <i class="bi bi-x-circle me-1"></i>批量拒绝选中
+    </button>
+    <button class="btn btn-sm btn-warning" onclick="confirmAll()">
+      <i class="bi bi-lightning me-1"></i>一键确认全部
+    </button>
+    <span class="text-muted small ms-auto" id="queueTotal">共 0 条</span>
+  </div>
+
+  <div id="queueList">
+    <div class="text-center text-muted py-4">加载中...</div>
+  </div>
+  <div class="d-flex justify-content-center gap-2 mt-2" id="queuePagination"></div>
+</div>
+
+<!-- Tab 3：训练管理 -->
+<div id="panel-train" style="display:none;">
+  <div class="row g-3">
+    <!-- 状态卡片 -->
+    <div class="col-md-5">
+      <div class="ablation-card">
+        <div class="card-title">训练状态</div>
+        <div id="retrainStatus">
+          <div class="text-muted small">加载中...</div>
+        </div>
+        <div class="mt-3 d-flex gap-2 flex-wrap">
+          <button class="btn btn-sm btn-primary" onclick="triggerIncremental()">
+            <i class="bi bi-arrow-clockwise me-1"></i>增量训练（已审核数据）
+          </button>
+          <button class="btn btn-sm btn-outline-danger" onclick="triggerFull()">
+            <i class="bi bi-cpu me-1"></i>强制全量重训练
+          </button>
+        </div>
+        <p class="text-muted small mt-2 mb-0">
+          <i class="bi bi-info-circle me-1"></i>
+          待训练数据 ≥ {{ threshold }} 条时自动切换为全量重训练；否则使用 DQN 在线微调。
+        </p>
+      </div>
+    </div>
+    <!-- 训练进度 -->
+    <div class="col-md-7">
+      <div class="ablation-card">
+        <div class="card-title">训练进度日志</div>
+        <div class="progress mb-2" style="height:6px;">
+          <div id="retrainProgressBar" class="progress-bar bg-danger" style="width:0%;transition:width 0.3s"></div>
+        </div>
+        <div class="progress-log" id="retrainLog">
+          <div style="color:#79c0ff">[等待训练...]</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 历史模型版本对比 -->
+  <div class="ablation-card mt-4">
+    <div class="card-title"><i class="bi bi-clock-history me-2"></i>模型版本历史</div>
+    <div class="table-responsive">
+      <table class="table table-sm text-center" style="font-size:12px;">
+        <thead><tr><th>版本</th><th>类型</th><th>样本数</th><th>AUC</th><th>F1</th><th>创建时间</th><th>状态</th></tr></thead>
+        <tbody id="modelHistoryBody">
+          <tr><td colspan="7" class="text-muted">加载中...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- 手动上传弹窗 -->
+<div class="modal-overlay" id="uploadModal">
+  <div class="modal-box">
+    <h6 class="fw-bold mb-3"><i class="bi bi-upload me-2"></i>手动上传生产数据文件</h6>
+    <div class="mb-3">
+      <label class="form-label small">选择文件（xlsx/xls/csv）</label>
+      <input type="file" id="uploadFile" class="form-control form-control-sm" accept=".xlsx,.xls,.csv">
+    </div>
+    <div class="text-muted small mb-3">
+      系统将根据文件名自动识别数据类型（CCD/功能测试/复校/AOI/维修等）。<br>
+      已导入过的文件（MD5 相同）将被跳过。
+    </div>
+    <div id="uploadResult" class="mb-3"></div>
+    <div class="d-flex justify-content-end gap-2">
+      <button class="btn btn-sm btn-outline-secondary" onclick="document.getElementById('uploadModal').style.display='none'">取消</button>
+      <button class="btn btn-sm btn-primary" onclick="doUpload()" id="uploadBtn">
+        <i class="bi bi-cloud-upload me-1"></i>上传解析
+      </button>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+const AUTO_RETRAIN_THRESHOLD = {{ threshold }};
+let selectedReviewIds = new Set();
+let trainSSE = null;
+
+// ─── 初始化 ──────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  loadLogs(1);
+  loadWatcherStatus();
+  subscribeNotify();
+  setInterval(loadWatcherStatus, 30000);
+});
+
+// ─── SSE 实时通知 ────────────────────────────────────────────────────────
+function subscribeNotify() {
+  const es = new EventSource('/notify/stream');
+  es.onmessage = (e) => {
+    const { event, data } = JSON.parse(e.data);
+    if (event === 'new_data') {
+      showBanner(`📥 ${data.message}`, 'success');
+      loadWatcherStatus();
+      loadLogs(1);
+      updatePendingBadge();
+    } else if (event === 'scan_summary' && data.new_files > 0) {
+      showBanner(`🔍 扫描完成：发现 ${data.new_files} 个新文件`, 'info');
+    } else if (event === 'error') {
+      showBanner(`❌ ${data.message}`, 'danger');
+    }
+  };
+}
+
+function showBanner(msg, type = 'info') {
+  const colors = { success: '#27ae60', info: '#1a3a5c', danger: '#e74c3c', warning: '#f0a500' };
+  const div = document.createElement('div');
+  div.className = 'notify-banner';
+  div.style.background = colors[type] || '#1a3a5c';
+  div.innerHTML = `<i class="bi bi-bell-fill"></i><span>${msg}</span>
+    <button class="btn-close btn-close-white btn-sm ms-auto" onclick="this.parentNode.remove()"></button>`;
+  document.getElementById('notifyArea').prepend(div);
+  setTimeout(() => div.remove(), 8000);
+}
+
+// ─── 监控状态 ─────────────────────────────────────────────────────────────
+async function loadWatcherStatus() {
+  const res = await fetch('/notify/watcher-status');
+  if (!res.ok) return;
+  const d = await res.json();
+  document.getElementById('watchStatusText').textContent =
+    d.running ? `文件监控运行中（已扫描 ${d.seen_files} 个文件）` : '监控已暂停';
+  document.getElementById('watchDot').className = d.running ? 'dot-online' : 'dot-offline';
+  document.getElementById('metPendingReview').textContent = d.pending_reviews;
+  document.getElementById('pendingBadge').textContent = d.pending_reviews;
+  updateRetrainStatus();
+}
+
+async function scanNow() {
+  showBanner('🔍 正在扫描监控目录...', 'info');
+  const res = await fetch('/notify/scan-now', { method: 'POST' });
+  const d = await res.json();
+  if (d.success) {
+    const s = d.summary;
+    showBanner(`✅ 扫描完成：共 ${s.scanned} 文件，发现 ${s.new_files} 个新文件`, 'success');
+    loadLogs(1);
+  }
+}
+
+// ─── Tab 切换 ─────────────────────────────────────────────────────────────
+function switchTab(tab) {
+  ['logs', 'queue', 'train'].forEach(t => {
+    document.getElementById(`panel-${t}`).style.display = t === tab ? 'block' : 'none';
+    document.getElementById(`tab-${t}`).classList.toggle('active', t === tab);
+  });
+  if (tab === 'queue') loadQueue(1);
+  if (tab === 'train') { updateRetrainStatus(); loadModelHistory(); }
+}
+
+// ─── 采集日志 ──────────────────────────────────────────────────────────────
+async function loadLogs(page) {
+  const res = await fetch(`/data-review/logs?page=${page}&page_size=20`);
+  const d = await res.json();
+  document.getElementById('metTotalLogs').textContent = d.total;
+
+  const tbody = document.getElementById('logsTableBody');
+  if (!d.items.length) {
+    tbody.innerHTML = '<tr><td colspan="8" class="text-muted py-3">暂无采集记录</td></tr>';
+    return;
+  }
+  tbody.innerHTML = d.items.map(l => {
+    const statusMap = { pending: '待审核', reviewed: '已审核', trained: '已训练', error: '错误' };
+    const statusCls = { pending: 'status-pending', reviewed: 'status-reviewed', trained: 'status-trained', error: 'status-error' };
+    return `<tr>
+      <td>${l.id}</td>
+      <td class="text-start" title="${l.file_name}">${l.file_name.length > 25 ? l.file_name.slice(0,25)+'…' : l.file_name}</td>
+      <td><code>${l.data_type || '-'}</code></td>
+      <td>${l.record_count ?? '-'}</td>
+      <td class="${l.new_count > 0 ? 'text-danger fw-bold' : ''}">${l.new_count ?? '-'}</td>
+      <td><span class="status-badge ${statusCls[l.status] || ''}">${statusMap[l.status] || l.status}</span></td>
+      <td>${(l.parsed_at || '').slice(0,16)}</td>
+      <td>${l.reviewed_by || '-'}</td>
+    </tr>`;
+  }).join('');
+
+  // 分页
+  const totalPages = Math.ceil(d.total / 20);
+  document.getElementById('logsPagination').innerHTML = totalPages <= 1 ? '' :
+    Array.from({ length: Math.min(totalPages, 10) }, (_, i) => i + 1).map(p =>
+      `<button class="btn btn-sm ${p === page ? 'btn-primary' : 'btn-outline-secondary'}" onclick="loadLogs(${p})">${p}</button>`
+    ).join('');
+}
+
+// ─── 审核队列 ─────────────────────────────────────────────────────────────
+async function loadQueue(page) {
+  const status = document.getElementById('queueStatusFilter').value;
+  const res = await fetch(`/data-review/queue?status=${status}&page=${page}&page_size=20`);
+  const d = await res.json();
+  document.getElementById('queueTotal').textContent = `共 ${d.total} 条`;
+  selectedReviewIds.clear();
+
+  const container = document.getElementById('queueList');
+  if (!d.items.length) {
+    container.innerHTML = '<div class="text-center text-muted py-4">暂无数据</div>';
+    return;
+  }
+  container.innerHTML = d.items.map(item => {
+    const riskClass = item.auto_label === 1 ? 'risk-high' : 'risk-low';
+    const riskText = item.auto_label === 1 ? '⚠ 高风险' : '✓ 正常';
+    const manualBadge = item.manual_label !== null && item.manual_label !== undefined
+      ? `<span class="badge bg-${item.manual_label === 1 ? 'danger' : 'success'} ms-1">人工: ${item.manual_label === 1 ? '高风险' : '正常'}</span>`
+      : '';
+    return `<div class="review-card d-flex gap-3 align-items-start">
+      <input type="checkbox" class="form-check-input mt-1 review-check" data-id="${item.id}" style="flex-shrink:0;">
+      <div class="flex-grow-1">
+        <div class="d-flex justify-content-between flex-wrap gap-2">
+          <div>
+            <strong>${item.barcode || `ID-${item.id}`}</strong>
+            <span class="${riskClass} ms-2">${riskText}</span>
+            ${manualBadge}
+          </div>
+          <div class="small text-muted">${item.created_at?.slice(0,16) || ''}</div>
+        </div>
+        <div class="small text-muted mt-1">
+          置信度: <strong>${((item.auto_confidence||0)*100).toFixed(1)}%</strong>
+          &nbsp;|&nbsp; 风险概率: <strong>${((item.auto_risk_prob||0)*100).toFixed(1)}%</strong>
+          &nbsp;|&nbsp; 来源: ${item.source || '-'}
+        </div>
+        ${item.review_note ? `<div class="small text-muted">备注：${item.review_note}</div>` : ''}
+      </div>
+      ${status === 'pending' ? `
+      <div class="d-flex gap-1 flex-shrink-0">
+        <button class="btn btn-xs btn-success" style="padding:2px 8px;font-size:11px;" onclick="confirmSingle(${item.id}, 'confirm', ${item.auto_label})">确认</button>
+        <button class="btn btn-xs btn-outline-danger" style="padding:2px 8px;font-size:11px;" onclick="confirmSingle(${item.id}, 'reject', ${item.auto_label})">拒绝</button>
+      </div>` : ''}
+    </div>`;
+  }).join('');
+
+  const totalPages = Math.ceil(d.total / 20);
+  document.getElementById('queuePagination').innerHTML = totalPages <= 1 ? '' :
+    Array.from({ length: Math.min(totalPages, 10) }, (_, i) => i + 1).map(p =>
+      `<button class="btn btn-sm ${p === page ? 'btn-primary' : 'btn-outline-secondary'}" onclick="loadQueue(${p})">${p}</button>`
+    ).join('');
+}
+
+async function confirmSingle(id, action, autoLabel) {
+  await fetch('/data-review/confirm', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ ids: [id], action, manual_label: autoLabel }),
+  });
+  loadQueue(1);
+  updatePendingBadge();
+}
+
+async function batchAction(action) {
+  const ids = Array.from(document.querySelectorAll('.review-check:checked')).map(
+    el => parseInt(el.dataset.id)
+  );
+  if (!ids.length) { showBanner('请先勾选要操作的条目', 'warning'); return; }
+  await fetch('/data-review/confirm', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ ids, action }),
+  });
+  showBanner(`${action === 'confirm' ? '✅ 批量确认' : '❌ 批量拒绝'} ${ids.length} 条`, 'success');
+  loadQueue(1);
+  updatePendingBadge();
+}
+
+async function confirmAll() {
+  if (!confirm('确认将所有 pending 数据批量确认（接受自动标注结果）？')) return;
+  const res = await fetch('/data-review/batch-confirm-all', { method: 'POST' });
+  const d = await res.json();
+  showBanner(`✅ 批量确认 ${d.confirmed} 条`, 'success');
+  loadQueue(1);
+  updatePendingBadge();
+  updateRetrainStatus();
+}
+
+function updatePendingBadge() {
+  fetch('/notify/watcher-status').then(r => r.json()).then(d => {
+    document.getElementById('pendingBadge').textContent = d.pending_reviews;
+    document.getElementById('metPendingReview').textContent = d.pending_reviews;
+  });
+}
+
+// ─── 训练管理 ──────────────────────────────────────────────────────────────
+async function updateRetrainStatus() {
+  const res = await fetch('/retrain/status');
+  if (!res.ok) return;
+  const d = await res.json();
+  document.getElementById('metConfirmedNotTrained').textContent = d.confirmed_not_trained;
+
+  const container = document.getElementById('retrainStatus');
+  const strategyText = d.retrain_strategy === 'full'
+    ? `<span class="badge bg-danger">全量重训练</span>`
+    : `<span class="badge bg-info">DQN 在线微调</span>`;
+
+  container.innerHTML = `
+    <div class="row g-2 mb-2">
+      <div class="col-6"><div class="metric-box"><div class="num text-warning">${d.pending_reviews}</div><div class="label">待审核</div></div></div>
+      <div class="col-6"><div class="metric-box"><div class="num ${d.confirmed_not_trained >= AUTO_RETRAIN_THRESHOLD ? 'text-danger' : 'text-primary'}">${d.confirmed_not_trained}</div><div class="label">待训练数据</div></div></div>
+    </div>
+    <div class="small mb-1">建议策略：${strategyText}</div>
+    <div class="small text-muted mb-1">总训练样本：${d.total_train_samples} 条</div>
+    <div class="small text-muted">激活模型：<code>${d.active_model?.version_tag || '无'}</code>
+      ${d.active_model?.auc_score ? `AUC: <strong>${d.active_model.auc_score.toFixed(4)}</strong>` : ''}
+    </div>
+    ${d.should_retrain ? '<div class="alert alert-warning mt-2 py-1 mb-0 small">⚠ 待训练数据已达阈值，建议触发重训练</div>' : ''}`;
+}
+
+async function triggerIncremental() {
+  const btn = event.target;
+  btn.disabled = true;
+  btn.textContent = '训练中...';
+  openTrainSSE();
+  const res = await fetch('/retrain/incremental', { method: 'POST' });
+  const d = await res.json();
+  showBanner(d.message || (d.error ? '❌ ' + d.error : '完成'), d.success ? 'success' : 'danger');
+  btn.disabled = false;
+  btn.innerHTML = '<i class="bi bi-arrow-clockwise me-1"></i>增量训练（已审核数据）';
+  updateRetrainStatus();
+  loadModelHistory();
+}
+
+async function triggerFull() {
+  if (!confirm('确认强制全量重训练？（耗时约 2-5 分钟）')) return;
+  openTrainSSE();
+  const res = await fetch('/retrain/full', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ model_type: 'tabnet' }),
+  });
+  const d = await res.json();
+  showBanner(d.message || '全量训练已启动', 'info');
+}
+
+function openTrainSSE() {
+  if (trainSSE) { trainSSE.close(); }
+  const log = document.getElementById('retrainLog');
+  log.innerHTML = '';
+  document.getElementById('retrainProgressBar').style.width = '0%';
+
+  trainSSE = new EventSource('/retrain/stream');
+  trainSSE.onmessage = (e) => {
+    const msg = JSON.parse(e.data);
+    if (!msg.event) return;
+    const div = document.createElement('div');
+    const colorMap = { ok: '#7ee787', err: '#f85149', info: '#79c0ff', done: '#7ee787' };
+    const eventColor = msg.event.includes('error') ? '#f85149' :
+                       msg.event.includes('done') || msg.event.includes('complete') ? '#7ee787' : '#79c0ff';
+    div.style.color = eventColor;
+    div.textContent = `[${new Date().toLocaleTimeString()}] ${JSON.stringify(msg.data || msg)}`;
+    log.appendChild(div);
+    log.scrollTop = log.scrollHeight;
+
+    if (msg.data?.progress_pct !== undefined) {
+      document.getElementById('retrainProgressBar').style.width = msg.data.progress_pct + '%';
+    }
+    if (msg.event === 'train_complete') {
+      document.getElementById('retrainProgressBar').style.width = '100%';
+      updateRetrainStatus();
+      loadModelHistory();
+    }
+  };
+}
+
+async function loadModelHistory() {
+  const res = await fetch('/models');
+  if (!res.ok) return;
+  const d = await res.json();
+  const tbody = document.getElementById('modelHistoryBody');
+  if (!d.models?.length) {
+    tbody.innerHTML = '<tr><td colspan="7" class="text-muted">暂无版本记录</td></tr>';
+    return;
+  }
+  tbody.innerHTML = d.models.slice(0, 10).map(m => `<tr ${m.is_active ? 'style="background:#f0fff4;"' : ''}>
+    <td><code>${m.version_tag}</code></td>
+    <td>${m.model_type || '-'}</td>
+    <td>${m.n_samples || '-'}</td>
+    <td class="${m.auc_score >= 0.8 ? 'text-success fw-bold' : ''}">${m.auc_score?.toFixed(4) || '-'}</td>
+    <td>${m.f1_score?.toFixed(4) || '-'}</td>
+    <td>${(m.created_at||'').slice(0,16)}</td>
+    <td>${m.is_active ? '<span class="badge bg-success">激活</span>' : '<span class="badge bg-light text-dark">历史</span>'}</td>
+  </tr>`).join('');
+}
+
+// ─── 文件上传 ──────────────────────────────────────────────────────────────
+async function doUpload() {
+  const file = document.getElementById('uploadFile').files[0];
+  if (!file) { alert('请选择文件'); return; }
+  const btn = document.getElementById('uploadBtn');
+  btn.disabled = true;
+  btn.textContent = '上传中...';
+  document.getElementById('uploadResult').innerHTML = '';
+
+  const form = new FormData();
+  form.append('file', file);
+  const res = await fetch('/notify/upload', { method: 'POST', body: form });
+  const d = await res.json();
+  const alertType = d.success ? 'alert-success' : 'alert-warning';
+  document.getElementById('uploadResult').innerHTML =
+    `<div class="alert ${alertType} py-2 small mb-0">${d.message || d.error}</div>`;
+  btn.disabled = false;
+  btn.innerHTML = '<i class="bi bi-cloud-upload me-1"></i>上传解析';
+
+  if (d.success) {
+    loadLogs(1);
+    updatePendingBadge();
+    updateRetrainStatus();
+  }
+}
+</script>
+{% endblock %}

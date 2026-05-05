@@ -133,13 +133,26 @@
         <!-- Excel 导入 -->
         <div id="tab-excel" class="tab-content active">
           <p class="text-muted small mb-2">将 Excel 文件放入 <code>data/raw/</code> 目录后点击导入：</p>
+          <div class="alert alert-light border small py-2 mb-3">
+            <div><strong>阶段一推荐：</strong>本机浏览器访问 <code>localhost:8090</code>，通过 Excel 上传、手动录入或本地监听目录扫描接入数据。</div>
+            <div class="mt-1">监听目录：<code id="watchDirText">{{ watch_dir }}</code></div>
+          </div>
+          <div class="d-flex flex-wrap gap-2 mb-3">
+            <a class="btn btn-sm btn-outline-success" href="/templates/download/factory"><i class="bi bi-download me-1"></i>出厂检测模板</a>
+            <a class="btn btn-sm btn-outline-success" href="/templates/download/production"><i class="bi bi-download me-1"></i>生产过程模板</a>
+            <a class="btn btn-sm btn-outline-success" href="/templates/download/aging"><i class="bi bi-download me-1"></i>老化测试模板</a>
+            <a class="btn btn-sm btn-outline-primary" href="/setup#templateArea"><i class="bi bi-files me-1"></i>全部模板</a>
+          </div>
           <ul class="small mb-3">
             <li>晶振和互感器10个样品的检验数据26.3.11.xlsx</li>
             <li>样品出厂检测和数字化电路板生产过程数据26.xlsx</li>
             <li>单相表-20版正面布局的耐久性（可靠性）试验数据26.3.6.xlsx</li>
           </ul>
           <button class="btn btn-primary w-100 mb-2" onclick="importExcel()">
-            <i class="bi bi-cloud-download me-2"></i>导入 / 更新数据
+            <i class="bi bi-cloud-download me-2"></i>导入 / 更新 data/raw 数据
+          </button>
+          <button class="btn btn-outline-primary w-100 mb-2" onclick="scanLocalFolder()">
+            <i class="bi bi-folder-symlink me-2"></i>扫描本地监听目录
           </button>
           <div id="importResult" style="display:none;"></div>
 
@@ -443,6 +456,21 @@ async function importExcel() {
   } catch(e) { hideLoading(); alert(e.message); }
 }
 
+async function scanLocalFolder() {
+  showLoading('正在扫描本地监听目录...');
+  try {
+    const res = await postJson('/notify/scan-now', {});
+    hideLoading();
+    const div = document.getElementById('importResult');
+    div.style.display = 'block';
+    if (res.success) {
+      div.innerHTML = `<div class="alert alert-success small mb-0">✅ 本地目录扫描完成：<pre class="mb-0 mt-1" style="white-space:pre-wrap;">${JSON.stringify(res.summary, null, 2)}</pre></div>`;
+    } else {
+      div.innerHTML = `<div class="alert alert-danger small mb-0">❌ 扫描失败：${res.error}</div>`;
+    }
+  } catch(e) { hideLoading(); alert(e.message); }
+}
+
 async function uploadExcel() {
   const f = document.getElementById('uploadFile').files[0];
   if (!f) { alert('请先选择文件'); return; }
@@ -473,6 +501,7 @@ async function submitFactory() {
     meter_constant_err: parseFloat(document.getElementById('f_meter_err').value) || null,
     clock_accuracy_sd: parseFloat(document.getElementById('f_clock_sd').value) || null,
     fault_type: document.getElementById('f_fault_type').value,
+    is_fault: document.getElementById('f_fault_type').value !== '正常',
     rs485_ok: true,
   };
   if (!data.meter_id) { alert('电表ID不能为空'); return; }

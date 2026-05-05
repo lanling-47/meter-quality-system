@@ -7,10 +7,11 @@ from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import RedirectResponse
+from starlette.middleware.base import BaseHTTPMiddleware
 
 from database import init_db
 from app.routers import dashboard, data_import, risk_predict, root_cause, degradation, anomaly_detect
-from app.routers import production, ablation, notify, retrain, data_review
+from app.routers import production, ablation, notify, retrain, data_review, factory_fault, system
 
 app = FastAPI(
     title="智能电表全周期质量管控系统",
@@ -24,7 +25,23 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 # 模板 (添加uru参数支持异步上下文)
 templates = Jinja2Templates(directory="templates")
 
+
+class LoginRequiredMiddleware(BaseHTTPMiddleware):
+    """阶段一单机部署的轻量访问保护。"""
+
+    async def dispatch(self, request: Request, call_next):
+        public_prefixes = ("/login", "/static", "/docs", "/openapi.json", "/redoc")
+        if request.url.path.startswith(public_prefixes):
+            return await call_next(request)
+        if request.cookies.get("meter_quality_login") == "ok":
+            return await call_next(request)
+        return RedirectResponse(url="/login")
+
+
+app.add_middleware(LoginRequiredMiddleware)
+
 # 注册路由
+app.include_router(system.router)
 app.include_router(dashboard.router)
 app.include_router(data_import.router)
 app.include_router(risk_predict.router)
@@ -32,6 +49,7 @@ app.include_router(root_cause.router)
 app.include_router(degradation.router)
 app.include_router(anomaly_detect.router)
 app.include_router(production.router)
+app.include_router(factory_fault.router)
 app.include_router(ablation.router)
 app.include_router(notify.router)
 app.include_router(retrain.router)
@@ -67,4 +85,4 @@ async def startup_event():
 
 @app.get("/")
 async def root():
-    return RedirectResponse(url="/dashboard")
+    return RedirectResponse(url="/setup")

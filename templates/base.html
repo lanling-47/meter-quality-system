@@ -130,6 +130,9 @@
 
   <div class="sidebar-nav">
     <div class="nav-section-title">主要功能</div>
+    <a href="/setup" class="nav-link-item {% if page == 'setup' %}active{% endif %}">
+      <i class="bi bi-rocket-takeoff"></i><span>部署向导</span>
+    </a>
     <a href="/dashboard" class="nav-link-item {% if page == 'dashboard' %}active{% endif %}">
       <i class="bi bi-grid-1x2"></i><span>质量看板</span>
     </a>
@@ -137,7 +140,10 @@
       <i class="bi bi-cloud-upload"></i><span>数据导入</span>
     </a>
     <a href="/predict" class="nav-link-item {% if page == 'predict' %}active{% endif %}">
-      <i class="bi bi-shield-check"></i><span>风险预测</span>
+      <i class="bi bi-shield-check"></i><span>质量风险预测</span>
+    </a>
+    <a href="/factory-fault" class="nav-link-item {% if page == 'factory_fault' %}active{% endif %}">
+      <i class="bi bi-activity"></i><span>出厂故障预测</span>
     </a>
     <a href="/rootcause" class="nav-link-item {% if page == 'rootcause' %}active{% endif %}">
       <i class="bi bi-search"></i><span>根因追溯</span>
@@ -164,15 +170,17 @@
       <i class="bi bi-flask"></i><span>消融实验</span>
     </a>
 
-    <div class="nav-section-title" style="margin-top:12px;">在线运营</div>
+    <div class="nav-section-title" style="margin-top:12px;">单机部署</div>
     <a href="/data-review" class="nav-link-item {% if page == 'data_review' %}active{% endif %}">
-      <i class="bi bi-radar"></i><span>数据采集</span>
+      <i class="bi bi-folder-symlink"></i><span>本地文件扫描</span>
       <span id="sidebarPendingBadge" class="badge bg-warning ms-auto" style="display:none;font-size:10px;"></span>
     </a>
   </div>
 
   <div class="sidebar-footer">
-    <i class="bi bi-cpu"></i> v1.0.0 &nbsp;|&nbsp; 浙江大学
+    <div class="mb-2"><i class="bi bi-person-circle"></i> {{ request.cookies.get('meter_quality_user', 'admin') if request else 'admin' }}</div>
+    <a href="/logout" class="text-decoration-none" style="color:#c8d8ea;"><i class="bi bi-box-arrow-right"></i> 退出登录</a>
+    <div class="mt-2"><i class="bi bi-cpu"></i> v1.0.0 &nbsp;|&nbsp; 浙江大学</div>
   </div>
 </nav>
 

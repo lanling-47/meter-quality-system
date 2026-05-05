@@ -41,6 +41,11 @@ WATCH_DIR.mkdir(parents=True, exist_ok=True)
 # 数据库 URL
 DATABASE_URL = f"sqlite:///{DB_PATH}"
 
+# 默认登录账号（阶段一单机部署使用，可通过环境变量覆盖）
+LOGIN_USER = os.environ.get("LOGIN_USER", "admin")
+LOGIN_PASSWORD = os.environ.get("LOGIN_PASSWORD", "admin123")
+LOGIN_COOKIE_MAX_AGE = int(os.environ.get("LOGIN_COOKIE_MAX_AGE", 8 * 60 * 60))
+
 # ── 质量阈值 ─────────────────────────────────────────────────────────────────
 # 加速老化试验（85℃/85%RH）条件下，参照 GB/T 17215.321 1级表：基本误差限 ±1%
 ERROR_THRESHOLD = 0.8        # 基本误差高风险阈值 %（老化末期 >0.8% 预警）

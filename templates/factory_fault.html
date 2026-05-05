@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+{% block title %}出厂故障预测 - 智能电表质量管控系统{% endblock %}
+{% block page_title %}出厂故障预测{% endblock %}
+
+{% block extra_css %}
+<style>
+.feature-grid { display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap:10px; }
+.result-hero { border-radius:14px; padding:22px; background:linear-gradient(135deg,#1a3a5c,#2d5986); color:#fff; }
+.prob-ring { width:118px; height:118px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:conic-gradient(#f0a500 var(--p), rgba(255,255,255,.18) 0); }
+.prob-ring-inner { width:90px; height:90px; border-radius:50%; background:#fff; color:#1a3a5c; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+.factor-item { background:#f8fafc; border:1px solid #e3e8f0; border-radius:10px; padding:10px 12px; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="alert alert-info d-flex align-items-start gap-2">
+  <i class="bi bi-pc-display-horizontal fs-5"></i>
+  <div>
+    <strong>阶段一单机导入版：</strong>本页面用于在本地 SQLite 数据库和 Excel/文件夹导入数据基础上，快速完成“元器件参数 + 生产过程数据 → 出厂故障概率/故障类型概率”的现场预测。
+    样本不足时自动使用透明规则引擎，样本充足后可训练本地随机森林模型。
+  </div>
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-md-3"><div class="kpi-card"><div class="kpi-value">{{ overview.factory_total }}</div><div class="kpi-label">出厂检测样本</div><i class="bi bi-clipboard-check kpi-bg"></i></div></div>
+  <div class="col-md-3"><div class="kpi-card"><div class="kpi-value text-danger">{{ overview.factory_fault_count }}</div><div class="kpi-label">出厂故障样本</div><i class="bi bi-exclamation-triangle kpi-bg"></i></div></div>
+  <div class="col-md-3"><div class="kpi-card"><div class="kpi-value">{{ overview.factory_fault_rate }}%</div><div class="kpi-label">历史故障率</div><i class="bi bi-graph-up-arrow kpi-bg"></i></div></div>
+  <div class="col-md-3"><div class="kpi-card"><div class="kpi-value">{{ overview.trace_total }}</div><div class="kpi-label">生产追溯记录</div><i class="bi bi-diagram-3 kpi-bg"></i></div></div>
+</div>
+
+<div class="row g-4">
+  <div class="col-lg-5">
+    <div class="card mb-4">
+      <div class="card-header primary d-flex justify-content-between align-items-center">
+        <span><i class="bi bi-search me-2"></i>按电表编号预测</span>
+        <button class="btn btn-sm btn-outline-light" onclick="trainFactoryFault()"><i class="bi bi-cpu me-1"></i>训练本地模型</button>
+      </div>
+      <div class="card-body">
+        <label class="form-label small fw-semibold">电表编号 / 条形码</label>
+        <div class="input-group mb-3">
+          <input id="meterIdInput" class="form-control" placeholder="输入 meter_id 或 barcode">
+          <button class="btn btn-primary" onclick="predictByMeter()">查询并预测</button>
+        </div>
+        <div class="small text-muted mb-3">系统会优先从出厂检测表和生产追溯汇总表读取特征；找不到时可使用下方手动特征预测。</div>
+        <div id="trainMsg" style="display:none;"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header primary"><i class="bi bi-sliders me-2"></i>手动输入特征预测</div>
+      <div class="card-body">
+        <div class="feature-grid">
+          {% for key, label in feature_labels.items() %}
+          <div>
+            <label class="form-label small">{{ label }}</label>
+            <input class="form-control form-control-sm ff-feature" data-key="{{ key }}" type="number" step="0.0001" value="0">
+          </div>
+          {% endfor %}
+        </div>
+        <button class="btn btn-accent w-100 mt-3" onclick="predictManual()"><i class="bi bi-lightning-charge me-1"></i>立即预测</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-7">
+    <div id="resultBox" class="card mb-4" style="display:none;">
+      <div class="card-body">
+        <div class="result-hero d-flex align-items-center justify-content-between gap-3 mb-3">
+          <div>
+            <div class="small opacity-75">预测结果</div>
+            <h3 id="riskLevel" class="mb-1">--</h3>
+            <div>最可能故障：<strong id="topFaultType">--</strong></div>
+            <div class="small opacity-75 mt-1">模型版本：<span id="modelVersion">--</span></div>
+          </div>
+          <div class="prob-ring" id="probRing" style="--p:0%;"><div class="prob-ring-inner"><div id="faultProb" class="fs-4 fw-bold">0%</div><div class="small">故障概率</div></div></div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-md-6">
+            <h6 class="mb-2">故障类型概率</h6>
+            <div id="faultTypeList"></div>
+          </div>
+          <div class="col-md-6">
+            <h6 class="mb-2">关键影响因素</h6>
+            <div id="factorList" class="d-grid gap-2"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header primary"><i class="bi bi-list-check me-2"></i>最近出厂样本预测</div>
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-hover mb-0">
+            <thead><tr><th>电表</th><th>预测风险</th><th>故障概率</th><th>最可能故障</th><th>真实结果</th><th></th></tr></thead>
+            <tbody>
+              {% for item in recent_predictions %}
+              <tr>
+                <td>{{ item.meter_id }}</td>
+                <td>{{ item.risk_level }}</td>
+                <td>{{ "%.1f"|format(item.fault_probability * 100) }}%</td>
+                <td>{{ item.top_fault_type }}</td>
+                <td>{% if item.actual_is_fault %}<span class="badge bg-danger">{{ item.actual_fault_type }}</span>{% else %}<span class="badge bg-success">正常</span>{% endif %}</td>
+                <td><button class="btn btn-sm btn-outline-primary" onclick="loadMeter('{{ item.meter_id }}')">查看</button></td>
+              </tr>
+              {% else %}
+              <tr><td colspan="6" class="text-center text-muted py-4">暂无出厂检测样本，请先在“数据导入”中导入或录入数据。</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function renderResult(data) {
+  if (!data.success) { alert(data.message || '预测失败'); return; }
+  document.getElementById('resultBox').style.display = 'block';
+  document.getElementById('riskLevel').textContent = data.risk_level;
+  document.getElementById('topFaultType').textContent = data.top_fault_type;
+  document.getElementById('modelVersion').textContent = data.model_version;
+  const pct = Math.round(data.fault_probability * 1000) / 10;
+  document.getElementById('faultProb').textContent = pct + '%';
+  document.getElementById('probRing').style.setProperty('--p', pct + '%');
+
+  document.getElementById('faultTypeList').innerHTML = Object.entries(data.fault_type_probabilities || {}).map(([k,v]) => {
+    const p = Math.round(v * 1000) / 10;
+    return `<div class="mb-2"><div class="d-flex justify-content-between small"><span>${k}</span><strong>${p}%</strong></div><div class="risk-bar"><div class="risk-bar-fill" style="width:${p}%;background:#f0a500"></div></div></div>`;
+  }).join('');
+  document.getElementById('factorList').innerHTML = (data.key_factors || []).map(f => `
+    <div class="factor-item"><div class="fw-semibold small">${f.reason}</div><div class="text-muted" style="font-size:12px;">${f.label}${f.value !== null ? '：' + f.value : ''}</div></div>
+  `).join('');
+}
+async function predictByMeter() {
+  const id = document.getElementById('meterIdInput').value.trim();
+  if (!id) { alert('请输入电表编号或条形码'); return; }
+  const res = await fetch('/factory-fault/predict/' + encodeURIComponent(id));
+  renderResult(await res.json());
+}
+function loadMeter(id) { document.getElementById('meterIdInput').value = id; predictByMeter(); }
+async function predictManual() {
+  const data = {};
+  document.querySelectorAll('.ff-feature').forEach(el => data[el.dataset.key] = parseFloat(el.value) || 0);
+  const res = await postJson('/factory-fault/predict', data);
+  renderResult(res);
+}
+async function trainFactoryFault() {
+  const box = document.getElementById('trainMsg');
+  box.style.display = 'block';
+  box.innerHTML = '<div class="alert alert-info small mb-0">正在训练本地出厂故障模型...</div>';
+  try {
+    const res = await postJson('/factory-fault/train', {});
+    box.innerHTML = res.success
+      ? `<div class="alert alert-success small mb-0">${res.message}：样本 ${res.model_info.n_samples}，AUC ${res.model_info.auc_score ?? '--'}，F1 ${res.model_info.f1_score}</div>`
+      : `<div class="alert alert-warning small mb-0">${res.message}</div>`;
+  } catch (e) {
+    box.innerHTML = `<div class="alert alert-danger small mb-0">训练失败：${e.message}</div>`;
+  }
+}
+</script>
+{% endblock %}

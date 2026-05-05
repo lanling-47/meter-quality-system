@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block title %}阶段一部署向导 - 智能电表质量管控系统{% endblock %}
+{% block page_title %}阶段一单机部署向导{% endblock %}
+
+{% block extra_css %}
+<style>
+.step-card { border-left:5px solid #1a3a5c; }
+.path-box { background:#0d1117; color:#c9d1d9; border-radius:8px; padding:10px 12px; font-family:Consolas,monospace; font-size:12px; word-break:break-all; }
+.template-card { border:1px solid #e3e8f0; border-radius:12px; padding:14px; height:100%; background:#fff; transition:.2s; }
+.template-card:hover { transform:translateY(-2px); box-shadow:0 8px 22px rgba(26,58,92,.12); }
+.ready-dot { width:10px; height:10px; border-radius:50%; display:inline-block; margin-right:6px; }
+.ready-ok { background:#27ae60; }
+.ready-warn { background:#f0a500; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="alert alert-info d-flex gap-2 align-items-start">
+  <i class="bi bi-info-circle fs-5"></i>
+  <div><strong>部署目标：</strong>我们的电脑本地启动系统，SQLite 存储数据，浏览器访问 <code>localhost:8090</code>，通过 Excel 上传、手动录入和本地目录扫描快速完成电表厂现场试运行。</div>
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-md-3"><div class="kpi-card"><div class="kpi-value">{{ stats.factory }}</div><div class="kpi-label">出厂检测样本</div><i class="bi bi-clipboard-check kpi-bg"></i></div></div>
+  <div class="col-md-3"><div class="kpi-card"><div class="kpi-value">{{ stats.production_trace }}</div><div class="kpi-label">生产追溯记录</div><i class="bi bi-diagram-3 kpi-bg"></i></div></div>
+  <div class="col-md-3"><div class="kpi-card"><div class="kpi-value">{{ stats.aging }}</div><div class="kpi-label">老化试验记录</div><i class="bi bi-graph-down kpi-bg"></i></div></div>
+  <div class="col-md-3"><div class="kpi-card"><div class="kpi-value">{{ stats.models }}</div><div class="kpi-label">模型版本</div><i class="bi bi-cpu kpi-bg"></i></div></div>
+</div>
+
+<div class="row g-4 mb-4">
+  <div class="col-lg-5">
+    <div class="card step-card mb-4">
+      <div class="card-header primary"><i class="bi bi-check2-circle me-2"></i>现场准备检查</div>
+      <div class="card-body">
+        <p><span class="ready-dot {% if readiness.db_parent_exists %}ready-ok{% else %}ready-warn{% endif %}"></span>数据库目录：{{ '正常' if readiness.db_parent_exists else '待创建' }}</p>
+        <p><span class="ready-dot {% if readiness.data_dir_exists %}ready-ok{% else %}ready-warn{% endif %}"></span>data/raw 目录：{{ '正常' if readiness.data_dir_exists else '待创建' }}</p>
+        <p><span class="ready-dot {% if readiness.watch_dir_exists %}ready-ok{% else %}ready-warn{% endif %}"></span>本地监听目录：{{ '正常' if readiness.watch_dir_exists else '待创建' }}</p>
+        <p><span class="ready-dot {% if readiness.has_factory_samples %}ready-ok{% else %}ready-warn{% endif %}"></span>出厂模型训练样本：{{ '可训练' if readiness.has_factory_samples else '建议至少导入5条' }}</p>
+        <p><span class="ready-dot {% if readiness.has_production_trace %}ready-ok{% else %}ready-warn{% endif %}"></span>生产追溯数据：{{ '已接入' if readiness.has_production_trace else '待导入' }}</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header primary"><i class="bi bi-folder2-open me-2"></i>本机路径</div>
+      <div class="card-body d-grid gap-3">
+        <div><div class="small text-muted mb-1">SQLite 数据库</div><div class="path-box">{{ paths.db_path }}</div></div>
+        <div><div class="small text-muted mb-1">data/raw 批量导入目录</div><div class="path-box">{{ paths.data_dir }}</div></div>
+        <div><div class="small text-muted mb-1">本地监听目录</div><div class="path-box">{{ paths.watch_dir }}</div></div>
+        <div><div class="small text-muted mb-1">模型存储目录</div><div class="path-box">{{ paths.model_dir }}</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-7">
+    <div class="card mb-4">
+      <div class="card-header primary"><i class="bi bi-signpost-split me-2"></i>推荐操作流程</div>
+      <div class="card-body">
+        <div class="row g-3">
+          <div class="col-md-6"><div class="template-card"><h6>1. 下载模板</h6><p class="small text-muted">先下载标准 Excel 模板，交给电表厂按字段导出或填写。</p><a class="btn btn-sm btn-outline-primary" href="#templateArea">查看模板</a></div></div>
+          <div class="col-md-6"><div class="template-card"><h6>2. 导入数据</h6><p class="small text-muted">在数据导入页面上传 Excel，或把文件放入监听目录后扫描。</p><a class="btn btn-sm btn-outline-primary" href="/import">进入导入</a></div></div>
+          <div class="col-md-6"><div class="template-card"><h6>3. 出厂故障预测</h6><p class="small text-muted">导入出厂样本后训练本地模型，并对新电表进行预测。</p><a class="btn btn-sm btn-outline-primary" href="/factory-fault">进入预测</a></div></div>
+          <div class="col-md-6"><div class="template-card"><h6>4. 看板与追溯</h6><p class="small text-muted">查看质量看板、生产追溯和老化退化分析结果。</p><a class="btn btn-sm btn-outline-primary" href="/dashboard">进入看板</a></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" id="templateArea">
+      <div class="card-header primary"><i class="bi bi-file-earmark-spreadsheet me-2"></i>标准 Excel 模板下载</div>
+      <div class="card-body">
+        <div class="row g-3" id="templateList"></div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+async function loadTemplates() {
+  const res = await fetch('/templates/list');
+  const data = await res.json();
+  document.getElementById('templateList').innerHTML = data.items.map(t => `
+    <div class="col-md-6">
+      <div class="template-card">
+        <div class="d-flex justify-content-between gap-2">
+          <div><h6 class="mb-1">${t.name}</h6><p class="small text-muted mb-2">${t.description}</p></div>
+          <i class="bi bi-file-earmark-excel fs-3 text-success"></i>
+        </div>
+        <a class="btn btn-sm btn-accent" href="/templates/download/${t.type}"><i class="bi bi-download me-1"></i>下载模板</a>
+      </div>
+    </div>
+  `).join('');
+}
+loadTemplates();
+</script>
+{% endblock %}

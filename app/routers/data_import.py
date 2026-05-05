@@ -27,6 +27,7 @@ def _get_db_stats(db):
 @router.get("/import", response_class=HTMLResponse)
 async def import_page(request: Request, db: Session = Depends(get_db)):
     from app.models.db_models import ModelVersion
+    import config as cfg
     stats = _get_db_stats(db)
     model_versions = db.query(ModelVersion).order_by(ModelVersion.created_at.desc()).all()
     mv_list = [{
@@ -42,6 +43,8 @@ async def import_page(request: Request, db: Session = Depends(get_db)):
     return templates.TemplateResponse(request, "data_import.html", {
         "stats": stats,
         "model_versions": mv_list,
+        "watch_dir": str(cfg.WATCH_DIR),
+        "data_dir": str(cfg.DATA_DIR),
         "page": "import",
     })
 

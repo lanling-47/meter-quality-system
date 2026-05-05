@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>登录 - 智能电表质量管控系统</title>
+  <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/bootstrap-icons/1.11.0/font/bootstrap-icons.min.css">
+  <style>
+    body { min-height:100vh; margin:0; font-family:'Segoe UI','PingFang SC',sans-serif; background:radial-gradient(circle at 20% 20%, #355f8f 0, transparent 28%), linear-gradient(135deg,#10243a,#1a3a5c 48%,#0d1b2a); display:flex; align-items:center; justify-content:center; }
+    .login-shell { width:min(980px, 94vw); display:grid; grid-template-columns:1.1fr .9fr; background:rgba(255,255,255,.96); border-radius:24px; overflow:hidden; box-shadow:0 28px 80px rgba(0,0,0,.35); }
+    .brand-panel { background:linear-gradient(145deg,#1a3a5c,#2d5986); color:#fff; padding:54px 46px; position:relative; overflow:hidden; }
+    .brand-panel:after { content:""; position:absolute; width:260px; height:260px; border-radius:50%; background:rgba(240,165,0,.18); right:-90px; bottom:-70px; }
+    .logo { width:58px; height:58px; border-radius:16px; background:#f0a500; display:flex; align-items:center; justify-content:center; font-size:30px; margin-bottom:26px; }
+    .feature { display:flex; gap:12px; align-items:flex-start; margin-top:20px; color:#dce8f6; }
+    .form-panel { padding:54px 42px; }
+    .form-control { height:46px; border-radius:12px; }
+    .btn-login { height:46px; border-radius:12px; background:#1a3a5c; border-color:#1a3a5c; }
+    .deploy-badge { display:inline-flex; gap:6px; align-items:center; border-radius:999px; background:#fff3cd; color:#9a6700; padding:5px 12px; font-size:12px; font-weight:600; }
+    @media (max-width: 860px) { .login-shell { grid-template-columns:1fr; } .brand-panel { display:none; } }
+  </style>
+</head>
+<body>
+  <div class="login-shell">
+    <section class="brand-panel">
+      <div class="logo"><i class="bi bi-lightning-charge"></i></div>
+      <h1 class="fw-bold mb-3">智能电表质量管控系统</h1>
+      <p class="lead mb-4">阶段一单机导入版：面向电表厂现场快速部署、Excel 数据接入、出厂故障预测与老化分析。</p>
+      <div class="feature"><i class="bi bi-cloud-upload fs-4 text-warning"></i><div><strong>本地数据接入</strong><br><span>Excel 上传、手动录入、本地监听目录扫描。</span></div></div>
+      <div class="feature"><i class="bi bi-activity fs-4 text-warning"></i><div><strong>出厂故障预测</strong><br><span>根据元器件参数和生产过程数据输出故障概率。</span></div></div>
+      <div class="feature"><i class="bi bi-hdd-network fs-4 text-warning"></i><div><strong>单机部署</strong><br><span>SQLite 本地数据库，浏览器访问 localhost:8090。</span></div></div>
+    </section>
+    <section class="form-panel">
+      <span class="deploy-badge mb-3"><i class="bi bi-pc-display"></i> Local Deployment</span>
+      <h3 class="fw-bold mb-1" style="color:#1a3a5c;">系统登录</h3>
+      <p class="text-muted mb-4">请输入阶段一现场部署账号。</p>
+      {% if error %}<div class="alert alert-danger py-2 small">{{ error }}</div>{% endif %}
+      <form method="post" action="/login">
+        <div class="mb-3">
+          <label class="form-label small fw-semibold">账号</label>
+          <input class="form-control" name="username" value="admin" autocomplete="username" required>
+        </div>
+        <div class="mb-4">
+          <label class="form-label small fw-semibold">密码</label>
+          <input class="form-control" name="password" type="password" autocomplete="current-password" placeholder="默认 admin123" required>
+        </div>
+        <button class="btn btn-primary btn-login w-100" type="submit"><i class="bi bi-box-arrow-in-right me-2"></i>登录系统</button>
+      </form>
+      <div class="alert alert-light border mt-4 small mb-0">
+        默认账号：<code>admin</code>，默认密码：<code>admin123</code>。正式驻厂时建议通过环境变量 <code>LOGIN_USER</code> 和 <code>LOGIN_PASSWORD</code> 修改。
+      </div>
+    </section>
+  </div>
+</body>
+</html>

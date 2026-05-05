@@ -44,3 +44,11 @@ logs/
 # 环境变量
 .env
 .env.local
+
+# 离线部署包（体积大，不上传到仓库）
+offline_packages_windows/
+offline_packages_linux/
+offline_packages/
+offline_install/
+*.whl
+*.exe

@@ -87,6 +87,7 @@
 {% endblock %}
 
 {% block extra_js %}
+<script src="{{ url_for('static', path='js/echarts.min.js') }}"></script>
 <script>
 let errorChart = null;
 let clockChart = null;

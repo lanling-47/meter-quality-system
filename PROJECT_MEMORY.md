@@ -109,7 +109,7 @@ CCD数据.xlsx:
 
 ## 四、算法架构
 
-### 4.1 特征工程（24维，但生产特征当前未实装）
+### 4.1 特征工程（46维，已接入生产过程画像与可靠性样机画像）
 
 ```python
 # 文件：app/services/predict_service.py  FEATURE_NAMES 变量
@@ -121,10 +121,17 @@ CCD数据.xlsx:
   clock_daily_error_max, error_variability_max, error_consistency_max,
   energy_balance_ratio, energy_peak_ratio, rs485_total_errors
 
-生产过程特征（10维）— ⚠️ 当前填充为0：
+单表生产过程特征（10维）：
   prod_ccd_retry, prod_func_retry, prod_reverify_retry, prod_total_retry,
   prod_smt_aoi_defect, prod_wave_aoi_defect, prod_repaired, prod_repair_count,
   prod_leak_current_max, prod_quality_risk_score
+
+数字化电路板生产过程画像（10维）：
+  process_smt_pressure_mm, process_smt_precision_cpk,
+  process_reflow_temp_span_c, process_reflow_conveyor_speed_cm_min,
+  process_online_current_meter_ua, process_online_current_deviation_ua,
+  process_online_current_max_ua, process_wave_preheat_span_c,
+  process_wave_solder_temp_c, process_wave_peak_height_delta_mm
 ```
 
 ### 4.2 模型层次
@@ -134,7 +141,7 @@ CCD数据.xlsx:
 第2层：TabNet（AAAI 2021）— 当前激活模型
         ↳ 文件: app/services/tabnet_service.py
         ↳ 参数: n_d=16, n_a=16, n_steps=3, mask_type=sparsemax, max_epochs=200
-        ↳ 当前 AUC: 0.999（⚠️ 因生产特征为0，数据过拟合，不可信）
+        ↳ 历史 AUC: 0.999（⚠️ 小样本/增强样本场景下不宜作为论文最终结论）
 第3层：DQN 在线学习层
         ↳ 文件: app/services/drl_agent.py
         ↳ 纯 NumPy 实现，无需 PyTorch
@@ -147,9 +154,9 @@ CCD数据.xlsx:
 ```
 文件: app/services/ablation_service.py
 设计: 4特征组 × 5算法 = 20组实验，5折CV，Mean ± Std
-特征组: A(4维来料) / B(14维来料+老化) / C(24维全特征) / D(10维仅生产)
+特征组: A(4维来料) / B(14维来料+老化) / C(46维全特征) / D(20维生产/工艺画像)
 算法: 规则引擎 / RandomForest / XGBoost / LightGBM / TabNet
-⚠️ 当前还未运行过消融实验（因生产特征为0，暂时无意义）
+⚠️ 当前生产过程画像已进入特征，但只有单批次画像；正式论文仍需多批次真实数据支撑消融结论
 ```
 
 ---
@@ -210,12 +217,12 @@ CCD数据.xlsx:
 
 ## 七、当前最优先的未解决问题
 
-### 🔴 P0：生产过程特征未打通到训练集
+### 🔴 P0：生产过程数据仍需多批次打通
 
 **现状**：
-- `quality_chain` 没有生产过程列（prod_xxx），24维特征在训练时有10维全为0
-- `meter_quality_trace` 有24,210条真实数据但完全未被用于训练
-- 当前 AUC=0.999 是因为样本量极少（231条，200条是SMOTE扩增），存在严重过拟合
+- `production_process_profile` 与 `reliability_sample_profile` 已接入训练矩阵，模型输入为 24 维基础快照 + 10 维生产过程画像 + 12 维可靠性样机画像 = 46 维
+- 但当前生产过程画像只有 1 条，无法支撑多批次工艺参数差异分析
+- 当前质量链路样本仍以增强/演示数据为主，AUC/F1 只能作为系统演示指标，不能作为论文最终结论
 
 **解决方案**：两种路线
 

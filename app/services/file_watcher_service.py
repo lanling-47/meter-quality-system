@@ -271,6 +271,11 @@ def auto_label_new_records(new_count: int, data_type: str, log_id: int, db) -> i
             0.0,  # leak_current_max（未存）
             float(trace.quality_risk_score or 0.0),
         ]])
+        target_dim = len(feat_names or FEATURE_NAMES)
+        if feat_vec.shape[1] < target_dim:
+            feat_vec = np.hstack([feat_vec, np.zeros((1, target_dim - feat_vec.shape[1]))])
+        elif feat_vec.shape[1] > target_dim:
+            feat_vec = feat_vec[:, :target_dim]
 
         try:
             x_input = scaler.transform(feat_vec) if scaler is not None else feat_vec
@@ -345,7 +350,7 @@ class FileWatcherService:
             try:
                 await self._scan_once()
             except Exception as e:
-                print(f"⚠️  文件监控扫描异常：{e}")
+                print(f"文件监控扫描异常：{e}")
             await asyncio.sleep(self.interval)
 
     def stop(self):
@@ -459,7 +464,7 @@ class FileWatcherService:
                 "new_count": new_count,
                 "labeled": labeled,
             }
-            print(f"✅ 处理文件 {file_path.name}：{new_count} 新记录，{labeled} 入审核队列")
+            print(f"处理文件 {file_path.name}：{new_count} 新记录，{labeled} 入审核队列")
             return result
 
         except Exception as e:
@@ -479,7 +484,7 @@ class FileWatcherService:
                 "file_name": file_path.name,
                 "message": f"处理失败: {error_msg}",
             })
-            print(f"❌ 处理文件 {file_path.name} 失败: {error_msg}")
+            print(f"处理文件 {file_path.name} 失败: {error_msg}")
             return {"file": file_path.name, "error": error_msg}
         finally:
             db.close()

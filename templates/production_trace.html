@@ -30,6 +30,9 @@
 <button class="btn btn-sm btn-primary" onclick="importData()">
   <i class="bi bi-cloud-download"></i> 导入生产数据
 </button>
+<button class="btn btn-sm btn-outline-primary ms-2" onclick="rebuildLinkage()">
+  <i class="bi bi-diagram-3"></i> 重建质量链路
+</button>
 {% endblock %}
 
 {% block content %}
@@ -82,6 +85,26 @@
         </div>
       </div>
       <i class="bi bi-tools kpi-bg"></i>
+    </div>
+  </div>
+</div>
+
+<!-- 批次抽检质量画像 -->
+<div class="row g-3 mb-4">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header primary d-flex align-items-center justify-content-between">
+        <span><i class="bi bi-clipboard-data"></i> 批次抽检质量画像</span>
+        <small class="text-light" id="linkageStatusText">--</small>
+      </div>
+      <div class="card-body">
+        <div class="alert alert-info py-2 mb-3">
+          老化实验按批次抽检建模：这里展示的是批次质量稳定性，不默认代表每块单表都做过老化。
+        </div>
+        <div class="row g-3" id="batchProfileCards">
+          <div class="col-12 text-muted small">暂无批次画像，请点击“重建质量链路”。</div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -203,6 +226,76 @@ async function loadKPI() {
 }
 
 // ── 加载追溯列表 ──────────────────────────────────────────────────────────
+async function loadLinkageStatus() {
+  try {
+    const status = await fetch('/production/linkage/status').then(r => r.json());
+    const identity = status.identity_by_source || {};
+    const snapshots = status.snapshot_by_source || {};
+    document.getElementById('linkageStatusText').textContent =
+      `条码链路 ${identity.barcode_linked || 0} 条 | 批次画像 ${status.batch_profile_total || 0} 个 | 抽检快照 ${snapshots.sampled_aging_unlinked || 0} 条`;
+  } catch (e) {
+    document.getElementById('linkageStatusText').textContent = '链路状态加载失败';
+  }
+}
+
+async function loadBatchProfiles() {
+  const container = document.getElementById('batchProfileCards');
+  try {
+    const data = await fetch('/production/batch-profiles').then(r => r.json());
+    if (!data.items || data.items.length === 0) {
+      container.innerHTML = '<div class="col-12 text-muted small">暂无批次画像，请点击“重建质量链路”。</div>';
+      return;
+    }
+    container.innerHTML = data.items.map(p => {
+      const risk = p.high_risk_rate || 0;
+      const riskColor = risk >= 0.5 ? '#e74c3c' : (risk >= 0.25 ? '#f0a500' : '#27ae60');
+      const meters = (p.sampled_meter_nos || []).join(', ');
+      return `
+        <div class="col-12 col-lg-6">
+          <div class="p-3 rounded" style="background:#f8fafc;border:1px solid #dce5ef">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <div>
+                <div class="fw-bold">批次 / 订单：${p.batch_key || '-'}</div>
+                <small class="text-muted">抽检样本：${meters || '-'} | 样本数 ${p.sample_count || 0}</small>
+              </div>
+              <span class="badge" style="background:${riskColor};color:#fff">风险率 ${(risk * 100).toFixed(1)}%</span>
+            </div>
+            <div class="risk-bar mb-2" style="height:8px">
+              <div class="risk-bar-fill" style="width:${Math.min(risk * 100, 100)}%;background:${riskColor}"></div>
+            </div>
+            <div class="row g-2 small">
+              <div class="col-6">最大末期误差：<strong>${(p.max_final_error_max || 0).toFixed(3)}%</strong></div>
+              <div class="col-6">平均末期误差：<strong>${(p.avg_final_error_max || 0).toFixed(3)}%</strong></div>
+              <div class="col-6">最大时钟漂移：<strong>${(p.max_clock_drift_rate || 0).toFixed(3)}</strong></div>
+              <div class="col-6">RS485异常：<strong>${p.max_rs485_total_errors || 0}</strong></div>
+            </div>
+            <div class="mt-2 text-muted" style="font-size:11px">${p.note || ''}</div>
+          </div>
+        </div>`;
+    }).join('');
+  } catch (e) {
+    container.innerHTML = `<div class="col-12 text-danger small">批次画像加载失败：${e}</div>`;
+  }
+}
+
+async function rebuildLinkage() {
+  showLoading('正在重建质量链路与批次抽检画像...');
+  try {
+    const data = await postJson('/production/linkage/build', {});
+    hideLoading();
+    if (!data.success) {
+      alert('重建失败：' + (data.error || JSON.stringify(data)));
+      return;
+    }
+    await loadLinkageStatus();
+    await loadBatchProfiles();
+    alert('质量链路已重建。老化抽检数据已按批次画像处理，不再默认绑定到单块生产表。');
+  } catch (e) {
+    hideLoading();
+    alert('重建请求失败：' + e);
+  }
+}
+
 async function loadTrace() {
   currentPage = 1;
   await fetchTrace();
@@ -294,6 +387,7 @@ async function showDetail(barcode) {
 
 function renderDetail(barcode, data) {
   const t = data.trace || {};
+  const batch = data.batch_profile || null;
 
   // 流程图
   const steps = [
@@ -314,6 +408,23 @@ function renderDetail(barcode, data) {
     if (i < steps.length - 1) flowHtml += '<div class="step-arrow">→</div>';
   });
   flowHtml += '</div>';
+
+  let batchHtml = '';
+  if (batch) {
+    const risk = batch.high_risk_rate || 0;
+    const riskColor = risk >= 0.5 ? '#e74c3c' : (risk >= 0.25 ? '#f0a500' : '#27ae60');
+    const meters = (batch.sampled_meter_nos || []).join(', ');
+    batchHtml = `<div class="alert alert-info py-2">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <strong>批次抽检质量画像：</strong>${batch.batch_key || '-'}
+          <span class="text-muted small ms-2">抽检样本 ${meters || '-'}，样本数 ${batch.sample_count || 0}</span>
+        </div>
+        <strong style="color:${riskColor}">抽检高风险率 ${(risk * 100).toFixed(1)}%</strong>
+      </div>
+      <div class="small mt-1">说明：该风险来自批次抽检老化实验，不表示当前单表一定做过老化。</div>
+    </div>`;
+  }
 
   // AOI缺陷
   let aoiHtml = '';
@@ -389,6 +500,7 @@ function renderDetail(barcode, data) {
         ${(t.smt_aoi_defect||t.wave_aoi_defect)?'<span class="badge bg-warning text-dark">AOI缺陷</span>':''}
       </h6>
     </div>
+    ${batchHtml}
     ${flowHtml}
     ${aoiHtml}
     ${repairHtml}
@@ -406,7 +518,10 @@ async function importData() {
     if (data.success) {
       const s = data.stats;
       alert(`导入完成！\n工序检测: ${s.inspection}条\nAOI缺陷: ${s.aoi_defect}条\n维修记录: ${s.repair}条\n单板测试: ${s.board_test}条\n追溯汇总: ${s.trace}条\n${s.errors.length > 0 ? '⚠️警告: ' + s.errors.join('\n') : ''}`);
+      await rebuildLinkage();
       loadKPI();
+      loadLinkageStatus();
+      loadBatchProfiles();
       loadTrace();
     } else {
       alert('导入失败: ' + (data.error || JSON.stringify(data)));
@@ -419,6 +534,8 @@ async function importData() {
 
 // ── 初始化 ────────────────────────────────────────────────────────────────
 loadKPI();
+loadLinkageStatus();
+loadBatchProfiles();
 loadTrace();
 </script>
 {% endblock %}

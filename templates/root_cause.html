@@ -70,6 +70,7 @@
 {% endblock %}
 
 {% block extra_js %}
+<script src="{{ url_for('static', path='js/echarts.min.js') }}"></script>
 <script>
 const globalImportance = {{ global_importance|safe }};
 

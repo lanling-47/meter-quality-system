@@ -4,12 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}智能电表全周期质量管控系统{% endblock %}</title>
-  <!-- Bootstrap 5 CDN -->
-  <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
-  <!-- Bootstrap Icons CDN -->
-  <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/bootstrap-icons/1.11.0/font/bootstrap-icons.min.css">
-  <!-- ECharts CDN -->
-  <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+  <!-- Local static assets -->
+  <link rel="stylesheet" href="{{ url_for('static', path='css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', path='css/bootstrap-icons.min.css') }}">
   <style>
     :root {
       --sidebar-width: 240px;
@@ -139,6 +136,9 @@
     <a href="/import" class="nav-link-item {% if page == 'import' %}active{% endif %}">
       <i class="bi bi-cloud-upload"></i><span>数据导入</span>
     </a>
+    <a href="/data-management" class="nav-link-item {% if page == 'data_management' %}active{% endif %}">
+      <i class="bi bi-database-gear"></i><span>全流程数据管理</span>
+    </a>
     <a href="/predict" class="nav-link-item {% if page == 'predict' %}active{% endif %}">
       <i class="bi bi-shield-check"></i><span>质量风险预测</span>
     </a>
@@ -206,7 +206,7 @@
 </div>
 
 <!-- Bootstrap JS -->
-<script src="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script src="{{ url_for('static', path='js/bootstrap.bundle.min.js') }}"></script>
 <script>
 function showLoading(text) {
   document.getElementById('loadingText').textContent = text || '处理中，请稍候...';

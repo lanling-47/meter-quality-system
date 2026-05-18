@@ -33,7 +33,7 @@ WATCH_INTERVAL_SEC = int(os.environ.get("WATCH_INTERVAL_SEC", 300))
 # 新增多少条数据后，前端显示"建议重训练"提示
 AUTO_RETRAIN_THRESHOLD = int(os.environ.get("AUTO_RETRAIN_THRESHOLD", 50))
 # 默认重训练使用的模型类型
-RETRAIN_MODEL_TYPE = os.environ.get("RETRAIN_MODEL_TYPE", "tabnet")
+RETRAIN_MODEL_TYPE = os.environ.get("RETRAIN_MODEL_TYPE", "mgqformer")
 
 # 确保监控目录存在
 WATCH_DIR.mkdir(parents=True, exist_ok=True)

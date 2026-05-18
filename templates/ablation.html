@@ -37,7 +37,7 @@
   <div>
     <strong>消融实验（Ablation Study）</strong>：通过系统地移除/替换特征组，量化每类特征对预测性能的独立贡献。
     本实验包含 <strong>4个特征组 × 5种算法 = 20组对比实验</strong>，每组采用5折交叉验证，输出 AUC ± std 等标准指标。
-    <span class="text-danger fw-bold">TabNet（本文方法）</span> 与 LightGBM 的全面对比是核心研究问题。
+    <span class="text-danger fw-bold">MGQ-Former</span> 是本文主模型，TabNet 与 LightGBM 用作基线对照。
   </div>
 </div>
 
@@ -47,8 +47,8 @@
   {% set group_descs = {
     'A': ['4维', '来料特征（晶振/互感器/时钟/出厂故障）'],
     'B': ['14维', '来料4维 + 老化试验10维'],
-    'C': ['24维', '全特征 = 来料 + 老化 + 生产过程（本文方法）'],
-    'D': ['10维', '仅生产过程特征（验证独立贡献）']
+    'C': ['46维', '全特征 = 来料 + 老化 + 生产工序 + 电路板工艺画像 + 可靠性样机画像（主特征组）'],
+    'D': ['20维', '仅生产工序/工艺画像特征（验证独立贡献）']
   } %}
   {% for g, info in group_descs.items() %}
   <div class="col-md-3">
@@ -165,6 +165,7 @@
 {% endblock %}
 
 {% block extra_js %}
+<script src="{{ url_for('static', path='js/echarts.min.js') }}"></script>
 <script>
 const FEATURE_GROUPS = {{ feature_groups|safe }};
 const MODEL_REGISTRY = {{ model_registry|safe }};
@@ -311,13 +312,13 @@ function renderGainChart(data) {
 
   gainChart.setOption({
     tooltip: { trigger: 'axis' },
-    legend: { data: ['TabNet（本文）', 'LightGBM'], bottom: 0, itemGap: 20 },
+    legend: { data: ['TabNet（深度基线）', 'LightGBM'], bottom: 0, itemGap: 20 },
     grid: { left: 50, right: 20, top: 20, bottom: 40 },
     xAxis: { type: 'category', data: groups.map(g => `Group-${g}\n(${GROUP_FEATURE_DIMS[g]}维)`), axisLabel: { fontSize: 11 } },
     yAxis: { type: 'value', min: 0.5, max: 1.0, name: 'AUC', nameTextStyle: { fontSize: 11 } },
     series: [
       {
-        name: 'TabNet（本文）', type: 'bar', data: tabnetData,
+        name: 'TabNet（深度基线）', type: 'bar', data: tabnetData,
         barWidth: 30,
         itemStyle: { color: { type: 'linear', x: 0, y: 0, x2: 0, y2: 1, colorStops: [{ offset: 0, color: '#e74c3c' }, { offset: 1, color: '#c0392b' }] } },
         label: { show: true, position: 'top', fontSize: 11, formatter: v => v.toFixed(3) },

@@ -521,6 +521,16 @@ def get_production_features_for_barcode(barcode: str, db: Session) -> dict:
     """
     trace = db.query(MeterQualityTrace).filter_by(barcode=barcode).first()
     if trace is None:
+        try:
+            from app.services.data_linkage_service import normalize_barcode
+            target = normalize_barcode(barcode)
+            for candidate in db.query(MeterQualityTrace).all():
+                if normalize_barcode(candidate.barcode) == target:
+                    trace = candidate
+                    break
+        except Exception:
+            trace = None
+    if trace is None:
         return {k: 0.0 for k in PRODUCTION_FEATURE_NAMES}
     return {
         'prod_ccd_retry': float(trace.ccd_retry_count or 0),

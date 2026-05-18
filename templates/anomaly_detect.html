@@ -41,7 +41,7 @@
       </div>
     </div>
     <div class="card">
-      <div class="card-header primary">各电表末期时钟偏差 | s（红色>10s为异常）</div>
+      <div class="card-header primary">各电表全周期最大时钟偏差 | s（红色>10s为异常）</div>
       <div class="card-body p-2">
         <div id="clockBarChart" style="height:220px;"></div>
       </div>
@@ -105,6 +105,7 @@
 {% endblock %}
 
 {% block extra_js %}
+<script src="{{ url_for('static', path='js/echarts.min.js') }}"></script>
 <script>
 const chartData = {{ chart_data_json|safe }};
 let trendChart = null;
@@ -131,7 +132,7 @@ errBar.setOption({
 // 时钟柱状图
 const clkBar = echarts.init(document.getElementById('clockBarChart'));
 clkBar.setOption({
-  tooltip: { trigger: 'axis', formatter: p => `电表 #${p[0].name}<br>时钟偏差：${p[0].value}s` },
+  tooltip: { trigger: 'axis', formatter: p => `电表 #${p[0].name}<br>最大时钟偏差：${p[0].value}s` },
   grid: { left: 45, right: 20, top: 20, bottom: 60 },
   xAxis: { type: 'category', data: chartData.meter_nos || [], axisLabel: { rotate: 45, fontSize: 11 } },
   yAxis: { type: 'value', name: '偏差(s)', nameTextStyle: { fontSize: 11 } },
@@ -151,7 +152,7 @@ window.addEventListener('resize', () => { errBar.resize(); clkBar.resize(); });
 
 async function loadTrend(meterNo) {
   showLoading('加载趋势数据...');
-  const res = await fetch('/anomaly/' + meterNo);
+  const res = await fetch('/anomaly/meter/' + meterNo);
   const data = await res.json();
   hideLoading();
 
@@ -161,18 +162,20 @@ async function loadTrend(meterNo) {
   document.getElementById('trendTitle').textContent = `电表 #${meterNo} 误差趋势`;
 
   if (!trendChart) trendChart = echarts.init(document.getElementById('trendChart'));
+  trendChart.resize();
   trendChart.setOption({
     tooltip: { trigger: 'axis' },
     grid: { left: 45, right: 20, top: 20, bottom: 50 },
-    xAxis: { type: 'category', data: data.time_labels, axisLabel: { fontSize: 10 } },
+    xAxis: { type: 'category', data: data.time_labels || [], axisLabel: { fontSize: 10 } },
     yAxis: { type: 'value', name: '误差(%)', nameTextStyle: { fontSize: 10 } },
     series: [
-      { name: '基本误差', type: 'line', data: data.error_series, symbol: 'circle', symbolSize: 8,
-        lineStyle: { color: '#1a3a5c' }, itemStyle: { color: p => data.anomaly_points.some(a => a.time === data.time_labels[p.dataIndex]) ? '#e74c3c' : '#1a3a5c' } },
-      { name: '阈值', type: 'line', data: Array(data.time_labels.length).fill(0.5),
+      { name: '基本误差', type: 'line', data: data.error_series || [], symbol: 'circle', symbolSize: 8,
+        lineStyle: { color: '#1a3a5c' }, itemStyle: { color: p => (data.anomaly_points || []).some(a => a.time === (data.time_labels || [])[p.dataIndex]) ? '#e74c3c' : '#1a3a5c' } },
+      { name: '阈值', type: 'line', data: Array((data.time_labels || []).length).fill(data.error_threshold || 0.5),
         lineStyle: { type: 'dashed', color: '#e74c3c', width: 1 }, symbol: 'none' }
     ]
-  });
+  }, true);
+  setTimeout(() => trendChart.resize(), 0);
 }
 </script>
 {% endblock %}

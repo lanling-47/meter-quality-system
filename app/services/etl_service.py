@@ -15,7 +15,14 @@ import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
 
 from database import SessionLocal
-from app.models.db_models import CrystalData, CTData, FactoryTest, AgingTest, QualityChain
+from app.models.db_models import (
+    CrystalData,
+    CTData,
+    FactoryTest,
+    AgingTest,
+    QualityChain,
+    ProductionProcessProfile,
+)
 import config as cfg
 
 
@@ -47,6 +54,34 @@ def _safe_int(val) -> Optional[int]:
         return int(float(s))
     except (ValueError, TypeError):
         return None
+
+
+def _extract_numbers(val) -> list[float]:
+    if val is None or val == "":
+        return []
+    if isinstance(val, (int, float)):
+        return [float(val)]
+    text = str(val).replace("，", ".").replace("：", ":")
+    return [float(x) for x in re.findall(r"[-+]?\d+(?:\.\d+)?", text)]
+
+
+def _first_number(val) -> Optional[float]:
+    nums = _extract_numbers(val)
+    return nums[0] if nums else None
+
+
+def _normalize_serial(value) -> str:
+    if value is None:
+        return ""
+    text = re.sub(r"[^A-Za-z0-9]", "", str(value).strip().upper())
+    runs = re.findall(r"\d{6,}", text)
+    return max(runs, key=len) if runs else text
+
+
+def _sheet_or_fallback(wb, preferred: str):
+    if preferred in wb.sheetnames:
+        return wb[preferred]
+    return wb[wb.sheetnames[-1]]
 
 
 def _parse_time_block(rows, allow_no_tablabel=False):
@@ -199,7 +234,17 @@ def parse_factory_test(filepath: Path) -> list[dict]:
     wb.close()
 
     records = []
+    in_factory_table = False
     for row in rows:
+        first_text = str(row[0]).strip() if row[0] is not None else ""
+        if "电表唯一ID" in first_text:
+            in_factory_table = True
+            continue
+        if in_factory_table and ("检测参量" in first_text or "故障类型" in first_text or "数字化电路板" in first_text):
+            break
+        if not in_factory_table:
+            continue
+
         meter_id = row[0]
         if not meter_id or not str(meter_id).strip().isdigit():
             continue
@@ -254,6 +299,164 @@ def parse_factory_test(filepath: Path) -> list[dict]:
 # ═══════════════════════════════════════════════════════════════════════
 # 4. 解析日计时误差（日计时 Sheet）
 # ═══════════════════════════════════════════════════════════════════════
+def parse_factory_process_profile(filepath: Path) -> list[dict]:
+    """解析出厂检测工作簿中嵌入的数字化电路板生产过程画像。"""
+    wb = openpyxl.load_workbook(filepath, data_only=True)
+    ws = _sheet_or_fallback(wb, "确认版")
+    rows = list(ws.iter_rows(values_only=True))
+    wb.close()
+
+    def find_row(keyword: str) -> Optional[int]:
+        for idx, row in enumerate(rows):
+            for cell in row:
+                if cell is not None and keyword in str(cell):
+                    return idx
+        return None
+
+    if find_row("数字化电路板生产过程数据") is None:
+        return []
+
+    smt_idx = find_row("SMT贴片")
+    reflow_idx = find_row("回流焊")
+    online_idx = find_row("在线测试")
+    wave_idx = find_row("波峰焊")
+
+    smt_pressure = None
+    smt_tol = None
+    smt_cpk = None
+    if smt_idx is not None:
+        for row in rows[smt_idx + 1: min(smt_idx + 8, len(rows))]:
+            if smt_pressure is None and row[0] is not None and "mm" in str(row[0]):
+                smt_pressure = _first_number(row[0])
+            if row[1] is not None and ("CPK" in str(row[1]).upper() or "mm" in str(row[1])):
+                nums = _extract_numbers(row[1])
+                if nums:
+                    smt_tol = nums[0]
+                    smt_cpk = nums[-1]
+
+    reflow_temps: list[float] = []
+    reflow_speeds: list[float] = []
+    if reflow_idx is not None:
+        stop = online_idx if online_idx is not None else len(rows)
+        for row in rows[reflow_idx + 1: stop]:
+            cell0 = row[0] if len(row) > 0 else None
+            cell1 = row[1] if len(row) > 1 else None
+            if cell0 is not None and "℃" in str(cell0):
+                temp = _first_number(cell0)
+                if temp is not None:
+                    reflow_temps.append(temp)
+            if cell1 is not None and ("cm" in str(cell1) or "分" in str(cell1)):
+                speed = _first_number(cell1)
+                if speed is not None:
+                    reflow_speeds.append(speed)
+
+    online_currents: dict[str, float] = {}
+    if online_idx is not None:
+        stop = wave_idx if wave_idx is not None else len(rows)
+        for row in rows[online_idx + 1: stop]:
+            meter_id = str(row[0]).strip() if row[0] is not None else ""
+            if not meter_id.isdigit() or len(meter_id) < 10:
+                continue
+            current = _first_number(row[1] if len(row) > 1 else None)
+            if current is not None:
+                online_currents[meter_id] = current
+
+    wave_flux = None
+    wave_preheats: list[float] = []
+    wave_solder_temp = None
+    wave_peak_1 = None
+    wave_peak_2 = None
+    if wave_idx is not None:
+        for row in rows[wave_idx + 1: min(wave_idx + 12, len(rows))]:
+            cell0 = row[0] if len(row) > 0 else None
+            cell1 = row[1] if len(row) > 1 else None
+            cell2 = row[2] if len(row) > 2 else None
+            cell3 = row[3] if len(row) > 3 else None
+
+            if wave_flux is None and isinstance(cell0, (int, float)):
+                wave_flux = float(cell0)
+            if cell1 is not None and "℃" in str(cell1):
+                temp = _first_number(cell1)
+                if temp is not None:
+                    wave_preheats.append(temp)
+            if wave_solder_temp is None and cell2 is not None and "℃" in str(cell2):
+                wave_solder_temp = _first_number(cell2)
+            if cell3 is not None and "波峰" in str(cell3):
+                text = str(cell3).replace("：", ":")
+                peaks = re.findall(r"波峰\s*[12]\s*:\s*([-+]?\d+(?:\.\d+)?)", text)
+                if len(peaks) >= 2:
+                    wave_peak_1 = float(peaks[0])
+                    wave_peak_2 = float(peaks[1])
+                else:
+                    nums = _extract_numbers(text)
+                    if len(nums) >= 2:
+                        wave_peak_1, wave_peak_2 = nums[-2], nums[-1]
+
+    if not any([smt_pressure, reflow_temps, online_currents, wave_preheats]):
+        return []
+
+    meter_ids = list(online_currents.keys())
+    normalized_ids = [_normalize_serial(mid) for mid in meter_ids]
+    current_values = list(online_currents.values())
+    reflow_min = min(reflow_temps) if reflow_temps else None
+    reflow_max = max(reflow_temps) if reflow_temps else None
+    preheat_min = min(wave_preheats) if wave_preheats else None
+    preheat_max = max(wave_preheats) if wave_preheats else None
+    preheat_avg = (sum(wave_preheats) / len(wave_preheats)) if wave_preheats else None
+
+    raw_payload = {
+        "smt": {
+            "pressure_mm": smt_pressure,
+            "precision_tol_mm": smt_tol,
+            "precision_cpk": smt_cpk,
+        },
+        "reflow": {
+            "temps_c": reflow_temps,
+            "speeds_cm_min": reflow_speeds,
+        },
+        "online_test": {
+            "current_by_meter_ua": online_currents,
+        },
+        "wave_solder": {
+            "flux_spray_qty": wave_flux,
+            "preheat_temps_c": wave_preheats,
+            "solder_temp_c": wave_solder_temp,
+            "peak_height_1_mm": wave_peak_1,
+            "peak_height_2_mm": wave_peak_2,
+        },
+    }
+
+    return [{
+        "batch_key": filepath.stem,
+        "source_file": filepath.name,
+        "meter_ids_json": json.dumps(meter_ids, ensure_ascii=False),
+        "normalized_meter_ids_json": json.dumps(normalized_ids, ensure_ascii=False),
+        "smt_pressure_mm": smt_pressure,
+        "smt_precision_tol_mm": smt_tol,
+        "smt_precision_cpk": smt_cpk,
+        "reflow_temp_min_c": reflow_min,
+        "reflow_temp_max_c": reflow_max,
+        "reflow_temp_span_c": (reflow_max - reflow_min) if reflow_min is not None and reflow_max is not None else None,
+        "reflow_conveyor_speed_cm_min": (sum(reflow_speeds) / len(reflow_speeds)) if reflow_speeds else None,
+        "reflow_profile_json": json.dumps(reflow_temps, ensure_ascii=False),
+        "online_current_min_ua": min(current_values) if current_values else None,
+        "online_current_max_ua": max(current_values) if current_values else None,
+        "online_current_avg_ua": (sum(current_values) / len(current_values)) if current_values else None,
+        "online_current_by_meter_json": json.dumps(online_currents, ensure_ascii=False),
+        "wave_flux_spray_qty": wave_flux,
+        "wave_preheat_temp_min_c": preheat_min,
+        "wave_preheat_temp_max_c": preheat_max,
+        "wave_preheat_temp_avg_c": preheat_avg,
+        "wave_solder_temp_c": wave_solder_temp,
+        "wave_peak_height_1_mm": wave_peak_1,
+        "wave_peak_height_2_mm": wave_peak_2,
+        "wave_profile_json": json.dumps(raw_payload["wave_solder"], ensure_ascii=False),
+        "confidence": 0.90 if meter_ids else 0.70,
+        "raw_json": json.dumps(raw_payload, ensure_ascii=False),
+        "note": "Parsed from the production-process block in the factory-test workbook.",
+    }]
+
+
 def parse_daily_timing(wb) -> dict:
     """
     解析「日计时」Sheet，返回 {(meter_no, time_label): clock_daily_error_sd}
@@ -684,8 +887,26 @@ def build_quality_chain(db: Session) -> list[dict]:
 # ═══════════════════════════════════════════════════════════════════════
 # 11. 主导入函数
 # ═══════════════════════════════════════════════════════════════════════
+def upsert_production_process_profiles(db: Session, profiles: list[dict]) -> int:
+    """Insert or update parsed production-process profiles by batch_key."""
+    count = 0
+    for profile in profiles:
+        batch_key = profile.get("batch_key")
+        if not batch_key:
+            continue
+        existing = db.query(ProductionProcessProfile).filter_by(batch_key=batch_key).first()
+        if existing is None:
+            db.add(ProductionProcessProfile(**profile))
+        else:
+            for key, value in profile.items():
+                if hasattr(existing, key):
+                    setattr(existing, key, value)
+        count += 1
+    return count
+
+
 def import_all_data(db: Session) -> dict:
-    stats = {"crystal": 0, "ct": 0, "factory": 0, "aging": 0, "chain": 0, "errors": []}
+    stats = {"crystal": 0, "ct": 0, "factory": 0, "process_profile": 0, "aging": 0, "chain": 0, "errors": []}
     data_dir = cfg.DATA_DIR
 
     # 晶振
@@ -710,7 +931,8 @@ def import_all_data(db: Session) -> dict:
 
     # 出厂检测
     try:
-        for r in parse_factory_test(data_dir / cfg.FACTORY_FILE):
+        factory_path = data_dir / cfg.FACTORY_FILE
+        for r in parse_factory_test(factory_path):
             existing = db.query(FactoryTest).filter_by(meter_id=r["meter_id"]).first()
             if not existing:
                 db.add(FactoryTest(**r))
@@ -719,6 +941,10 @@ def import_all_data(db: Session) -> dict:
                 for k, v in r.items():
                     if k != "meter_id":
                         setattr(existing, k, v)
+        stats["process_profile"] = upsert_production_process_profiles(
+            db,
+            parse_factory_process_profile(factory_path),
+        )
         db.commit()
     except Exception as e:
         stats["errors"].append(f"出厂检测：{e}"); db.rollback()

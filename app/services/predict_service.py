@@ -20,6 +20,8 @@ from sqlalchemy.orm import Session
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
 import config as cfg
+from app.services.data_linkage_service import PROCESS_PROFILE_FEATURE_NAMES
+from app.services.reliability_sample_service import RELIABILITY_FEATURE_NAMES
 
 FEATURE_NAMES = [
     # 来料特征（3个）
@@ -33,7 +35,7 @@ FEATURE_NAMES = [
     "final_error_max",
     "error_degradation_rate",
     "clock_drift_rate",
-    # 老化试验新增特征（来自未使用Sheet，6个）
+    # 老化试验新增特征（来自未使用 Sheet，5 个）
     "clock_daily_error_max",    # 日计时最大日误差 s/d
     "error_variability_max",    # 误差变差最大值 %
     "error_consistency_max",    # 误差一致性偏差最大值 %
@@ -52,7 +54,7 @@ FEATURE_NAMES = [
     "prod_repair_count",        # 维修次数
     "prod_leak_current_max",    # 最大漏电流（耐压）
     "prod_quality_risk_score",  # 综合生产质量风险分
-]
+] + PROCESS_PROFILE_FEATURE_NAMES + RELIABILITY_FEATURE_NAMES
 
 FEATURE_LABELS = {
     "crystal_ppm": "晶振频率误差(ppm)",
@@ -79,11 +81,78 @@ FEATURE_LABELS = {
     "prod_repair_count": "维修次数",
     "prod_leak_current_max": "最大漏电流",
     "prod_quality_risk_score": "生产质量风险分",
+    "process_smt_pressure_mm": "SMT贴片压力/位移(mm)",
+    "process_smt_precision_cpk": "SMT贴片精度CPK",
+    "process_reflow_temp_span_c": "回流焊温区跨度(℃)",
+    "process_reflow_conveyor_speed_cm_min": "回流焊传送带速度(cm/min)",
+    "process_online_current_meter_ua": "在线测试单表电流(uA)",
+    "process_online_current_deviation_ua": "在线测试电流偏离均值(uA)",
+    "process_online_current_max_ua": "在线测试最大电流(uA)",
+    "process_wave_preheat_span_c": "波峰焊预热温区跨度(℃)",
+    "process_wave_solder_temp_c": "波峰焊锡炉温度(℃)",
+    "process_wave_peak_height_delta_mm": "波峰高度差(mm)",
+    "rel_prod_error_abs_max": "可靠性样机生产误差绝对最大值",
+    "rel_prod_error_abs_avg": "可靠性样机生产误差绝对均值",
+    "rel_prod_error_abs_std": "可靠性样机生产误差波动",
+    "rel_prod_bad_rate": "可靠性样机生产不合格率",
+    "rel_prod_test_date_count": "可靠性样机生产测试日期数",
+    "rel_after_error_abs_max": "试验后误差绝对最大值",
+    "rel_after_error_abs_avg": "试验后误差绝对均值",
+    "rel_after_deviation_abs_max": "试验后相对试验前最大偏移",
+    "rel_after_deviation_abs_avg": "试验后相对试验前平均偏移",
+    "rel_timing_after_abs": "试验后日计时误差绝对值",
+    "rel_risk_score": "可靠性样机综合风险分",
+    "rel_sample_count": "可靠性样机画像可用标记",
 }
+
+FEATURE_DEFAULTS = {
+    "crystal_ppm": 9.0,
+    "ct_ratio_err": 0.5,
+    "clock_accuracy_sd": 0.018,
+    "factory_fault": 0.0,
+    "initial_error_max": 0.0,
+    "final_error_max": 0.0,
+    "error_degradation_rate": 0.0,
+    "clock_drift_rate": 0.0,
+    "clock_daily_error_max": 0.22,
+    "error_variability_max": 0.006,
+    "error_consistency_max": 0.086,
+    "energy_balance_ratio": 1.0,
+    "energy_peak_ratio": 0.246,
+    "rs485_total_errors": 0.0,
+}
+FEATURE_DEFAULTS.update({name: 0.0 for name in FEATURE_NAMES if name not in FEATURE_DEFAULTS})
+
+
+def _feature_array_from_dict(features: dict) -> np.ndarray:
+    values = []
+    for name in FEATURE_NAMES:
+        value = features.get(name, FEATURE_DEFAULTS.get(name, 0.0))
+        if value is None or value == "":
+            value = FEATURE_DEFAULTS.get(name, 0.0)
+        try:
+            values.append(1.0 if isinstance(value, bool) and value else float(value))
+        except (TypeError, ValueError):
+            values.append(float(FEATURE_DEFAULTS.get(name, 0.0)))
+    return np.asarray([values], dtype=float)
 
 
 def _get_feature_matrix(db: Session):
     from app.models.db_models import QualityChain
+    try:
+        from app.services.data_linkage_service import (
+            build_quality_feature_snapshots,
+            get_snapshot_feature_matrix,
+        )
+        X_snap, y_snap, meta_snap = get_snapshot_feature_matrix(db)
+        if len(X_snap) == 0:
+            build_quality_feature_snapshots(db, include_synthetic_demo=False)
+            X_snap, y_snap, meta_snap = get_snapshot_feature_matrix(db)
+        if len(X_snap) > 0:
+            return X_snap, y_snap, meta_snap
+    except Exception as exc:
+        print(f"质量融合快照不可用，回退到 quality_chain 原始特征: {exc}")
+
     chains = db.query(QualityChain).all()
     X_rows, y, meta = [], [], []
     for c in chains:
@@ -109,6 +178,8 @@ def _get_feature_matrix(db: Session):
             0.0, 0.0,             # repaired, repair_count
             0.0, 0.0,             # leak_current_max, quality_risk_score
         ]
+        if len(row) < len(FEATURE_NAMES):
+            row.extend([0.0] * (len(FEATURE_NAMES) - len(row)))
         X_rows.append(row)
         y.append(c.quality_label)
         meta.append({"meter_no": c.meter_no, "is_augmented": c.is_augmented})
@@ -147,13 +218,14 @@ async def training_event_stream() -> AsyncGenerator[str, None]:
             _train_progress_queues.remove(q)
 
 
-def train_model(db: Session, model_type: str = "tabnet") -> dict:
+def train_model(db: Session, model_type: str = "mgqformer") -> dict:
     """
     训练质量风险预测模型（带 SSE 详细进度事件）
 
     Parameters
     ----------
-    model_type : "tabnet"（默认，前沿深度学习）或 "lightgbm"（经典梯度提升，备用）
+    model_type : "mgqformer"（默认，跨粒度深度融合）、
+        "tabnet"（表格深度学习基线）或 "lightgbm"（经典梯度提升基线）
     """
     X, y, meta = _get_feature_matrix(db)
     n_samples = len(X)
@@ -177,10 +249,13 @@ def train_model(db: Session, model_type: str = "tabnet") -> dict:
         "message": f"开始训练 {model_type.upper()}：共 {n_samples} 个样本，{n_positive} 个高风险样本",
     })
 
-    if n_samples < 5:
+    if n_samples < 5 and model_type not in {"mgqformer", "deep_fusion", "deep"}:
         result["error"] = "样本数不足（需至少5条）"
         _emit("error", {"message": result["error"]})
         return result
+
+    if model_type in {"mgqformer", "deep_fusion", "deep"}:
+        return _train_with_mgqformer(X, y, meta, version_tag, result, db)
 
     # ── TabNet 训练路径 ────────────────────────────────────────────────
     if model_type == "tabnet":
@@ -283,6 +358,96 @@ def _train_with_tabnet(X, y, meta, version_tag: str, result: dict, db: Session) 
         return _train_with_lightgbm(X, y, meta, version_tag.replace("tabnet", "lightgbm"), result, db)
 
     return result
+
+
+def _train_with_mgqformer(X, y, meta, version_tag: str, result: dict, db: Session) -> dict:
+    """MGQ-Former cross-granularity deep fusion training flow."""
+    from app.models.db_models import ModelVersion, QualityChain
+    from app.services.deep_fusion_service import train_mgqformer
+
+    try:
+        _emit("progress", {"step": 1, "total": 6, "message": "启动 MGQ-Former 跨粒度深度融合训练..."})
+        deep_result = train_mgqformer(db, FEATURE_NAMES, emit_fn=_emit)
+        package = deep_result["model_package"]
+
+        auc = deep_result["auc_score"]
+        f1 = deep_result["f1_score"]
+        cm = deep_result["confusion_matrix"]
+        roc_data = deep_result["roc_data"]
+        feature_importance = deep_result["feature_importance"]
+        train_loss_curve = deep_result["train_loss_curve"]
+        architecture = deep_result["architecture"]
+
+        cfg.ML_MODELS_DIR.mkdir(exist_ok=True)
+        model_path = cfg.ML_MODELS_DIR / f"{version_tag}.pkl"
+        joblib.dump({
+            "model": package,
+            "scaler": None,
+            "feature_names": FEATURE_NAMES,
+            "batch_feature_names": package.batch_feature_names,
+            "model_type": "mgqformer",
+            "architecture": architecture,
+        }, model_path)
+
+        probs = package.predict_proba(deep_result["X_single"], deep_result["X_batch"])[:, 1]
+        chains_by_meter = {c.meter_no: c for c in db.query(QualityChain).all()}
+        for idx, item in enumerate(deep_result["meta"]):
+            chain = chains_by_meter.get(item["meter_no"])
+            if chain is None:
+                continue
+            chain.predicted_risk = float(probs[idx])
+            chain.predicted_label = 1 if probs[idx] >= 0.5 else 0
+        db.commit()
+
+        result.update({
+            "model_type": "mgqformer",
+            "model_path": str(model_path),
+            "auc_score": auc,
+            "f1_score": f1,
+            "confusion_matrix": cm,
+            "roc_data": roc_data,
+            "train_loss_curve": train_loss_curve,
+            "feature_importance": feature_importance,
+            "architecture": architecture,
+            "precision": deep_result["precision"],
+            "recall": deep_result["recall"],
+            "accuracy": deep_result["accuracy"],
+        })
+        result["log"].append(f"MGQ-Former Train AUC: {auc:.3f}, F1: {f1:.3f}")
+        result["log"].append("Architecture: meter encoder + batch profile encoder + Transformer fusion")
+
+        db.query(ModelVersion).update({"is_active": False})
+        mv = ModelVersion(
+            version_tag=version_tag,
+            model_type="mgqformer",
+            model_path=str(model_path),
+            n_samples=len(deep_result["y"]),
+            auc_score=float(auc),
+            f1_score=float(f1),
+            feature_names_json=json.dumps(FEATURE_NAMES, ensure_ascii=False),
+            is_active=True,
+            train_log="\n".join(result["log"]),
+        )
+        db.add(mv)
+        db.commit()
+
+        _emit("done", {
+            "version_tag": version_tag,
+            "model_type": "mgqformer",
+            "auc": float(auc),
+            "f1": float(f1),
+            "confusion_matrix": cm,
+            "roc_data": roc_data,
+            "feature_importance": feature_importance,
+            "train_loss_curve": train_loss_curve,
+            "architecture": architecture,
+            "message": f"MGQ-Former 训练完成：AUC={auc:.3f}, F1={f1:.3f}",
+        })
+        return result
+    except Exception as e:
+        _emit("progress", {"step": 2, "total": 6, "message": f"MGQ-Former 失败（{e}），降级为 LightGBM..."})
+        result["log"].append(f"MGQ-Former 失败：{e}，使用 LightGBM")
+        return _train_with_lightgbm(X, y, meta, version_tag.replace("mgqformer", "lightgbm"), result, db)
 
 
 def _train_with_lightgbm(X, y, meta, version_tag: str, result: dict, db: Session) -> dict:
@@ -490,33 +655,7 @@ def predict_single(features: dict, db: Session) -> dict:
     混合预测：TabNet/LightGBM + DQN 在线学习
     """
     model, feat_names, version, scaler, model_type = load_active_model(db)
-    x = np.array([[
-        features.get("crystal_ppm", 9.0),
-        features.get("ct_ratio_err", 0.5),
-        features.get("clock_accuracy_sd", 0.018),
-        float(features.get("factory_fault", False)),
-        features.get("initial_error_max", 0.0),
-        features.get("final_error_max", 0.0),
-        features.get("error_degradation_rate", 0.0),
-        features.get("clock_drift_rate", 0.0),
-        features.get("clock_daily_error_max", 0.22),
-        features.get("error_variability_max", 0.006),
-        features.get("error_consistency_max", 0.086),
-        features.get("energy_balance_ratio", 1.0),
-        features.get("energy_peak_ratio", 0.246),
-        float(features.get("rs485_total_errors", 0)),
-        # 生产过程特征
-        float(features.get("prod_ccd_retry", 0)),
-        float(features.get("prod_func_retry", 0)),
-        float(features.get("prod_reverify_retry", 0)),
-        float(features.get("prod_total_retry", 0)),
-        float(features.get("prod_smt_aoi_defect", 0)),
-        float(features.get("prod_wave_aoi_defect", 0)),
-        float(features.get("prod_repaired", 0)),
-        float(features.get("prod_repair_count", 0)),
-        float(features.get("prod_leak_current_max", 0)),
-        float(features.get("prod_quality_risk_score", 0)),
-    ]])
+    x = _feature_array_from_dict(features)
 
     if model is None:
         risk_prob = _rule_based_risk(features)
@@ -536,8 +675,34 @@ def predict_single(features: dict, db: Session) -> dict:
     x_input = scaler.transform(x) if scaler is not None else x
 
     # 主模型预测
-    main_prob = float(model.predict_proba(x_input)[0][1])
+    batch_vec = None
+    if model_type == "mgqformer":
+        try:
+            from app.services.deep_fusion_service import batch_features_from_key
+            batch_key = features.get("batch_key") or features.get("order_no")
+            batch_vec = batch_features_from_key(batch_key, db)
+            main_prob = float(model.predict_proba(x, batch_features=batch_vec)[0][1])
+        except Exception:
+            main_prob = float(model.predict_proba(x_input)[0][1])
+    else:
+        main_prob = float(model.predict_proba(x_input)[0][1])
     main_confidence = abs(main_prob - 0.5) * 2
+
+    if model_type == "mgqformer":
+        label = 1 if main_prob >= 0.5 else 0
+        level = "高" if main_prob >= 0.7 else ("中" if main_prob >= 0.4 else "低")
+        return {
+            "risk_level": level,
+            "risk_prob": round(main_prob, 4),
+            "risk_label": label,
+            "model_version": version,
+            "model_type": "mgqformer",
+            "shap_values": None,
+            "feature_values": dict(zip(FEATURE_NAMES, x[0].tolist())),
+            "batch_feature_values": batch_vec,
+            "drl_enabled": False,
+            "drl_note": "MGQ-Former uses direct deep-fusion probability; DQN post-adjustment is skipped.",
+        }
 
     # DQN 在线学习层预测
     try:
@@ -581,41 +746,16 @@ def learn_from_feedback(features: dict, true_label: int, db: Session) -> dict:
     """
     try:
         from app.services.drl_agent import learn_from_new_label, predict_hybrid
-        
+
         model, _, version, scaler, _ = load_active_model(db)
         if model is None:
             return {"success": False, "message": "无训练模型"}
-        
-        x = np.array([[
-            features.get("crystal_ppm", 9.0),
-            features.get("ct_ratio_err", 0.5),
-            features.get("clock_accuracy_sd", 0.018),
-            float(features.get("factory_fault", False)),
-            features.get("initial_error_max", 0.0),
-            features.get("final_error_max", 0.0),
-            features.get("error_degradation_rate", 0.0),
-            features.get("clock_drift_rate", 0.0),
-            features.get("clock_daily_error_max", 0.22),
-            features.get("error_variability_max", 0.006),
-            features.get("error_consistency_max", 0.086),
-            features.get("energy_balance_ratio", 1.0),
-            features.get("energy_peak_ratio", 0.246),
-            float(features.get("rs485_total_errors", 0)),
-            float(features.get("prod_ccd_retry", 0)),
-            float(features.get("prod_func_retry", 0)),
-            float(features.get("prod_reverify_retry", 0)),
-            float(features.get("prod_total_retry", 0)),
-            float(features.get("prod_smt_aoi_defect", 0)),
-            float(features.get("prod_wave_aoi_defect", 0)),
-            float(features.get("prod_repaired", 0)),
-            float(features.get("prod_repair_count", 0)),
-            float(features.get("prod_leak_current_max", 0)),
-            float(features.get("prod_quality_risk_score", 0)),
-        ]])
-        
+
+        x = _feature_array_from_dict(features)
+
         lgbm_prob = float(model.predict_proba(scaler.transform(x) if scaler else x)[0][1])
         lgbm_confidence = abs(lgbm_prob - 0.5) * 2
-        
+
         result = learn_from_new_label(features, true_label, lgbm_prob, lgbm_confidence)
         
         return {

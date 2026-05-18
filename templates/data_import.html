@@ -33,8 +33,8 @@
 {% block content %}
 <!-- 统计行 -->
 <div class="row g-3 mb-4">
-  {% for label, key in [('晶振记录','crystal'),('互感器记录','ct'),('出厂检测','factory'),('老化试验','aging'),('质量链路','chain')] %}
-  <div class="col">
+  {% for label, key in [('晶振记录','crystal'),('互感器记录','ct'),('出厂检测','factory'),('生产过程画像','process_profile'),('老化试验','aging'),('质量链路','chain'),('可靠性样机画像','reliability_profile')] %}
+  <div class="col-6 col-md-4 col-xl-3">
     <div class="card text-center p-3">
       <div class="fs-4 fw-bold text-primary">{{ stats[key] }}</div>
       <div class="text-muted small">{{ label }}</div>
@@ -147,13 +147,24 @@
             <li>晶振和互感器10个样品的检验数据26.3.11.xlsx</li>
             <li>样品出厂检测和数字化电路板生产过程数据26.xlsx</li>
             <li>单相表-20版正面布局的耐久性（可靠性）试验数据26.3.6.xlsx</li>
+            <li>X202201001 可靠性样机生产数据与试验后数据（新增接入，形成12维可靠性画像特征）</li>
           </ul>
           <button class="btn btn-primary w-100 mb-2" onclick="importExcel()">
             <i class="bi bi-cloud-download me-2"></i>导入 / 更新 data/raw 数据
           </button>
+          <button class="btn btn-outline-warning w-100 mb-2" onclick="importReliabilitySample()">
+            <i class="bi bi-clipboard2-pulse me-2"></i>导入 X202201001 生产数据 + 试验后数据
+          </button>
           <button class="btn btn-outline-primary w-100 mb-2" onclick="scanLocalFolder()">
             <i class="bi bi-folder-symlink me-2"></i>扫描本地监听目录
           </button>
+          <div class="alert alert-light border small py-2 mb-2">
+            <strong>当前可靠性样机库：</strong>
+            生产明细 {{ stats.reliability_production }} 条 |
+            试验后明细 {{ stats.reliability_after }} 条 |
+            样机画像 {{ stats.reliability_profile }} 条
+            <div class="text-muted mt-1">该数据作为批次/样机级证据并入模型，不强行解释为每块电表一一对应标签。</div>
+          </div>
           <div id="importResult" style="display:none;"></div>
 
           <hr>
@@ -250,7 +261,8 @@
         <span><i class="bi bi-cpu me-2"></i>AI 模型训练</span>
         <div class="d-flex gap-2 align-items-center">
           <select id="modelTypeSelect" class="form-select form-select-sm" style="width:auto;font-size:12px;">
-            <option value="tabnet" selected>🔬 TabNet（本文方法）</option>
+            <option value="mgqformer" selected>MGQ-Former（跨粒度深度融合）</option>
+            <option value="tabnet">🔬 TabNet（表格深度基线）</option>
             <option value="lightgbm">📊 LightGBM（对照基线）</option>
           </select>
           <button class="btn btn-sm btn-accent" id="trainBtn" onclick="startTrainWithViz()">
@@ -354,6 +366,7 @@
 {% endblock %}
 
 {% block extra_js %}
+<script src="{{ url_for('static', path='js/echarts.min.js') }}"></script>
 <script>
 // ── 数据增强 ────────────────────────────────────────────────────────
 async function loadAugStats() {
@@ -452,6 +465,26 @@ async function importExcel() {
       setTimeout(() => location.reload(), 2000);
     } else {
       div.innerHTML = `<div class="alert alert-danger small mb-0">❌ ${res.message}</div>`;
+    }
+  } catch(e) { hideLoading(); alert(e.message); }
+}
+
+async function importReliabilitySample() {
+  showLoading('正在导入 X202201001 可靠性样机数据...');
+  try {
+    const res = await postJson('/import/reliability-sample', {});
+    hideLoading();
+    const div = document.getElementById('importResult');
+    div.style.display = 'block';
+    if (res.success) {
+      const s = res.stats || {};
+      div.innerHTML = `<div class="alert alert-success small mb-0">
+        ✅ 可靠性样机导入完成：生产明细 ${s.production_records || 0} | 试验后明细 ${s.after_records || 0} | 画像 ${s.profiles || 0}
+        ${s.errors && s.errors.length ? '<br>⚠️ ' + s.errors.join('<br>') : ''}
+      </div>`;
+      setTimeout(() => location.reload(), 2000);
+    } else {
+      div.innerHTML = `<div class="alert alert-danger small mb-0">❌ ${res.message || '可靠性样机导入失败'}</div>`;
     }
   } catch(e) { hideLoading(); alert(e.message); }
 }
@@ -636,7 +669,7 @@ function setProgress(pct, text) {
 
 async function startTrainWithViz() {
   const btn = document.getElementById('trainBtn');
-  const modelType = document.getElementById('modelTypeSelect')?.value || 'tabnet';
+  const modelType = document.getElementById('modelTypeSelect')?.value || 'mgqformer';
   btn.disabled = true;
   btn.innerHTML = '<i class="bi bi-hourglass-split me-1"></i>训练中...';
 
@@ -646,7 +679,12 @@ async function startTrainWithViz() {
   setProgress(0, `初始化 ${modelType.toUpperCase()} 训练...`);
   initTrainCharts();
 
-  addLog(`使用 ${modelType === 'tabnet' ? '🔬 TabNet（前沿深度学习，含Sequential Attention）' : '📊 LightGBM（对照基线）'} 开始训练...`, 'info');
+  const modelLabelMap = {
+    mgqformer: 'MGQ-Former（跨粒度深度融合，单表Token+批次Token）',
+    tabnet: '🔬 TabNet（表格深度基线，含Sequential Attention）',
+    lightgbm: '📊 LightGBM（对照基线）',
+  };
+  addLog(`使用 ${modelLabelMap[modelType] || modelType} 开始训练...`, 'info');
 
   const evtSource = new EventSource(`/train/stream?model_type=${modelType}`);
 
@@ -688,6 +726,11 @@ async function startTrainWithViz() {
         document.getElementById('resVersion').textContent = d.version_tag;
 
         if (d.confusion_matrix) renderFinalCharts(d.confusion_matrix, d.roc_data || []);
+        if (typeof d.auc === 'number') {
+          const finalStep = lossData.length ? lossData[lossData.length - 1][0] : 100;
+          aucData.push([finalStep, d.auc]);
+          aucChartObj?.setOption({ series: [{ data: aucData }] });
+        }
 
         btn.disabled = false;
         btn.innerHTML = '<i class="bi bi-play-circle me-1"></i>重新训练';

@@ -51,47 +51,52 @@ async def predict_single(request: Request, db: Session = Depends(get_db)):
 async def predict_batch(request: Request, db: Session = Depends(get_db)):
     """批量重新预测所有电表（融合生产过程特征）"""
     from app.services.predict_service import predict_single
-    from app.models.db_models import QualityChain, MeterQualityTrace
+    from app.models.db_models import QualityChain
+    from app.services.data_linkage_service import (
+        build_quality_feature_snapshots,
+        features_from_snapshot,
+        snapshot_for_meter,
+    )
     chains = db.query(QualityChain).all()
 
-    # 预加载追溯汇总数据（barcode→trace 映射，用电表编号关联）
-    # QualityChain.meter_no 是整数编号，MeterQualityTrace.barcode 是条形码
-    # 二者目前无直接关联字段，生产特征采用默认值0，等数据打通后可关联
+    linkage_stats = build_quality_feature_snapshots(db, include_synthetic_demo=False)
     results = []
     for c in chains:
-        features = {
-            "crystal_ppm": c.crystal_ppm or 9.0,
-            "ct_ratio_err": c.ct_ratio_err or 0.5,
-            "clock_accuracy_sd": c.clock_accuracy_sd or 0.03,
-            "factory_fault": c.factory_fault,
-            "initial_error_max": c.initial_error_max or 0.0,
-            "final_error_max": c.final_error_max or 0.0,
-            "error_degradation_rate": c.error_degradation_rate or 0.0,
-            "clock_drift_rate": c.clock_drift_rate or 0.0,
-            "clock_daily_error_max": c.clock_daily_error_max,
-            "error_variability_max": c.error_variability_max,
-            "error_consistency_max": c.error_consistency_max,
-            "energy_balance_ratio": c.energy_balance_ratio,
-            "energy_peak_ratio": c.energy_peak_ratio,
-            "rs485_total_errors": c.rs485_total_errors or 0,
-            # 生产过程特征（默认0；若有关联 barcode 可通过 production_etl_service 查询）
-            "prod_ccd_retry": 0.0,
-            "prod_func_retry": 0.0,
-            "prod_reverify_retry": 0.0,
-            "prod_total_retry": 0.0,
-            "prod_smt_aoi_defect": 0.0,
-            "prod_wave_aoi_defect": 0.0,
-            "prod_repaired": 0.0,
-            "prod_repair_count": 0.0,
-            "prod_leak_current_max": 0.0,
-            "prod_quality_risk_score": 0.0,
-        }
+        snapshot = snapshot_for_meter(db, c.meter_no)
+        if snapshot is not None:
+            features = features_from_snapshot(snapshot)
+            features["batch_key"] = snapshot.batch_key
+            features["order_no"] = snapshot.order_no
+        else:
+            features = {
+                "crystal_ppm": c.crystal_ppm or 9.0,
+                "ct_ratio_err": c.ct_ratio_err or 0.5,
+                "clock_accuracy_sd": c.clock_accuracy_sd or 0.03,
+                "factory_fault": c.factory_fault,
+                "initial_error_max": c.initial_error_max or 0.0,
+                "final_error_max": c.final_error_max or 0.0,
+                "error_degradation_rate": c.error_degradation_rate or 0.0,
+                "clock_drift_rate": c.clock_drift_rate or 0.0,
+                "clock_daily_error_max": c.clock_daily_error_max,
+                "error_variability_max": c.error_variability_max,
+                "error_consistency_max": c.error_consistency_max,
+                "energy_balance_ratio": c.energy_balance_ratio,
+                "energy_peak_ratio": c.energy_peak_ratio,
+                "rs485_total_errors": c.rs485_total_errors or 0,
+            }
         r = predict_single(features, db)
         c.predicted_risk = r.get("risk_prob", 0)
         c.predicted_label = r.get("risk_label", 0)
-        results.append({"meter_no": c.meter_no, **r})
+        results.append({
+            "meter_no": c.meter_no,
+            "barcode": snapshot.barcode if snapshot else None,
+            "batch_key": snapshot.batch_key if snapshot else None,
+            "source": snapshot.source if snapshot else "legacy",
+            "confidence": snapshot.confidence if snapshot else 0.0,
+            **r,
+        })
     db.commit()
-    return JSONResponse({"success": True, "results": results})
+    return JSONResponse({"success": True, "linkage": linkage_stats, "results": results})
 
 
 # ─── DQN 在线学习 API ──────────────────────────────────────────

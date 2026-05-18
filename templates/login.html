@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>登录 - 智能电表质量管控系统</title>
-  <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/bootstrap-icons/1.11.0/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', path='css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', path='css/bootstrap-icons.min.css') }}">
   <style>
     body { min-height:100vh; margin:0; font-family:'Segoe UI','PingFang SC',sans-serif; background:radial-gradient(circle at 20% 20%, #355f8f 0, transparent 28%), linear-gradient(135deg,#10243a,#1a3a5c 48%,#0d1b2a); display:flex; align-items:center; justify-content:center; }
     .login-shell { width:min(980px, 94vw); display:grid; grid-template-columns:1.1fr .9fr; background:rgba(255,255,255,.96); border-radius:24px; overflow:hidden; box-shadow:0 28px 80px rgba(0,0,0,.35); }

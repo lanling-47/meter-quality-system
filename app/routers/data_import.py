@@ -14,13 +14,27 @@ templates = Jinja2Templates(directory="templates")
 
 
 def _get_db_stats(db):
-    from app.models.db_models import CrystalData, CTData, FactoryTest, AgingTest, QualityChain
+    from app.models.db_models import (
+        AgingTest,
+        CTData,
+        CrystalData,
+        FactoryTest,
+        ProductionProcessProfile,
+        QualityChain,
+        ReliabilitySampleAfterRecord,
+        ReliabilitySampleProductionRecord,
+        ReliabilitySampleProfile,
+    )
     return {
         "crystal": db.query(CrystalData).count(),
         "ct": db.query(CTData).count(),
         "factory": db.query(FactoryTest).count(),
+        "process_profile": db.query(ProductionProcessProfile).count(),
         "aging": db.query(AgingTest).count(),
         "chain": db.query(QualityChain).count(),
+        "reliability_production": db.query(ReliabilitySampleProductionRecord).count(),
+        "reliability_after": db.query(ReliabilitySampleAfterRecord).count(),
+        "reliability_profile": db.query(ReliabilitySampleProfile).count(),
     }
 
 
@@ -62,6 +76,19 @@ async def import_excel(request: Request, db: Session = Depends(get_db)):
         return JSONResponse({"success": False, "message": str(e)})
 
 
+@router.post("/import/reliability-sample")
+async def import_reliability_sample(request: Request, db: Session = Depends(get_db)):
+    """导入 X202201001 可靠性样机生产数据和试验后数据。"""
+    from app.services.reliability_sample_service import import_reliability_sample_data
+
+    try:
+        stats = import_reliability_sample_data(db)
+        return JSONResponse({"success": not stats.get("errors"), "stats": stats})
+    except Exception as e:
+        import traceback
+        return JSONResponse({"success": False, "message": str(e), "trace": traceback.format_exc()})
+
+
 @router.post("/import/factory")
 async def import_factory_manual(request: Request, db: Session = Depends(get_db)):
     """手动录入出厂检测记录"""
@@ -89,7 +116,7 @@ async def train_model_api(request: Request, db: Session = Depends(get_db)):
     """触发模型训练（同步返回结果）"""
     from app.services.predict_service import train_model
     try:
-        result = train_model(db)
+        result = train_model(db, model_type="mgqformer")
         return JSONResponse({"success": True, "result": {
             k: v for k, v in result.items()
             if k not in ("roc_data", "train_loss_curve", "cv_auc_curve", "feature_importance")
@@ -100,8 +127,8 @@ async def train_model_api(request: Request, db: Session = Depends(get_db)):
 
 
 @router.get("/train/stream")
-async def train_stream(request: Request, model_type: str = "tabnet", db: Session = Depends(get_db)):
-    """SSE 端点：流式推送训练进度，支持 model_type=tabnet|lightgbm"""
+async def train_stream(request: Request, model_type: str = "mgqformer", db: Session = Depends(get_db)):
+    """SSE 端点：流式推送训练进度，支持 model_type=mgqformer|tabnet|lightgbm"""
     from fastapi.responses import StreamingResponse
     from app.services.predict_service import training_event_stream, train_model
 
@@ -141,6 +168,13 @@ async def list_models(db: Session = Depends(get_db)):
         "is_active": m.is_active,
         "created_at": str(m.created_at)[:16] if m.created_at else "--",
     } for m in versions])
+
+
+@router.get("/models/mgqformer/architecture")
+async def mgqformer_architecture():
+    """Return MGQ-Former architecture metadata for UI and thesis export."""
+    from app.services.deep_fusion_service import get_mgqformer_architecture
+    return JSONResponse(get_mgqformer_architecture())
 
 
 @router.post("/models/activate/{version_tag}")
@@ -252,7 +286,14 @@ async def upload_excel_file(
 ):
     """上传 Excel 文件解析导入"""
     import tempfile, os
-    from app.services.etl_service import parse_crystal_data, parse_ct_data, parse_factory_test, parse_aging_test
+    from app.services.etl_service import (
+        parse_crystal_data,
+        parse_ct_data,
+        parse_factory_test,
+        parse_factory_process_profile,
+        parse_aging_test,
+        upsert_production_process_profiles,
+    )
     from app.models.db_models import CrystalData, CTData, FactoryTest, AgingTest
 
     content = await file.read()
@@ -271,8 +312,15 @@ async def upload_excel_file(
         elif data_type == "factory":
             records = parse_factory_test(tmp_path)
             for r in records:
-                db.merge(FactoryTest(**r))
+                existing = db.query(FactoryTest).filter_by(meter_id=r["meter_id"]).first()
+                if existing:
+                    for k, v in r.items():
+                        if k != "meter_id" and hasattr(existing, k):
+                            setattr(existing, k, v)
+                else:
+                    db.add(FactoryTest(**r))
             count = len(records)
+            count += upsert_production_process_profiles(db, parse_factory_process_profile(tmp_path))
         elif data_type == "aging":
             records = parse_aging_test(tmp_path)
             for r in records:

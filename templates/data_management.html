@@ -1,0 +1,323 @@
+{% extends "base.html" %}
+{% block title %}全流程数据管理 - 智能电表质量管控系统{% endblock %}
+{% block page_title %}全流程数据管理{% endblock %}
+
+{% block topbar_actions %}
+<button class="btn btn-sm btn-outline-secondary" onclick="reloadCurrent()">
+  <i class="bi bi-arrow-clockwise me-1"></i>刷新
+</button>
+<button class="btn btn-sm btn-accent" onclick="rebuildLinkage()">
+  <i class="bi bi-diagram-3 me-1"></i>重建质量链路
+</button>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.dm-shell { display:grid; grid-template-columns: 310px 1fr; gap:18px; }
+.dataset-card { border:1px solid #e3e8f0; border-radius:12px; padding:12px 14px; background:#fff; cursor:pointer; transition:all .18s; }
+.dataset-card:hover { transform:translateY(-1px); box-shadow:0 6px 18px rgba(26,58,92,.12); }
+.dataset-card.active { border-color:var(--accent); box-shadow:0 0 0 2px rgba(240,165,0,.18); }
+.stage-pill { font-size:11px; border-radius:999px; padding:2px 8px; background:#eef4ff; color:#1a3a5c; font-weight:600; }
+.count-pill { font-size:11px; border-radius:999px; padding:2px 8px; background:#fff4d8; color:#9a6500; font-weight:700; }
+.field-grid { display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap:12px; }
+.field-grid .full { grid-column:1 / -1; }
+.record-table-wrap { max-height:520px; overflow:auto; border:1px solid #edf1f7; border-radius:10px; }
+.record-table { min-width:980px; margin:0; }
+.record-table th { position:sticky; top:0; z-index:1; }
+.muted-help { color:#71859b; font-size:12px; }
+.operator-note { border-left:4px solid var(--accent); background:#fffbef; border-radius:0 10px 10px 0; padding:12px 14px; }
+@media (max-width: 1100px) {
+  .dm-shell { grid-template-columns: 1fr; }
+  .field-grid { grid-template-columns: 1fr; }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="operator-note mb-3">
+  <strong>企业录入模式：</strong>
+  操作人员可以在这里按业务环节逐条维护来料、出厂、老化、生产、AOI、维修和融合追溯数据。Excel 导入仍可用于批量初始化，数据库表单用于日常补录、修正和复核。
+</div>
+
+<div class="dm-shell">
+  <div>
+    <div class="card">
+      <div class="card-header primary"><i class="bi bi-database me-2"></i>全流程数据集</div>
+      <div class="card-body p-3">
+        <input class="form-control form-control-sm mb-3" id="datasetFilter" placeholder="筛选数据集..." oninput="renderDatasets()">
+        <div id="datasetList" class="d-grid gap-2"></div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="card mb-3">
+      <div class="card-header primary d-flex justify-content-between align-items-center">
+        <span id="datasetTitle"><i class="bi bi-table me-2"></i>请选择数据集</span>
+        <span class="badge bg-light text-dark" id="datasetCount">0 条</span>
+      </div>
+      <div class="card-body">
+        <div class="d-flex gap-2 flex-wrap mb-3">
+          <input class="form-control form-control-sm" style="max-width:300px" id="searchInput" placeholder="按条码/批次/订单/说明搜索">
+          <button class="btn btn-sm btn-primary" onclick="loadRecords(1)"><i class="bi bi-search me-1"></i>查询</button>
+          <button class="btn btn-sm btn-accent" onclick="openCreateForm()"><i class="bi bi-plus-circle me-1"></i>新增记录</button>
+        </div>
+        <div class="muted-help mb-2" id="datasetDesc">源数据建议由操作员逐条录入；融合表可由“重建质量链路”自动生成后复核。</div>
+        <div class="record-table-wrap">
+          <table class="table table-hover record-table">
+            <thead id="recordHead"></thead>
+            <tbody id="recordBody"></tbody>
+          </table>
+        </div>
+        <div class="d-flex justify-content-between align-items-center mt-3">
+          <div class="small text-muted" id="pageInfo">第 1 页</div>
+          <div class="btn-group btn-group-sm">
+            <button class="btn btn-outline-secondary" onclick="prevPage()">上一页</button>
+            <button class="btn btn-outline-secondary" onclick="nextPage()">下一页</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="recordModal" tabindex="-1">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="recordModalTitle">新增记录</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-info py-2 small mb-3">
+          带必填约束或唯一约束的字段请按业务真实值填写；时间字段建议使用 <code>YYYY-MM-DD HH:MM:SS</code>。
+        </div>
+        <div class="field-grid" id="recordForm"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary" onclick="saveRecord()">保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let datasets = [];
+let currentDataset = null;
+let currentSchema = null;
+let currentRows = [];
+let currentPage = 1;
+let totalRows = 0;
+let editingId = null;
+let recordModal = null;
+
+const displayLimit = 8;
+
+async function initDataManagement() {
+  recordModal = new bootstrap.Modal(document.getElementById('recordModal'));
+  const res = await fetch('/data-management/api/datasets');
+  const data = await res.json();
+  datasets = data.items || [];
+  renderDatasets();
+  if (datasets.length) selectDataset(datasets[0].key);
+}
+
+function renderDatasets() {
+  const box = document.getElementById('datasetList');
+  const filter = (document.getElementById('datasetFilter').value || '').trim().toLowerCase();
+  const items = datasets.filter(d => !filter || `${d.name}${d.stage}${d.description}`.toLowerCase().includes(filter));
+  box.innerHTML = items.map(d => `
+    <div class="dataset-card ${currentDataset === d.key ? 'active' : ''}" onclick="selectDataset('${d.key}')">
+      <div class="d-flex justify-content-between align-items-start mb-2">
+        <strong>${d.name}</strong>
+        <span class="count-pill">${d.count}</span>
+      </div>
+      <div class="mb-2"><span class="stage-pill">${d.stage}</span></div>
+      <div class="small text-muted">${d.description}</div>
+    </div>
+  `).join('');
+}
+
+async function selectDataset(key) {
+  currentDataset = key;
+  currentPage = 1;
+  editingId = null;
+  renderDatasets();
+  const schemaRes = await fetch(`/data-management/api/${key}/schema`);
+  currentSchema = await schemaRes.json();
+  document.getElementById('datasetTitle').innerHTML = `<i class="bi bi-table me-2"></i>${currentSchema.name}`;
+  document.getElementById('datasetDesc').textContent = currentSchema.description;
+  await loadRecords(1);
+}
+
+function visibleFields() {
+  const fields = (currentSchema?.fields || []).filter(f => f.name !== 'feature_json');
+  const important = fields.filter(f => ['id', 'barcode', 'meter_id', 'meter_no', 'order_no', 'batch_no', 'process', 'result', 'quality_label', 'quality_risk_score', 'created_at'].includes(f.name));
+  const merged = [...important];
+  for (const f of fields) {
+    if (merged.length >= displayLimit) break;
+    if (!merged.find(x => x.name === f.name)) merged.push(f);
+  }
+  return merged;
+}
+
+async function loadRecords(page = currentPage) {
+  if (!currentDataset) return;
+  currentPage = Math.max(1, page);
+  const q = encodeURIComponent(document.getElementById('searchInput').value || '');
+  const res = await fetch(`/data-management/api/${currentDataset}?page=${currentPage}&page_size=20&q=${q}`);
+  const data = await res.json();
+  currentRows = data.items || [];
+  totalRows = data.total || 0;
+  document.getElementById('datasetCount').textContent = `${totalRows} 条`;
+  renderTable();
+}
+
+function renderTable() {
+  const fields = visibleFields();
+  document.getElementById('recordHead').innerHTML = `<tr>${fields.map(f => `<th>${f.label}</th>`).join('')}<th style="width:120px;">操作</th></tr>`;
+  document.getElementById('recordBody').innerHTML = currentRows.map(row => `
+    <tr>
+      ${fields.map(f => `<td>${formatValue(row[f.name], f.type)}</td>`).join('')}
+      <td>
+        <button class="btn btn-sm btn-outline-primary py-0" onclick="openEditForm(${row.id})">编辑</button>
+        <button class="btn btn-sm btn-outline-danger py-0" onclick="deleteRecord(${row.id})">删除</button>
+      </td>
+    </tr>
+  `).join('') || `<tr><td colspan="${fields.length + 1}" class="text-center text-muted py-4">暂无记录</td></tr>`;
+  const totalPages = Math.max(1, Math.ceil(totalRows / 20));
+  document.getElementById('pageInfo').textContent = `第 ${currentPage} / ${totalPages} 页，共 ${totalRows} 条`;
+}
+
+function formatValue(value, type) {
+  if (value === null || value === undefined || value === '') return '<span class="text-muted">-</span>';
+  if (type === 'boolean') return value ? '<span class="badge bg-success">是</span>' : '<span class="badge bg-secondary">否</span>';
+  if (type === 'float') return Number(value).toFixed(4).replace(/0+$/, '').replace(/\.$/, '');
+  if (type === 'datetime') return String(value).replace('T', ' ').slice(0, 19);
+  const text = String(value);
+  return text.length > 40 ? `${escapeHtml(text.slice(0, 40))}...` : escapeHtml(text);
+}
+
+function escapeHtml(text) {
+  return String(text).replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
+}
+
+function openCreateForm() {
+  editingId = null;
+  document.getElementById('recordModalTitle').textContent = `新增：${currentSchema.name}`;
+  renderForm({});
+  recordModal.show();
+}
+
+function openEditForm(id) {
+  const row = currentRows.find(r => r.id === id);
+  if (!row) return;
+  editingId = id;
+  document.getElementById('recordModalTitle').textContent = `编辑：${currentSchema.name} #${id}`;
+  renderForm(row);
+  recordModal.show();
+}
+
+function renderForm(row) {
+  const fields = (currentSchema.fields || []).filter(f => !f.readonly && f.name !== 'feature_json');
+  document.getElementById('recordForm').innerHTML = fields.map(f => {
+    const value = row[f.name] ?? '';
+    const required = f.required ? 'required' : '';
+    const cls = f.type === 'text' ? 'full' : '';
+    if (f.type === 'boolean') {
+      return `<div class="${cls}"><label class="form-label small">${f.label}</label>
+        <select class="form-select form-select-sm" data-field="${f.name}" data-type="${f.type}">
+          <option value="">未填写</option>
+          <option value="true" ${value === true ? 'selected' : ''}>是</option>
+          <option value="false" ${value === false ? 'selected' : ''}>否</option>
+        </select></div>`;
+    }
+    if (f.type === 'text') {
+      return `<div class="${cls}"><label class="form-label small">${f.label}</label>
+        <textarea class="form-control form-control-sm" rows="3" data-field="${f.name}" data-type="${f.type}" ${required}>${escapeHtml(value)}</textarea></div>`;
+    }
+    const inputType = f.type === 'datetime' ? 'text' : (f.type === 'integer' || f.type === 'float' ? 'number' : 'text');
+    const step = f.type === 'integer' ? '1' : (f.type === 'float' ? '0.0001' : '');
+    return `<div class="${cls}"><label class="form-label small">${f.label}${f.required ? ' <span class="text-danger">*</span>' : ''}</label>
+      <input class="form-control form-control-sm" type="${inputType}" step="${step}" value="${escapeHtml(value)}" data-field="${f.name}" data-type="${f.type}" ${required}></div>`;
+  }).join('');
+}
+
+function collectPayload() {
+  const payload = {};
+  document.querySelectorAll('#recordForm [data-field]').forEach(el => {
+    payload[el.dataset.field] = el.value;
+  });
+  return payload;
+}
+
+async function saveRecord() {
+  const payload = collectPayload();
+  const url = editingId ? `/data-management/api/${currentDataset}/${editingId}` : `/data-management/api/${currentDataset}`;
+  const method = editingId ? 'PUT' : 'POST';
+  const res = await fetch(url, {
+    method,
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(payload),
+  });
+  const data = await res.json();
+  if (!data.success) {
+    alert(data.message || '保存失败');
+    return;
+  }
+  recordModal.hide();
+  await refreshDatasetCounts();
+  await loadRecords(currentPage);
+}
+
+async function deleteRecord(id) {
+  if (!confirm(`确认删除记录 #${id}？该操作会直接修改数据库。`)) return;
+  const res = await fetch(`/data-management/api/${currentDataset}/${id}`, { method: 'DELETE' });
+  const data = await res.json();
+  if (!data.success) {
+    alert(data.message || '删除失败');
+    return;
+  }
+  await refreshDatasetCounts();
+  await loadRecords(currentPage);
+}
+
+async function refreshDatasetCounts() {
+  const res = await fetch('/data-management/api/datasets');
+  const data = await res.json();
+  datasets = data.items || datasets;
+  renderDatasets();
+}
+
+function prevPage() {
+  if (currentPage > 1) loadRecords(currentPage - 1);
+}
+
+function nextPage() {
+  if (currentPage * 20 < totalRows) loadRecords(currentPage + 1);
+}
+
+function reloadCurrent() {
+  refreshDatasetCounts();
+  loadRecords(currentPage);
+}
+
+async function rebuildLinkage() {
+  if (!confirm('确认根据当前数据库记录重建身份映射、批次画像和融合特征快照？')) return;
+  showLoading('正在重建质量链路...');
+  const res = await fetch('/data-management/api/rebuild-linkage', { method: 'POST' });
+  const data = await res.json();
+  hideLoading();
+  if (!data.success) {
+    alert(data.message || '重建失败');
+    return;
+  }
+  alert('质量链路已重建');
+  await refreshDatasetCounts();
+  await loadRecords(currentPage);
+}
+
+document.addEventListener('DOMContentLoaded', initDataManagement);
+</script>
+{% endblock %}

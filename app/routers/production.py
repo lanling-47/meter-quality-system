@@ -10,6 +10,7 @@
   - /production/overview-stats   生产概况 KPI JSON
 """
 from fastapi import APIRouter, Request, Depends
+from fastapi.encoders import jsonable_encoder
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
@@ -68,7 +69,7 @@ async def import_production(request: Request, db: Session = Depends(get_db)):
 async def overview_stats(db: Session = Depends(get_db)):
     """生产概况 KPI 数据"""
     from app.models.db_models import (
-        MeterQualityTrace, ProductionInspection, AoiDefect,
+        BatchQualityProfile, MeterQualityTrace, ProductionInspection, AoiDefect,
         RepairRecord, BoardTestDetail
     )
     total_trace = db.query(MeterQualityTrace).count()
@@ -119,6 +120,53 @@ async def overview_stats(db: Session = Depends(get_db)):
 
 # ── 追溯列表 ─────────────────────────────────────────────────────────────
 
+@router.get("/production/batch-profiles")
+async def batch_profiles(db: Session = Depends(get_db)):
+    """List batch-level quality profiles built from sampled aging tests."""
+    from app.models.db_models import BatchQualityProfile
+    profiles = db.query(BatchQualityProfile).order_by(
+        BatchQualityProfile.high_risk_rate.desc(),
+        BatchQualityProfile.updated_at.desc(),
+    ).all()
+    return JSONResponse(jsonable_encoder({
+        "total": len(profiles),
+        "items": [p.to_dict() for p in profiles],
+    }))
+
+
+@router.get("/production/linkage/status")
+async def linkage_status(db: Session = Depends(get_db)):
+    """Show how many rows are linked at barcode, batch, and sampled-aging levels."""
+    from app.models.db_models import BatchQualityProfile, MeterIdentity, QualityFeatureSnapshot
+    source_counts = {}
+    for row in db.query(MeterIdentity.source).all():
+        source = row[0] or "unknown"
+        source_counts[source] = source_counts.get(source, 0) + 1
+    snapshot_counts = {}
+    for row in db.query(QualityFeatureSnapshot.source).all():
+        source = row[0] or "unknown"
+        snapshot_counts[source] = snapshot_counts.get(source, 0) + 1
+    return JSONResponse({
+        "identity_total": db.query(MeterIdentity).count(),
+        "identity_by_source": source_counts,
+        "snapshot_total": db.query(QualityFeatureSnapshot).count(),
+        "snapshot_by_source": snapshot_counts,
+        "batch_profile_total": db.query(BatchQualityProfile).count(),
+    })
+
+
+@router.post("/production/linkage/build")
+async def build_quality_linkage(db: Session = Depends(get_db), include_demo: bool = False):
+    """Rebuild meter identity links and fused feature snapshots."""
+    from app.services.data_linkage_service import build_quality_feature_snapshots
+    try:
+        stats = build_quality_feature_snapshots(db, include_synthetic_demo=include_demo)
+        return JSONResponse({"success": True, "stats": stats})
+    except Exception as e:
+        db.rollback()
+        return JSONResponse({"success": False, "error": str(e)}, status_code=500)
+
+
 @router.get("/production/trace")
 async def trace_list(
     db: Session = Depends(get_db),
@@ -161,12 +209,17 @@ async def trace_list(
 async def trace_detail(barcode: str, db: Session = Depends(get_db)):
     """获取单块电表全链路追溯详情"""
     from app.models.db_models import (
-        MeterQualityTrace, ProductionInspection, AoiDefect,
+        BatchQualityProfile, MeterQualityTrace, ProductionInspection, AoiDefect,
         RepairRecord, BoardTestDetail
     )
     import json as _json
 
     trace = db.query(MeterQualityTrace).filter_by(barcode=barcode).first()
+    batch_profile = None
+    if trace and trace.order_no:
+        batch_profile = db.query(BatchQualityProfile).filter_by(batch_key=trace.order_no).first()
+        if batch_profile is None:
+            batch_profile = db.query(BatchQualityProfile).filter_by(order_no=trace.order_no).first()
 
     # 工序检测明细
     inspections = db.query(ProductionInspection).filter_by(barcode=barcode).order_by(
@@ -185,8 +238,9 @@ async def trace_detail(barcode: str, db: Session = Depends(get_db)):
     def _dt(v):
         return str(v)[:19] if v else None
 
-    return JSONResponse({
+    return JSONResponse(jsonable_encoder({
         'trace': trace.to_dict() if trace else None,
+        'batch_profile': batch_profile.to_dict() if batch_profile else None,
         'inspections': [{
             'process': r.process,
             'test_count': r.test_count,
@@ -217,7 +271,7 @@ async def trace_detail(barcode: str, db: Session = Depends(get_db)):
             'test_data': r.test_data,
             'test_time': _dt(r.test_time),
         } for r in board_fails],
-    })
+    }))
 
 
 # ── 维修分析 ─────────────────────────────────────────────────────────────

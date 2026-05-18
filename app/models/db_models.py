@@ -235,6 +235,145 @@ class BoardTestDetail(Base):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
 
+class ProductionProcessProfile(Base):
+    """数字化电路板生产过程画像，来源于出厂检测工作簿下方的工艺参数区块。"""
+    __tablename__ = "production_process_profile"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    batch_key = Column(String(120), nullable=False, unique=True, index=True, comment="批次/文件画像标识")
+    source_file = Column(String(255), nullable=True, comment="来源 Excel 文件名")
+    meter_ids_json = Column(Text, nullable=True, comment="该工艺画像覆盖的电表 ID 列表 JSON")
+    normalized_meter_ids_json = Column(Text, nullable=True, comment="标准化电表 ID 列表 JSON")
+
+    smt_pressure_mm = Column(Float, nullable=True, comment="SMT 贴片压力/贴装位移 mm")
+    smt_precision_tol_mm = Column(Float, nullable=True, comment="SMT 贴片精度公差 mm")
+    smt_precision_cpk = Column(Float, nullable=True, comment="SMT 贴片精度 CPK 下限")
+
+    reflow_temp_min_c = Column(Float, nullable=True, comment="回流焊温区最低温度 ℃")
+    reflow_temp_max_c = Column(Float, nullable=True, comment="回流焊温区最高温度 ℃")
+    reflow_temp_span_c = Column(Float, nullable=True, comment="回流焊温区跨度 ℃")
+    reflow_conveyor_speed_cm_min = Column(Float, nullable=True, comment="回流焊传送带速度 cm/min")
+    reflow_profile_json = Column(Text, nullable=True, comment="回流焊温度曲线 JSON")
+
+    online_current_min_ua = Column(Float, nullable=True, comment="在线测试 PCB 电流最小值 uA")
+    online_current_max_ua = Column(Float, nullable=True, comment="在线测试 PCB 电流最大值 uA")
+    online_current_avg_ua = Column(Float, nullable=True, comment="在线测试 PCB 电流均值 uA")
+    online_current_by_meter_json = Column(Text, nullable=True, comment="单表在线测试电流映射 JSON")
+
+    wave_flux_spray_qty = Column(Float, nullable=True, comment="波峰焊助焊剂喷涂量")
+    wave_preheat_temp_min_c = Column(Float, nullable=True, comment="波峰焊预热最低温度 ℃")
+    wave_preheat_temp_max_c = Column(Float, nullable=True, comment="波峰焊预热最高温度 ℃")
+    wave_preheat_temp_avg_c = Column(Float, nullable=True, comment="波峰焊预热平均温度 ℃")
+    wave_solder_temp_c = Column(Float, nullable=True, comment="波峰焊锡炉温度 ℃")
+    wave_peak_height_1_mm = Column(Float, nullable=True, comment="波峰 1 高度")
+    wave_peak_height_2_mm = Column(Float, nullable=True, comment="波峰 2 高度")
+    wave_profile_json = Column(Text, nullable=True, comment="波峰焊参数 JSON")
+
+    confidence = Column(Float, default=0.75, comment="画像可信度")
+    raw_json = Column(Text, nullable=True, comment="原始解析结果 JSON")
+    note = Column(String(500), nullable=True, comment="解析说明")
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    def to_dict(self):
+        d = {c.name: getattr(self, c.name) for c in self.__table__.columns}
+        for key in (
+            "meter_ids_json",
+            "normalized_meter_ids_json",
+            "reflow_profile_json",
+            "online_current_by_meter_json",
+            "wave_profile_json",
+            "raw_json",
+        ):
+            out_key = key[:-5] if key.endswith("_json") else key
+            try:
+                d[out_key] = json.loads(d[key]) if d.get(key) else []
+            except Exception:
+                d[out_key] = d.get(key)
+        return d
+
+
+class ReliabilitySampleProductionRecord(Base):
+    """X202201001 可靠性样机生产修调后多次测试明细。"""
+    __tablename__ = "reliability_sample_production_record"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    sample_id = Column(String(50), nullable=False, index=True, comment="电子批号")
+    source_file = Column(String(255), nullable=True)
+    test_item = Column(String(50), index=True, comment="测试项目")
+    status = Column(String(50), nullable=True, comment="状态/方向")
+    phase_sequence = Column(String(50), nullable=True, comment="相序")
+    phase_element = Column(String(50), nullable=True, comment="分合元")
+    current_point = Column(String(50), nullable=True, comment="电流点")
+    power_factor = Column(String(50), nullable=True, comment="功率因数")
+    error_value = Column(Float, nullable=True, comment="误差值")
+    actual_value = Column(String(100), nullable=True, comment="实际值")
+    operator = Column(String(50), nullable=True, comment="操作者")
+    operation_time = Column(DateTime, nullable=True, index=True, comment="操作时间")
+    operation_result = Column(String(20), nullable=True, comment="操作结果")
+    raw_json = Column(Text, nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    def to_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
+
+class ReliabilitySampleAfterRecord(Base):
+    """X202201001 可靠性样机试验后误差分析明细。"""
+    __tablename__ = "reliability_sample_after_record"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    sample_id = Column(String(50), nullable=False, index=True, comment="电子批号")
+    source_file = Column(String(255), nullable=True)
+    test_item = Column(String(50), index=True, comment="测试项目")
+    current_point = Column(String(50), nullable=True, comment="电流点/检验点")
+    power_factor = Column(String(50), nullable=True, comment="功率因数")
+    pre_values_json = Column(Text, nullable=True, comment="车间试验前多次测试值 JSON")
+    pre_avg = Column(Float, nullable=True, comment="试验前平均值")
+    pre_min = Column(Float, nullable=True, comment="试验前最小值")
+    pre_max = Column(Float, nullable=True, comment="试验前最大值")
+    after_value = Column(Float, nullable=True, comment="试验后测试值")
+    after_min_deviation = Column(Float, nullable=True, comment="试验后相对试验前最小偏差")
+    after_max_deviation = Column(Float, nullable=True, comment="试验后相对试验前最大偏差")
+    after_avg_deviation = Column(Float, nullable=True, comment="试验后相对试验前平均偏差")
+    raw_json = Column(Text, nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    def to_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
+
+class ReliabilitySampleProfile(Base):
+    """按电子批号聚合的可靠性样机生产-试验后质量画像。"""
+    __tablename__ = "reliability_sample_profile"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    sample_id = Column(String(50), nullable=False, unique=True, index=True, comment="电子批号")
+    batch_key = Column(String(100), default="X202201001", index=True)
+    source = Column(String(50), default="production_after_reliability")
+    production_record_count = Column(Integer, default=0)
+    production_error_count = Column(Integer, default=0)
+    production_error_abs_max = Column(Float, default=0.0)
+    production_error_abs_avg = Column(Float, default=0.0)
+    production_error_abs_std = Column(Float, default=0.0)
+    production_bad_count = Column(Integer, default=0)
+    production_test_date_count = Column(Integer, default=0)
+    after_error_count = Column(Integer, default=0)
+    after_error_abs_max = Column(Float, default=0.0)
+    after_error_abs_avg = Column(Float, default=0.0)
+    after_deviation_abs_max = Column(Float, default=0.0)
+    after_deviation_abs_avg = Column(Float, default=0.0)
+    timing_after_abs = Column(Float, default=0.0)
+    reliability_risk_score = Column(Float, default=0.0)
+    quality_label = Column(Integer, default=0)
+    note = Column(String(500), nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    def to_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
+
 class MeterQualityTrace(Base):
     """电表全工序质量追溯汇总（每块电表一条记录）"""
     __tablename__ = "meter_quality_trace"
@@ -272,6 +411,106 @@ class MeterQualityTrace(Base):
 
     def to_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
+
+class MeterIdentity(Base):
+    """电表身份映射表：连接老化/质量链路编号与生产条形码。"""
+    __tablename__ = "meter_identity"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    meter_no = Column(Integer, unique=True, nullable=True, index=True, comment="老化/质量链路电表编号")
+    barcode = Column(String(50), unique=True, nullable=False, index=True, comment="生产条形码")
+    normalized_barcode = Column(String(50), nullable=False, index=True, comment="标准化条码")
+    order_no = Column(String(50), nullable=True, index=True, comment="订单号")
+    batch_no = Column(String(50), nullable=True, index=True, comment="批次号")
+    product_model = Column(String(100), nullable=True, comment="产品型号")
+    source = Column(String(50), default="unknown", comment="映射来源")
+    confidence = Column(Float, default=0.0, comment="映射置信度 0-1")
+    note = Column(String(500), nullable=True, comment="映射说明")
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    def to_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
+
+class QualityFeatureSnapshot(Base):
+    """融合后的质量风险训练快照：固定特征口径，便于论文实验复现。"""
+    __tablename__ = "quality_feature_snapshot"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    meter_no = Column(Integer, nullable=False, unique=True, index=True)
+    barcode = Column(String(50), nullable=True, index=True)
+    normalized_barcode = Column(String(50), nullable=True, index=True)
+    order_no = Column(String(50), nullable=True, index=True)
+    batch_key = Column(String(100), nullable=True, index=True)
+    source = Column(String(50), default="linked", comment="linked/synthetic_demo/unlinked")
+    confidence = Column(Float, default=0.0)
+
+    crystal_ppm = Column(Float)
+    ct_ratio_err = Column(Float)
+    clock_accuracy_sd = Column(Float)
+    factory_fault = Column(Boolean, default=False)
+    initial_error_max = Column(Float)
+    final_error_max = Column(Float)
+    error_degradation_rate = Column(Float)
+    clock_drift_rate = Column(Float)
+    clock_daily_error_max = Column(Float)
+    error_variability_max = Column(Float)
+    error_consistency_max = Column(Float)
+    energy_balance_ratio = Column(Float)
+    energy_peak_ratio = Column(Float)
+    rs485_total_errors = Column(Integer, default=0)
+
+    prod_ccd_retry = Column(Float, default=0.0)
+    prod_func_retry = Column(Float, default=0.0)
+    prod_reverify_retry = Column(Float, default=0.0)
+    prod_total_retry = Column(Float, default=0.0)
+    prod_smt_aoi_defect = Column(Float, default=0.0)
+    prod_wave_aoi_defect = Column(Float, default=0.0)
+    prod_repaired = Column(Float, default=0.0)
+    prod_repair_count = Column(Float, default=0.0)
+    prod_leak_current_max = Column(Float, default=0.0)
+    prod_quality_risk_score = Column(Float, default=0.0)
+
+    quality_label = Column(Integer, default=0)
+    quality_reason = Column(String(500))
+    feature_json = Column(Text, nullable=True, comment="按基础快照特征顺序保存的24维特征数组")
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    def to_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
+
+class BatchQualityProfile(Base):
+    """批次抽检质量画像：老化实验是批次/抽检粒度，不默认对应到每块生产表。"""
+    __tablename__ = "batch_quality_profile"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    batch_key = Column(String(100), nullable=False, unique=True, index=True, comment="批次标识，优先 order_no/batch_no")
+    order_no = Column(String(50), nullable=True, index=True)
+    batch_no = Column(String(50), nullable=True, index=True)
+    source = Column(String(50), default="sampled_aging", comment="sampled_aging/sampled_batch_demo")
+    confidence = Column(Float, default=0.0)
+
+    sample_count = Column(Integer, default=0)
+    high_risk_count = Column(Integer, default=0)
+    high_risk_rate = Column(Float, default=0.0)
+    avg_final_error_max = Column(Float, default=0.0)
+    max_final_error_max = Column(Float, default=0.0)
+    avg_error_degradation_rate = Column(Float, default=0.0)
+    max_clock_drift_rate = Column(Float, default=0.0)
+    max_rs485_total_errors = Column(Integer, default=0)
+    sampled_meter_nos_json = Column(Text, nullable=True)
+    note = Column(String(500), nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    def to_dict(self):
+        d = {c.name: getattr(self, c.name) for c in self.__table__.columns}
+        d["sampled_meter_nos"] = json.loads(self.sampled_meter_nos_json) if self.sampled_meter_nos_json else []
+        return d
 
 
 class ModelVersion(Base):

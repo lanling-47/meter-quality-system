@@ -13,6 +13,31 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
 from app.services.predict_service import FEATURE_NAMES, FEATURE_LABELS, load_active_model
 
 
+def _align_feature_columns(x: np.ndarray) -> np.ndarray:
+    if x.shape[1] == len(FEATURE_NAMES):
+        return x
+    if x.shape[1] > len(FEATURE_NAMES):
+        return x[:, :len(FEATURE_NAMES)]
+    pad = np.zeros((x.shape[0], len(FEATURE_NAMES) - x.shape[1]))
+    return np.hstack([x, pad])
+
+
+def _snapshot_feature_row(db, meter_no: int) -> Optional[np.ndarray]:
+    try:
+        from app.services.data_linkage_service import (
+            build_quality_feature_snapshots,
+            get_snapshot_feature_matrix,
+        )
+        build_quality_feature_snapshots(db, include_synthetic_demo=False)
+        X, _, meta = get_snapshot_feature_matrix(db)
+        for idx, item in enumerate(meta):
+            if item.get("meter_no") == meter_no:
+                return X[idx:idx + 1]
+    except Exception:
+        return None
+    return None
+
+
 def explain_meter(meter_no: int, db) -> dict:
     """
     对指定电表编号生成 SHAP 解释
@@ -29,7 +54,7 @@ def explain_meter(meter_no: int, db) -> dict:
 
     model, feat_names, version, scaler, model_type = load_active_model(db)
 
-    # 构建特征向量（24维，含生产过程特征）
+    # 构建兜底特征向量；优先使用快照矩阵中的46维特征。
     x = np.array([[
         chain.crystal_ppm or 9.0,
         chain.ct_ratio_err or 0.5,
@@ -50,6 +75,8 @@ def explain_meter(meter_no: int, db) -> dict:
         0.0, 0.0, 0.0, 0.0,
         0.0, 0.0,
     ]])
+    snapshot_x = _snapshot_feature_row(db, meter_no)
+    x = snapshot_x if snapshot_x is not None else _align_feature_columns(x)
 
     # 当前特征值字典
     feat_vals = dict(zip(FEATURE_NAMES, x[0].tolist()))
@@ -244,6 +271,18 @@ def get_all_shap_summary(db) -> dict:
         0.0, 0.0, 0.0, 0.0,
         0.0, 0.0,
     ] for c in chains])
+    try:
+        from app.services.data_linkage_service import (
+            build_quality_feature_snapshots,
+            get_snapshot_feature_matrix,
+        )
+        build_quality_feature_snapshots(db, include_synthetic_demo=False)
+        snapshot_X, _, _ = get_snapshot_feature_matrix(db)
+        if len(snapshot_X) > 0:
+            X = snapshot_X
+    except Exception:
+        pass
+    X = _align_feature_columns(X)
 
     try:
         import shap

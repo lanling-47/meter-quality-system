@@ -5,15 +5,15 @@
 实验设计:
   特征组 A - 来料特征（4维）
   特征组 B - 来料 + 老化试验（14维）
-  特征组 C - 来料 + 老化 + 生产过程（全特征，24维）
-  特征组 D - 仅生产过程特征（10维）
+  特征组 C - 来料 + 老化 + 生产过程 + 工艺画像 + 可靠性样机画像（全特征，46维）
+  特征组 D - 仅生产过程/工艺画像特征（20维）
 
 对比算法（5种）:
   1. Rule-based  - 规则引擎基线
   2. RandomForest - 传统集成学习
   3. XGBoost     - 梯度提升（工业标准）
   4. LightGBM    - 原方法
-  5. TabNet      - 本文方法（前沿深度学习）
+  5. TabNet      - 表格深度学习基线
 
 评估指标（5个，5折交叉验证 mean ± std）:
   AUC-ROC / F1(高风险) / Precision / Recall / Accuracy
@@ -29,6 +29,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
 import config as cfg
 
 from app.services.predict_service import FEATURE_NAMES, FEATURE_LABELS
+from app.services.data_linkage_service import PROCESS_PROFILE_FEATURE_NAMES
 
 # ─── 特征组定义 ───────────────────────────────────────────────────────
 FEATURE_GROUPS = {
@@ -54,18 +55,18 @@ FEATURE_GROUPS = {
     },
     "C": {
         "name": "Group-C: 全特征（本文方法）",
-        "desc": "来料4维 + 老化10维 + 生产过程10维 = 24维",
-        "features": FEATURE_NAMES,  # 全部24维
+        "desc": "来料/老化/追溯 + 生产过程画像 + 可靠性样机画像 = 全特征（46维）",
+        "features": FEATURE_NAMES,
         "color": "#e74c3c",
     },
     "D": {
         "name": "Group-D: 仅生产过程特征",
-        "desc": "生产过程10维（验证生产特征的独立贡献）",
+        "desc": "生产追溯10维 + 电路板工艺画像10维（验证生产特征的独立贡献）",
         "features": [
             "prod_ccd_retry", "prod_func_retry", "prod_reverify_retry", "prod_total_retry",
             "prod_smt_aoi_defect", "prod_wave_aoi_defect", "prod_repaired", "prod_repair_count",
             "prod_leak_current_max", "prod_quality_risk_score",
-        ],
+        ] + PROCESS_PROFILE_FEATURE_NAMES,
         "color": "#f0a500",
     },
 }
@@ -97,8 +98,8 @@ MODEL_REGISTRY = {
         "is_baseline": False,
     },
     "tabnet": {
-        "name": "TabNet（本文）",
-        "name_en": "TabNet (Ours)",
+        "name": "TabNet（深度基线）",
+        "name_en": "TabNet (Deep baseline)",
         "color": "#e74c3c",
         "is_baseline": False,
     },
@@ -109,32 +110,18 @@ ABLATION_RESULTS_PATH = cfg.BASE_DIR / "data" / "ablation_results.json"
 
 
 def _get_full_feature_matrix(db):
-    """从数据库获取全量特征矩阵（24维），与 predict_service 一致"""
-    from app.models.db_models import QualityChain
-    chains = db.query(QualityChain).all()
-    if not chains:
+    """从数据库获取全量特征矩阵，与 predict_service 一致。"""
+    from app.services.data_linkage_service import (
+        build_quality_feature_snapshots,
+        get_snapshot_feature_matrix,
+    )
+
+    build_quality_feature_snapshots(db, include_synthetic_demo=False)
+    X, y, _ = get_snapshot_feature_matrix(db)
+    if len(X) == 0:
         return None, None
 
-    X_rows, y = [], []
-    for c in chains:
-        row = [
-            c.crystal_ppm or 9.0, c.ct_ratio_err or 0.5,
-            c.clock_accuracy_sd or 0.018, 1.0 if c.factory_fault else 0.0,
-            c.initial_error_max or 0.0, c.final_error_max or 0.0,
-            c.error_degradation_rate or 0.0, c.clock_drift_rate or 0.0,
-            c.clock_daily_error_max if c.clock_daily_error_max is not None else 0.22,
-            c.error_variability_max if c.error_variability_max is not None else 0.006,
-            c.error_consistency_max if c.error_consistency_max is not None else 0.086,
-            c.energy_balance_ratio if c.energy_balance_ratio is not None else 1.0,
-            c.energy_peak_ratio if c.energy_peak_ratio is not None else 0.246,
-            float(c.rs485_total_errors or 0),
-            # 生产特征（当前默认0）
-            0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-        ]
-        X_rows.append(row)
-        y.append(c.quality_label)
-
-    return np.array(X_rows), np.array(y)
+    return X, y
 
 
 def _select_features(X_full: np.ndarray, group_key: str) -> np.ndarray:

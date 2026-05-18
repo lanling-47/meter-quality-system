@@ -3,7 +3,7 @@
 
 策略（人工审核后触发）：
   - 新增标注数据 < AUTO_RETRAIN_THRESHOLD 条 → DQN 在线学习（轻量）
-  - 新增标注数据 ≥ AUTO_RETRAIN_THRESHOLD 条 → 全量重训练 TabNet
+  - 新增标注数据 ≥ AUTO_RETRAIN_THRESHOLD 条 → 全量重训练 MGQ-Former
 
 API 列表：
   POST /retrain/incremental  基于审核标注数据触发增量训练（DQN 或 全量）
@@ -69,7 +69,7 @@ async def retrain_incremental(request: Request, db: Session = Depends(get_db)):
 
     自动选择策略：
       - 数据量 < threshold → DQN 批量学习
-      - 数据量 ≥ threshold → 全量重训练 TabNet
+      - 数据量 ≥ threshold → 全量重训练 MGQ-Former
     """
     from app.models.db_models import QualityLabelReview, QualityChain
     from app.services.predict_service import load_active_model
@@ -130,7 +130,7 @@ async def retrain_incremental(request: Request, db: Session = Depends(get_db)):
             "strategy": "full_retrain",
             "confirmed_count": count,
             "added_to_chain": added_to_chain,
-            "message": f"已将 {added_to_chain} 条确认数据加入训练集，TabNet 全量重训练已在后台启动",
+            "message": f"已将 {added_to_chain} 条确认数据加入训练集，{cfg.RETRAIN_MODEL_TYPE.upper()} 全量重训练已在后台启动",
         })
 
 

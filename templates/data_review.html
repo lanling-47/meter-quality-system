@@ -479,7 +479,7 @@ async function triggerFull() {
   const res = await fetch('/retrain/full', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ model_type: 'tabnet' }),
+    body: JSON.stringify({ model_type: 'mgqformer' }),
   });
   const d = await res.json();
   showBanner(d.message || '全量训练已启动', 'info');

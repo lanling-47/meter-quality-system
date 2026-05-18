@@ -84,13 +84,22 @@ async def setup_page(request: Request, db: Session = Depends(get_db)):
 @router.get("/templates/download/{template_type}")
 async def download_template(template_type: str):
     from app.services.template_service import build_template_workbook
+    from urllib.parse import quote
     workbook, filename = build_template_workbook(template_type)
 
     import io
     buffer = io.BytesIO()
     workbook.save(buffer)
     buffer.seek(0)
-    headers = {"Content-Disposition": f"attachment; filename*=UTF-8''{filename}"}
+    # HTTP headers must be latin-1 encodable in Starlette. Use RFC 5987
+    # filename* encoding so Chinese template filenames download correctly.
+    encoded_filename = quote(filename.encode("utf-8"))
+    headers = {
+        "Content-Disposition": (
+            f"attachment; filename=\"{template_type}_template.xlsx\"; "
+            f"filename*=UTF-8''{encoded_filename}"
+        )
+    }
     return StreamingResponse(
         buffer,
         media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",

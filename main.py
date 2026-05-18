@@ -11,7 +11,7 @@ from starlette.middleware.base import BaseHTTPMiddleware
 
 from database import init_db
 from app.routers import dashboard, data_import, risk_predict, root_cause, degradation, anomaly_detect
-from app.routers import production, ablation, notify, retrain, data_review, factory_fault, system
+from app.routers import production, ablation, notify, retrain, data_review, factory_fault, system, data_management
 
 app = FastAPI(
     title="智能电表全周期质量管控系统",
@@ -44,6 +44,7 @@ app.add_middleware(LoginRequiredMiddleware)
 app.include_router(system.router)
 app.include_router(dashboard.router)
 app.include_router(data_import.router)
+app.include_router(data_management.router)
 app.include_router(risk_predict.router)
 app.include_router(root_cause.router)
 app.include_router(degradation.router)
@@ -61,15 +62,15 @@ async def startup_event():
     """应用启动时初始化数据库 + 启动文件监控服务"""
     import asyncio
     init_db()
-    print("✅ 数据库初始化完成")
+    print("数据库初始化完成")
     # 自动导入数据（如数据库为空）
     try:
         from app.services.etl_service import auto_import_on_startup
         result = auto_import_on_startup()
         if result:
-            print(f"✅ 数据自动导入完成：{result}")
+            print(f"数据自动导入完成：{result}")
     except Exception as e:
-        print(f"⚠️  数据自动导入失败（可稍后手动导入）：{e}")
+        print(f"数据自动导入失败（可稍后手动导入）：{e}")
 
     # 启动文件监控服务（生产线实时采集）
     try:
@@ -78,9 +79,9 @@ async def startup_event():
         watcher = get_watcher()
         watcher.set_db_factory(SessionLocal)
         asyncio.create_task(watcher.start())
-        print("✅ 文件监控服务已启动")
+        print("文件监控服务已启动")
     except Exception as e:
-        print(f"⚠️  文件监控服务启动失败：{e}")
+        print(f"文件监控服务启动失败：{e}")
 
 
 @app.get("/")

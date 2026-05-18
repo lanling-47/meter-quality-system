@@ -64,7 +64,7 @@ def get_power_data(db) -> dict:
     meter_summaries = []
 
     # 提取各维度数据（用于 Z-score 计算）
-    final_errors, daily_errs, variabilities, balance_ratios = [], [], [], []
+    final_errors, daily_errs, variabilities, balance_ratios, max_clocks = [], [], [], [], []
 
     for mn in meter_nos:
         recs = sorted(meter_data[mn], key=lambda x: x.test_hours)
@@ -75,9 +75,12 @@ def get_power_data(db) -> dict:
         daily_errs.append(abs(final.clock_daily_error_sd) if final.clock_daily_error_sd is not None else None)
         variabilities.append(final.error_variability)
         balance_ratios.append(final.energy_balance_ratio)
+        clock_values = [r.clock_offset_s or 0 for r in recs]
+        max_clocks.append(max((abs(v) for v in clock_values), default=0))
 
     # Z-score 异常集合
     zscore_error = _zscore_anomaly(final_errors, meter_nos, 2.0)
+    zscore_clock = _zscore_anomaly(max_clocks, meter_nos, 2.0)
     zscore_daily = _zscore_anomaly(daily_errs, meter_nos, 2.0)
     zscore_var = _zscore_anomaly(variabilities, meter_nos, 2.5)
 
@@ -112,9 +115,14 @@ def get_power_data(db) -> dict:
 
         # ② 时钟异常（静态偏差 + 日漂移）
         clock = final.clock_offset_s or 0
-        if abs(clock) > THRESHOLDS["clock_s"]:
-            anomaly_reasons.append(f"时钟偏差{clock}s超限(>{THRESHOLDS['clock_s']}s)")
+        clock_values = [r.clock_offset_s or 0 for r in recs]
+        max_clock = max((abs(v) for v in clock_values), default=0)
+        if max_clock > THRESHOLDS["clock_s"]:
+            anomaly_reasons.append(f"全周期最大时钟偏差{max_clock:g}s超限(>{THRESHOLDS['clock_s']}s)")
             anomaly_types.append("时钟超差")
+        elif mn in zscore_clock:
+            anomaly_reasons.append(f"全周期最大时钟偏差统计异常({max_clock:g}s)")
+            anomaly_types.append("时钟统计异常")
         daily_err_val = abs(final.clock_daily_error_sd) if final.clock_daily_error_sd is not None else None
         if daily_err_val is not None and daily_err_val > THRESHOLDS["clock_daily_sd"]:
             anomaly_reasons.append(f"日误差{daily_err_val:.3f}s/d偏高(>{THRESHOLDS['clock_daily_sd']}s/d)")
@@ -163,6 +171,7 @@ def get_power_data(db) -> dict:
             "meter_no": mn,
             "final_error": round(err, 4),
             "final_clock": clock,
+            "max_clock": round(max_clock, 4),
             "daily_error": round(daily_err_val, 4) if daily_err_val is not None else None,
             "energy_balance": round(balance, 4) if balance is not None else None,
             "energy_peak_ratio": round(peak_r, 4) if peak_r is not None else None,
@@ -182,6 +191,7 @@ def get_power_data(db) -> dict:
     chart_data = {
         "meter_nos": [ms["meter_no"] for ms in meter_summaries],
         "errors": [ms["final_error"] for ms in meter_summaries],
+        "clocks": [ms["max_clock"] for ms in meter_summaries],
         "daily_errors": [ms["daily_error"] for ms in meter_summaries],
         "balance_ratios": [ms["energy_balance"] for ms in meter_summaries],
         "peak_ratios": [ms["energy_peak_ratio"] for ms in meter_summaries],

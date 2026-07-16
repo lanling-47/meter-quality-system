@@ -1,8 +1,9 @@
 """风险预测路由"""
 import json
+from urllib.parse import quote
 from fastapi import APIRouter, Request, Depends
 from fastapi.templating import Jinja2Templates
-from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.responses import HTMLResponse, JSONResponse, Response
 from sqlalchemy.orm import Session
 
 from database import get_db
@@ -45,6 +46,24 @@ async def predict_single(request: Request, db: Session = Depends(get_db)):
         return JSONResponse(result)
     except Exception as e:
         return JSONResponse({"error": str(e)}, status_code=500)
+
+
+@router.get("/predict/report/docx")
+async def download_analysis_report(db: Session = Depends(get_db)):
+    """Download a formal management report based on the current prediction data."""
+    from app.services.report_service import generate_quality_analysis_report
+
+    content, filename = generate_quality_analysis_report(db)
+    encoded_filename = quote(filename)
+    return Response(
+        content=content,
+        media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        headers={
+            "Content-Disposition": (
+                f"attachment; filename=quality-risk-analysis-report.docx; filename*=UTF-8''{encoded_filename}"
+            )
+        },
+    )
 
 
 @router.post("/predict/batch")

@@ -57,6 +57,9 @@ offline_install/
 # 本地前端/文档构建依赖
 ppt_build/node_modules/
 
+# 企业原始数据，不上传公共仓库
+data/bosch_gbh2_24/raw/
+
 # 公开老化数据与实验大文件（统一存放在 D 盘本项目目录）
 data/public/
 experiments/unified_degradation/checkpoints/

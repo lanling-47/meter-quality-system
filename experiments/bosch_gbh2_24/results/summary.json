@@ -1,0 +1,260 @@
+{
+  "source": {
+    "mes_file": "MES 生产记录.xlsx",
+    "repair_file": "GBH2-24 2026.08 维修记录.xlsx",
+    "raw_files_committed": false,
+    "mes_sha256": "d0ec6fa9a624ee9d5af3efdb80bbdda1c42db4a284d6e03f8be3e386b0b2a82b",
+    "repair_sha256": "421df4583c828c58f76e92fd8dcbaca970f7328105bb5c282b07e49012d2aa9c",
+    "origin": "Bosch industrial data, according to the provider; no independent provenance certification"
+  },
+  "mes": {
+    "rows": 184912,
+    "serials": 10910,
+    "unique_test_ids": 11557,
+    "complete_16_parameter_serials": 10910,
+    "complete_16_parameter_tests": 11557,
+    "invalid_timestamp_rows": 0,
+    "date_min": "2025-08-05T13:58:44.752209",
+    "date_max": "2025-08-29T17:27:53.410209",
+    "usable_parameters": [
+      "WP2RunInFullVolt",
+      "WP2RunInHalfCurrent",
+      "WP2RunInHalfVolt",
+      "WP2RunInFullCurrent",
+      "WP3RunInCurrent",
+      "WP3RunInVolt",
+      "WP5ClutchTorq",
+      "WP6NoloadCurrent",
+      "WP6NoloadVolt",
+      "WP7LeakageCurrent1",
+      "WP7LeakageCurrent2"
+    ],
+    "usable_raw_range_violations": 10461,
+    "diagnostic_only_parameters": [
+      "WP1DummyCurrent10",
+      "WP7Current",
+      "WP7Similarity",
+      "WP7Volt"
+    ],
+    "unit_unverified_proxy_parameters": [
+      "WP4ImpactEnergy"
+    ]
+  },
+  "repair": {
+    "rows": 3101,
+    "unique_serials": 2789,
+    "top_parts": [
+      [
+        "Armature",
+        949
+      ],
+      [
+        "Protective Cap",
+        476
+      ],
+      [
+        "Field",
+        338
+      ],
+      [
+        "Pipe",
+        195
+      ],
+      [
+        "Grease Tube",
+        149
+      ],
+      [
+        "Switch",
+        139
+      ],
+      [
+        "Hammer Piston",
+        103
+      ],
+      [
+        "Toothed Shaft",
+        101
+      ],
+      [
+        "Striker Pin",
+        98
+      ],
+      [
+        "Clamp Handle",
+        69
+      ],
+      [
+        "GBH 240",
+        50
+      ],
+      [
+        "Brush Plate",
+        47
+      ]
+    ],
+    "top_models": [
+      [
+        "GBH 2-24 DRE",
+        2615
+      ],
+      [
+        "GBH 2-24 DFR",
+        322
+      ],
+      [
+        "GBH 2-24 RE",
+        164
+      ]
+    ],
+    "top_actions": [
+      [
+        "Repair",
+        2919
+      ],
+      [
+        "Repair on contract (3 Years)",
+        87
+      ],
+      [
+        "Exchange/New product Sparepart not on st",
+        43
+      ],
+      [
+        "Exchange/New product  after diagnosis",
+        23
+      ],
+      [
+        "Exchange requested by QMM",
+        9
+      ],
+      [
+        "Exchange/New product Sparepart not defin",
+        7
+      ],
+      [
+        "Exchange/New product  Rapid handling",
+        7
+      ],
+      [
+        "Exchange Legal Request",
+        5
+      ]
+    ]
+  },
+  "linkage": {
+    "matched_serials": 65,
+    "mes_serials_without_repair_record": 10845,
+    "repair_serials_without_mes_record": 2724,
+    "repair_to_mes_match_rate": 0.023306,
+    "matched_mes_tools": [
+      [
+        "Rotary Hammer GBH 240",
+        30
+      ],
+      [
+        "Rotary Hammer GBH 2-24 DRE",
+        29
+      ],
+      [
+        "Rotary Hammer GBH 240 F",
+        6
+      ]
+    ],
+    "august_2025_repair_serials": 64,
+    "august_2025_matched_serials": 58,
+    "interpretation": "descriptive linkage; repair coverage and observation windows are not established as complete"
+  },
+  "quality_flags": {
+    "wp1_and_wp7_placeholder_channels": [
+      "WP1DummyCurrent10",
+      "WP7Current",
+      "WP7Similarity",
+      "WP7Volt"
+    ],
+    "raw_range_checks_include_status_and_dictionary_mismatch": true,
+    "serials_exposed_in_outputs": false
+  },
+  "response_reconstruction": {
+    "task": "offline same-cycle WP3 current reconstruction from WP2; not lifetime prediction",
+    "independent_eligible_devices": 10843,
+    "excluded_first_cycle_devices": 67,
+    "split_counts": {
+      "train": 6183,
+      "validation": 2473,
+      "test": 2187
+    },
+    "split_day_ranges": {
+      "train": [
+        "2025-08-05",
+        "2025-08-21"
+      ],
+      "validation": [
+        "2025-08-23",
+        "2025-08-25"
+      ],
+      "test": [
+        "2025-08-26",
+        "2025-08-29"
+      ]
+    },
+    "seed": 20261007,
+    "bootstrap_replicates": 1000,
+    "test_serial_overlap": 0,
+    "target": "WP3RunInCurrent",
+    "response_inputs": [
+      "WP2RunInHalfVolt",
+      "WP2RunInFullVolt",
+      "WP2RunInHalfCurrent",
+      "WP2RunInFullCurrent"
+    ],
+    "selection": {
+      "ridge_type_voltage": {
+        "alpha": 100.0,
+        "validation_mae_A": 0.19687980288050025
+      },
+      "ridge_type_voltage_current": {
+        "alpha": 0.01,
+        "validation_mae_A": 0.054510333228903515
+      }
+    },
+    "metrics": {
+      "WP2_full_current_baseline": {
+        "mae_A": 0.4107407394151029,
+        "rmse_A": 0.44257719772861426
+      },
+      "ridge_type_voltage": {
+        "mae_A": 0.18431831189039544,
+        "rmse_A": 0.20716486368202608
+      },
+      "ridge_type_voltage_current": {
+        "mae_A": 0.059046158458636304,
+        "rmse_A": 0.07948677832237655
+      }
+    },
+    "paired_mae_current_minus_type_voltage_A": -0.12527215343175915,
+    "paired_mae_difference_95ci_A": [
+      -0.1297753652815506,
+      -0.12047529805368927
+    ],
+    "retested_devices": 442,
+    "same_day_retested_devices": 425,
+    "retest_span_median_hours": 0.12305880958333332,
+    "retest_span_max_hours": 61.728604825000005,
+    "adapter_physical_mask_counts": {
+      "WP2RunInHalfVolt": 10910,
+      "WP2RunInHalfCurrent": 10910,
+      "WP2RunInFullVolt": 10910,
+      "WP2RunInFullCurrent": 10910,
+      "WP3RunInVolt": 10910,
+      "WP3RunInCurrent": 10910,
+      "WP5ClutchTorq": 10910,
+      "WP6NoloadVolt": 10910,
+      "WP6NoloadCurrent": 10910,
+      "WP7LeakageCurrent1": 10910,
+      "WP7LeakageCurrent2": 10910
+    },
+    "test_unseen_types": [],
+    "figure_generated": true
+  }
+}

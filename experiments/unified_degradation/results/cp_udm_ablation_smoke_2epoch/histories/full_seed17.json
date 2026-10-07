@@ -1,0 +1,30 @@
+[
+  {
+    "epoch": 1,
+    "validation_mae": 0.24422989959518115,
+    "train_total": -0.1705824390053749,
+    "train_data": -0.450949501991272,
+    "train_monotonicity": 0.0,
+    "train_smoothness": 0.0012872864492237568,
+    "train_domain": 1.0324077308177948,
+    "train_physics": 2.9445117712020874,
+    "train_forecast": 0.08149643503129482,
+    "train_ranking": 0.020135056972503663,
+    "train_endpoint": 0.05003386214375496,
+    "train_alignment": 0.29339579939842225
+  },
+  {
+    "epoch": 2,
+    "validation_mae": 0.2322188345094522,
+    "train_total": -0.4773107349872589,
+    "train_data": -0.7232892215251923,
+    "train_monotonicity": 0.0,
+    "train_smoothness": 0.0019831147510558367,
+    "train_domain": 0.7831592917442322,
+    "train_physics": 2.922132730484009,
+    "train_forecast": 0.0681510141119361,
+    "train_ranking": 0.019491922669112684,
+    "train_endpoint": 0.047216403484344485,
+    "train_alignment": 0.15941648855805396
+  }
+]

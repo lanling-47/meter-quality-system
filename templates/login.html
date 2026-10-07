@@ -31,9 +31,15 @@
       <div class="feature"><i class="bi bi-hdd-network fs-4 text-warning"></i><div><strong>单机部署</strong><br><span>SQLite 本地数据库，浏览器访问 localhost:8090。</span></div></div>
     </section>
     <section class="form-panel">
-      <span class="deploy-badge mb-3"><i class="bi bi-pc-display"></i> Local Deployment</span>
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <span class="deploy-badge"><i class="bi bi-pc-display"></i> Local Deployment</span>
+        <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#loginHelp" aria-expanded="false" aria-controls="loginHelp" title="查看登录帮助"><i class="bi bi-question-circle me-1"></i>帮助</button>
+      </div>
       <h3 class="fw-bold mb-1" style="color:#1a3a5c;">系统登录</h3>
       <p class="text-muted mb-4">请输入阶段一现场部署账号。</p>
+      <div class="collapse mb-3" id="loginHelp">
+        <div class="alert alert-info small mb-0"><strong>登录后：</strong>先看部署向导，再导入数据；日常工作从质量看板开始。默认账号由部署管理员提供，正式现场请修改默认密码。</div>
+      </div>
       {% if error %}<div class="alert alert-danger py-2 small">{{ error }}</div>{% endif %}
       <form method="post" action="/login">
         <div class="mb-3">
@@ -51,5 +57,6 @@
       </div>
     </section>
   </div>
+  <script src="{{ url_for('static', path='js/bootstrap.bundle.min.js') }}"></script>
 </body>
 </html>

@@ -8,6 +8,11 @@ from typing import Optional
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
 import config as cfg
+from app.services.unified_degradation_features import (
+    ResponseSpec,
+    aggregate_degradation_evidence,
+    extract_degradation_features,
+)
 
 
 def get_meter_degradation(meter_no: int, db) -> dict:
@@ -30,6 +35,28 @@ def get_meter_degradation(meter_no: int, db) -> dict:
     # 退化模式判断
     trend_type = _detect_trend_type(error_series)
 
+    error_features = extract_degradation_features(
+        hours,
+        error_series,
+        ResponseSpec(
+            name="basic_error",
+            degradation_direction=1,
+            warning_threshold=cfg.ERROR_THRESHOLD,
+        ),
+    )
+    clock_abs_series = [abs(value) for value in clock_series]
+    clock_features = extract_degradation_features(
+        hours,
+        clock_abs_series,
+        ResponseSpec(
+            name="clock_offset_abs",
+            degradation_direction=1,
+            warning_threshold=cfg.CLOCK_THRESHOLD,
+        ),
+    )
+    unified_features = [error_features, clock_features]
+    unified_evidence = aggregate_degradation_evidence(unified_features)
+
     return {
         "meter_no": meter_no,
         "time_points": time_points,
@@ -39,6 +66,11 @@ def get_meter_degradation(meter_no: int, db) -> dict:
         "trend": trend,
         "clock_trend": clock_trend,
         "trend_type": trend_type,
+        "unified_degradation": {
+            "responses": [item.to_dict() for item in unified_features],
+            "evidence": unified_evidence,
+            "note": "health_risk_index 为统一退化描述指标，不等同于校准后的失效概率",
+        },
         "threshold_error": cfg.ERROR_THRESHOLD,
         "threshold_clock": cfg.CLOCK_THRESHOLD,
         "stats": {
@@ -119,8 +151,22 @@ def get_all_meters_degradation_summary(db) -> list:
         final_err = recs[-1].error_max if recs else None
         final_clock = recs[-1].clock_offset_s if recs else None
         errors = [r.error_max or 0.0 for r in recs]
+        hours = [r.test_hours or 0.0 for r in recs]
+        clocks = [abs(r.clock_offset_s or 0.0) for r in recs]
 
         trend = _detect_trend_type(errors)
+        evidence = aggregate_degradation_evidence([
+            extract_degradation_features(
+                hours,
+                errors,
+                ResponseSpec("basic_error", 1, cfg.ERROR_THRESHOLD),
+            ),
+            extract_degradation_features(
+                hours,
+                clocks,
+                ResponseSpec("clock_offset_abs", 1, cfg.CLOCK_THRESHOLD),
+            ),
+        ])
 
         from app.models.db_models import QualityChain
         chain = db.query(QualityChain).filter_by(meter_no=meter_no).first()
@@ -132,6 +178,7 @@ def get_all_meters_degradation_summary(db) -> list:
             "final_error_max": round(final_err, 4) if final_err else None,
             "final_clock_offset": final_clock,
             "trend_type": trend,
+            "health_risk_index": round(evidence["health_risk_index"], 4),
             "risk_label": risk_label,
             "n_records": len(recs),
         })

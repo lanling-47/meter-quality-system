@@ -1,0 +1,3969 @@
+{
+  "status": "exploratory; single fixed group split",
+  "split_seed": 42,
+  "model": "GatedResidualNet",
+  "neural": [
+    {
+      "seed": 17,
+      "validation_mae": 0.1651700884103775,
+      "best_epoch": 82,
+      "best_train_mae": 0.1941402703523636,
+      "stopped_epoch": 107,
+      "history": [
+        {
+          "epoch": 1,
+          "train_mae": 0.2672022879123688,
+          "validation_mae": 0.25319111347198486
+        },
+        {
+          "epoch": 2,
+          "train_mae": 0.258637011051178,
+          "validation_mae": 0.24304388463497162
+        },
+        {
+          "epoch": 3,
+          "train_mae": 0.2537359893321991,
+          "validation_mae": 0.2357310652732849
+        },
+        {
+          "epoch": 4,
+          "train_mae": 0.25112593173980713,
+          "validation_mae": 0.2302437424659729
+        },
+        {
+          "epoch": 5,
+          "train_mae": 0.24826130270957947,
+          "validation_mae": 0.22564460337162018
+        },
+        {
+          "epoch": 6,
+          "train_mae": 0.24664807319641113,
+          "validation_mae": 0.22279341518878937
+        },
+        {
+          "epoch": 7,
+          "train_mae": 0.24577583372592926,
+          "validation_mae": 0.22080029547214508
+        },
+        {
+          "epoch": 8,
+          "train_mae": 0.24498720467090607,
+          "validation_mae": 0.21873526275157928
+        },
+        {
+          "epoch": 9,
+          "train_mae": 0.24434193968772888,
+          "validation_mae": 0.2170983999967575
+        },
+        {
+          "epoch": 10,
+          "train_mae": 0.24368533492088318,
+          "validation_mae": 0.215914785861969
+        },
+        {
+          "epoch": 11,
+          "train_mae": 0.24313361942768097,
+          "validation_mae": 0.21500568091869354
+        },
+        {
+          "epoch": 12,
+          "train_mae": 0.2425139993429184,
+          "validation_mae": 0.2139424979686737
+        },
+        {
+          "epoch": 13,
+          "train_mae": 0.24202343821525574,
+          "validation_mae": 0.21329186856746674
+        },
+        {
+          "epoch": 14,
+          "train_mae": 0.24153514206409454,
+          "validation_mae": 0.21279488503932953
+        },
+        {
+          "epoch": 15,
+          "train_mae": 0.2410990297794342,
+          "validation_mae": 0.21267859637737274
+        },
+        {
+          "epoch": 16,
+          "train_mae": 0.24052906036376953,
+          "validation_mae": 0.21236172318458557
+        },
+        {
+          "epoch": 17,
+          "train_mae": 0.2400439828634262,
+          "validation_mae": 0.2117495983839035
+        },
+        {
+          "epoch": 18,
+          "train_mae": 0.23933231830596924,
+          "validation_mae": 0.2106645554304123
+        },
+        {
+          "epoch": 19,
+          "train_mae": 0.23865754902362823,
+          "validation_mae": 0.2093576043844223
+        },
+        {
+          "epoch": 20,
+          "train_mae": 0.23784711956977844,
+          "validation_mae": 0.20756125450134277
+        },
+        {
+          "epoch": 21,
+          "train_mae": 0.2372133582830429,
+          "validation_mae": 0.2067447155714035
+        },
+        {
+          "epoch": 22,
+          "train_mae": 0.2367340624332428,
+          "validation_mae": 0.20632770657539368
+        },
+        {
+          "epoch": 23,
+          "train_mae": 0.23653239011764526,
+          "validation_mae": 0.20638027787208557
+        },
+        {
+          "epoch": 24,
+          "train_mae": 0.23601944744586945,
+          "validation_mae": 0.20571424067020416
+        },
+        {
+          "epoch": 25,
+          "train_mae": 0.23576274514198303,
+          "validation_mae": 0.20546355843544006
+        },
+        {
+          "epoch": 26,
+          "train_mae": 0.23520295321941376,
+          "validation_mae": 0.20462970435619354
+        },
+        {
+          "epoch": 27,
+          "train_mae": 0.2344447374343872,
+          "validation_mae": 0.20374695956707
+        },
+        {
+          "epoch": 28,
+          "train_mae": 0.23386579751968384,
+          "validation_mae": 0.20267735421657562
+        },
+        {
+          "epoch": 29,
+          "train_mae": 0.23359045386314392,
+          "validation_mae": 0.20239128172397614
+        },
+        {
+          "epoch": 30,
+          "train_mae": 0.23299795389175415,
+          "validation_mae": 0.2015969157218933
+        },
+        {
+          "epoch": 31,
+          "train_mae": 0.23237740993499756,
+          "validation_mae": 0.20086687803268433
+        },
+        {
+          "epoch": 32,
+          "train_mae": 0.23170027136802673,
+          "validation_mae": 0.2001046985387802
+        },
+        {
+          "epoch": 33,
+          "train_mae": 0.23119165003299713,
+          "validation_mae": 0.19963379204273224
+        },
+        {
+          "epoch": 34,
+          "train_mae": 0.2307034283876419,
+          "validation_mae": 0.1995353251695633
+        },
+        {
+          "epoch": 35,
+          "train_mae": 0.230459064245224,
+          "validation_mae": 0.19893930852413177
+        },
+        {
+          "epoch": 36,
+          "train_mae": 0.22973476350307465,
+          "validation_mae": 0.1982237845659256
+        },
+        {
+          "epoch": 37,
+          "train_mae": 0.22925928235054016,
+          "validation_mae": 0.19741365313529968
+        },
+        {
+          "epoch": 38,
+          "train_mae": 0.22814373672008514,
+          "validation_mae": 0.19650916755199432
+        },
+        {
+          "epoch": 39,
+          "train_mae": 0.22758883237838745,
+          "validation_mae": 0.19507312774658203
+        },
+        {
+          "epoch": 40,
+          "train_mae": 0.22703313827514648,
+          "validation_mae": 0.1941826343536377
+        },
+        {
+          "epoch": 41,
+          "train_mae": 0.2263840138912201,
+          "validation_mae": 0.1939552277326584
+        },
+        {
+          "epoch": 42,
+          "train_mae": 0.226004958152771,
+          "validation_mae": 0.19349375367164612
+        },
+        {
+          "epoch": 43,
+          "train_mae": 0.22615669667720795,
+          "validation_mae": 0.19352960586547852
+        },
+        {
+          "epoch": 44,
+          "train_mae": 0.22507569193840027,
+          "validation_mae": 0.19212624430656433
+        },
+        {
+          "epoch": 45,
+          "train_mae": 0.22316589951515198,
+          "validation_mae": 0.18987937271595
+        },
+        {
+          "epoch": 46,
+          "train_mae": 0.22211094200611115,
+          "validation_mae": 0.18886211514472961
+        },
+        {
+          "epoch": 47,
+          "train_mae": 0.22146129608154297,
+          "validation_mae": 0.18777886033058167
+        },
+        {
+          "epoch": 48,
+          "train_mae": 0.22063148021697998,
+          "validation_mae": 0.18688391149044037
+        },
+        {
+          "epoch": 49,
+          "train_mae": 0.21949201822280884,
+          "validation_mae": 0.18569965660572052
+        },
+        {
+          "epoch": 50,
+          "train_mae": 0.21843980252742767,
+          "validation_mae": 0.18443672358989716
+        },
+        {
+          "epoch": 51,
+          "train_mae": 0.21749432384967804,
+          "validation_mae": 0.18341819941997528
+        },
+        {
+          "epoch": 52,
+          "train_mae": 0.21691878139972687,
+          "validation_mae": 0.18170404434204102
+        },
+        {
+          "epoch": 53,
+          "train_mae": 0.21600466966629028,
+          "validation_mae": 0.18068191409111023
+        },
+        {
+          "epoch": 54,
+          "train_mae": 0.2146906703710556,
+          "validation_mae": 0.18043525516986847
+        },
+        {
+          "epoch": 55,
+          "train_mae": 0.2132962942123413,
+          "validation_mae": 0.17957283556461334
+        },
+        {
+          "epoch": 56,
+          "train_mae": 0.2120349258184433,
+          "validation_mae": 0.17854204773902893
+        },
+        {
+          "epoch": 57,
+          "train_mae": 0.2109779417514801,
+          "validation_mae": 0.17816369235515594
+        },
+        {
+          "epoch": 58,
+          "train_mae": 0.21019349992275238,
+          "validation_mae": 0.17745700478553772
+        },
+        {
+          "epoch": 59,
+          "train_mae": 0.20938459038734436,
+          "validation_mae": 0.17689497768878937
+        },
+        {
+          "epoch": 60,
+          "train_mae": 0.20874738693237305,
+          "validation_mae": 0.17626436054706573
+        },
+        {
+          "epoch": 61,
+          "train_mae": 0.20692482590675354,
+          "validation_mae": 0.17501403391361237
+        },
+        {
+          "epoch": 62,
+          "train_mae": 0.2056523859500885,
+          "validation_mae": 0.17419244349002838
+        },
+        {
+          "epoch": 63,
+          "train_mae": 0.2056799829006195,
+          "validation_mae": 0.17399130761623383
+        },
+        {
+          "epoch": 64,
+          "train_mae": 0.20389766991138458,
+          "validation_mae": 0.17307154834270477
+        },
+        {
+          "epoch": 65,
+          "train_mae": 0.2042437642812729,
+          "validation_mae": 0.1730470508337021
+        },
+        {
+          "epoch": 66,
+          "train_mae": 0.20333027839660645,
+          "validation_mae": 0.1717941015958786
+        },
+        {
+          "epoch": 67,
+          "train_mae": 0.20120292901992798,
+          "validation_mae": 0.17005175352096558
+        },
+        {
+          "epoch": 68,
+          "train_mae": 0.20006117224693298,
+          "validation_mae": 0.16985873878002167
+        },
+        {
+          "epoch": 69,
+          "train_mae": 0.19912204146385193,
+          "validation_mae": 0.16960017383098602
+        },
+        {
+          "epoch": 70,
+          "train_mae": 0.19903987646102905,
+          "validation_mae": 0.16862323880195618
+        },
+        {
+          "epoch": 71,
+          "train_mae": 0.1984107941389084,
+          "validation_mae": 0.16902898252010345
+        },
+        {
+          "epoch": 72,
+          "train_mae": 0.1977384090423584,
+          "validation_mae": 0.16951926052570343
+        },
+        {
+          "epoch": 73,
+          "train_mae": 0.19740517437458038,
+          "validation_mae": 0.16967566311359406
+        },
+        {
+          "epoch": 74,
+          "train_mae": 0.197220578789711,
+          "validation_mae": 0.16858068108558655
+        },
+        {
+          "epoch": 75,
+          "train_mae": 0.1968948394060135,
+          "validation_mae": 0.1680670529603958
+        },
+        {
+          "epoch": 76,
+          "train_mae": 0.1964678019285202,
+          "validation_mae": 0.16762320697307587
+        },
+        {
+          "epoch": 77,
+          "train_mae": 0.1961330622434616,
+          "validation_mae": 0.167313814163208
+        },
+        {
+          "epoch": 78,
+          "train_mae": 0.1956005096435547,
+          "validation_mae": 0.16703484952449799
+        },
+        {
+          "epoch": 79,
+          "train_mae": 0.1951887607574463,
+          "validation_mae": 0.16591358184814453
+        },
+        {
+          "epoch": 80,
+          "train_mae": 0.19541411101818085,
+          "validation_mae": 0.16611042618751526
+        },
+        {
+          "epoch": 81,
+          "train_mae": 0.19447684288024902,
+          "validation_mae": 0.16541995108127594
+        },
+        {
+          "epoch": 82,
+          "train_mae": 0.1941402703523636,
+          "validation_mae": 0.1651700884103775
+        },
+        {
+          "epoch": 83,
+          "train_mae": 0.19372375309467316,
+          "validation_mae": 0.1656804233789444
+        },
+        {
+          "epoch": 84,
+          "train_mae": 0.19369754195213318,
+          "validation_mae": 0.1663723886013031
+        },
+        {
+          "epoch": 85,
+          "train_mae": 0.19352298974990845,
+          "validation_mae": 0.16649462282657623
+        },
+        {
+          "epoch": 86,
+          "train_mae": 0.1926402598619461,
+          "validation_mae": 0.16715256869792938
+        },
+        {
+          "epoch": 87,
+          "train_mae": 0.1921226978302002,
+          "validation_mae": 0.16641314327716827
+        },
+        {
+          "epoch": 88,
+          "train_mae": 0.19178910553455353,
+          "validation_mae": 0.16627193987369537
+        },
+        {
+          "epoch": 89,
+          "train_mae": 0.19148337841033936,
+          "validation_mae": 0.16612234711647034
+        },
+        {
+          "epoch": 90,
+          "train_mae": 0.19165407121181488,
+          "validation_mae": 0.16653314232826233
+        },
+        {
+          "epoch": 91,
+          "train_mae": 0.19113630056381226,
+          "validation_mae": 0.1666390746831894
+        },
+        {
+          "epoch": 92,
+          "train_mae": 0.1906072348356247,
+          "validation_mae": 0.16639330983161926
+        },
+        {
+          "epoch": 93,
+          "train_mae": 0.1901664435863495,
+          "validation_mae": 0.16563864052295685
+        },
+        {
+          "epoch": 94,
+          "train_mae": 0.19112682342529297,
+          "validation_mae": 0.1681371033191681
+        },
+        {
+          "epoch": 95,
+          "train_mae": 0.19018620252609253,
+          "validation_mae": 0.16756293177604675
+        },
+        {
+          "epoch": 96,
+          "train_mae": 0.18974794447422028,
+          "validation_mae": 0.1664334088563919
+        },
+        {
+          "epoch": 97,
+          "train_mae": 0.190316304564476,
+          "validation_mae": 0.1690363883972168
+        },
+        {
+          "epoch": 98,
+          "train_mae": 0.1896480917930603,
+          "validation_mae": 0.16805486381053925
+        },
+        {
+          "epoch": 99,
+          "train_mae": 0.18898575007915497,
+          "validation_mae": 0.16815465688705444
+        },
+        {
+          "epoch": 100,
+          "train_mae": 0.18878932297229767,
+          "validation_mae": 0.16832037270069122
+        },
+        {
+          "epoch": 101,
+          "train_mae": 0.18955741822719574,
+          "validation_mae": 0.17010505497455597
+        },
+        {
+          "epoch": 102,
+          "train_mae": 0.18916215002536774,
+          "validation_mae": 0.1694772094488144
+        },
+        {
+          "epoch": 103,
+          "train_mae": 0.18870969116687775,
+          "validation_mae": 0.16906847059726715
+        },
+        {
+          "epoch": 104,
+          "train_mae": 0.18763749301433563,
+          "validation_mae": 0.167514830827713
+        },
+        {
+          "epoch": 105,
+          "train_mae": 0.18700480461120605,
+          "validation_mae": 0.1664782464504242
+        },
+        {
+          "epoch": 106,
+          "train_mae": 0.18667159974575043,
+          "validation_mae": 0.1663050651550293
+        },
+        {
+          "epoch": 107,
+          "train_mae": 0.18629518151283264,
+          "validation_mae": 0.16579778492450714
+        }
+      ],
+      "test_mae": 0.1960001289844513,
+      "parameter_count": 1639,
+      "predictions": [
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES12.mat::ES12C4::prefix-0028",
+          "group": "ES12.mat::ES12C4",
+          "target": 0.24324324324324326,
+          "prediction": 0.5423332452774048
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES12.mat::ES12C4::prefix-0045",
+          "group": "ES12.mat::ES12C4",
+          "target": 0.3963963963963964,
+          "prediction": 0.5214340090751648
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES12.mat::ES12C4::prefix-0062",
+          "group": "ES12.mat::ES12C4",
+          "target": 0.5495495495495496,
+          "prediction": 0.5592644810676575
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES12.mat::ES12C4::prefix-0078",
+          "group": "ES12.mat::ES12C4",
+          "target": 0.6936936936936937,
+          "prediction": 0.5885310173034668
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES12.mat::ES12C4::prefix-0095",
+          "group": "ES12.mat::ES12C4",
+          "target": 0.8468468468468469,
+          "prediction": 0.5515756607055664
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES12.mat::ES12C4::prefix-0112",
+          "group": "ES12.mat::ES12C4",
+          "target": 1.0,
+          "prediction": 0.8354992270469666
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C1::prefix-0032",
+          "group": "ES14.mat::ES14C1",
+          "target": 0.2440944881889764,
+          "prediction": 0.35537075996398926
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C1::prefix-0051",
+          "group": "ES14.mat::ES14C1",
+          "target": 0.3937007874015748,
+          "prediction": 0.3442951738834381
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C1::prefix-0070",
+          "group": "ES14.mat::ES14C1",
+          "target": 0.5433070866141733,
+          "prediction": 0.6545225381851196
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C1::prefix-0090",
+          "group": "ES14.mat::ES14C1",
+          "target": 0.7007874015748031,
+          "prediction": 0.6431553959846497
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C1::prefix-0109",
+          "group": "ES14.mat::ES14C1",
+          "target": 0.8503937007874016,
+          "prediction": 0.7169998288154602
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C1::prefix-0128",
+          "group": "ES14.mat::ES14C1",
+          "target": 1.0,
+          "prediction": 0.863980770111084
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C2::prefix-0032",
+          "group": "ES14.mat::ES14C2",
+          "target": 0.2440944881889764,
+          "prediction": 0.34403008222579956
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C2::prefix-0051",
+          "group": "ES14.mat::ES14C2",
+          "target": 0.3937007874015748,
+          "prediction": 0.3036361038684845
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C2::prefix-0070",
+          "group": "ES14.mat::ES14C2",
+          "target": 0.5433070866141733,
+          "prediction": 0.6782014966011047
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C2::prefix-0090",
+          "group": "ES14.mat::ES14C2",
+          "target": 0.7007874015748031,
+          "prediction": 0.5929802060127258
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C2::prefix-0109",
+          "group": "ES14.mat::ES14C2",
+          "target": 0.8503937007874016,
+          "prediction": 0.7022385001182556
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C2::prefix-0128",
+          "group": "ES14.mat::ES14C2",
+          "target": 1.0,
+          "prediction": 0.8968309760093689
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C3::prefix-0032",
+          "group": "ES14.mat::ES14C3",
+          "target": 0.2440944881889764,
+          "prediction": 0.32229068875312805
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C3::prefix-0051",
+          "group": "ES14.mat::ES14C3",
+          "target": 0.3937007874015748,
+          "prediction": 0.2909860610961914
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C3::prefix-0070",
+          "group": "ES14.mat::ES14C3",
+          "target": 0.5433070866141733,
+          "prediction": 0.6688717007637024
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C3::prefix-0090",
+          "group": "ES14.mat::ES14C3",
+          "target": 0.7007874015748031,
+          "prediction": 0.6187983155250549
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C3::prefix-0109",
+          "group": "ES14.mat::ES14C3",
+          "target": 0.8503937007874016,
+          "prediction": 0.7548861503601074
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C3::prefix-0128",
+          "group": "ES14.mat::ES14C3",
+          "target": 1.0,
+          "prediction": 0.8899660110473633
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C4::prefix-0032",
+          "group": "ES14.mat::ES14C4",
+          "target": 0.2440944881889764,
+          "prediction": 0.3878794312477112
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C4::prefix-0051",
+          "group": "ES14.mat::ES14C4",
+          "target": 0.3937007874015748,
+          "prediction": 0.3293200433254242
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C4::prefix-0070",
+          "group": "ES14.mat::ES14C4",
+          "target": 0.5433070866141733,
+          "prediction": 0.5794807076454163
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C4::prefix-0090",
+          "group": "ES14.mat::ES14C4",
+          "target": 0.7007874015748031,
+          "prediction": 0.5415654182434082
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C4::prefix-0109",
+          "group": "ES14.mat::ES14C4",
+          "target": 0.8503937007874016,
+          "prediction": 0.6730428338050842
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C4::prefix-0128",
+          "group": "ES14.mat::ES14C4",
+          "target": 1.0,
+          "prediction": 0.9241324663162231
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C8::prefix-0031",
+          "group": "ES14.mat::ES14C8",
+          "target": 0.24390243902439024,
+          "prediction": 0.638102114200592
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C8::prefix-0050",
+          "group": "ES14.mat::ES14C8",
+          "target": 0.3983739837398374,
+          "prediction": 0.6882691383361816
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C8::prefix-0068",
+          "group": "ES14.mat::ES14C8",
+          "target": 0.5447154471544715,
+          "prediction": 0.5308607220649719
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C8::prefix-0087",
+          "group": "ES14.mat::ES14C8",
+          "target": 0.6991869918699187,
+          "prediction": 0.8829569816589355
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C8::prefix-0105",
+          "group": "ES14.mat::ES14C8",
+          "target": 0.8455284552845529,
+          "prediction": 0.7633212804794312
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C8::prefix-0124",
+          "group": "ES14.mat::ES14C8",
+          "target": 1.0,
+          "prediction": 0.868533194065094
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0024",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+          "target": 0.2406673015390091,
+          "prediction": 0.12940409779548645
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0038",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+          "target": 0.3886323185616189,
+          "prediction": 0.3334753215312958
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0053",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+          "target": 0.5467215484924876,
+          "prediction": 0.528092086315155
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0067",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+          "target": 0.6947017204861377,
+          "prediction": 0.7055807709693909
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0082",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+          "target": 0.8534209974609458,
+          "prediction": 0.7653437852859497
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0096",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+          "target": 1.0,
+          "prediction": 0.9416406750679016
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0024",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+          "target": 0.24087652142248164,
+          "prediction": 0.7720099687576294
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0038",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+          "target": 0.388551443174556,
+          "prediction": 0.7228147387504578
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0053",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+          "target": 0.5460381010003206,
+          "prediction": 0.9360360503196716
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0067",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+          "target": 0.6934404154493027,
+          "prediction": 0.8424614667892456
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0082",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+          "target": 0.8518493862792624,
+          "prediction": 0.9432117342948914
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0096",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+          "target": 1.0,
+          "prediction": 0.9981489181518555
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_14::prefix-0024",
+          "group": "Test_14",
+          "target": 0.45380269990052813,
+          "prediction": 0.6827034950256348
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_14::prefix-0038",
+          "group": "Test_14",
+          "target": 0.48939222112348896,
+          "prediction": 0.7653812170028687
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_14::prefix-0053",
+          "group": "Test_14",
+          "target": 0.607093359210136,
+          "prediction": 0.7936007976531982
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_14::prefix-0067",
+          "group": "Test_14",
+          "target": 0.6427050935535923,
+          "prediction": 0.8104161620140076
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_14::prefix-0082",
+          "group": "Test_14",
+          "target": 0.6810166763207536,
+          "prediction": 0.8449627757072449
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_14::prefix-0096",
+          "group": "Test_14",
+          "target": 1.0,
+          "prediction": 0.8714853525161743
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_15::prefix-0024",
+          "group": "Test_15",
+          "target": 0.2553296056646679,
+          "prediction": 0.38482627272605896
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_15::prefix-0038",
+          "group": "Test_15",
+          "target": 0.40660617329146287,
+          "prediction": 0.4168369174003601
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_15::prefix-0053",
+          "group": "Test_15",
+          "target": 0.5662660154146211,
+          "prediction": 0.4397258460521698
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_15::prefix-0067",
+          "group": "Test_15",
+          "target": 0.7127845508398175,
+          "prediction": 0.46171835064888
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_15::prefix-0082",
+          "group": "Test_15",
+          "target": 0.8647090646150815,
+          "prediction": 0.4504259526729584
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_15::prefix-0096",
+          "group": "Test_15",
+          "target": 1.0,
+          "prediction": 0.46601906418800354
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_17::prefix-0024",
+          "group": "Test_17",
+          "target": 0.24014296215898728,
+          "prediction": 0.4570613503456116
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_17::prefix-0038",
+          "group": "Test_17",
+          "target": 0.38738114131661827,
+          "prediction": 0.4763004779815674
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_17::prefix-0053",
+          "group": "Test_17",
+          "target": 0.5455231469546927,
+          "prediction": 0.49060913920402527
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_17::prefix-0067",
+          "group": "Test_17",
+          "target": 0.6942297433926868,
+          "prediction": 0.48840489983558655
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_17::prefix-0082",
+          "group": "Test_17",
+          "target": 0.8523349061700145,
+          "prediction": 0.48827338218688965
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_17::prefix-0096",
+          "group": "Test_17",
+          "target": 1.0,
+          "prediction": 0.5514373183250427
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_25::prefix-0024",
+          "group": "Test_25",
+          "target": 0.12174529621862554,
+          "prediction": 0.5247136354446411
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_25::prefix-0038",
+          "group": "Test_25",
+          "target": 0.4015336652482285,
+          "prediction": 0.5598909258842468
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_25::prefix-0053",
+          "group": "Test_25",
+          "target": 0.47939160085082744,
+          "prediction": 0.5059496760368347
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_25::prefix-0067",
+          "group": "Test_25",
+          "target": 0.549485682351667,
+          "prediction": 0.5697051286697388
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_25::prefix-0082",
+          "group": "Test_25",
+          "target": 0.9451150675998303,
+          "prediction": 0.883339524269104
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_25::prefix-0096",
+          "group": "Test_25",
+          "target": 1.0,
+          "prediction": 0.5623182654380798
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_27::prefix-0024",
+          "group": "Test_27",
+          "target": 0.8991729298412504,
+          "prediction": 0.6445856690406799
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_27::prefix-0038",
+          "group": "Test_27",
+          "target": 0.9132531133125352,
+          "prediction": 0.6300687193870544
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_27::prefix-0053",
+          "group": "Test_27",
+          "target": 0.9283513760374877,
+          "prediction": 0.6083801984786987
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_27::prefix-0067",
+          "group": "Test_27",
+          "target": 0.9708088378835497,
+          "prediction": 0.664599597454071
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_27::prefix-0082",
+          "group": "Test_27",
+          "target": 0.985903089323849,
+          "prediction": 0.6704949140548706
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_27::prefix-0096",
+          "group": "Test_27",
+          "target": 1.0,
+          "prediction": 0.6672499775886536
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_33::prefix-0024",
+          "group": "Test_33",
+          "target": 0.24110476867853375,
+          "prediction": 0.6304847002029419
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_33::prefix-0038",
+          "group": "Test_33",
+          "target": 0.3876919075185423,
+          "prediction": 0.6558658480644226
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_33::prefix-0053",
+          "group": "Test_33",
+          "target": 0.5448205936305287,
+          "prediction": 0.6868606805801392
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_33::prefix-0067",
+          "group": "Test_33",
+          "target": 0.6925435370217036,
+          "prediction": 0.7170298099517822
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_33::prefix-0082",
+          "group": "Test_33",
+          "target": 0.8513329192246386,
+          "prediction": 0.8058773875236511
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_33::prefix-0096",
+          "group": "Test_33",
+          "target": 1.0,
+          "prediction": 0.7094027400016785
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_36::prefix-0024",
+          "group": "Test_36",
+          "target": 0.24684817412811833,
+          "prediction": 0.4825488030910492
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_36::prefix-0038",
+          "group": "Test_36",
+          "target": 0.3970980488709745,
+          "prediction": 0.5555076599121094
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_36::prefix-0053",
+          "group": "Test_36",
+          "target": 0.5577948911681063,
+          "prediction": 0.521091878414154
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_36::prefix-0067",
+          "group": "Test_36",
+          "target": 0.707176828545695,
+          "prediction": 0.5417861938476562
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_36::prefix-0082",
+          "group": "Test_36",
+          "target": 0.8652274231479754,
+          "prediction": 0.5259457230567932
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_36::prefix-0096",
+          "group": "Test_36",
+          "target": 1.0,
+          "prediction": 0.7909486889839172
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_4::prefix-0024",
+          "group": "Test_4",
+          "target": 0.0018710317819172096,
+          "prediction": 0.3391586244106293
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_4::prefix-0038",
+          "group": "Test_4",
+          "target": 0.0029016767409094303,
+          "prediction": 0.3542620837688446
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_4::prefix-0053",
+          "group": "Test_4",
+          "target": 0.0040045705389227205,
+          "prediction": 0.8095991611480713
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_4::prefix-0067",
+          "group": "Test_4",
+          "target": 0.005035219168673755,
+          "prediction": 0.5053991675376892
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_4::prefix-0082",
+          "group": "Test_4",
+          "target": 0.0061381184542860815,
+          "prediction": 0.5064491629600525
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_4::prefix-0096",
+          "group": "Test_4",
+          "target": 1.0,
+          "prediction": 0.9286549687385559
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_7::prefix-0024",
+          "group": "Test_7",
+          "target": 0.27080217772170107,
+          "prediction": 0.3976142108440399
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_7::prefix-0038",
+          "group": "Test_7",
+          "target": 0.42993195387311756,
+          "prediction": 0.39700618386268616
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_7::prefix-0053",
+          "group": "Test_7",
+          "target": 0.5911490652438853,
+          "prediction": 0.38162246346473694
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_7::prefix-0067",
+          "group": "Test_7",
+          "target": 0.7316164941382937,
+          "prediction": 0.45488089323043823
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_7::prefix-0082",
+          "group": "Test_7",
+          "target": 0.8659675482918864,
+          "prediction": 0.42337095737457275
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_7::prefix-0096",
+          "group": "Test_7",
+          "target": 1.0,
+          "prediction": 0.8922613859176636
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_9::prefix-0024",
+          "group": "Test_9",
+          "target": 0.39005275977775244,
+          "prediction": 0.8256553411483765
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_9::prefix-0038",
+          "group": "Test_9",
+          "target": 0.427054827065675,
+          "prediction": 0.8485007882118225
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_9::prefix-0053",
+          "group": "Test_9",
+          "target": 0.516159622251805,
+          "prediction": 0.9534720778465271
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_9::prefix-0067",
+          "group": "Test_9",
+          "target": 0.5532607345363267,
+          "prediction": 0.9580492973327637
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_9::prefix-0082",
+          "group": "Test_9",
+          "target": 0.9628653248182096,
+          "prediction": 0.9528508186340332
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_9::prefix-0096",
+          "group": "Test_9",
+          "target": 1.0,
+          "prediction": 0.9923750758171082
+        }
+      ]
+    },
+    {
+      "seed": 42,
+      "validation_mae": 0.1704407036304474,
+      "best_epoch": 87,
+      "best_train_mae": 0.19099831581115723,
+      "stopped_epoch": 112,
+      "history": [
+        {
+          "epoch": 1,
+          "train_mae": 0.26013240218162537,
+          "validation_mae": 0.24046866595745087
+        },
+        {
+          "epoch": 2,
+          "train_mae": 0.2522179186344147,
+          "validation_mae": 0.23174461722373962
+        },
+        {
+          "epoch": 3,
+          "train_mae": 0.24847841262817383,
+          "validation_mae": 0.22669313848018646
+        },
+        {
+          "epoch": 4,
+          "train_mae": 0.24589601159095764,
+          "validation_mae": 0.22291287779808044
+        },
+        {
+          "epoch": 5,
+          "train_mae": 0.2439097911119461,
+          "validation_mae": 0.21966105699539185
+        },
+        {
+          "epoch": 6,
+          "train_mae": 0.2424343377351761,
+          "validation_mae": 0.21722334623336792
+        },
+        {
+          "epoch": 7,
+          "train_mae": 0.24104832112789154,
+          "validation_mae": 0.21499629318714142
+        },
+        {
+          "epoch": 8,
+          "train_mae": 0.24027523398399353,
+          "validation_mae": 0.21425332129001617
+        },
+        {
+          "epoch": 9,
+          "train_mae": 0.2396560162305832,
+          "validation_mae": 0.2127787321805954
+        },
+        {
+          "epoch": 10,
+          "train_mae": 0.2390850931406021,
+          "validation_mae": 0.21165814995765686
+        },
+        {
+          "epoch": 11,
+          "train_mae": 0.23883546888828278,
+          "validation_mae": 0.21208375692367554
+        },
+        {
+          "epoch": 12,
+          "train_mae": 0.2383110076189041,
+          "validation_mae": 0.21108603477478027
+        },
+        {
+          "epoch": 13,
+          "train_mae": 0.23785202205181122,
+          "validation_mae": 0.21015368402004242
+        },
+        {
+          "epoch": 14,
+          "train_mae": 0.2376846820116043,
+          "validation_mae": 0.2098212093114853
+        },
+        {
+          "epoch": 15,
+          "train_mae": 0.2374110370874405,
+          "validation_mae": 0.20915773510932922
+        },
+        {
+          "epoch": 16,
+          "train_mae": 0.2366134375333786,
+          "validation_mae": 0.20797158777713776
+        },
+        {
+          "epoch": 17,
+          "train_mae": 0.2363443225622177,
+          "validation_mae": 0.2065487653017044
+        },
+        {
+          "epoch": 18,
+          "train_mae": 0.23606432974338531,
+          "validation_mae": 0.20559357106685638
+        },
+        {
+          "epoch": 19,
+          "train_mae": 0.23556935787200928,
+          "validation_mae": 0.20528049767017365
+        },
+        {
+          "epoch": 20,
+          "train_mae": 0.2351481020450592,
+          "validation_mae": 0.20524896681308746
+        },
+        {
+          "epoch": 21,
+          "train_mae": 0.23469935357570648,
+          "validation_mae": 0.20504137873649597
+        },
+        {
+          "epoch": 22,
+          "train_mae": 0.23442517220973969,
+          "validation_mae": 0.20487162470817566
+        },
+        {
+          "epoch": 23,
+          "train_mae": 0.23415111005306244,
+          "validation_mae": 0.20483197271823883
+        },
+        {
+          "epoch": 24,
+          "train_mae": 0.23389902710914612,
+          "validation_mae": 0.20462565124034882
+        },
+        {
+          "epoch": 25,
+          "train_mae": 0.23360656201839447,
+          "validation_mae": 0.20413899421691895
+        },
+        {
+          "epoch": 26,
+          "train_mae": 0.23314085602760315,
+          "validation_mae": 0.20357708632946014
+        },
+        {
+          "epoch": 27,
+          "train_mae": 0.23244281113147736,
+          "validation_mae": 0.20266474783420563
+        },
+        {
+          "epoch": 28,
+          "train_mae": 0.2323635220527649,
+          "validation_mae": 0.2019195854663849
+        },
+        {
+          "epoch": 29,
+          "train_mae": 0.2317853718996048,
+          "validation_mae": 0.20141632854938507
+        },
+        {
+          "epoch": 30,
+          "train_mae": 0.23126232624053955,
+          "validation_mae": 0.20094461739063263
+        },
+        {
+          "epoch": 31,
+          "train_mae": 0.23091302812099457,
+          "validation_mae": 0.20083743333816528
+        },
+        {
+          "epoch": 32,
+          "train_mae": 0.2305709719657898,
+          "validation_mae": 0.20082801580429077
+        },
+        {
+          "epoch": 33,
+          "train_mae": 0.2300601601600647,
+          "validation_mae": 0.2003527283668518
+        },
+        {
+          "epoch": 34,
+          "train_mae": 0.2297549992799759,
+          "validation_mae": 0.199875608086586
+        },
+        {
+          "epoch": 35,
+          "train_mae": 0.22932298481464386,
+          "validation_mae": 0.19962963461875916
+        },
+        {
+          "epoch": 36,
+          "train_mae": 0.22877392172813416,
+          "validation_mae": 0.19887647032737732
+        },
+        {
+          "epoch": 37,
+          "train_mae": 0.22807885706424713,
+          "validation_mae": 0.19826261699199677
+        },
+        {
+          "epoch": 38,
+          "train_mae": 0.22731585800647736,
+          "validation_mae": 0.19740594923496246
+        },
+        {
+          "epoch": 39,
+          "train_mae": 0.22665934264659882,
+          "validation_mae": 0.19666199386119843
+        },
+        {
+          "epoch": 40,
+          "train_mae": 0.22592520713806152,
+          "validation_mae": 0.19592243432998657
+        },
+        {
+          "epoch": 41,
+          "train_mae": 0.22557048499584198,
+          "validation_mae": 0.19513216614723206
+        },
+        {
+          "epoch": 42,
+          "train_mae": 0.22479285299777985,
+          "validation_mae": 0.19433383643627167
+        },
+        {
+          "epoch": 43,
+          "train_mae": 0.22399218380451202,
+          "validation_mae": 0.19355212152004242
+        },
+        {
+          "epoch": 44,
+          "train_mae": 0.2233603149652481,
+          "validation_mae": 0.1929693967103958
+        },
+        {
+          "epoch": 45,
+          "train_mae": 0.22260332107543945,
+          "validation_mae": 0.19268395006656647
+        },
+        {
+          "epoch": 46,
+          "train_mae": 0.22168920934200287,
+          "validation_mae": 0.19213028252124786
+        },
+        {
+          "epoch": 47,
+          "train_mae": 0.22057512402534485,
+          "validation_mae": 0.1911800354719162
+        },
+        {
+          "epoch": 48,
+          "train_mae": 0.2197784036397934,
+          "validation_mae": 0.19028057157993317
+        },
+        {
+          "epoch": 49,
+          "train_mae": 0.2191125601530075,
+          "validation_mae": 0.18978160619735718
+        },
+        {
+          "epoch": 50,
+          "train_mae": 0.2181105613708496,
+          "validation_mae": 0.1892765313386917
+        },
+        {
+          "epoch": 51,
+          "train_mae": 0.21662868559360504,
+          "validation_mae": 0.18851429224014282
+        },
+        {
+          "epoch": 52,
+          "train_mae": 0.21515046060085297,
+          "validation_mae": 0.18737731873989105
+        },
+        {
+          "epoch": 53,
+          "train_mae": 0.21371105313301086,
+          "validation_mae": 0.18611763417720795
+        },
+        {
+          "epoch": 54,
+          "train_mae": 0.2120840847492218,
+          "validation_mae": 0.18431644141674042
+        },
+        {
+          "epoch": 55,
+          "train_mae": 0.21086059510707855,
+          "validation_mae": 0.18316908180713654
+        },
+        {
+          "epoch": 56,
+          "train_mae": 0.21143625676631927,
+          "validation_mae": 0.1829673796892166
+        },
+        {
+          "epoch": 57,
+          "train_mae": 0.20869691669940948,
+          "validation_mae": 0.18170824646949768
+        },
+        {
+          "epoch": 58,
+          "train_mae": 0.20709457993507385,
+          "validation_mae": 0.18181928992271423
+        },
+        {
+          "epoch": 59,
+          "train_mae": 0.2061251699924469,
+          "validation_mae": 0.18165750801563263
+        },
+        {
+          "epoch": 60,
+          "train_mae": 0.20510026812553406,
+          "validation_mae": 0.18074186146259308
+        },
+        {
+          "epoch": 61,
+          "train_mae": 0.20418718457221985,
+          "validation_mae": 0.17955069243907928
+        },
+        {
+          "epoch": 62,
+          "train_mae": 0.20350238680839539,
+          "validation_mae": 0.17875036597251892
+        },
+        {
+          "epoch": 63,
+          "train_mae": 0.20303234457969666,
+          "validation_mae": 0.17869475483894348
+        },
+        {
+          "epoch": 64,
+          "train_mae": 0.20353145897388458,
+          "validation_mae": 0.17998631298542023
+        },
+        {
+          "epoch": 65,
+          "train_mae": 0.20171646773815155,
+          "validation_mae": 0.17840777337551117
+        },
+        {
+          "epoch": 66,
+          "train_mae": 0.2012024223804474,
+          "validation_mae": 0.17728076875209808
+        },
+        {
+          "epoch": 67,
+          "train_mae": 0.20052088797092438,
+          "validation_mae": 0.1761617511510849
+        },
+        {
+          "epoch": 68,
+          "train_mae": 0.19943925738334656,
+          "validation_mae": 0.1752912998199463
+        },
+        {
+          "epoch": 69,
+          "train_mae": 0.19877290725708008,
+          "validation_mae": 0.17452624440193176
+        },
+        {
+          "epoch": 70,
+          "train_mae": 0.19998566806316376,
+          "validation_mae": 0.1731346696615219
+        },
+        {
+          "epoch": 71,
+          "train_mae": 0.19976098835468292,
+          "validation_mae": 0.17546303570270538
+        },
+        {
+          "epoch": 72,
+          "train_mae": 0.19801126420497894,
+          "validation_mae": 0.17570693790912628
+        },
+        {
+          "epoch": 73,
+          "train_mae": 0.1966090053319931,
+          "validation_mae": 0.17403587698936462
+        },
+        {
+          "epoch": 74,
+          "train_mae": 0.19626669585704803,
+          "validation_mae": 0.17391259968280792
+        },
+        {
+          "epoch": 75,
+          "train_mae": 0.19554908573627472,
+          "validation_mae": 0.17444562911987305
+        },
+        {
+          "epoch": 76,
+          "train_mae": 0.19494424760341644,
+          "validation_mae": 0.17474991083145142
+        },
+        {
+          "epoch": 77,
+          "train_mae": 0.19428160786628723,
+          "validation_mae": 0.1741030365228653
+        },
+        {
+          "epoch": 78,
+          "train_mae": 0.19444717466831207,
+          "validation_mae": 0.17523488402366638
+        },
+        {
+          "epoch": 79,
+          "train_mae": 0.1942121982574463,
+          "validation_mae": 0.17562048137187958
+        },
+        {
+          "epoch": 80,
+          "train_mae": 0.1933286339044571,
+          "validation_mae": 0.17403894662857056
+        },
+        {
+          "epoch": 81,
+          "train_mae": 0.1930510699748993,
+          "validation_mae": 0.17341452836990356
+        },
+        {
+          "epoch": 82,
+          "train_mae": 0.19439664483070374,
+          "validation_mae": 0.17428888380527496
+        },
+        {
+          "epoch": 83,
+          "train_mae": 0.19278806447982788,
+          "validation_mae": 0.1734134405851364
+        },
+        {
+          "epoch": 84,
+          "train_mae": 0.19248734414577484,
+          "validation_mae": 0.17307670414447784
+        },
+        {
+          "epoch": 85,
+          "train_mae": 0.19212506711483002,
+          "validation_mae": 0.1716073900461197
+        },
+        {
+          "epoch": 86,
+          "train_mae": 0.1909465789794922,
+          "validation_mae": 0.17163261771202087
+        },
+        {
+          "epoch": 87,
+          "train_mae": 0.19099831581115723,
+          "validation_mae": 0.1704407036304474
+        },
+        {
+          "epoch": 88,
+          "train_mae": 0.18973568081855774,
+          "validation_mae": 0.17223860323429108
+        },
+        {
+          "epoch": 89,
+          "train_mae": 0.1898830384016037,
+          "validation_mae": 0.1724308282136917
+        },
+        {
+          "epoch": 90,
+          "train_mae": 0.18969468772411346,
+          "validation_mae": 0.17178568243980408
+        },
+        {
+          "epoch": 91,
+          "train_mae": 0.1892259567975998,
+          "validation_mae": 0.17161925137043
+        },
+        {
+          "epoch": 92,
+          "train_mae": 0.18810878694057465,
+          "validation_mae": 0.17200326919555664
+        },
+        {
+          "epoch": 93,
+          "train_mae": 0.18802478909492493,
+          "validation_mae": 0.172501340508461
+        },
+        {
+          "epoch": 94,
+          "train_mae": 0.1873190999031067,
+          "validation_mae": 0.17190209031105042
+        },
+        {
+          "epoch": 95,
+          "train_mae": 0.18727749586105347,
+          "validation_mae": 0.1717343032360077
+        },
+        {
+          "epoch": 96,
+          "train_mae": 0.18676389753818512,
+          "validation_mae": 0.17324763536453247
+        },
+        {
+          "epoch": 97,
+          "train_mae": 0.18816937506198883,
+          "validation_mae": 0.17844493687152863
+        },
+        {
+          "epoch": 98,
+          "train_mae": 0.1873021125793457,
+          "validation_mae": 0.1780756115913391
+        },
+        {
+          "epoch": 99,
+          "train_mae": 0.18564841151237488,
+          "validation_mae": 0.17475993931293488
+        },
+        {
+          "epoch": 100,
+          "train_mae": 0.18563556671142578,
+          "validation_mae": 0.17384642362594604
+        },
+        {
+          "epoch": 101,
+          "train_mae": 0.1851893961429596,
+          "validation_mae": 0.17311793565750122
+        },
+        {
+          "epoch": 102,
+          "train_mae": 0.18580955266952515,
+          "validation_mae": 0.17249111831188202
+        },
+        {
+          "epoch": 103,
+          "train_mae": 0.18522028625011444,
+          "validation_mae": 0.17244799435138702
+        },
+        {
+          "epoch": 104,
+          "train_mae": 0.18430592119693756,
+          "validation_mae": 0.17322853207588196
+        },
+        {
+          "epoch": 105,
+          "train_mae": 0.18392397463321686,
+          "validation_mae": 0.17321760952472687
+        },
+        {
+          "epoch": 106,
+          "train_mae": 0.18303851783275604,
+          "validation_mae": 0.17427942156791687
+        },
+        {
+          "epoch": 107,
+          "train_mae": 0.18355393409729004,
+          "validation_mae": 0.17407043278217316
+        },
+        {
+          "epoch": 108,
+          "train_mae": 0.18330742418766022,
+          "validation_mae": 0.17254939675331116
+        },
+        {
+          "epoch": 109,
+          "train_mae": 0.18207313120365143,
+          "validation_mae": 0.17228852212429047
+        },
+        {
+          "epoch": 110,
+          "train_mae": 0.18201802670955658,
+          "validation_mae": 0.17231085896492004
+        },
+        {
+          "epoch": 111,
+          "train_mae": 0.18106047809123993,
+          "validation_mae": 0.1732507050037384
+        },
+        {
+          "epoch": 112,
+          "train_mae": 0.1808934062719345,
+          "validation_mae": 0.175066739320755
+        }
+      ],
+      "test_mae": 0.18925173580646515,
+      "parameter_count": 1639,
+      "predictions": [
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES12.mat::ES12C4::prefix-0028",
+          "group": "ES12.mat::ES12C4",
+          "target": 0.24324324324324326,
+          "prediction": 0.5477871298789978
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES12.mat::ES12C4::prefix-0045",
+          "group": "ES12.mat::ES12C4",
+          "target": 0.3963963963963964,
+          "prediction": 0.5100016593933105
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES12.mat::ES12C4::prefix-0062",
+          "group": "ES12.mat::ES12C4",
+          "target": 0.5495495495495496,
+          "prediction": 0.5656629800796509
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES12.mat::ES12C4::prefix-0078",
+          "group": "ES12.mat::ES12C4",
+          "target": 0.6936936936936937,
+          "prediction": 0.5891751646995544
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES12.mat::ES12C4::prefix-0095",
+          "group": "ES12.mat::ES12C4",
+          "target": 0.8468468468468469,
+          "prediction": 0.5477732419967651
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES12.mat::ES12C4::prefix-0112",
+          "group": "ES12.mat::ES12C4",
+          "target": 1.0,
+          "prediction": 0.7940570116043091
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C1::prefix-0032",
+          "group": "ES14.mat::ES14C1",
+          "target": 0.2440944881889764,
+          "prediction": 0.30932754278182983
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C1::prefix-0051",
+          "group": "ES14.mat::ES14C1",
+          "target": 0.3937007874015748,
+          "prediction": 0.30692583322525024
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C1::prefix-0070",
+          "group": "ES14.mat::ES14C1",
+          "target": 0.5433070866141733,
+          "prediction": 0.6608946919441223
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C1::prefix-0090",
+          "group": "ES14.mat::ES14C1",
+          "target": 0.7007874015748031,
+          "prediction": 0.6577581763267517
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C1::prefix-0109",
+          "group": "ES14.mat::ES14C1",
+          "target": 0.8503937007874016,
+          "prediction": 0.718555748462677
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C1::prefix-0128",
+          "group": "ES14.mat::ES14C1",
+          "target": 1.0,
+          "prediction": 0.838159441947937
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C2::prefix-0032",
+          "group": "ES14.mat::ES14C2",
+          "target": 0.2440944881889764,
+          "prediction": 0.3062732219696045
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C2::prefix-0051",
+          "group": "ES14.mat::ES14C2",
+          "target": 0.3937007874015748,
+          "prediction": 0.24724343419075012
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C2::prefix-0070",
+          "group": "ES14.mat::ES14C2",
+          "target": 0.5433070866141733,
+          "prediction": 0.6881589293479919
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C2::prefix-0090",
+          "group": "ES14.mat::ES14C2",
+          "target": 0.7007874015748031,
+          "prediction": 0.6214050054550171
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C2::prefix-0109",
+          "group": "ES14.mat::ES14C2",
+          "target": 0.8503937007874016,
+          "prediction": 0.7138633728027344
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C2::prefix-0128",
+          "group": "ES14.mat::ES14C2",
+          "target": 1.0,
+          "prediction": 0.8664571046829224
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C3::prefix-0032",
+          "group": "ES14.mat::ES14C3",
+          "target": 0.2440944881889764,
+          "prediction": 0.2782544493675232
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C3::prefix-0051",
+          "group": "ES14.mat::ES14C3",
+          "target": 0.3937007874015748,
+          "prediction": 0.22342731058597565
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C3::prefix-0070",
+          "group": "ES14.mat::ES14C3",
+          "target": 0.5433070866141733,
+          "prediction": 0.6858224868774414
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C3::prefix-0090",
+          "group": "ES14.mat::ES14C3",
+          "target": 0.7007874015748031,
+          "prediction": 0.6525315642356873
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C3::prefix-0109",
+          "group": "ES14.mat::ES14C3",
+          "target": 0.8503937007874016,
+          "prediction": 0.7572348713874817
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C3::prefix-0128",
+          "group": "ES14.mat::ES14C3",
+          "target": 1.0,
+          "prediction": 0.8626281023025513
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C4::prefix-0032",
+          "group": "ES14.mat::ES14C4",
+          "target": 0.2440944881889764,
+          "prediction": 0.35651135444641113
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C4::prefix-0051",
+          "group": "ES14.mat::ES14C4",
+          "target": 0.3937007874015748,
+          "prediction": 0.2656269371509552
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C4::prefix-0070",
+          "group": "ES14.mat::ES14C4",
+          "target": 0.5433070866141733,
+          "prediction": 0.6069832444190979
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C4::prefix-0090",
+          "group": "ES14.mat::ES14C4",
+          "target": 0.7007874015748031,
+          "prediction": 0.5680264830589294
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C4::prefix-0109",
+          "group": "ES14.mat::ES14C4",
+          "target": 0.8503937007874016,
+          "prediction": 0.6915075778961182
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C4::prefix-0128",
+          "group": "ES14.mat::ES14C4",
+          "target": 1.0,
+          "prediction": 0.8849959969520569
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C8::prefix-0031",
+          "group": "ES14.mat::ES14C8",
+          "target": 0.24390243902439024,
+          "prediction": 0.6843795776367188
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C8::prefix-0050",
+          "group": "ES14.mat::ES14C8",
+          "target": 0.3983739837398374,
+          "prediction": 0.7155965566635132
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C8::prefix-0068",
+          "group": "ES14.mat::ES14C8",
+          "target": 0.5447154471544715,
+          "prediction": 0.5465036034584045
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C8::prefix-0087",
+          "group": "ES14.mat::ES14C8",
+          "target": 0.6991869918699187,
+          "prediction": 0.8143886923789978
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C8::prefix-0105",
+          "group": "ES14.mat::ES14C8",
+          "target": 0.8455284552845529,
+          "prediction": 0.7590526938438416
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C8::prefix-0124",
+          "group": "ES14.mat::ES14C8",
+          "target": 1.0,
+          "prediction": 0.8254375457763672
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0024",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+          "target": 0.2406673015390091,
+          "prediction": 0.11269127577543259
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0038",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+          "target": 0.3886323185616189,
+          "prediction": 0.34978440403938293
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0053",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+          "target": 0.5467215484924876,
+          "prediction": 0.5572783350944519
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0067",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+          "target": 0.6947017204861377,
+          "prediction": 0.7319623827934265
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0082",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+          "target": 0.8534209974609458,
+          "prediction": 0.7893381118774414
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0096",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+          "target": 1.0,
+          "prediction": 0.9583910703659058
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0024",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+          "target": 0.24087652142248164,
+          "prediction": 0.7791678309440613
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0038",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+          "target": 0.388551443174556,
+          "prediction": 0.7121245861053467
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0053",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+          "target": 0.5460381010003206,
+          "prediction": 0.9057390093803406
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0067",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+          "target": 0.6934404154493027,
+          "prediction": 0.8506941199302673
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0082",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+          "target": 0.8518493862792624,
+          "prediction": 0.9399104714393616
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0096",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+          "target": 1.0,
+          "prediction": 0.9974449872970581
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_14::prefix-0024",
+          "group": "Test_14",
+          "target": 0.45380269990052813,
+          "prediction": 0.6655001640319824
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_14::prefix-0038",
+          "group": "Test_14",
+          "target": 0.48939222112348896,
+          "prediction": 0.701922595500946
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_14::prefix-0053",
+          "group": "Test_14",
+          "target": 0.607093359210136,
+          "prediction": 0.7294871807098389
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_14::prefix-0067",
+          "group": "Test_14",
+          "target": 0.6427050935535923,
+          "prediction": 0.7429733872413635
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_14::prefix-0082",
+          "group": "Test_14",
+          "target": 0.6810166763207536,
+          "prediction": 0.7676337361335754
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_14::prefix-0096",
+          "group": "Test_14",
+          "target": 1.0,
+          "prediction": 0.8340266942977905
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_15::prefix-0024",
+          "group": "Test_15",
+          "target": 0.2553296056646679,
+          "prediction": 0.44566965103149414
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_15::prefix-0038",
+          "group": "Test_15",
+          "target": 0.40660617329146287,
+          "prediction": 0.47018545866012573
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_15::prefix-0053",
+          "group": "Test_15",
+          "target": 0.5662660154146211,
+          "prediction": 0.4978905916213989
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_15::prefix-0067",
+          "group": "Test_15",
+          "target": 0.7127845508398175,
+          "prediction": 0.5322383642196655
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_15::prefix-0082",
+          "group": "Test_15",
+          "target": 0.8647090646150815,
+          "prediction": 0.49882546067237854
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_15::prefix-0096",
+          "group": "Test_15",
+          "target": 1.0,
+          "prediction": 0.5488409996032715
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_17::prefix-0024",
+          "group": "Test_17",
+          "target": 0.24014296215898728,
+          "prediction": 0.456760436296463
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_17::prefix-0038",
+          "group": "Test_17",
+          "target": 0.38738114131661827,
+          "prediction": 0.485612154006958
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_17::prefix-0053",
+          "group": "Test_17",
+          "target": 0.5455231469546927,
+          "prediction": 0.5143378376960754
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_17::prefix-0067",
+          "group": "Test_17",
+          "target": 0.6942297433926868,
+          "prediction": 0.5060186982154846
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_17::prefix-0082",
+          "group": "Test_17",
+          "target": 0.8523349061700145,
+          "prediction": 0.4919146001338959
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_17::prefix-0096",
+          "group": "Test_17",
+          "target": 1.0,
+          "prediction": 0.5592293739318848
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_25::prefix-0024",
+          "group": "Test_25",
+          "target": 0.12174529621862554,
+          "prediction": 0.3792068064212799
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_25::prefix-0038",
+          "group": "Test_25",
+          "target": 0.4015336652482285,
+          "prediction": 0.4174249768257141
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_25::prefix-0053",
+          "group": "Test_25",
+          "target": 0.47939160085082744,
+          "prediction": 0.36797034740448
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_25::prefix-0067",
+          "group": "Test_25",
+          "target": 0.549485682351667,
+          "prediction": 0.511888861656189
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_25::prefix-0082",
+          "group": "Test_25",
+          "target": 0.9451150675998303,
+          "prediction": 0.8886967897415161
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_25::prefix-0096",
+          "group": "Test_25",
+          "target": 1.0,
+          "prediction": 0.6186246871948242
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_27::prefix-0024",
+          "group": "Test_27",
+          "target": 0.8991729298412504,
+          "prediction": 0.6480176448822021
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_27::prefix-0038",
+          "group": "Test_27",
+          "target": 0.9132531133125352,
+          "prediction": 0.641288697719574
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_27::prefix-0053",
+          "group": "Test_27",
+          "target": 0.9283513760374877,
+          "prediction": 0.6378988027572632
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_27::prefix-0067",
+          "group": "Test_27",
+          "target": 0.9708088378835497,
+          "prediction": 0.6702151298522949
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_27::prefix-0082",
+          "group": "Test_27",
+          "target": 0.985903089323849,
+          "prediction": 0.6738353371620178
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_27::prefix-0096",
+          "group": "Test_27",
+          "target": 1.0,
+          "prediction": 0.6757785677909851
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_33::prefix-0024",
+          "group": "Test_33",
+          "target": 0.24110476867853375,
+          "prediction": 0.6559746861457825
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_33::prefix-0038",
+          "group": "Test_33",
+          "target": 0.3876919075185423,
+          "prediction": 0.683632493019104
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_33::prefix-0053",
+          "group": "Test_33",
+          "target": 0.5448205936305287,
+          "prediction": 0.6840047240257263
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_33::prefix-0067",
+          "group": "Test_33",
+          "target": 0.6925435370217036,
+          "prediction": 0.696307897567749
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_33::prefix-0082",
+          "group": "Test_33",
+          "target": 0.8513329192246386,
+          "prediction": 0.7445021271705627
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_33::prefix-0096",
+          "group": "Test_33",
+          "target": 1.0,
+          "prediction": 0.6983181238174438
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_36::prefix-0024",
+          "group": "Test_36",
+          "target": 0.24684817412811833,
+          "prediction": 0.4748121500015259
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_36::prefix-0038",
+          "group": "Test_36",
+          "target": 0.3970980488709745,
+          "prediction": 0.5533202886581421
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_36::prefix-0053",
+          "group": "Test_36",
+          "target": 0.5577948911681063,
+          "prediction": 0.5300546884536743
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_36::prefix-0067",
+          "group": "Test_36",
+          "target": 0.707176828545695,
+          "prediction": 0.5459681153297424
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_36::prefix-0082",
+          "group": "Test_36",
+          "target": 0.8652274231479754,
+          "prediction": 0.5353885889053345
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_36::prefix-0096",
+          "group": "Test_36",
+          "target": 1.0,
+          "prediction": 0.7595269680023193
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_4::prefix-0024",
+          "group": "Test_4",
+          "target": 0.0018710317819172096,
+          "prediction": 0.4030827283859253
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_4::prefix-0038",
+          "group": "Test_4",
+          "target": 0.0029016767409094303,
+          "prediction": 0.4297240078449249
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_4::prefix-0053",
+          "group": "Test_4",
+          "target": 0.0040045705389227205,
+          "prediction": 0.6541323065757751
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_4::prefix-0067",
+          "group": "Test_4",
+          "target": 0.005035219168673755,
+          "prediction": 0.46618467569351196
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_4::prefix-0082",
+          "group": "Test_4",
+          "target": 0.0061381184542860815,
+          "prediction": 0.4670443534851074
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_4::prefix-0096",
+          "group": "Test_4",
+          "target": 1.0,
+          "prediction": 0.8133015632629395
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_7::prefix-0024",
+          "group": "Test_7",
+          "target": 0.27080217772170107,
+          "prediction": 0.41914185881614685
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_7::prefix-0038",
+          "group": "Test_7",
+          "target": 0.42993195387311756,
+          "prediction": 0.43298062682151794
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_7::prefix-0053",
+          "group": "Test_7",
+          "target": 0.5911490652438853,
+          "prediction": 0.43203720450401306
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_7::prefix-0067",
+          "group": "Test_7",
+          "target": 0.7316164941382937,
+          "prediction": 0.498658686876297
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_7::prefix-0082",
+          "group": "Test_7",
+          "target": 0.8659675482918864,
+          "prediction": 0.4879211485385895
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_7::prefix-0096",
+          "group": "Test_7",
+          "target": 1.0,
+          "prediction": 0.8398457765579224
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_9::prefix-0024",
+          "group": "Test_9",
+          "target": 0.39005275977775244,
+          "prediction": 0.7589866518974304
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_9::prefix-0038",
+          "group": "Test_9",
+          "target": 0.427054827065675,
+          "prediction": 0.7928585410118103
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_9::prefix-0053",
+          "group": "Test_9",
+          "target": 0.516159622251805,
+          "prediction": 0.8812107443809509
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_9::prefix-0067",
+          "group": "Test_9",
+          "target": 0.5532607345363267,
+          "prediction": 0.8462793827056885
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_9::prefix-0082",
+          "group": "Test_9",
+          "target": 0.9628653248182096,
+          "prediction": 0.8747138977050781
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_9::prefix-0096",
+          "group": "Test_9",
+          "target": 1.0,
+          "prediction": 0.8965783715248108
+        }
+      ]
+    },
+    {
+      "seed": 73,
+      "validation_mae": 0.16683323681354523,
+      "best_epoch": 86,
+      "best_train_mae": 0.18493421375751495,
+      "stopped_epoch": 111,
+      "history": [
+        {
+          "epoch": 1,
+          "train_mae": 0.2538648545742035,
+          "validation_mae": 0.2332807332277298
+        },
+        {
+          "epoch": 2,
+          "train_mae": 0.2489466369152069,
+          "validation_mae": 0.2266605943441391
+        },
+        {
+          "epoch": 3,
+          "train_mae": 0.24556468427181244,
+          "validation_mae": 0.22221651673316956
+        },
+        {
+          "epoch": 4,
+          "train_mae": 0.24412822723388672,
+          "validation_mae": 0.21948449313640594
+        },
+        {
+          "epoch": 5,
+          "train_mae": 0.24263796210289001,
+          "validation_mae": 0.21641136705875397
+        },
+        {
+          "epoch": 6,
+          "train_mae": 0.24112212657928467,
+          "validation_mae": 0.21401134133338928
+        },
+        {
+          "epoch": 7,
+          "train_mae": 0.23982957005500793,
+          "validation_mae": 0.21157486736774445
+        },
+        {
+          "epoch": 8,
+          "train_mae": 0.23888199031352997,
+          "validation_mae": 0.21001002192497253
+        },
+        {
+          "epoch": 9,
+          "train_mae": 0.23800021409988403,
+          "validation_mae": 0.20870910584926605
+        },
+        {
+          "epoch": 10,
+          "train_mae": 0.23728923499584198,
+          "validation_mae": 0.20754678547382355
+        },
+        {
+          "epoch": 11,
+          "train_mae": 0.2364709973335266,
+          "validation_mae": 0.20694862306118011
+        },
+        {
+          "epoch": 12,
+          "train_mae": 0.23605051636695862,
+          "validation_mae": 0.20656496286392212
+        },
+        {
+          "epoch": 13,
+          "train_mae": 0.2358149141073227,
+          "validation_mae": 0.2060137689113617
+        },
+        {
+          "epoch": 14,
+          "train_mae": 0.2350267469882965,
+          "validation_mae": 0.20552068948745728
+        },
+        {
+          "epoch": 15,
+          "train_mae": 0.2344508171081543,
+          "validation_mae": 0.20486721396446228
+        },
+        {
+          "epoch": 16,
+          "train_mae": 0.2338581085205078,
+          "validation_mae": 0.204398050904274
+        },
+        {
+          "epoch": 17,
+          "train_mae": 0.23351486027240753,
+          "validation_mae": 0.20406703650951385
+        },
+        {
+          "epoch": 18,
+          "train_mae": 0.23312634229660034,
+          "validation_mae": 0.2038370817899704
+        },
+        {
+          "epoch": 19,
+          "train_mae": 0.23269875347614288,
+          "validation_mae": 0.20362916588783264
+        },
+        {
+          "epoch": 20,
+          "train_mae": 0.23306375741958618,
+          "validation_mae": 0.20293191075325012
+        },
+        {
+          "epoch": 21,
+          "train_mae": 0.2326226532459259,
+          "validation_mae": 0.20243166387081146
+        },
+        {
+          "epoch": 22,
+          "train_mae": 0.23168762028217316,
+          "validation_mae": 0.20225629210472107
+        },
+        {
+          "epoch": 23,
+          "train_mae": 0.2309480458498001,
+          "validation_mae": 0.2018328309059143
+        },
+        {
+          "epoch": 24,
+          "train_mae": 0.2304694652557373,
+          "validation_mae": 0.20139403641223907
+        },
+        {
+          "epoch": 25,
+          "train_mae": 0.22995994985103607,
+          "validation_mae": 0.2009413093328476
+        },
+        {
+          "epoch": 26,
+          "train_mae": 0.22931204736232758,
+          "validation_mae": 0.2001771628856659
+        },
+        {
+          "epoch": 27,
+          "train_mae": 0.228618785738945,
+          "validation_mae": 0.19962529838085175
+        },
+        {
+          "epoch": 28,
+          "train_mae": 0.2280162125825882,
+          "validation_mae": 0.19881397485733032
+        },
+        {
+          "epoch": 29,
+          "train_mae": 0.2274823635816574,
+          "validation_mae": 0.19820232689380646
+        },
+        {
+          "epoch": 30,
+          "train_mae": 0.22680743038654327,
+          "validation_mae": 0.19742946326732635
+        },
+        {
+          "epoch": 31,
+          "train_mae": 0.22623653709888458,
+          "validation_mae": 0.19684241712093353
+        },
+        {
+          "epoch": 32,
+          "train_mae": 0.2255433201789856,
+          "validation_mae": 0.19634181261062622
+        },
+        {
+          "epoch": 33,
+          "train_mae": 0.22476644814014435,
+          "validation_mae": 0.19563640654087067
+        },
+        {
+          "epoch": 34,
+          "train_mae": 0.2241048812866211,
+          "validation_mae": 0.19499839842319489
+        },
+        {
+          "epoch": 35,
+          "train_mae": 0.22349829971790314,
+          "validation_mae": 0.19417612254619598
+        },
+        {
+          "epoch": 36,
+          "train_mae": 0.2230701595544815,
+          "validation_mae": 0.19303616881370544
+        },
+        {
+          "epoch": 37,
+          "train_mae": 0.22231340408325195,
+          "validation_mae": 0.19237901270389557
+        },
+        {
+          "epoch": 38,
+          "train_mae": 0.22149845957756042,
+          "validation_mae": 0.19195803999900818
+        },
+        {
+          "epoch": 39,
+          "train_mae": 0.22062094509601593,
+          "validation_mae": 0.19150425493717194
+        },
+        {
+          "epoch": 40,
+          "train_mae": 0.21959523856639862,
+          "validation_mae": 0.19109505414962769
+        },
+        {
+          "epoch": 41,
+          "train_mae": 0.21876101195812225,
+          "validation_mae": 0.19072328507900238
+        },
+        {
+          "epoch": 42,
+          "train_mae": 0.21771718561649323,
+          "validation_mae": 0.19082504510879517
+        },
+        {
+          "epoch": 43,
+          "train_mae": 0.21667519211769104,
+          "validation_mae": 0.1903102546930313
+        },
+        {
+          "epoch": 44,
+          "train_mae": 0.21556349098682404,
+          "validation_mae": 0.18953905999660492
+        },
+        {
+          "epoch": 45,
+          "train_mae": 0.21428531408309937,
+          "validation_mae": 0.1882384866476059
+        },
+        {
+          "epoch": 46,
+          "train_mae": 0.21348094940185547,
+          "validation_mae": 0.1875208467245102
+        },
+        {
+          "epoch": 47,
+          "train_mae": 0.21277713775634766,
+          "validation_mae": 0.1868886649608612
+        },
+        {
+          "epoch": 48,
+          "train_mae": 0.2115221917629242,
+          "validation_mae": 0.18645355105400085
+        },
+        {
+          "epoch": 49,
+          "train_mae": 0.21028351783752441,
+          "validation_mae": 0.1851624995470047
+        },
+        {
+          "epoch": 50,
+          "train_mae": 0.20895925164222717,
+          "validation_mae": 0.18408483266830444
+        },
+        {
+          "epoch": 51,
+          "train_mae": 0.20763538777828217,
+          "validation_mae": 0.18238848447799683
+        },
+        {
+          "epoch": 52,
+          "train_mae": 0.20693011581897736,
+          "validation_mae": 0.18083351850509644
+        },
+        {
+          "epoch": 53,
+          "train_mae": 0.20610898733139038,
+          "validation_mae": 0.17986081540584564
+        },
+        {
+          "epoch": 54,
+          "train_mae": 0.20492830872535706,
+          "validation_mae": 0.17935724556446075
+        },
+        {
+          "epoch": 55,
+          "train_mae": 0.20422664284706116,
+          "validation_mae": 0.1771235466003418
+        },
+        {
+          "epoch": 56,
+          "train_mae": 0.20277738571166992,
+          "validation_mae": 0.17623819410800934
+        },
+        {
+          "epoch": 57,
+          "train_mae": 0.20157015323638916,
+          "validation_mae": 0.17530593276023865
+        },
+        {
+          "epoch": 58,
+          "train_mae": 0.20002424716949463,
+          "validation_mae": 0.17577430605888367
+        },
+        {
+          "epoch": 59,
+          "train_mae": 0.19951342046260834,
+          "validation_mae": 0.17370890080928802
+        },
+        {
+          "epoch": 60,
+          "train_mae": 0.19875654578208923,
+          "validation_mae": 0.172389417886734
+        },
+        {
+          "epoch": 61,
+          "train_mae": 0.19712957739830017,
+          "validation_mae": 0.17278768122196198
+        },
+        {
+          "epoch": 62,
+          "train_mae": 0.19748060405254364,
+          "validation_mae": 0.17292822897434235
+        },
+        {
+          "epoch": 63,
+          "train_mae": 0.19595453143119812,
+          "validation_mae": 0.17138977348804474
+        },
+        {
+          "epoch": 64,
+          "train_mae": 0.19517837464809418,
+          "validation_mae": 0.17093317210674286
+        },
+        {
+          "epoch": 65,
+          "train_mae": 0.19546930491924286,
+          "validation_mae": 0.17189553380012512
+        },
+        {
+          "epoch": 66,
+          "train_mae": 0.19392499327659607,
+          "validation_mae": 0.16935396194458008
+        },
+        {
+          "epoch": 67,
+          "train_mae": 0.19371436536312103,
+          "validation_mae": 0.16907170414924622
+        },
+        {
+          "epoch": 68,
+          "train_mae": 0.19295035302639008,
+          "validation_mae": 0.17046953737735748
+        },
+        {
+          "epoch": 69,
+          "train_mae": 0.19450676441192627,
+          "validation_mae": 0.17358554899692535
+        },
+        {
+          "epoch": 70,
+          "train_mae": 0.19299399852752686,
+          "validation_mae": 0.17221538722515106
+        },
+        {
+          "epoch": 71,
+          "train_mae": 0.19128276407718658,
+          "validation_mae": 0.16941015422344208
+        },
+        {
+          "epoch": 72,
+          "train_mae": 0.1903608739376068,
+          "validation_mae": 0.16781438887119293
+        },
+        {
+          "epoch": 73,
+          "train_mae": 0.19075682759284973,
+          "validation_mae": 0.16713254153728485
+        },
+        {
+          "epoch": 74,
+          "train_mae": 0.19072546064853668,
+          "validation_mae": 0.16739940643310547
+        },
+        {
+          "epoch": 75,
+          "train_mae": 0.18920893967151642,
+          "validation_mae": 0.16831226646900177
+        },
+        {
+          "epoch": 76,
+          "train_mae": 0.18946832418441772,
+          "validation_mae": 0.1693708300590515
+        },
+        {
+          "epoch": 77,
+          "train_mae": 0.1885487288236618,
+          "validation_mae": 0.16821442544460297
+        },
+        {
+          "epoch": 78,
+          "train_mae": 0.18803629279136658,
+          "validation_mae": 0.16817934811115265
+        },
+        {
+          "epoch": 79,
+          "train_mae": 0.18782272934913635,
+          "validation_mae": 0.1690811663866043
+        },
+        {
+          "epoch": 80,
+          "train_mae": 0.18764834105968475,
+          "validation_mae": 0.16834735870361328
+        },
+        {
+          "epoch": 81,
+          "train_mae": 0.18814446032047272,
+          "validation_mae": 0.16974090039730072
+        },
+        {
+          "epoch": 82,
+          "train_mae": 0.18666550517082214,
+          "validation_mae": 0.1682925969362259
+        },
+        {
+          "epoch": 83,
+          "train_mae": 0.18630987405776978,
+          "validation_mae": 0.16879472136497498
+        },
+        {
+          "epoch": 84,
+          "train_mae": 0.18572403490543365,
+          "validation_mae": 0.16818198561668396
+        },
+        {
+          "epoch": 85,
+          "train_mae": 0.18753573298454285,
+          "validation_mae": 0.16765999794006348
+        },
+        {
+          "epoch": 86,
+          "train_mae": 0.18493421375751495,
+          "validation_mae": 0.16683323681354523
+        },
+        {
+          "epoch": 87,
+          "train_mae": 0.18467018008232117,
+          "validation_mae": 0.16865067183971405
+        },
+        {
+          "epoch": 88,
+          "train_mae": 0.18462540209293365,
+          "validation_mae": 0.16982947289943695
+        },
+        {
+          "epoch": 89,
+          "train_mae": 0.18398956954479218,
+          "validation_mae": 0.1686466783285141
+        },
+        {
+          "epoch": 90,
+          "train_mae": 0.18343277275562286,
+          "validation_mae": 0.16796699166297913
+        },
+        {
+          "epoch": 91,
+          "train_mae": 0.1831589788198471,
+          "validation_mae": 0.1679389774799347
+        },
+        {
+          "epoch": 92,
+          "train_mae": 0.18279612064361572,
+          "validation_mae": 0.16790787875652313
+        },
+        {
+          "epoch": 93,
+          "train_mae": 0.1825210005044937,
+          "validation_mae": 0.1677822768688202
+        },
+        {
+          "epoch": 94,
+          "train_mae": 0.18206250667572021,
+          "validation_mae": 0.16844318807125092
+        },
+        {
+          "epoch": 95,
+          "train_mae": 0.18162000179290771,
+          "validation_mae": 0.1686832159757614
+        },
+        {
+          "epoch": 96,
+          "train_mae": 0.18172687292099,
+          "validation_mae": 0.1707652360200882
+        },
+        {
+          "epoch": 97,
+          "train_mae": 0.1811564564704895,
+          "validation_mae": 0.16989560425281525
+        },
+        {
+          "epoch": 98,
+          "train_mae": 0.18079881370067596,
+          "validation_mae": 0.17030638456344604
+        },
+        {
+          "epoch": 99,
+          "train_mae": 0.18059183657169342,
+          "validation_mae": 0.17094336450099945
+        },
+        {
+          "epoch": 100,
+          "train_mae": 0.1802290827035904,
+          "validation_mae": 0.16938450932502747
+        },
+        {
+          "epoch": 101,
+          "train_mae": 0.1819629818201065,
+          "validation_mae": 0.17474107444286346
+        },
+        {
+          "epoch": 102,
+          "train_mae": 0.1807868629693985,
+          "validation_mae": 0.17382891476154327
+        },
+        {
+          "epoch": 103,
+          "train_mae": 0.179238960146904,
+          "validation_mae": 0.17017677426338196
+        },
+        {
+          "epoch": 104,
+          "train_mae": 0.1791674941778183,
+          "validation_mae": 0.16790156066417694
+        },
+        {
+          "epoch": 105,
+          "train_mae": 0.1790718287229538,
+          "validation_mae": 0.1672353595495224
+        },
+        {
+          "epoch": 106,
+          "train_mae": 0.1783294528722763,
+          "validation_mae": 0.16950130462646484
+        },
+        {
+          "epoch": 107,
+          "train_mae": 0.1786859780550003,
+          "validation_mae": 0.1718112826347351
+        },
+        {
+          "epoch": 108,
+          "train_mae": 0.17797505855560303,
+          "validation_mae": 0.17024873197078705
+        },
+        {
+          "epoch": 109,
+          "train_mae": 0.17754167318344116,
+          "validation_mae": 0.17018048465251923
+        },
+        {
+          "epoch": 110,
+          "train_mae": 0.17843511700630188,
+          "validation_mae": 0.1728677749633789
+        },
+        {
+          "epoch": 111,
+          "train_mae": 0.17729917168617249,
+          "validation_mae": 0.16785669326782227
+        }
+      ],
+      "test_mae": 0.18993084132671356,
+      "parameter_count": 1639,
+      "predictions": [
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES12.mat::ES12C4::prefix-0028",
+          "group": "ES12.mat::ES12C4",
+          "target": 0.24324324324324326,
+          "prediction": 0.5837350487709045
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES12.mat::ES12C4::prefix-0045",
+          "group": "ES12.mat::ES12C4",
+          "target": 0.3963963963963964,
+          "prediction": 0.5547937154769897
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES12.mat::ES12C4::prefix-0062",
+          "group": "ES12.mat::ES12C4",
+          "target": 0.5495495495495496,
+          "prediction": 0.598458468914032
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES12.mat::ES12C4::prefix-0078",
+          "group": "ES12.mat::ES12C4",
+          "target": 0.6936936936936937,
+          "prediction": 0.6212905049324036
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES12.mat::ES12C4::prefix-0095",
+          "group": "ES12.mat::ES12C4",
+          "target": 0.8468468468468469,
+          "prediction": 0.5919564366340637
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES12.mat::ES12C4::prefix-0112",
+          "group": "ES12.mat::ES12C4",
+          "target": 1.0,
+          "prediction": 0.8190733194351196
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C1::prefix-0032",
+          "group": "ES14.mat::ES14C1",
+          "target": 0.2440944881889764,
+          "prediction": 0.3347327709197998
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C1::prefix-0051",
+          "group": "ES14.mat::ES14C1",
+          "target": 0.3937007874015748,
+          "prediction": 0.33543211221694946
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C1::prefix-0070",
+          "group": "ES14.mat::ES14C1",
+          "target": 0.5433070866141733,
+          "prediction": 0.6655506491661072
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C1::prefix-0090",
+          "group": "ES14.mat::ES14C1",
+          "target": 0.7007874015748031,
+          "prediction": 0.6646335124969482
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C1::prefix-0109",
+          "group": "ES14.mat::ES14C1",
+          "target": 0.8503937007874016,
+          "prediction": 0.7305575609207153
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C1::prefix-0128",
+          "group": "ES14.mat::ES14C1",
+          "target": 1.0,
+          "prediction": 0.8498029708862305
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C2::prefix-0032",
+          "group": "ES14.mat::ES14C2",
+          "target": 0.2440944881889764,
+          "prediction": 0.32727673649787903
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C2::prefix-0051",
+          "group": "ES14.mat::ES14C2",
+          "target": 0.3937007874015748,
+          "prediction": 0.27975621819496155
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C2::prefix-0070",
+          "group": "ES14.mat::ES14C2",
+          "target": 0.5433070866141733,
+          "prediction": 0.6902464628219604
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C2::prefix-0090",
+          "group": "ES14.mat::ES14C2",
+          "target": 0.7007874015748031,
+          "prediction": 0.6240611672401428
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C2::prefix-0109",
+          "group": "ES14.mat::ES14C2",
+          "target": 0.8503937007874016,
+          "prediction": 0.722789466381073
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C2::prefix-0128",
+          "group": "ES14.mat::ES14C2",
+          "target": 1.0,
+          "prediction": 0.8802185654640198
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C3::prefix-0032",
+          "group": "ES14.mat::ES14C3",
+          "target": 0.2440944881889764,
+          "prediction": 0.30042752623558044
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C3::prefix-0051",
+          "group": "ES14.mat::ES14C3",
+          "target": 0.3937007874015748,
+          "prediction": 0.2584918439388275
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C3::prefix-0070",
+          "group": "ES14.mat::ES14C3",
+          "target": 0.5433070866141733,
+          "prediction": 0.684334933757782
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C3::prefix-0090",
+          "group": "ES14.mat::ES14C3",
+          "target": 0.7007874015748031,
+          "prediction": 0.6505446434020996
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C3::prefix-0109",
+          "group": "ES14.mat::ES14C3",
+          "target": 0.8503937007874016,
+          "prediction": 0.7667558193206787
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C3::prefix-0128",
+          "group": "ES14.mat::ES14C3",
+          "target": 1.0,
+          "prediction": 0.8750017881393433
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C4::prefix-0032",
+          "group": "ES14.mat::ES14C4",
+          "target": 0.2440944881889764,
+          "prediction": 0.3714003264904022
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C4::prefix-0051",
+          "group": "ES14.mat::ES14C4",
+          "target": 0.3937007874015748,
+          "prediction": 0.3005859851837158
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C4::prefix-0070",
+          "group": "ES14.mat::ES14C4",
+          "target": 0.5433070866141733,
+          "prediction": 0.6009055972099304
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C4::prefix-0090",
+          "group": "ES14.mat::ES14C4",
+          "target": 0.7007874015748031,
+          "prediction": 0.5712109208106995
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C4::prefix-0109",
+          "group": "ES14.mat::ES14C4",
+          "target": 0.8503937007874016,
+          "prediction": 0.696972668170929
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C4::prefix-0128",
+          "group": "ES14.mat::ES14C4",
+          "target": 1.0,
+          "prediction": 0.9022916555404663
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C8::prefix-0031",
+          "group": "ES14.mat::ES14C8",
+          "target": 0.24390243902439024,
+          "prediction": 0.6762879490852356
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C8::prefix-0050",
+          "group": "ES14.mat::ES14C8",
+          "target": 0.3983739837398374,
+          "prediction": 0.7107191681861877
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C8::prefix-0068",
+          "group": "ES14.mat::ES14C8",
+          "target": 0.5447154471544715,
+          "prediction": 0.5470675826072693
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C8::prefix-0087",
+          "group": "ES14.mat::ES14C8",
+          "target": 0.6991869918699187,
+          "prediction": 0.848259449005127
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C8::prefix-0105",
+          "group": "ES14.mat::ES14C8",
+          "target": 0.8455284552845529,
+          "prediction": 0.7625433206558228
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C8::prefix-0124",
+          "group": "ES14.mat::ES14C8",
+          "target": 1.0,
+          "prediction": 0.8467985987663269
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0024",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+          "target": 0.2406673015390091,
+          "prediction": 0.12137368321418762
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0038",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+          "target": 0.3886323185616189,
+          "prediction": 0.32630854845046997
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0053",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+          "target": 0.5467215484924876,
+          "prediction": 0.49988237023353577
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0067",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+          "target": 0.6947017204861377,
+          "prediction": 0.6545993089675903
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0082",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+          "target": 0.8534209974609458,
+          "prediction": 0.722835898399353
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0096",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+          "target": 1.0,
+          "prediction": 0.9348116517066956
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0024",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+          "target": 0.24087652142248164,
+          "prediction": 0.793701171875
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0038",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+          "target": 0.388551443174556,
+          "prediction": 0.6812760829925537
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0053",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+          "target": 0.5460381010003206,
+          "prediction": 0.86276775598526
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0067",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+          "target": 0.6934404154493027,
+          "prediction": 0.811381995677948
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0082",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+          "target": 0.8518493862792624,
+          "prediction": 0.9119350910186768
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0096",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+          "target": 1.0,
+          "prediction": 0.9956140518188477
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_14::prefix-0024",
+          "group": "Test_14",
+          "target": 0.45380269990052813,
+          "prediction": 0.6551110148429871
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_14::prefix-0038",
+          "group": "Test_14",
+          "target": 0.48939222112348896,
+          "prediction": 0.7593129873275757
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_14::prefix-0053",
+          "group": "Test_14",
+          "target": 0.607093359210136,
+          "prediction": 0.7939764261245728
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_14::prefix-0067",
+          "group": "Test_14",
+          "target": 0.6427050935535923,
+          "prediction": 0.8210210204124451
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_14::prefix-0082",
+          "group": "Test_14",
+          "target": 0.6810166763207536,
+          "prediction": 0.8511347770690918
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_14::prefix-0096",
+          "group": "Test_14",
+          "target": 1.0,
+          "prediction": 0.9094281792640686
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_15::prefix-0024",
+          "group": "Test_15",
+          "target": 0.2553296056646679,
+          "prediction": 0.3890300393104553
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_15::prefix-0038",
+          "group": "Test_15",
+          "target": 0.40660617329146287,
+          "prediction": 0.41090551018714905
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_15::prefix-0053",
+          "group": "Test_15",
+          "target": 0.5662660154146211,
+          "prediction": 0.4543840289115906
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_15::prefix-0067",
+          "group": "Test_15",
+          "target": 0.7127845508398175,
+          "prediction": 0.4948672652244568
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_15::prefix-0082",
+          "group": "Test_15",
+          "target": 0.8647090646150815,
+          "prediction": 0.46669670939445496
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_15::prefix-0096",
+          "group": "Test_15",
+          "target": 1.0,
+          "prediction": 0.5108383297920227
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_17::prefix-0024",
+          "group": "Test_17",
+          "target": 0.24014296215898728,
+          "prediction": 0.3874821960926056
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_17::prefix-0038",
+          "group": "Test_17",
+          "target": 0.38738114131661827,
+          "prediction": 0.43817123770713806
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_17::prefix-0053",
+          "group": "Test_17",
+          "target": 0.5455231469546927,
+          "prediction": 0.47848600149154663
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_17::prefix-0067",
+          "group": "Test_17",
+          "target": 0.6942297433926868,
+          "prediction": 0.47928330302238464
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_17::prefix-0082",
+          "group": "Test_17",
+          "target": 0.8523349061700145,
+          "prediction": 0.4718896150588989
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_17::prefix-0096",
+          "group": "Test_17",
+          "target": 1.0,
+          "prediction": 0.540682315826416
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_25::prefix-0024",
+          "group": "Test_25",
+          "target": 0.12174529621862554,
+          "prediction": 0.3471197783946991
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_25::prefix-0038",
+          "group": "Test_25",
+          "target": 0.4015336652482285,
+          "prediction": 0.4020926356315613
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_25::prefix-0053",
+          "group": "Test_25",
+          "target": 0.47939160085082744,
+          "prediction": 0.3268687129020691
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_25::prefix-0067",
+          "group": "Test_25",
+          "target": 0.549485682351667,
+          "prediction": 0.5061559677124023
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_25::prefix-0082",
+          "group": "Test_25",
+          "target": 0.9451150675998303,
+          "prediction": 0.9223858118057251
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_25::prefix-0096",
+          "group": "Test_25",
+          "target": 1.0,
+          "prediction": 0.6195625066757202
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_27::prefix-0024",
+          "group": "Test_27",
+          "target": 0.8991729298412504,
+          "prediction": 0.6150480508804321
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_27::prefix-0038",
+          "group": "Test_27",
+          "target": 0.9132531133125352,
+          "prediction": 0.6076772809028625
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_27::prefix-0053",
+          "group": "Test_27",
+          "target": 0.9283513760374877,
+          "prediction": 0.6215982437133789
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_27::prefix-0067",
+          "group": "Test_27",
+          "target": 0.9708088378835497,
+          "prediction": 0.6360729932785034
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_27::prefix-0082",
+          "group": "Test_27",
+          "target": 0.985903089323849,
+          "prediction": 0.6471557021141052
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_27::prefix-0096",
+          "group": "Test_27",
+          "target": 1.0,
+          "prediction": 0.6383398771286011
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_33::prefix-0024",
+          "group": "Test_33",
+          "target": 0.24110476867853375,
+          "prediction": 0.6826990246772766
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_33::prefix-0038",
+          "group": "Test_33",
+          "target": 0.3876919075185423,
+          "prediction": 0.7078333497047424
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_33::prefix-0053",
+          "group": "Test_33",
+          "target": 0.5448205936305287,
+          "prediction": 0.7271257042884827
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_33::prefix-0067",
+          "group": "Test_33",
+          "target": 0.6925435370217036,
+          "prediction": 0.7470135688781738
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_33::prefix-0082",
+          "group": "Test_33",
+          "target": 0.8513329192246386,
+          "prediction": 0.818835437297821
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_33::prefix-0096",
+          "group": "Test_33",
+          "target": 1.0,
+          "prediction": 0.74385666847229
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_36::prefix-0024",
+          "group": "Test_36",
+          "target": 0.24684817412811833,
+          "prediction": 0.4498033821582794
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_36::prefix-0038",
+          "group": "Test_36",
+          "target": 0.3970980488709745,
+          "prediction": 0.5525317788124084
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_36::prefix-0053",
+          "group": "Test_36",
+          "target": 0.5577948911681063,
+          "prediction": 0.516524612903595
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_36::prefix-0067",
+          "group": "Test_36",
+          "target": 0.707176828545695,
+          "prediction": 0.5395979881286621
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_36::prefix-0082",
+          "group": "Test_36",
+          "target": 0.8652274231479754,
+          "prediction": 0.5226877331733704
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_36::prefix-0096",
+          "group": "Test_36",
+          "target": 1.0,
+          "prediction": 0.8110823035240173
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_4::prefix-0024",
+          "group": "Test_4",
+          "target": 0.0018710317819172096,
+          "prediction": 0.4253585934638977
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_4::prefix-0038",
+          "group": "Test_4",
+          "target": 0.0029016767409094303,
+          "prediction": 0.4126116633415222
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_4::prefix-0053",
+          "group": "Test_4",
+          "target": 0.0040045705389227205,
+          "prediction": 0.6645485162734985
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_4::prefix-0067",
+          "group": "Test_4",
+          "target": 0.005035219168673755,
+          "prediction": 0.471744567155838
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_4::prefix-0082",
+          "group": "Test_4",
+          "target": 0.0061381184542860815,
+          "prediction": 0.4663957953453064
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_4::prefix-0096",
+          "group": "Test_4",
+          "target": 1.0,
+          "prediction": 0.8924159407615662
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_7::prefix-0024",
+          "group": "Test_7",
+          "target": 0.27080217772170107,
+          "prediction": 0.3927784264087677
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_7::prefix-0038",
+          "group": "Test_7",
+          "target": 0.42993195387311756,
+          "prediction": 0.41752490401268005
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_7::prefix-0053",
+          "group": "Test_7",
+          "target": 0.5911490652438853,
+          "prediction": 0.4182228744029999
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_7::prefix-0067",
+          "group": "Test_7",
+          "target": 0.7316164941382937,
+          "prediction": 0.5302311182022095
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_7::prefix-0082",
+          "group": "Test_7",
+          "target": 0.8659675482918864,
+          "prediction": 0.4858538508415222
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_7::prefix-0096",
+          "group": "Test_7",
+          "target": 1.0,
+          "prediction": 0.9349023699760437
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_9::prefix-0024",
+          "group": "Test_9",
+          "target": 0.39005275977775244,
+          "prediction": 0.7991644740104675
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_9::prefix-0038",
+          "group": "Test_9",
+          "target": 0.427054827065675,
+          "prediction": 0.8218874931335449
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_9::prefix-0053",
+          "group": "Test_9",
+          "target": 0.516159622251805,
+          "prediction": 0.9087997674942017
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_9::prefix-0067",
+          "group": "Test_9",
+          "target": 0.5532607345363267,
+          "prediction": 0.897312343120575
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_9::prefix-0082",
+          "group": "Test_9",
+          "target": 0.9628653248182096,
+          "prediction": 0.912507951259613
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_9::prefix-0096",
+          "group": "Test_9",
+          "target": 1.0,
+          "prediction": 0.9681011438369751
+        }
+      ]
+    }
+  ],
+  "random_forest_mae": {
+    "17": 0.1676728522736956,
+    "42": 0.169829640876083,
+    "73": 0.16870666024735304
+  }
+}

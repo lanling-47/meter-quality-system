@@ -1,7 +1,6 @@
-"""Generate auditable quality-risk analysis reports for production management."""
+"""Generate plain-language quality disposition reports for shop-floor operators."""
 from __future__ import annotations
 
-from collections import Counter
 from datetime import datetime
 from io import BytesIO
 
@@ -17,7 +16,6 @@ FONT = "Arial Unicode MS"
 BLUE = "1F4E78"
 LIGHT_BLUE = "D9EAF7"
 LIGHT_RED = "FCE4D6"
-LIGHT_YELLOW = "FFF2CC"
 
 
 def _set_font(run, size: float = 10.5, bold: bool = False, color: str | None = None):
@@ -69,13 +67,14 @@ def _paragraph(doc: Document, text: str, *, bold_prefix: str | None = None):
     return p
 
 
-def _risk_level(probability: float | None) -> str:
-    p = probability or 0.0
-    if p >= 0.7:
-        return "高风险"
-    if p >= 0.4:
-        return "中风险"
-    return "低风险"
+def _effective_risk(chain) -> tuple[float, str]:
+    """Prefer a model score, but never hide a rule-based quality alarm."""
+    predicted = chain.predicted_risk
+    if predicted is None:
+        return (0.8, "规则预警") if chain.quality_label else (0.0, "正常")
+
+    score = max(float(predicted), 0.7 if chain.quality_label else 0.0)
+    return score, "模型预警" if chain.predicted_label is not None else "规则预警"
 
 
 def _action_for_chain(chain) -> str:
@@ -91,20 +90,25 @@ def _action_for_chain(chain) -> str:
     return "；".join(actions) if actions else "复核原始检测记录；必要时安排抽检复测"
 
 
+def _issue_for_chain(chain) -> str:
+    if chain.quality_reason and chain.quality_reason != "正常":
+        return chain.quality_reason.replace(";", "；").rstrip("；")
+    if chain.factory_fault:
+        return "出厂检测有故障记录"
+    return "系统提示复核该表的检测记录"
+
+
 def generate_quality_analysis_report(db) -> tuple[bytes, str]:
-    """Create a management-facing Word report from current prediction results."""
-    from app.models.db_models import BatchQualityProfile, ModelVersion, QualityChain, QualityFeatureSnapshot
+    """Create a one-click, plain-language disposition sheet for operators."""
+    from app.models.db_models import ModelVersion, QualityChain
 
     chains = db.query(QualityChain).order_by(QualityChain.meter_no).all()
     model = db.query(ModelVersion).filter_by(is_active=True).order_by(ModelVersion.created_at.desc()).first()
-    snapshots = db.query(QualityFeatureSnapshot).all()
-    batch_profiles = db.query(BatchQualityProfile).all()
 
-    ranked = sorted(chains, key=lambda item: item.predicted_risk or 0.0, reverse=True)
-    high = [item for item in ranked if (item.predicted_risk or 0.0) >= 0.7]
-    medium = [item for item in ranked if 0.4 <= (item.predicted_risk or 0.0) < 0.7]
-    low = [item for item in ranked if (item.predicted_risk or 0.0) < 0.4]
-    source_counts = Counter(item.source or "unknown" for item in snapshots)
+    ranked = sorted(chains, key=lambda item: _effective_risk(item)[0], reverse=True)
+    high = [item for item in ranked if _effective_risk(item)[0] >= 0.7]
+    medium = [item for item in ranked if 0.4 <= _effective_risk(item)[0] < 0.7]
+    low = [item for item in ranked if _effective_risk(item)[0] < 0.4]
     now = datetime.now()
 
     doc = Document()
@@ -122,62 +126,56 @@ def generate_quality_analysis_report(db) -> tuple[bytes, str]:
     title = doc.add_paragraph()
     title.alignment = WD_ALIGN_PARAGRAPH.CENTER
     title.paragraph_format.space_after = Pt(12)
-    _set_font(title.add_run("智能电表质量风险分析报告"), 18, bold=True, color=BLUE)
+    _set_font(title.add_run("智能电表现场质量处置单"), 18, bold=True, color=BLUE)
 
-    meta = doc.add_table(rows=3, cols=4)
+    meta = doc.add_table(rows=2, cols=4)
     meta.style = "Table Grid"
     meta_data = [
-        ("报告编号", f"QRA-{now.strftime('%Y%m%d-%H%M%S')}", "生成时间", now.strftime("%Y-%m-%d %H:%M")),
-        ("分析对象", "当前已完成预测的质量链路数据", "分析样本数", f"{len(chains)} 条"),
-        ("当前模型", model.version_tag if model else "规则引擎（未训练模型）", "报告状态", "系统自动生成，待质量负责人审核"),
+        ("处置单编号", f"QD-{now.strftime('%Y%m%d-%H%M%S')}", "生成时间", now.strftime("%Y-%m-%d %H:%M")),
+        ("本次检查电表", f"{len(chains)} 块", "当前判定方式", model.version_tag if model else "规则预警（未训练模型）"),
     ]
     for row, values in zip(meta.rows, meta_data):
         for idx, value in enumerate(values):
             _set_cell(row.cells[idx], value, bold=idx % 2 == 0, fill=LIGHT_BLUE if idx % 2 == 0 else None)
 
-    _heading(doc, "一、分析结果概览")
-    result_table = doc.add_table(rows=1, cols=4)
+    _heading(doc, "一、先看这里：本班需要做什么")
+    result_table = doc.add_table(rows=1, cols=3)
     result_table.style = "Table Grid"
-    headers = ["高风险", "中风险", "低风险", "高风险占比"]
-    values = [str(len(high)), str(len(medium)), str(len(low)), f"{(len(high) / len(chains) * 100) if chains else 0:.1f}%"]
+    headers = ["立即复测 / 处置", "安排复核", "可按常规抽检"]
+    values = [f"{len(high)} 块", f"{len(medium)} 块", f"{len(low)} 块"]
     for cell, value in zip(result_table.rows[0].cells, headers):
         _set_cell(cell, value, bold=True, fill=LIGHT_BLUE, align=WD_ALIGN_PARAGRAPH.CENTER)
     row = result_table.add_row()
     for cell, value in zip(row.cells, values):
         _set_cell(cell, value, bold=True, align=WD_ALIGN_PARAGRAPH.CENTER)
 
-    _paragraph(doc, "处理顺序：先处理高风险，再处理中风险；低风险按常规抽检执行。")
+    _paragraph(doc, f"操作顺序：先处理下表中的 {len(high)} 块，再安排 {len(medium)} 块复核。处理完成后，在系统中复查记录。")
 
-    _heading(doc, "二、高风险处置清单")
+    _heading(doc, "二、立即处理清单")
     if not high:
-        _paragraph(doc, "暂无预测为高风险的记录。")
+        _paragraph(doc, "本次没有需要立即处置的电表。请按常规抽检继续生产。")
     else:
-        risk_table = doc.add_table(rows=1, cols=5)
+        risk_table = doc.add_table(rows=1, cols=4)
         risk_table.style = "Table Grid"
-        risk_headers = ["序号", "电表编号", "风险概率", "发现的问题", "立即处理"]
+        risk_headers = ["序号", "电表编号", "发现的问题", "现在怎么做"]
         for cell, value in zip(risk_table.rows[0].cells, risk_headers):
             _set_cell(cell, value, bold=True, fill=LIGHT_BLUE, align=WD_ALIGN_PARAGRAPH.CENTER)
-        for index, chain in enumerate(high[:12], start=1):
+        for index, chain in enumerate(high, start=1):
             row = risk_table.add_row()
             values = [
                 str(index),
                 str(chain.meter_no),
-                f"{(chain.predicted_risk or 0) * 100:.2f}%",
-                chain.quality_reason or "系统未记录明确线索",
+                _issue_for_chain(chain),
                 _action_for_chain(chain),
             ]
             for col, value in enumerate(values):
-                _set_cell(row.cells[col], value, fill=LIGHT_RED if col == 2 else None)
-        if len(high) > 12:
-            _paragraph(doc, f"注：高风险共 {len(high)} 条，本页展示风险最高的前12条。其余记录请在系统风险列表中查看。")
+                _set_cell(row.cells[col], value, fill=LIGHT_RED if col in (1, 2) else None)
 
-    _heading(doc, "三、审核结论")
-    _paragraph(doc, "请根据复测结果勾选：□ 高风险记录已复测并完成处置  □ 需扩大同批抽检  □ 需转质量工程师进一步分析")
-    _paragraph(doc, "说明：本报告用于安排复查和处置，不替代检验结论。")
-    if source_counts.get("sampled_aging_unlinked", 0):
-        _paragraph(doc, "本次含抽检老化数据，其结果用于提示批次风险，不能直接作为单表最终结论。")
+    _heading(doc, "三、处理完成后")
+    _paragraph(doc, "□ 已完成复测  □ 已隔离不合格品  □ 已通知班组长 / 质量人员  □ 已记录处理结果")
+    _paragraph(doc, "说明：本处置单用于安排复测和隔离，不替代最终检验结论。")
 
-    _heading(doc, "四、签核")
+    _heading(doc, "四、签字确认")
     sign = doc.add_table(rows=2, cols=3)
     sign.style = "Table Grid"
     for cell, value in zip(sign.rows[0].cells, ["编制", "复核", "批准"]):
@@ -187,5 +185,5 @@ def generate_quality_analysis_report(db) -> tuple[bytes, str]:
 
     output = BytesIO()
     doc.save(output)
-    filename = f"智能电表质量风险分析报告_{now.strftime('%Y%m%d_%H%M%S')}.docx"
+    filename = f"智能电表现场质量处置单_{now.strftime('%Y%m%d_%H%M%S')}.docx"
     return output.getvalue(), filename

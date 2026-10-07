@@ -1,0 +1,2307 @@
+{
+  "status": "exploratory; single fixed group split",
+  "split_seed": 42,
+  "model": "GatedResidualNet",
+  "neural": [
+    {
+      "seed": 17,
+      "validation_mae": 0.1651700884103775,
+      "best_epoch": 82,
+      "test_mae": 0.1960001289844513,
+      "parameter_count": 1639,
+      "predictions": [
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES12.mat::ES12C4::prefix-0028",
+          "group": "ES12.mat::ES12C4",
+          "target": 0.24324324324324326,
+          "prediction": 0.5423332452774048
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES12.mat::ES12C4::prefix-0045",
+          "group": "ES12.mat::ES12C4",
+          "target": 0.3963963963963964,
+          "prediction": 0.5214340090751648
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES12.mat::ES12C4::prefix-0062",
+          "group": "ES12.mat::ES12C4",
+          "target": 0.5495495495495496,
+          "prediction": 0.5592644810676575
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES12.mat::ES12C4::prefix-0078",
+          "group": "ES12.mat::ES12C4",
+          "target": 0.6936936936936937,
+          "prediction": 0.5885310173034668
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES12.mat::ES12C4::prefix-0095",
+          "group": "ES12.mat::ES12C4",
+          "target": 0.8468468468468469,
+          "prediction": 0.5515756607055664
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES12.mat::ES12C4::prefix-0112",
+          "group": "ES12.mat::ES12C4",
+          "target": 1.0,
+          "prediction": 0.8354992270469666
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C1::prefix-0032",
+          "group": "ES14.mat::ES14C1",
+          "target": 0.2440944881889764,
+          "prediction": 0.35537075996398926
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C1::prefix-0051",
+          "group": "ES14.mat::ES14C1",
+          "target": 0.3937007874015748,
+          "prediction": 0.3442951738834381
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C1::prefix-0070",
+          "group": "ES14.mat::ES14C1",
+          "target": 0.5433070866141733,
+          "prediction": 0.6545225381851196
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C1::prefix-0090",
+          "group": "ES14.mat::ES14C1",
+          "target": 0.7007874015748031,
+          "prediction": 0.6431553959846497
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C1::prefix-0109",
+          "group": "ES14.mat::ES14C1",
+          "target": 0.8503937007874016,
+          "prediction": 0.7169998288154602
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C1::prefix-0128",
+          "group": "ES14.mat::ES14C1",
+          "target": 1.0,
+          "prediction": 0.863980770111084
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C2::prefix-0032",
+          "group": "ES14.mat::ES14C2",
+          "target": 0.2440944881889764,
+          "prediction": 0.34403008222579956
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C2::prefix-0051",
+          "group": "ES14.mat::ES14C2",
+          "target": 0.3937007874015748,
+          "prediction": 0.3036361038684845
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C2::prefix-0070",
+          "group": "ES14.mat::ES14C2",
+          "target": 0.5433070866141733,
+          "prediction": 0.6782014966011047
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C2::prefix-0090",
+          "group": "ES14.mat::ES14C2",
+          "target": 0.7007874015748031,
+          "prediction": 0.5929802060127258
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C2::prefix-0109",
+          "group": "ES14.mat::ES14C2",
+          "target": 0.8503937007874016,
+          "prediction": 0.7022385001182556
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C2::prefix-0128",
+          "group": "ES14.mat::ES14C2",
+          "target": 1.0,
+          "prediction": 0.8968309760093689
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C3::prefix-0032",
+          "group": "ES14.mat::ES14C3",
+          "target": 0.2440944881889764,
+          "prediction": 0.32229068875312805
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C3::prefix-0051",
+          "group": "ES14.mat::ES14C3",
+          "target": 0.3937007874015748,
+          "prediction": 0.2909860610961914
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C3::prefix-0070",
+          "group": "ES14.mat::ES14C3",
+          "target": 0.5433070866141733,
+          "prediction": 0.6688717007637024
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C3::prefix-0090",
+          "group": "ES14.mat::ES14C3",
+          "target": 0.7007874015748031,
+          "prediction": 0.6187983155250549
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C3::prefix-0109",
+          "group": "ES14.mat::ES14C3",
+          "target": 0.8503937007874016,
+          "prediction": 0.7548861503601074
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C3::prefix-0128",
+          "group": "ES14.mat::ES14C3",
+          "target": 1.0,
+          "prediction": 0.8899660110473633
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C4::prefix-0032",
+          "group": "ES14.mat::ES14C4",
+          "target": 0.2440944881889764,
+          "prediction": 0.3878794312477112
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C4::prefix-0051",
+          "group": "ES14.mat::ES14C4",
+          "target": 0.3937007874015748,
+          "prediction": 0.3293200433254242
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C4::prefix-0070",
+          "group": "ES14.mat::ES14C4",
+          "target": 0.5433070866141733,
+          "prediction": 0.5794807076454163
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C4::prefix-0090",
+          "group": "ES14.mat::ES14C4",
+          "target": 0.7007874015748031,
+          "prediction": 0.5415654182434082
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C4::prefix-0109",
+          "group": "ES14.mat::ES14C4",
+          "target": 0.8503937007874016,
+          "prediction": 0.6730428338050842
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C4::prefix-0128",
+          "group": "ES14.mat::ES14C4",
+          "target": 1.0,
+          "prediction": 0.9241324663162231
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C8::prefix-0031",
+          "group": "ES14.mat::ES14C8",
+          "target": 0.24390243902439024,
+          "prediction": 0.638102114200592
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C8::prefix-0050",
+          "group": "ES14.mat::ES14C8",
+          "target": 0.3983739837398374,
+          "prediction": 0.6882691383361816
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C8::prefix-0068",
+          "group": "ES14.mat::ES14C8",
+          "target": 0.5447154471544715,
+          "prediction": 0.5308607220649719
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C8::prefix-0087",
+          "group": "ES14.mat::ES14C8",
+          "target": 0.6991869918699187,
+          "prediction": 0.8829569816589355
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C8::prefix-0105",
+          "group": "ES14.mat::ES14C8",
+          "target": 0.8455284552845529,
+          "prediction": 0.7633212804794312
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C8::prefix-0124",
+          "group": "ES14.mat::ES14C8",
+          "target": 1.0,
+          "prediction": 0.868533194065094
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0024",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+          "target": 0.2406673015390091,
+          "prediction": 0.12940409779548645
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0038",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+          "target": 0.3886323185616189,
+          "prediction": 0.3334753215312958
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0053",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+          "target": 0.5467215484924876,
+          "prediction": 0.528092086315155
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0067",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+          "target": 0.6947017204861377,
+          "prediction": 0.7055807709693909
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0082",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+          "target": 0.8534209974609458,
+          "prediction": 0.7653437852859497
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0096",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+          "target": 1.0,
+          "prediction": 0.9416406750679016
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0024",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+          "target": 0.24087652142248164,
+          "prediction": 0.7720099687576294
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0038",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+          "target": 0.388551443174556,
+          "prediction": 0.7228147387504578
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0053",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+          "target": 0.5460381010003206,
+          "prediction": 0.9360360503196716
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0067",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+          "target": 0.6934404154493027,
+          "prediction": 0.8424614667892456
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0082",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+          "target": 0.8518493862792624,
+          "prediction": 0.9432117342948914
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0096",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+          "target": 1.0,
+          "prediction": 0.9981489181518555
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_14::prefix-0024",
+          "group": "Test_14",
+          "target": 0.45380269990052813,
+          "prediction": 0.6827034950256348
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_14::prefix-0038",
+          "group": "Test_14",
+          "target": 0.48939222112348896,
+          "prediction": 0.7653812170028687
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_14::prefix-0053",
+          "group": "Test_14",
+          "target": 0.607093359210136,
+          "prediction": 0.7936007976531982
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_14::prefix-0067",
+          "group": "Test_14",
+          "target": 0.6427050935535923,
+          "prediction": 0.8104161620140076
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_14::prefix-0082",
+          "group": "Test_14",
+          "target": 0.6810166763207536,
+          "prediction": 0.8449627757072449
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_14::prefix-0096",
+          "group": "Test_14",
+          "target": 1.0,
+          "prediction": 0.8714853525161743
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_15::prefix-0024",
+          "group": "Test_15",
+          "target": 0.2553296056646679,
+          "prediction": 0.38482627272605896
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_15::prefix-0038",
+          "group": "Test_15",
+          "target": 0.40660617329146287,
+          "prediction": 0.4168369174003601
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_15::prefix-0053",
+          "group": "Test_15",
+          "target": 0.5662660154146211,
+          "prediction": 0.4397258460521698
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_15::prefix-0067",
+          "group": "Test_15",
+          "target": 0.7127845508398175,
+          "prediction": 0.46171835064888
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_15::prefix-0082",
+          "group": "Test_15",
+          "target": 0.8647090646150815,
+          "prediction": 0.4504259526729584
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_15::prefix-0096",
+          "group": "Test_15",
+          "target": 1.0,
+          "prediction": 0.46601906418800354
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_17::prefix-0024",
+          "group": "Test_17",
+          "target": 0.24014296215898728,
+          "prediction": 0.4570613503456116
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_17::prefix-0038",
+          "group": "Test_17",
+          "target": 0.38738114131661827,
+          "prediction": 0.4763004779815674
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_17::prefix-0053",
+          "group": "Test_17",
+          "target": 0.5455231469546927,
+          "prediction": 0.49060913920402527
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_17::prefix-0067",
+          "group": "Test_17",
+          "target": 0.6942297433926868,
+          "prediction": 0.48840489983558655
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_17::prefix-0082",
+          "group": "Test_17",
+          "target": 0.8523349061700145,
+          "prediction": 0.48827338218688965
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_17::prefix-0096",
+          "group": "Test_17",
+          "target": 1.0,
+          "prediction": 0.5514373183250427
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_25::prefix-0024",
+          "group": "Test_25",
+          "target": 0.12174529621862554,
+          "prediction": 0.5247136354446411
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_25::prefix-0038",
+          "group": "Test_25",
+          "target": 0.4015336652482285,
+          "prediction": 0.5598909258842468
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_25::prefix-0053",
+          "group": "Test_25",
+          "target": 0.47939160085082744,
+          "prediction": 0.5059496760368347
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_25::prefix-0067",
+          "group": "Test_25",
+          "target": 0.549485682351667,
+          "prediction": 0.5697051286697388
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_25::prefix-0082",
+          "group": "Test_25",
+          "target": 0.9451150675998303,
+          "prediction": 0.883339524269104
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_25::prefix-0096",
+          "group": "Test_25",
+          "target": 1.0,
+          "prediction": 0.5623182654380798
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_27::prefix-0024",
+          "group": "Test_27",
+          "target": 0.8991729298412504,
+          "prediction": 0.6445856690406799
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_27::prefix-0038",
+          "group": "Test_27",
+          "target": 0.9132531133125352,
+          "prediction": 0.6300687193870544
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_27::prefix-0053",
+          "group": "Test_27",
+          "target": 0.9283513760374877,
+          "prediction": 0.6083801984786987
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_27::prefix-0067",
+          "group": "Test_27",
+          "target": 0.9708088378835497,
+          "prediction": 0.664599597454071
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_27::prefix-0082",
+          "group": "Test_27",
+          "target": 0.985903089323849,
+          "prediction": 0.6704949140548706
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_27::prefix-0096",
+          "group": "Test_27",
+          "target": 1.0,
+          "prediction": 0.6672499775886536
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_33::prefix-0024",
+          "group": "Test_33",
+          "target": 0.24110476867853375,
+          "prediction": 0.6304847002029419
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_33::prefix-0038",
+          "group": "Test_33",
+          "target": 0.3876919075185423,
+          "prediction": 0.6558658480644226
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_33::prefix-0053",
+          "group": "Test_33",
+          "target": 0.5448205936305287,
+          "prediction": 0.6868606805801392
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_33::prefix-0067",
+          "group": "Test_33",
+          "target": 0.6925435370217036,
+          "prediction": 0.7170298099517822
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_33::prefix-0082",
+          "group": "Test_33",
+          "target": 0.8513329192246386,
+          "prediction": 0.8058773875236511
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_33::prefix-0096",
+          "group": "Test_33",
+          "target": 1.0,
+          "prediction": 0.7094027400016785
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_36::prefix-0024",
+          "group": "Test_36",
+          "target": 0.24684817412811833,
+          "prediction": 0.4825488030910492
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_36::prefix-0038",
+          "group": "Test_36",
+          "target": 0.3970980488709745,
+          "prediction": 0.5555076599121094
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_36::prefix-0053",
+          "group": "Test_36",
+          "target": 0.5577948911681063,
+          "prediction": 0.521091878414154
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_36::prefix-0067",
+          "group": "Test_36",
+          "target": 0.707176828545695,
+          "prediction": 0.5417861938476562
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_36::prefix-0082",
+          "group": "Test_36",
+          "target": 0.8652274231479754,
+          "prediction": 0.5259457230567932
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_36::prefix-0096",
+          "group": "Test_36",
+          "target": 1.0,
+          "prediction": 0.7909486889839172
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_4::prefix-0024",
+          "group": "Test_4",
+          "target": 0.0018710317819172096,
+          "prediction": 0.3391586244106293
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_4::prefix-0038",
+          "group": "Test_4",
+          "target": 0.0029016767409094303,
+          "prediction": 0.3542620837688446
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_4::prefix-0053",
+          "group": "Test_4",
+          "target": 0.0040045705389227205,
+          "prediction": 0.8095991611480713
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_4::prefix-0067",
+          "group": "Test_4",
+          "target": 0.005035219168673755,
+          "prediction": 0.5053991675376892
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_4::prefix-0082",
+          "group": "Test_4",
+          "target": 0.0061381184542860815,
+          "prediction": 0.5064491629600525
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_4::prefix-0096",
+          "group": "Test_4",
+          "target": 1.0,
+          "prediction": 0.9286549687385559
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_7::prefix-0024",
+          "group": "Test_7",
+          "target": 0.27080217772170107,
+          "prediction": 0.3976142108440399
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_7::prefix-0038",
+          "group": "Test_7",
+          "target": 0.42993195387311756,
+          "prediction": 0.39700618386268616
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_7::prefix-0053",
+          "group": "Test_7",
+          "target": 0.5911490652438853,
+          "prediction": 0.38162246346473694
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_7::prefix-0067",
+          "group": "Test_7",
+          "target": 0.7316164941382937,
+          "prediction": 0.45488089323043823
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_7::prefix-0082",
+          "group": "Test_7",
+          "target": 0.8659675482918864,
+          "prediction": 0.42337095737457275
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_7::prefix-0096",
+          "group": "Test_7",
+          "target": 1.0,
+          "prediction": 0.8922613859176636
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_9::prefix-0024",
+          "group": "Test_9",
+          "target": 0.39005275977775244,
+          "prediction": 0.8256553411483765
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_9::prefix-0038",
+          "group": "Test_9",
+          "target": 0.427054827065675,
+          "prediction": 0.8485007882118225
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_9::prefix-0053",
+          "group": "Test_9",
+          "target": 0.516159622251805,
+          "prediction": 0.9534720778465271
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_9::prefix-0067",
+          "group": "Test_9",
+          "target": 0.5532607345363267,
+          "prediction": 0.9580492973327637
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_9::prefix-0082",
+          "group": "Test_9",
+          "target": 0.9628653248182096,
+          "prediction": 0.9528508186340332
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_9::prefix-0096",
+          "group": "Test_9",
+          "target": 1.0,
+          "prediction": 0.9923750758171082
+        }
+      ]
+    },
+    {
+      "seed": 42,
+      "validation_mae": 0.1704407036304474,
+      "best_epoch": 87,
+      "test_mae": 0.18925173580646515,
+      "parameter_count": 1639,
+      "predictions": [
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES12.mat::ES12C4::prefix-0028",
+          "group": "ES12.mat::ES12C4",
+          "target": 0.24324324324324326,
+          "prediction": 0.5477871298789978
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES12.mat::ES12C4::prefix-0045",
+          "group": "ES12.mat::ES12C4",
+          "target": 0.3963963963963964,
+          "prediction": 0.5100016593933105
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES12.mat::ES12C4::prefix-0062",
+          "group": "ES12.mat::ES12C4",
+          "target": 0.5495495495495496,
+          "prediction": 0.5656629800796509
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES12.mat::ES12C4::prefix-0078",
+          "group": "ES12.mat::ES12C4",
+          "target": 0.6936936936936937,
+          "prediction": 0.5891751646995544
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES12.mat::ES12C4::prefix-0095",
+          "group": "ES12.mat::ES12C4",
+          "target": 0.8468468468468469,
+          "prediction": 0.5477732419967651
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES12.mat::ES12C4::prefix-0112",
+          "group": "ES12.mat::ES12C4",
+          "target": 1.0,
+          "prediction": 0.7940570116043091
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C1::prefix-0032",
+          "group": "ES14.mat::ES14C1",
+          "target": 0.2440944881889764,
+          "prediction": 0.30932754278182983
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C1::prefix-0051",
+          "group": "ES14.mat::ES14C1",
+          "target": 0.3937007874015748,
+          "prediction": 0.30692583322525024
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C1::prefix-0070",
+          "group": "ES14.mat::ES14C1",
+          "target": 0.5433070866141733,
+          "prediction": 0.6608946919441223
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C1::prefix-0090",
+          "group": "ES14.mat::ES14C1",
+          "target": 0.7007874015748031,
+          "prediction": 0.6577581763267517
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C1::prefix-0109",
+          "group": "ES14.mat::ES14C1",
+          "target": 0.8503937007874016,
+          "prediction": 0.718555748462677
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C1::prefix-0128",
+          "group": "ES14.mat::ES14C1",
+          "target": 1.0,
+          "prediction": 0.838159441947937
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C2::prefix-0032",
+          "group": "ES14.mat::ES14C2",
+          "target": 0.2440944881889764,
+          "prediction": 0.3062732219696045
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C2::prefix-0051",
+          "group": "ES14.mat::ES14C2",
+          "target": 0.3937007874015748,
+          "prediction": 0.24724343419075012
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C2::prefix-0070",
+          "group": "ES14.mat::ES14C2",
+          "target": 0.5433070866141733,
+          "prediction": 0.6881589293479919
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C2::prefix-0090",
+          "group": "ES14.mat::ES14C2",
+          "target": 0.7007874015748031,
+          "prediction": 0.6214050054550171
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C2::prefix-0109",
+          "group": "ES14.mat::ES14C2",
+          "target": 0.8503937007874016,
+          "prediction": 0.7138633728027344
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C2::prefix-0128",
+          "group": "ES14.mat::ES14C2",
+          "target": 1.0,
+          "prediction": 0.8664571046829224
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C3::prefix-0032",
+          "group": "ES14.mat::ES14C3",
+          "target": 0.2440944881889764,
+          "prediction": 0.2782544493675232
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C3::prefix-0051",
+          "group": "ES14.mat::ES14C3",
+          "target": 0.3937007874015748,
+          "prediction": 0.22342731058597565
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C3::prefix-0070",
+          "group": "ES14.mat::ES14C3",
+          "target": 0.5433070866141733,
+          "prediction": 0.6858224868774414
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C3::prefix-0090",
+          "group": "ES14.mat::ES14C3",
+          "target": 0.7007874015748031,
+          "prediction": 0.6525315642356873
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C3::prefix-0109",
+          "group": "ES14.mat::ES14C3",
+          "target": 0.8503937007874016,
+          "prediction": 0.7572348713874817
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C3::prefix-0128",
+          "group": "ES14.mat::ES14C3",
+          "target": 1.0,
+          "prediction": 0.8626281023025513
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C4::prefix-0032",
+          "group": "ES14.mat::ES14C4",
+          "target": 0.2440944881889764,
+          "prediction": 0.35651135444641113
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C4::prefix-0051",
+          "group": "ES14.mat::ES14C4",
+          "target": 0.3937007874015748,
+          "prediction": 0.2656269371509552
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C4::prefix-0070",
+          "group": "ES14.mat::ES14C4",
+          "target": 0.5433070866141733,
+          "prediction": 0.6069832444190979
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C4::prefix-0090",
+          "group": "ES14.mat::ES14C4",
+          "target": 0.7007874015748031,
+          "prediction": 0.5680264830589294
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C4::prefix-0109",
+          "group": "ES14.mat::ES14C4",
+          "target": 0.8503937007874016,
+          "prediction": 0.6915075778961182
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C4::prefix-0128",
+          "group": "ES14.mat::ES14C4",
+          "target": 1.0,
+          "prediction": 0.8849959969520569
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C8::prefix-0031",
+          "group": "ES14.mat::ES14C8",
+          "target": 0.24390243902439024,
+          "prediction": 0.6843795776367188
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C8::prefix-0050",
+          "group": "ES14.mat::ES14C8",
+          "target": 0.3983739837398374,
+          "prediction": 0.7155965566635132
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C8::prefix-0068",
+          "group": "ES14.mat::ES14C8",
+          "target": 0.5447154471544715,
+          "prediction": 0.5465036034584045
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C8::prefix-0087",
+          "group": "ES14.mat::ES14C8",
+          "target": 0.6991869918699187,
+          "prediction": 0.8143886923789978
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C8::prefix-0105",
+          "group": "ES14.mat::ES14C8",
+          "target": 0.8455284552845529,
+          "prediction": 0.7590526938438416
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C8::prefix-0124",
+          "group": "ES14.mat::ES14C8",
+          "target": 1.0,
+          "prediction": 0.8254375457763672
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0024",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+          "target": 0.2406673015390091,
+          "prediction": 0.11269127577543259
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0038",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+          "target": 0.3886323185616189,
+          "prediction": 0.34978440403938293
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0053",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+          "target": 0.5467215484924876,
+          "prediction": 0.5572783350944519
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0067",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+          "target": 0.6947017204861377,
+          "prediction": 0.7319623827934265
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0082",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+          "target": 0.8534209974609458,
+          "prediction": 0.7893381118774414
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0096",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+          "target": 1.0,
+          "prediction": 0.9583910703659058
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0024",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+          "target": 0.24087652142248164,
+          "prediction": 0.7791678309440613
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0038",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+          "target": 0.388551443174556,
+          "prediction": 0.7121245861053467
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0053",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+          "target": 0.5460381010003206,
+          "prediction": 0.9057390093803406
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0067",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+          "target": 0.6934404154493027,
+          "prediction": 0.8506941199302673
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0082",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+          "target": 0.8518493862792624,
+          "prediction": 0.9399104714393616
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0096",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+          "target": 1.0,
+          "prediction": 0.9974449872970581
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_14::prefix-0024",
+          "group": "Test_14",
+          "target": 0.45380269990052813,
+          "prediction": 0.6655001640319824
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_14::prefix-0038",
+          "group": "Test_14",
+          "target": 0.48939222112348896,
+          "prediction": 0.701922595500946
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_14::prefix-0053",
+          "group": "Test_14",
+          "target": 0.607093359210136,
+          "prediction": 0.7294871807098389
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_14::prefix-0067",
+          "group": "Test_14",
+          "target": 0.6427050935535923,
+          "prediction": 0.7429733872413635
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_14::prefix-0082",
+          "group": "Test_14",
+          "target": 0.6810166763207536,
+          "prediction": 0.7676337361335754
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_14::prefix-0096",
+          "group": "Test_14",
+          "target": 1.0,
+          "prediction": 0.8340266942977905
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_15::prefix-0024",
+          "group": "Test_15",
+          "target": 0.2553296056646679,
+          "prediction": 0.44566965103149414
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_15::prefix-0038",
+          "group": "Test_15",
+          "target": 0.40660617329146287,
+          "prediction": 0.47018545866012573
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_15::prefix-0053",
+          "group": "Test_15",
+          "target": 0.5662660154146211,
+          "prediction": 0.4978905916213989
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_15::prefix-0067",
+          "group": "Test_15",
+          "target": 0.7127845508398175,
+          "prediction": 0.5322383642196655
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_15::prefix-0082",
+          "group": "Test_15",
+          "target": 0.8647090646150815,
+          "prediction": 0.49882546067237854
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_15::prefix-0096",
+          "group": "Test_15",
+          "target": 1.0,
+          "prediction": 0.5488409996032715
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_17::prefix-0024",
+          "group": "Test_17",
+          "target": 0.24014296215898728,
+          "prediction": 0.456760436296463
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_17::prefix-0038",
+          "group": "Test_17",
+          "target": 0.38738114131661827,
+          "prediction": 0.485612154006958
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_17::prefix-0053",
+          "group": "Test_17",
+          "target": 0.5455231469546927,
+          "prediction": 0.5143378376960754
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_17::prefix-0067",
+          "group": "Test_17",
+          "target": 0.6942297433926868,
+          "prediction": 0.5060186982154846
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_17::prefix-0082",
+          "group": "Test_17",
+          "target": 0.8523349061700145,
+          "prediction": 0.4919146001338959
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_17::prefix-0096",
+          "group": "Test_17",
+          "target": 1.0,
+          "prediction": 0.5592293739318848
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_25::prefix-0024",
+          "group": "Test_25",
+          "target": 0.12174529621862554,
+          "prediction": 0.3792068064212799
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_25::prefix-0038",
+          "group": "Test_25",
+          "target": 0.4015336652482285,
+          "prediction": 0.4174249768257141
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_25::prefix-0053",
+          "group": "Test_25",
+          "target": 0.47939160085082744,
+          "prediction": 0.36797034740448
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_25::prefix-0067",
+          "group": "Test_25",
+          "target": 0.549485682351667,
+          "prediction": 0.511888861656189
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_25::prefix-0082",
+          "group": "Test_25",
+          "target": 0.9451150675998303,
+          "prediction": 0.8886967897415161
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_25::prefix-0096",
+          "group": "Test_25",
+          "target": 1.0,
+          "prediction": 0.6186246871948242
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_27::prefix-0024",
+          "group": "Test_27",
+          "target": 0.8991729298412504,
+          "prediction": 0.6480176448822021
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_27::prefix-0038",
+          "group": "Test_27",
+          "target": 0.9132531133125352,
+          "prediction": 0.641288697719574
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_27::prefix-0053",
+          "group": "Test_27",
+          "target": 0.9283513760374877,
+          "prediction": 0.6378988027572632
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_27::prefix-0067",
+          "group": "Test_27",
+          "target": 0.9708088378835497,
+          "prediction": 0.6702151298522949
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_27::prefix-0082",
+          "group": "Test_27",
+          "target": 0.985903089323849,
+          "prediction": 0.6738353371620178
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_27::prefix-0096",
+          "group": "Test_27",
+          "target": 1.0,
+          "prediction": 0.6757785677909851
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_33::prefix-0024",
+          "group": "Test_33",
+          "target": 0.24110476867853375,
+          "prediction": 0.6559746861457825
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_33::prefix-0038",
+          "group": "Test_33",
+          "target": 0.3876919075185423,
+          "prediction": 0.683632493019104
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_33::prefix-0053",
+          "group": "Test_33",
+          "target": 0.5448205936305287,
+          "prediction": 0.6840047240257263
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_33::prefix-0067",
+          "group": "Test_33",
+          "target": 0.6925435370217036,
+          "prediction": 0.696307897567749
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_33::prefix-0082",
+          "group": "Test_33",
+          "target": 0.8513329192246386,
+          "prediction": 0.7445021271705627
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_33::prefix-0096",
+          "group": "Test_33",
+          "target": 1.0,
+          "prediction": 0.6983181238174438
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_36::prefix-0024",
+          "group": "Test_36",
+          "target": 0.24684817412811833,
+          "prediction": 0.4748121500015259
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_36::prefix-0038",
+          "group": "Test_36",
+          "target": 0.3970980488709745,
+          "prediction": 0.5533202886581421
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_36::prefix-0053",
+          "group": "Test_36",
+          "target": 0.5577948911681063,
+          "prediction": 0.5300546884536743
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_36::prefix-0067",
+          "group": "Test_36",
+          "target": 0.707176828545695,
+          "prediction": 0.5459681153297424
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_36::prefix-0082",
+          "group": "Test_36",
+          "target": 0.8652274231479754,
+          "prediction": 0.5353885889053345
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_36::prefix-0096",
+          "group": "Test_36",
+          "target": 1.0,
+          "prediction": 0.7595269680023193
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_4::prefix-0024",
+          "group": "Test_4",
+          "target": 0.0018710317819172096,
+          "prediction": 0.4030827283859253
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_4::prefix-0038",
+          "group": "Test_4",
+          "target": 0.0029016767409094303,
+          "prediction": 0.4297240078449249
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_4::prefix-0053",
+          "group": "Test_4",
+          "target": 0.0040045705389227205,
+          "prediction": 0.6541323065757751
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_4::prefix-0067",
+          "group": "Test_4",
+          "target": 0.005035219168673755,
+          "prediction": 0.46618467569351196
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_4::prefix-0082",
+          "group": "Test_4",
+          "target": 0.0061381184542860815,
+          "prediction": 0.4670443534851074
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_4::prefix-0096",
+          "group": "Test_4",
+          "target": 1.0,
+          "prediction": 0.8133015632629395
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_7::prefix-0024",
+          "group": "Test_7",
+          "target": 0.27080217772170107,
+          "prediction": 0.41914185881614685
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_7::prefix-0038",
+          "group": "Test_7",
+          "target": 0.42993195387311756,
+          "prediction": 0.43298062682151794
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_7::prefix-0053",
+          "group": "Test_7",
+          "target": 0.5911490652438853,
+          "prediction": 0.43203720450401306
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_7::prefix-0067",
+          "group": "Test_7",
+          "target": 0.7316164941382937,
+          "prediction": 0.498658686876297
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_7::prefix-0082",
+          "group": "Test_7",
+          "target": 0.8659675482918864,
+          "prediction": 0.4879211485385895
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_7::prefix-0096",
+          "group": "Test_7",
+          "target": 1.0,
+          "prediction": 0.8398457765579224
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_9::prefix-0024",
+          "group": "Test_9",
+          "target": 0.39005275977775244,
+          "prediction": 0.7589866518974304
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_9::prefix-0038",
+          "group": "Test_9",
+          "target": 0.427054827065675,
+          "prediction": 0.7928585410118103
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_9::prefix-0053",
+          "group": "Test_9",
+          "target": 0.516159622251805,
+          "prediction": 0.8812107443809509
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_9::prefix-0067",
+          "group": "Test_9",
+          "target": 0.5532607345363267,
+          "prediction": 0.8462793827056885
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_9::prefix-0082",
+          "group": "Test_9",
+          "target": 0.9628653248182096,
+          "prediction": 0.8747138977050781
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_9::prefix-0096",
+          "group": "Test_9",
+          "target": 1.0,
+          "prediction": 0.8965783715248108
+        }
+      ]
+    },
+    {
+      "seed": 73,
+      "validation_mae": 0.16683323681354523,
+      "best_epoch": 86,
+      "test_mae": 0.18993084132671356,
+      "parameter_count": 1639,
+      "predictions": [
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES12.mat::ES12C4::prefix-0028",
+          "group": "ES12.mat::ES12C4",
+          "target": 0.24324324324324326,
+          "prediction": 0.5837350487709045
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES12.mat::ES12C4::prefix-0045",
+          "group": "ES12.mat::ES12C4",
+          "target": 0.3963963963963964,
+          "prediction": 0.5547937154769897
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES12.mat::ES12C4::prefix-0062",
+          "group": "ES12.mat::ES12C4",
+          "target": 0.5495495495495496,
+          "prediction": 0.598458468914032
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES12.mat::ES12C4::prefix-0078",
+          "group": "ES12.mat::ES12C4",
+          "target": 0.6936936936936937,
+          "prediction": 0.6212905049324036
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES12.mat::ES12C4::prefix-0095",
+          "group": "ES12.mat::ES12C4",
+          "target": 0.8468468468468469,
+          "prediction": 0.5919564366340637
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES12.mat::ES12C4::prefix-0112",
+          "group": "ES12.mat::ES12C4",
+          "target": 1.0,
+          "prediction": 0.8190733194351196
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C1::prefix-0032",
+          "group": "ES14.mat::ES14C1",
+          "target": 0.2440944881889764,
+          "prediction": 0.3347327709197998
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C1::prefix-0051",
+          "group": "ES14.mat::ES14C1",
+          "target": 0.3937007874015748,
+          "prediction": 0.33543211221694946
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C1::prefix-0070",
+          "group": "ES14.mat::ES14C1",
+          "target": 0.5433070866141733,
+          "prediction": 0.6655506491661072
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C1::prefix-0090",
+          "group": "ES14.mat::ES14C1",
+          "target": 0.7007874015748031,
+          "prediction": 0.6646335124969482
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C1::prefix-0109",
+          "group": "ES14.mat::ES14C1",
+          "target": 0.8503937007874016,
+          "prediction": 0.7305575609207153
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C1::prefix-0128",
+          "group": "ES14.mat::ES14C1",
+          "target": 1.0,
+          "prediction": 0.8498029708862305
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C2::prefix-0032",
+          "group": "ES14.mat::ES14C2",
+          "target": 0.2440944881889764,
+          "prediction": 0.32727673649787903
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C2::prefix-0051",
+          "group": "ES14.mat::ES14C2",
+          "target": 0.3937007874015748,
+          "prediction": 0.27975621819496155
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C2::prefix-0070",
+          "group": "ES14.mat::ES14C2",
+          "target": 0.5433070866141733,
+          "prediction": 0.6902464628219604
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C2::prefix-0090",
+          "group": "ES14.mat::ES14C2",
+          "target": 0.7007874015748031,
+          "prediction": 0.6240611672401428
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C2::prefix-0109",
+          "group": "ES14.mat::ES14C2",
+          "target": 0.8503937007874016,
+          "prediction": 0.722789466381073
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C2::prefix-0128",
+          "group": "ES14.mat::ES14C2",
+          "target": 1.0,
+          "prediction": 0.8802185654640198
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C3::prefix-0032",
+          "group": "ES14.mat::ES14C3",
+          "target": 0.2440944881889764,
+          "prediction": 0.30042752623558044
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C3::prefix-0051",
+          "group": "ES14.mat::ES14C3",
+          "target": 0.3937007874015748,
+          "prediction": 0.2584918439388275
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C3::prefix-0070",
+          "group": "ES14.mat::ES14C3",
+          "target": 0.5433070866141733,
+          "prediction": 0.684334933757782
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C3::prefix-0090",
+          "group": "ES14.mat::ES14C3",
+          "target": 0.7007874015748031,
+          "prediction": 0.6505446434020996
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C3::prefix-0109",
+          "group": "ES14.mat::ES14C3",
+          "target": 0.8503937007874016,
+          "prediction": 0.7667558193206787
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C3::prefix-0128",
+          "group": "ES14.mat::ES14C3",
+          "target": 1.0,
+          "prediction": 0.8750017881393433
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C4::prefix-0032",
+          "group": "ES14.mat::ES14C4",
+          "target": 0.2440944881889764,
+          "prediction": 0.3714003264904022
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C4::prefix-0051",
+          "group": "ES14.mat::ES14C4",
+          "target": 0.3937007874015748,
+          "prediction": 0.3005859851837158
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C4::prefix-0070",
+          "group": "ES14.mat::ES14C4",
+          "target": 0.5433070866141733,
+          "prediction": 0.6009055972099304
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C4::prefix-0090",
+          "group": "ES14.mat::ES14C4",
+          "target": 0.7007874015748031,
+          "prediction": 0.5712109208106995
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C4::prefix-0109",
+          "group": "ES14.mat::ES14C4",
+          "target": 0.8503937007874016,
+          "prediction": 0.696972668170929
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C4::prefix-0128",
+          "group": "ES14.mat::ES14C4",
+          "target": 1.0,
+          "prediction": 0.9022916555404663
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C8::prefix-0031",
+          "group": "ES14.mat::ES14C8",
+          "target": 0.24390243902439024,
+          "prediction": 0.6762879490852356
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C8::prefix-0050",
+          "group": "ES14.mat::ES14C8",
+          "target": 0.3983739837398374,
+          "prediction": 0.7107191681861877
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C8::prefix-0068",
+          "group": "ES14.mat::ES14C8",
+          "target": 0.5447154471544715,
+          "prediction": 0.5470675826072693
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C8::prefix-0087",
+          "group": "ES14.mat::ES14C8",
+          "target": 0.6991869918699187,
+          "prediction": 0.848259449005127
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C8::prefix-0105",
+          "group": "ES14.mat::ES14C8",
+          "target": 0.8455284552845529,
+          "prediction": 0.7625433206558228
+        },
+        {
+          "device_type": "capacitor",
+          "sample_id": "ES14.mat::ES14C8::prefix-0124",
+          "group": "ES14.mat::ES14C8",
+          "target": 1.0,
+          "prediction": 0.8467985987663269
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0024",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+          "target": 0.2406673015390091,
+          "prediction": 0.12137368321418762
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0038",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+          "target": 0.3886323185616189,
+          "prediction": 0.32630854845046997
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0053",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+          "target": 0.5467215484924876,
+          "prediction": 0.49988237023353577
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0067",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+          "target": 0.6947017204861377,
+          "prediction": 0.6545993089675903
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0082",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+          "target": 0.8534209974609458,
+          "prediction": 0.722835898399353
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0096",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+          "target": 1.0,
+          "prediction": 0.9348116517066956
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0024",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+          "target": 0.24087652142248164,
+          "prediction": 0.793701171875
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0038",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+          "target": 0.388551443174556,
+          "prediction": 0.6812760829925537
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0053",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+          "target": 0.5460381010003206,
+          "prediction": 0.86276775598526
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0067",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+          "target": 0.6934404154493027,
+          "prediction": 0.811381995677948
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0082",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+          "target": 0.8518493862792624,
+          "prediction": 0.9119350910186768
+        },
+        {
+          "device_type": "igbt",
+          "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0096",
+          "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+          "target": 1.0,
+          "prediction": 0.9956140518188477
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_14::prefix-0024",
+          "group": "Test_14",
+          "target": 0.45380269990052813,
+          "prediction": 0.6551110148429871
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_14::prefix-0038",
+          "group": "Test_14",
+          "target": 0.48939222112348896,
+          "prediction": 0.7593129873275757
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_14::prefix-0053",
+          "group": "Test_14",
+          "target": 0.607093359210136,
+          "prediction": 0.7939764261245728
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_14::prefix-0067",
+          "group": "Test_14",
+          "target": 0.6427050935535923,
+          "prediction": 0.8210210204124451
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_14::prefix-0082",
+          "group": "Test_14",
+          "target": 0.6810166763207536,
+          "prediction": 0.8511347770690918
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_14::prefix-0096",
+          "group": "Test_14",
+          "target": 1.0,
+          "prediction": 0.9094281792640686
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_15::prefix-0024",
+          "group": "Test_15",
+          "target": 0.2553296056646679,
+          "prediction": 0.3890300393104553
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_15::prefix-0038",
+          "group": "Test_15",
+          "target": 0.40660617329146287,
+          "prediction": 0.41090551018714905
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_15::prefix-0053",
+          "group": "Test_15",
+          "target": 0.5662660154146211,
+          "prediction": 0.4543840289115906
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_15::prefix-0067",
+          "group": "Test_15",
+          "target": 0.7127845508398175,
+          "prediction": 0.4948672652244568
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_15::prefix-0082",
+          "group": "Test_15",
+          "target": 0.8647090646150815,
+          "prediction": 0.46669670939445496
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_15::prefix-0096",
+          "group": "Test_15",
+          "target": 1.0,
+          "prediction": 0.5108383297920227
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_17::prefix-0024",
+          "group": "Test_17",
+          "target": 0.24014296215898728,
+          "prediction": 0.3874821960926056
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_17::prefix-0038",
+          "group": "Test_17",
+          "target": 0.38738114131661827,
+          "prediction": 0.43817123770713806
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_17::prefix-0053",
+          "group": "Test_17",
+          "target": 0.5455231469546927,
+          "prediction": 0.47848600149154663
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_17::prefix-0067",
+          "group": "Test_17",
+          "target": 0.6942297433926868,
+          "prediction": 0.47928330302238464
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_17::prefix-0082",
+          "group": "Test_17",
+          "target": 0.8523349061700145,
+          "prediction": 0.4718896150588989
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_17::prefix-0096",
+          "group": "Test_17",
+          "target": 1.0,
+          "prediction": 0.540682315826416
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_25::prefix-0024",
+          "group": "Test_25",
+          "target": 0.12174529621862554,
+          "prediction": 0.3471197783946991
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_25::prefix-0038",
+          "group": "Test_25",
+          "target": 0.4015336652482285,
+          "prediction": 0.4020926356315613
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_25::prefix-0053",
+          "group": "Test_25",
+          "target": 0.47939160085082744,
+          "prediction": 0.3268687129020691
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_25::prefix-0067",
+          "group": "Test_25",
+          "target": 0.549485682351667,
+          "prediction": 0.5061559677124023
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_25::prefix-0082",
+          "group": "Test_25",
+          "target": 0.9451150675998303,
+          "prediction": 0.9223858118057251
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_25::prefix-0096",
+          "group": "Test_25",
+          "target": 1.0,
+          "prediction": 0.6195625066757202
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_27::prefix-0024",
+          "group": "Test_27",
+          "target": 0.8991729298412504,
+          "prediction": 0.6150480508804321
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_27::prefix-0038",
+          "group": "Test_27",
+          "target": 0.9132531133125352,
+          "prediction": 0.6076772809028625
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_27::prefix-0053",
+          "group": "Test_27",
+          "target": 0.9283513760374877,
+          "prediction": 0.6215982437133789
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_27::prefix-0067",
+          "group": "Test_27",
+          "target": 0.9708088378835497,
+          "prediction": 0.6360729932785034
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_27::prefix-0082",
+          "group": "Test_27",
+          "target": 0.985903089323849,
+          "prediction": 0.6471557021141052
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_27::prefix-0096",
+          "group": "Test_27",
+          "target": 1.0,
+          "prediction": 0.6383398771286011
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_33::prefix-0024",
+          "group": "Test_33",
+          "target": 0.24110476867853375,
+          "prediction": 0.6826990246772766
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_33::prefix-0038",
+          "group": "Test_33",
+          "target": 0.3876919075185423,
+          "prediction": 0.7078333497047424
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_33::prefix-0053",
+          "group": "Test_33",
+          "target": 0.5448205936305287,
+          "prediction": 0.7271257042884827
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_33::prefix-0067",
+          "group": "Test_33",
+          "target": 0.6925435370217036,
+          "prediction": 0.7470135688781738
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_33::prefix-0082",
+          "group": "Test_33",
+          "target": 0.8513329192246386,
+          "prediction": 0.818835437297821
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_33::prefix-0096",
+          "group": "Test_33",
+          "target": 1.0,
+          "prediction": 0.74385666847229
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_36::prefix-0024",
+          "group": "Test_36",
+          "target": 0.24684817412811833,
+          "prediction": 0.4498033821582794
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_36::prefix-0038",
+          "group": "Test_36",
+          "target": 0.3970980488709745,
+          "prediction": 0.5525317788124084
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_36::prefix-0053",
+          "group": "Test_36",
+          "target": 0.5577948911681063,
+          "prediction": 0.516524612903595
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_36::prefix-0067",
+          "group": "Test_36",
+          "target": 0.707176828545695,
+          "prediction": 0.5395979881286621
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_36::prefix-0082",
+          "group": "Test_36",
+          "target": 0.8652274231479754,
+          "prediction": 0.5226877331733704
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_36::prefix-0096",
+          "group": "Test_36",
+          "target": 1.0,
+          "prediction": 0.8110823035240173
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_4::prefix-0024",
+          "group": "Test_4",
+          "target": 0.0018710317819172096,
+          "prediction": 0.4253585934638977
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_4::prefix-0038",
+          "group": "Test_4",
+          "target": 0.0029016767409094303,
+          "prediction": 0.4126116633415222
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_4::prefix-0053",
+          "group": "Test_4",
+          "target": 0.0040045705389227205,
+          "prediction": 0.6645485162734985
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_4::prefix-0067",
+          "group": "Test_4",
+          "target": 0.005035219168673755,
+          "prediction": 0.471744567155838
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_4::prefix-0082",
+          "group": "Test_4",
+          "target": 0.0061381184542860815,
+          "prediction": 0.4663957953453064
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_4::prefix-0096",
+          "group": "Test_4",
+          "target": 1.0,
+          "prediction": 0.8924159407615662
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_7::prefix-0024",
+          "group": "Test_7",
+          "target": 0.27080217772170107,
+          "prediction": 0.3927784264087677
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_7::prefix-0038",
+          "group": "Test_7",
+          "target": 0.42993195387311756,
+          "prediction": 0.41752490401268005
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_7::prefix-0053",
+          "group": "Test_7",
+          "target": 0.5911490652438853,
+          "prediction": 0.4182228744029999
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_7::prefix-0067",
+          "group": "Test_7",
+          "target": 0.7316164941382937,
+          "prediction": 0.5302311182022095
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_7::prefix-0082",
+          "group": "Test_7",
+          "target": 0.8659675482918864,
+          "prediction": 0.4858538508415222
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_7::prefix-0096",
+          "group": "Test_7",
+          "target": 1.0,
+          "prediction": 0.9349023699760437
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_9::prefix-0024",
+          "group": "Test_9",
+          "target": 0.39005275977775244,
+          "prediction": 0.7991644740104675
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_9::prefix-0038",
+          "group": "Test_9",
+          "target": 0.427054827065675,
+          "prediction": 0.8218874931335449
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_9::prefix-0053",
+          "group": "Test_9",
+          "target": 0.516159622251805,
+          "prediction": 0.9087997674942017
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_9::prefix-0067",
+          "group": "Test_9",
+          "target": 0.5532607345363267,
+          "prediction": 0.897312343120575
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_9::prefix-0082",
+          "group": "Test_9",
+          "target": 0.9628653248182096,
+          "prediction": 0.912507951259613
+        },
+        {
+          "device_type": "mosfet",
+          "sample_id": "Test_9::prefix-0096",
+          "group": "Test_9",
+          "target": 1.0,
+          "prediction": 0.9681011438369751
+        }
+      ]
+    }
+  ],
+  "random_forest_mae": {
+    "17": 0.16767285227369555,
+    "42": 0.169829640876083,
+    "73": 0.16870666024735304
+  }
+}

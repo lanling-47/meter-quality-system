@@ -1,0 +1,352 @@
+{"kind":"deck","id":"pr/k173g5","name":"Deck"}
+{"kind":"layout","layoutId":"9e15dbee-5281-44b8-8657-86bde77614f2","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"e17306b2-80f9-400c-9fe8-e84649b1bfdd","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/2gec4i","slide":1,"title":"给企业看的系统价值与使用路径","textShapes":5}
+{"kind":"textbox","id":"sh/6hwvm5gj","slide":1,"text":"给企业看的系统价值与使用路径","textPreview":"给企业看的系统价值与使用路径","textChars":14,"textLines":1,"bbox":[82,70,520,28]}
+{"kind":"textbox","id":"sh/tk7ehkzu","slide":1,"text":"智能电表\n全周期质量管控系统","textPreview":"智能电表 | 全周期质量管控系统","textChars":14,"textLines":2,"bbox":[82,126,640,150]}
+{"kind":"textbox","id":"sh/sjydofy9","slide":1,"text":"把企业已有的检测、生产、老化和维修数据，变成可执行的质量动作。","textPreview":"把企业已有的检测、生产、老化和维修数据，变成可执行的质量动作。","textChars":31,"textLines":1,"bbox":[86,306,580,58]}
+{"kind":"shape","id":"sh/je5wbqhs","slide":1,"bbox":[86,410,230,30]}
+{"kind":"textbox","id":"sh/itwvilg7","slide":1,"text":"DATA IN → ACTION OUT","textPreview":"DATA IN → ACTION OUT","textChars":20,"textLines":1,"bbox":[86,415,230,20]}
+{"kind":"textbox","id":"sh/kfedkvyd","slide":1,"text":"数据接入 · 质量画像 · 风险预警 · 处置闭环","textPreview":"数据接入 · 质量画像 · 风险预警 · 处置闭环","textChars":25,"textLines":1,"bbox":[86,620,680,26]}
+{"kind":"image","id":"im/czqtojet","slide":1,"name":"","geometry":"roundRect","bbox":[720,70,470,520]}
+{"kind":"notes","id":"nt/2gec4i","slide":1,"text":"开场：今天不先讲算法，而是从企业生产现场出发，看一条电表生产线上的数据如何转化为质量预测、根因线索和处置动作。\n\n请企业带着三个问题听：现有数据够不够？不同工序能不能串起来？系统最终能不能帮助班组做决定？\n\n[Sources]\n- 截图来自本地运行系统 http://127.0.0.1:8090/dashboard。"}
+{"kind":"slide","id":"sl/c8dfmj","slide":2,"title":"01 背景意义","textShapes":30}
+{"kind":"textbox","id":"sh/czuhs7ax","slide":2,"text":"01 背景意义","textPreview":"01 背景意义","textChars":7,"textLines":1,"bbox":[72,40,500,24]}
+{"kind":"textbox","id":"sh/byl0z29c","slide":2,"text":"电表批量生产，质量证据分布在整条流水线","textPreview":"电表批量生产，质量证据分布在整条流水线","textChars":19,"textLines":1,"bbox":[72,72,1120,60]}
+{"kind":"textbox","id":"sh/qxczqxsr","slide":2,"text":"不同企业工序会有差异，但质量数据通常跨越来料、加工、检测、可靠性和售后。","textPreview":"不同企业工序会有差异，但质量数据通常跨越来料、加工、检测、可靠性和售后。","textChars":36,"textLines":1,"bbox":[74,136,1100,34]}
+{"kind":"textbox","id":"sh/pw3ixsr6","slide":2,"text":"零部件与电路板","textPreview":"零部件与电路板","textChars":7,"textLines":1,"bbox":[78,232,160,30]}
+{"kind":"shape","id":"sh/ovuhonal","slide":2,"bbox":[250,205,195,82]}
+{"kind":"textbox","id":"sh/3al0vi90","slide":2,"text":"来料抽检","textPreview":"来料抽检","textChars":4,"textLines":1,"bbox":[262,230,171,30]}
+{"kind":"textbox","id":"sh/29czmdsf","slide":2,"text":"›","textPreview":"›","textChars":1,"textLines":1,"bbox":[446,228,34,32]}
+{"kind":"shape","id":"sh/9s7itwra","slide":2,"bbox":[480,205,195,82]}
+{"kind":"textbox","id":"sh/8re10rap","slide":2,"text":"PCB加工 / 过孔","textPreview":"PCB加工 / 过孔","textChars":10,"textLines":1,"bbox":[492,230,171,30]}
+{"kind":"textbox","id":"sh/mtwn2lov","slide":2,"text":"›","textPreview":"›","textChars":1,"textLines":1,"bbox":[676,228,34,32]}
+{"kind":"shape","id":"sh/nu5ovqpg","slide":2,"bbox":[710,205,195,82]}
+{"kind":"textbox","id":"sh/8ve54v61","slide":2,"text":"SMT贴片","textPreview":"SMT贴片","textChars":5,"textLines":1,"bbox":[722,230,171,30]}
+{"kind":"textbox","id":"sh/9wn6x07m","slide":2,"text":"›","textPreview":"›","textChars":1,"textLines":1,"bbox":[906,228,34,32]}
+{"kind":"shape","id":"sh/ypcnyloz","slide":2,"bbox":[940,205,195,82]}
+{"kind":"textbox","id":"sh/zqlorqp4","slide":2,"text":"回流焊 / AOI","textPreview":"回流焊 / AOI","textChars":9,"textLines":1,"bbox":[952,230,171,30]}
+{"kind":"textbox","id":"sh/0ru50v6p","slide":2,"text":"装配与计量","textPreview":"装配与计量","textChars":5,"textLines":1,"bbox":[78,347,160,30]}
+{"kind":"shape","id":"sh/ls36tg7a","slide":2,"bbox":[250,320,195,82]}
+{"kind":"textbox","id":"sh/ilg7a5o3","slide":2,"text":"波峰焊","textPreview":"波峰焊","textChars":3,"textLines":1,"bbox":[262,345,171,30]}
+{"kind":"textbox","id":"sh/jmpo3apo","slide":2,"text":"›","textPreview":"›","textChars":1,"textLines":1,"bbox":[446,343,34,32]}
+{"kind":"shape","id":"sh/f6hkv250","slide":2,"bbox":[480,320,195,82]}
+{"kind":"textbox","id":"sh/e583mx4f","slide":2,"text":"整表装配","textPreview":"整表装配","textChars":4,"textLines":1,"bbox":[492,345,171,30]}
+{"kind":"textbox","id":"sh/18z2xcn6","slide":2,"text":"›","textPreview":"›","textChars":1,"textLines":1,"bbox":[676,343,34,32]}
+{"kind":"shape","id":"sh/g7qlo7ml","slide":2,"bbox":[710,320,195,82]}
+{"kind":"textbox","id":"sh/3u14zm5w","slide":2,"text":"参数写入 / 校准","textPreview":"参数写入 / 校准","textChars":9,"textLines":1,"bbox":[722,345,171,30]}
+{"kind":"textbox","id":"sh/2t83qh4r","slide":2,"text":"›","textPreview":"›","textChars":1,"textLines":1,"bbox":[906,343,34,32]}
+{"kind":"shape","id":"sh/pwjm1wn2","slide":2,"bbox":[940,320,195,82]}
+{"kind":"textbox","id":"sh/ovalsrmh","slide":2,"text":"功能与计量检定","textPreview":"功能与计量检定","textChars":7,"textLines":1,"bbox":[952,345,171,30]}
+{"kind":"textbox","id":"sh/by143m58","slide":2,"text":"可靠性与市场","textPreview":"可靠性与市场","textChars":6,"textLines":1,"bbox":[78,462,160,30]}
+{"kind":"shape","id":"sh/qxs3uh4n","slide":2,"bbox":[250,435,195,82]}
+{"kind":"textbox","id":"sh/83ulkr2l","slide":2,"text":"耐压 / 加压抽检","textPreview":"耐压 / 加压抽检","textChars":9,"textLines":1,"bbox":[262,460,171,30]}
+{"kind":"textbox","id":"sh/9432twj6","slide":2,"text":"›","textPreview":"›","textChars":1,"textLines":1,"bbox":[446,458,34,32]}
+{"kind":"shape","id":"sh/m1cji1kv","slide":2,"bbox":[480,435,195,82]}
+{"kind":"textbox","id":"sh/n2lkrm1g","slide":2,"text":"老化抽检","textPreview":"老化抽检","textChars":4,"textLines":1,"bbox":[492,460,171,30]}
+{"kind":"textbox","id":"sh/0za1gr2p","slide":2,"text":"›","textPreview":"›","textChars":1,"textLines":1,"bbox":[676,458,34,32]}
+{"kind":"shape","id":"sh/l0j2pwja","slide":2,"bbox":[710,435,195,82]}
+{"kind":"textbox","id":"sh/yxsjehkj","slide":2,"text":"出厂检验 / 包装","textPreview":"出厂检验 / 包装","textChars":9,"textLines":1,"bbox":[722,460,171,30]}
+{"kind":"textbox","id":"sh/zy1knm14","slide":2,"text":"›","textPreview":"›","textChars":1,"textLines":1,"bbox":[906,458,34,32]}
+{"kind":"shape","id":"sh/cva1c72t","slide":2,"bbox":[940,435,195,82]}
+{"kind":"textbox","id":"sh/dwj2lcjy","slide":2,"text":"销售后返修","textPreview":"销售后返修","textChars":5,"textLines":1,"bbox":[952,460,171,30]}
+{"kind":"shape","id":"sh/1gfit8zq","slide":2,"bbox":[78,570,1110,72]}
+{"kind":"textbox","id":"sh/gf6hk3il","slide":2,"text":"常见现状：设备和工位能记录数字化加工参数，但数据多用于存档与追溯，缺少跨工序的智能质量预测。","textPreview":"常见现状：设备和工位能记录数字化加工参数，但数据多用于存档与追溯，缺少跨工序的智能质量预测。","textChars":46,"textLines":1,"bbox":[112,591,1040,32]}
+{"kind":"textbox","id":"sh/fexgrih0","slide":2,"text":"智能电表全周期质量管控系统  |  企业数据接入与应用指南","textPreview":"智能电表全周期质量管控系统  |  企业数据接入与应用指南","textChars":29,"textLines":1,"bbox":[72,682,850,18]}
+{"kind":"textbox","id":"sh/edozid0f","slide":2,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[1148,680,58,18]}
+{"kind":"notes","id":"nt/c8dfmj","slide":2,"text":"这一页先快速回顾常见的电表批量生产流程。实际企业的工艺命名和先后顺序可能不同，但质量证据通常会跨越来料、电路板加工、焊接、装配、校准、可靠性抽检、出厂和售后。\n\n重点不是把工序讲全，而是说明每个工位都在产生数据。如果这些数据只留在设备、工位表格或独立数据库中，就只能完成事后查询，不能形成跨工序的质量预测。\n\n[Sources]\n- 流程为面向企业交流的典型工序归纳，需在试点时按企业真实产线校准。"}
+{"kind":"slide","id":"sl/mbl41i","slide":3,"title":"02 现状缺口","textShapes":21}
+{"kind":"textbox","id":"sh/5wj6xone","slide":3,"text":"02 现状缺口","textPreview":"02 现状缺口","textChars":7,"textLines":1,"bbox":[72,40,500,24]}
+{"kind":"textbox","id":"sh/itsn29on","slide":3,"text":"数字化记录，不等于智能质量测控","textPreview":"数字化记录，不等于智能质量测控","textChars":15,"textLines":1,"bbox":[72,72,1120,60]}
+{"kind":"textbox","id":"sh/ju1ove58","slide":3,"text":"局部工序优化能够控制单点参数，却难以解释整表质量为何发生变化。","textPreview":"局部工序优化能够控制单点参数，却难以解释整表质量为何发生变化。","textChars":31,"textLines":1,"bbox":[74,136,1100,34]}
+{"kind":"shape","id":"sh/w7a50z6h","slide":3,"bbox":[74,220,470,82]}
+{"kind":"textbox","id":"sh/xsj6t4n2","slide":3,"text":"数字化记录","textPreview":"数字化记录","textChars":5,"textLines":1,"bbox":[100,236,150,25]}
+{"kind":"textbox","id":"sh/a58nypor","slide":3,"text":"温度、速度、压力、电流等参数已被采集","textPreview":"温度、速度、压力、电流等参数已被采集","textChars":18,"textLines":1,"bbox":[260,234,250,48]}
+{"kind":"shape","id":"sh/v61oru5w","slide":3,"bbox":[74,330,470,82]}
+{"kind":"textbox","id":"sh/83q5wz6l","slide":3,"text":"单工序 AI","textPreview":"单工序 AI","textChars":6,"textLines":1,"bbox":[100,346,150,25]}
+{"kind":"textbox","id":"sh/94z6p4n6","slide":3,"text":"常集中在焊接、AOI或设备状态等一个模块","textPreview":"常集中在焊接、AOI或设备状态等一个模块","textChars":20,"textLines":1,"bbox":[260,344,250,48]}
+{"kind":"shape","id":"sh/1kjmlwni","slide":3,"bbox":[74,440,470,82]}
+{"kind":"textbox","id":"sh/0ja5cr6x","slide":3,"text":"末端抽检","textPreview":"末端抽检","textChars":4,"textLines":1,"bbox":[100,456,150,25]}
+{"kind":"textbox","id":"sh/zi14j65s","slide":3,"text":"依赖成品检验发现问题，反馈链路较长","textPreview":"依赖成品检验发现问题，反馈链路较长","textChars":17,"textLines":1,"bbox":[260,454,250,48]}
+{"kind":"shape","id":"sh/ehsna1o7","slide":3,"bbox":[610,220,580,302]}
+{"kind":"textbox","id":"sh/dgjmhwnm","slide":3,"text":"企业仍然难以回答","textPreview":"企业仍然难以回答","textChars":8,"textLines":1,"bbox":[650,252,380,30]}
+{"kind":"shape","id":"sh/cfal8r61","slide":3,"bbox":[650,310,32,30]}
+{"kind":"textbox","id":"sh/re14fm5g","slide":3,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[650,315,32,20]}
+{"kind":"textbox","id":"sh/qd836hov","slide":3,"text":"零部件抽检是否影响后续计量稳定性？","textPreview":"零部件抽检是否影响后续计量稳定性？","textChars":17,"textLines":1,"bbox":[700,313,445,30]}
+{"kind":"shape","id":"sh/pczmdcna","slide":3,"bbox":[650,358,32,30]}
+{"kind":"textbox","id":"sh/4bql4765","slide":3,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[650,363,32,20]}
+{"kind":"textbox","id":"sh/gvu50rel","slide":3,"text":"过孔数、波峰焊参数变化会怎样影响成品风险？","textPreview":"过孔数、波峰焊参数变化会怎样影响成品风险？","textChars":21,"textLines":1,"bbox":[700,361,445,30]}
+{"kind":"shape","id":"sh/hw3mtcv6","slide":3,"bbox":[650,406,32,30]}
+{"kind":"textbox","id":"sh/utcnyhwv","slide":3,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[650,411,32,20]}
+{"kind":"textbox","id":"sh/vul4rmxg","slide":3,"text":"成品加压和老化结果能否反向约束工艺窗口？","textPreview":"成品加压和老化结果能否反向约束工艺窗口？","textChars":20,"textLines":1,"bbox":[700,409,445,30]}
+{"kind":"shape","id":"sh/8ra5w7ep","slide":3,"bbox":[650,454,32,30]}
+{"kind":"textbox","id":"sh/ts3mpcfa","slide":3,"text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[650,459,32,20]}
+{"kind":"textbox","id":"sh/65s3uxwj","slide":3,"text":"售后返修是否能追溯到批次、器件与工序？","textPreview":"售后返修是否能追溯到批次、器件与工序？","textChars":19,"textLines":1,"bbox":[700,457,445,30]}
+{"kind":"shape","id":"sh/7q14n2x4","slide":3,"bbox":[610,550,580,72]}
+{"kind":"textbox","id":"sh/sne58bet","slide":3,"text":"核心缺口：缺少跨阶段、多粒度、多模态证据的联合分析。","textPreview":"核心缺口：缺少跨阶段、多粒度、多模态证据的联合分析。","textChars":26,"textLines":1,"bbox":[625,569,550,38]}
+{"kind":"textbox","id":"sh/donm1gve","slide":3,"text":"智能电表全周期质量管控系统  |  企业数据接入与应用指南","textPreview":"智能电表全周期质量管控系统  |  企业数据接入与应用指南","textChars":29,"textLines":1,"bbox":[72,682,850,18]}
+{"kind":"textbox","id":"sh/ni98raxg","slide":3,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[1148,680,58,18]}
+{"kind":"notes","id":"nt/mbl41i","slide":3,"text":"现有数字化系统通常已经能够采集温度、速度、压力、电流和检测结果；部分人工智能应用也能对焊接、AOI或设备状态做单点监控。\n\n问题是，整表质量往往不是某一个参数单独决定的。企业真正需要回答的是：上游器件和工艺变化，如何共同影响下游计量稳定性、老化表现和售后返修。\n\n[Sources]\n- 现状归纳用于说明本项目的问题定义，不代表对所有企业系统的统一判断。"}
+{"kind":"slide","id":"sl/532fsq","slide":4,"title":"03 方法需求","textShapes":14}
+{"kind":"textbox","id":"sh/ixcbyh0z","slide":4,"text":"03 方法需求","textPreview":"03 方法需求","textChars":7,"textLines":1,"bbox":[72,40,500,24]}
+{"kind":"textbox","id":"sh/503utwza","slide":4,"text":"整表质量，需要跨工序、多粒度证据共同判断","textPreview":"整表质量，需要跨工序、多粒度证据共同判断","textChars":20,"textLines":1,"bbox":[72,72,1120,60]}
+{"kind":"textbox","id":"sh/kzut0ri5","slide":4,"text":"同一质量结果可能同时受到器件、工艺、抽检可靠性和使用反馈影响。","textPreview":"同一质量结果可能同时受到器件、工艺、抽检可靠性和使用反馈影响。","textChars":31,"textLines":1,"bbox":[74,136,1100,34]}
+{"kind":"shape","id":"sh/va1snmh8","slide":4,"bbox":[78,205,1110,70]}
+{"kind":"textbox","id":"sh/a9sbuh0n","slide":4,"text":"单表级证据","textPreview":"单表级证据","textChars":5,"textLines":1,"bbox":[108,222,210,27]}
+{"kind":"textbox","id":"sh/xw3apwze","slide":4,"text":"主要元器件参数、计量误差、通信、生产重测、维修记录","textPreview":"主要元器件参数、计量误差、通信、生产重测、维修记录","textChars":25,"textLines":1,"bbox":[345,221,795,30]}
+{"kind":"shape","id":"sh/wvutwrit","slide":4,"bbox":[78,296,1110,70]}
+{"kind":"textbox","id":"sh/f65cz6hs","slide":4,"text":"批次级工艺画像","textPreview":"批次级工艺画像","textChars":7,"textLines":1,"bbox":[108,313,210,27]}
+{"kind":"textbox","id":"sh/u5wb6107","slide":4,"text":"双面电路板过孔数、SMT、回流焊、波峰焊系列参数","textPreview":"双面电路板过孔数、SMT、回流焊、波峰焊系列参数","textChars":24,"textLines":1,"bbox":[345,312,795,30]}
+{"kind":"shape","id":"sh/0v2d87yt","slide":4,"bbox":[78,387,1110,70]}
+{"kind":"textbox","id":"sh/1wbe1sfe","slide":4,"text":"抽检与时序证据","textPreview":"抽检与时序证据","textChars":7,"textLines":1,"bbox":[108,404,210,27]}
+{"kind":"textbox","id":"sh/etkv6xgn","slide":4,"text":"成品表抽检、加压抽检、老化曲线、试验前后偏移","textPreview":"成品表抽检、加压抽检、老化曲线、试验前后偏移","textChars":22,"textLines":1,"bbox":[345,403,795,30]}
+{"kind":"shape","id":"sh/futwz2x8","slide":4,"bbox":[78,478,1110,70]}
+{"kind":"textbox","id":"sh/srid4nyx","slide":4,"text":"生命周期反馈","textPreview":"生命周期反馈","textChars":6,"textLines":1,"bbox":[108,495,210,27]}
+{"kind":"textbox","id":"sh/dsrexsfi","slide":4,"text":"销售后故障现象、返修部位、复测结论、批次回溯","textPreview":"销售后故障现象、返修部位、复测结论、批次回溯","textChars":22,"textLines":1,"bbox":[345,494,795,30]}
+{"kind":"shape","id":"sh/qp0v2dgr","slide":4,"bbox":[78,590,1110,55]}
+{"kind":"textbox","id":"sh/rq9wvixc","slide":4,"text":"当前主体：结构化参数与时序数据；多模态扩展：AOI图像 + 维修文本 + 工艺知识。","textPreview":"当前主体：结构化参数与时序数据；多模态扩展：AOI图像 + 维修文本 + 工艺知识。","textChars":42,"textLines":1,"bbox":[112,606,1040,28]}
+{"kind":"textbox","id":"sh/43id03yl","slide":4,"text":"智能电表全周期质量管控系统  |  企业数据接入与应用指南","textPreview":"智能电表全周期质量管控系统  |  企业数据接入与应用指南","textChars":29,"textLines":1,"bbox":[72,682,850,18]}
+{"kind":"textbox","id":"sh/54ret8f6","slide":4,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[1148,680,58,18]}
+{"kind":"notes","id":"nt/532fsq","slide":4,"text":"这里把需要融合的证据分成四层：单表记录、批次工艺画像、抽检时序证据和生命周期反馈。\n\n特别注意，双面电路板过孔数、波峰焊参数等往往是批次级或工艺级数据；老化、加压也可能只抽检部分样表。不能把一条批次数据简单复制成每块表的独立实验结果。\n\n当前系统以结构化参数和时序数据为主体；AOI图像与维修文本属于多模态扩展方向。\n\n[Sources]\n- 数据粒度与模型输入依据 MGQ-Former模型结构.md、系统架构功能与使用说明.md。"}
+{"kind":"slide","id":"sl/ou1oub","slide":5,"title":"04 特殊技术路线","textShapes":22}
+{"kind":"textbox","id":"sh/nup4fmlg","slide":5,"text":"04 特殊技术路线","textPreview":"04 特殊技术路线","textChars":9,"textLines":1,"bbox":[72,40,500,24]}
+{"kind":"textbox","id":"sh/ovy58r21","slide":5,"text":"跨粒度融合预测、可解释追溯，再走向数字孪生闭环","textPreview":"跨粒度融合预测、可解释追溯，再走向数字孪生闭环","textChars":23,"textLines":1,"bbox":[72,72,1120,60]}
+{"kind":"textbox","id":"sh/pw7mhw3m","slide":5,"text":"既尊重单表与批次抽检的粒度差异，又把预测结果转成可验证的工艺和质量动作。","textPreview":"既尊重单表与批次抽检的粒度差异，又把预测结果转成可验证的工艺和质量动作。","textChars":36,"textLines":1,"bbox":[74,136,1100,34]}
+{"kind":"shape","id":"sh/epw32h4z","slide":5,"bbox":[307,295,90,1]}
+{"kind":"shape","id":"sh/fq54bmlk","slide":5,"bbox":[592,295,90,1]}
+{"kind":"shape","id":"sh/grel4rm5","slide":5,"bbox":[877,295,90,1]}
+{"kind":"shape","id":"sh/1s7mdc3q","slide":5,"bbox":[72,225,235,142]}
+{"kind":"shape","id":"sh/yl0ne1k3","slide":5,"bbox":[90,243,32,30]}
+{"kind":"textbox","id":"sh/zm94n6lo","slide":5,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[90,248,32,20]}
+{"kind":"textbox","id":"sh/321k7mpg","slide":5,"text":"多源质量数据","textPreview":"多源质量数据","textChars":6,"textLines":1,"bbox":[90,283,200,28]}
+{"kind":"textbox","id":"sh/i1s3eh8v","slide":5,"text":"器件 · 工艺 · 抽检\n老化 · 返修","textPreview":"器件 · 工艺 · 抽检 | 老化 · 返修","textChars":20,"textLines":2,"bbox":[90,319,200,42]}
+{"kind":"shape","id":"sh/54j29w7m","slide":5,"bbox":[357,225,235,142]}
+{"kind":"shape","id":"sh/43algrq1","slide":5,"bbox":[375,243,32,30]}
+{"kind":"textbox","id":"sh/rq1kb6pc","slide":5,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[375,248,32,20]}
+{"kind":"textbox","id":"sh/qps3i187","slide":5,"text":"身份与粒度对齐","textPreview":"身份与粒度对齐","textChars":7,"textLines":1,"bbox":[375,283,200,28]}
+{"kind":"textbox","id":"sh/ds3mdw7i","slide":5,"text":"meter_no / barcode\n单表级 / 批次级","textPreview":"meter_no / barcode | 单表级 / 批次级","textChars":28,"textLines":2,"bbox":[375,319,200,42]}
+{"kind":"shape","id":"sh/sralkrqx","slide":5,"bbox":[642,225,235,142]}
+{"kind":"shape","id":"sh/ful4f6po","slide":5,"bbox":[660,243,32,30]}
+{"kind":"textbox","id":"sh/etc3m183","slide":5,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[660,248,32,20]}
+{"kind":"textbox","id":"sh/a1gfu9wn","slide":5,"text":"MGQ-Former 融合","textPreview":"MGQ-Former 融合","textChars":13,"textLines":1,"bbox":[660,283,200,28]}
+{"kind":"textbox","id":"sh/b2pw3ed8","slide":5,"text":"46维 Meter Token\n8维 Batch Token","textPreview":"46维 Meter Token | 8维 Batch Token","textChars":30,"textLines":2,"bbox":[660,319,200,42]}
+{"kind":"shape","id":"sh/w3yxwzet","slide":5,"bbox":[927,225,235,142]}
+{"kind":"shape","id":"sh/x47ep4vy","slide":5,"bbox":[945,243,32,30]}
+{"kind":"textbox","id":"sh/mxgfqpwb","slide":5,"text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[945,248,32,20]}
+{"kind":"textbox","id":"sh/nypwzudw","slide":5,"text":"企业质量输出","textPreview":"企业质量输出","textChars":6,"textLines":1,"bbox":[945,283,200,28]}
+{"kind":"textbox","id":"sh/ozyxszeh","slide":5,"text":"风险排序 · 根因线索\n趋势 · 处置单","textPreview":"风险排序 · 根因线索 | 趋势 · 处置单","textChars":20,"textLines":2,"bbox":[945,319,200,42]}
+{"kind":"shape","id":"sh/907e14v2","slide":5,"bbox":[72,420,1110,88]}
+{"kind":"textbox","id":"sh/6t0f2tcv","slide":5,"text":"已实现的特点","textPreview":"已实现的特点","textChars":6,"textLines":1,"bbox":[98,441,165,24]}
+{"kind":"textbox","id":"sh/7u9gvydg","slide":5,"text":"不把批次抽检结果简单复制给每块表；通过 Transformer 学习单表、工艺与批次可靠性之间的非线性关联，并提供可解释风险线索。","textPreview":"不把批次抽检结果简单复制给每块表；通过 Transformer 学习单表、工艺与批次可靠性之间的非线性关联，并提供可解释风险线索。","textChars":65,"textLines":1,"bbox":[270,435,875,52]}
+{"kind":"shape","id":"sh/hovi1sfi","slide":5,"bbox":[72,535,1110,102]}
+{"kind":"shape","id":"sh/gn2hsnyx","slide":5,"bbox":[98,555,92,30]}
+{"kind":"textbox","id":"sh/fmt0zixc","slide":5,"text":"规划扩展","textPreview":"规划扩展","textChars":4,"textLines":1,"bbox":[98,560,92,20]}
+{"kind":"textbox","id":"sh/ulkzqdgr","slide":5,"text":"数字孪生工艺推演：候选参数变更 → 虚拟质量响应 → 风险变化预测 → 工艺窗口建议","textPreview":"数字孪生工艺推演：候选参数变更 → 虚拟质量响应 → 风险变化预测 → 工艺窗口建议","textChars":42,"textLines":1,"bbox":[215,554,920,28]}
+{"kind":"textbox","id":"sh/tkbix8f6","slide":5,"text":"需要多批次真实工艺数据和对照试验验证，当前演示系统不将其作为已交付功能。","textPreview":"需要多批次真实工艺数据和对照试验验证，当前演示系统不将其作为已交付功能。","textChars":36,"textLines":1,"bbox":[215,593,920,25]}
+{"kind":"textbox","id":"sh/8z2ho3y1","slide":5,"text":"智能电表全周期质量管控系统  |  企业数据接入与应用指南","textPreview":"智能电表全周期质量管控系统  |  企业数据接入与应用指南","textChars":29,"textLines":1,"bbox":[72,682,850,18]}
+{"kind":"textbox","id":"sh/7yt0vyxg","slide":5,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[1148,680,58,18]}
+{"kind":"notes","id":"nt/ou1oub","slide":5,"text":"这是本技术路线的核心。第一步汇聚多源数据，第二步按 meter_no、barcode 和批次关系做身份与粒度对齐，第三步由 MGQ-Former 融合单表和批次证据，第四步输出风险排序、解释线索和处置单。\n\n当前已经实现的是 46 维 Meter Token、8 维 Batch Token 的跨粒度融合，以及风险预测和可解释追溯。\n\n数字孪生部分是后续扩展：将候选工艺参数输入虚拟质量模型，预测风险变化并给出工艺窗口建议。它需要多批次真实工艺数据和对照实验，现场必须明确不能称为当前已交付功能。\n\n[Sources]\n- MGQ-Former模型结构.md；系统架构功能与使用说明.md；全流程数据缺口与数量不足分析.md。"}
+{"kind":"slide","id":"sl/tq6fbi","slide":6,"title":"05 企业数据","textShapes":18}
+{"kind":"textbox","id":"sh/gjul0fed","slide":6,"text":"05 企业数据","textPreview":"05 企业数据","textChars":7,"textLines":1,"bbox":[72,40,500,24]}
+{"kind":"textbox","id":"sh/fil47uxs","slide":6,"text":"接下来回答：企业的数据从哪里来？","textPreview":"接下来回答：企业的数据从哪里来？","textChars":16,"textLines":1,"bbox":[72,72,1120,60]}
+{"kind":"textbox","id":"sh/ehc3ypw7","slide":6,"text":"系统不要求推翻原有系统，先接入企业已经在产生的数据。","textPreview":"系统不要求推翻原有系统，先接入企业已经在产生的数据。","textChars":26,"textLines":1,"bbox":[74,136,1100,34]}
+{"kind":"shape","id":"sh/tg3m5kfm","slide":6,"bbox":[80,205,1120,76]}
+{"kind":"textbox","id":"sh/sfulcfe1","slide":6,"text":"来料与器件","textPreview":"来料与器件","textChars":5,"textLines":1,"bbox":[108,221,170,25]}
+{"kind":"textbox","id":"sh/rel43axg","slide":6,"text":"晶振、互感器、元器件批次抽检","textPreview":"晶振、互感器、元器件批次抽检","textChars":14,"textLines":1,"bbox":[300,220,430,42]}
+{"kind":"textbox","id":"sh/6ds3a5wb","slide":6,"text":"判断来料是否带来早期风险","textPreview":"判断来料是否带来早期风险","textChars":12,"textLines":1,"bbox":[765,220,385,42]}
+{"kind":"shape","id":"sh/5cjm10fq","slide":6,"bbox":[80,302,1120,76]}
+{"kind":"textbox","id":"sh/4bal8ve5","slide":6,"text":"生产过程","textPreview":"生产过程","textChars":4,"textLines":1,"bbox":[108,318,170,25]}
+{"kind":"textbox","id":"sh/yxcjipwj","slide":6,"text":"PCB过孔、SMT、回流焊、在线测试、波峰焊","textPreview":"PCB过孔、SMT、回流焊、在线测试、波峰焊","textChars":22,"textLines":1,"bbox":[300,317,430,42]}
+{"kind":"textbox","id":"sh/zyl0bux4","slide":6,"text":"定位工艺批次与异常工序","textPreview":"定位工艺批次与异常工序","textChars":11,"textLines":1,"bbox":[765,317,385,42]}
+{"kind":"shape","id":"sh/kju1kzep","slide":6,"bbox":[80,399,1120,76]}
+{"kind":"textbox","id":"sh/lk3id4fa","slide":6,"text":"出厂与可靠性","textPreview":"出厂与可靠性","textChars":6,"textLines":1,"bbox":[108,415,170,25]}
+{"kind":"textbox","id":"sh/atsjepgn","slide":6,"text":"成品抽检、加压、老化、通信与误差指标","textPreview":"成品抽检、加压、老化、通信与误差指标","textChars":18,"textLines":1,"bbox":[300,414,430,42]}
+{"kind":"textbox","id":"sh/bul07ux8","slide":6,"text":"形成可靠性和放行前证据","textPreview":"形成可靠性和放行前证据","textChars":11,"textLines":1,"bbox":[765,414,385,42]}
+{"kind":"shape","id":"sh/cvu1gfyt","slide":6,"bbox":[80,496,1120,76]}
+{"kind":"textbox","id":"sh/xw3i9kfy","slide":6,"text":"售后与维修","textPreview":"售后与维修","textChars":5,"textLines":1,"bbox":[108,512,170,25]}
+{"kind":"textbox","id":"sh/2psza5gb","slide":6,"text":"故障现象、维修动作、复测结果","textPreview":"故障现象、维修动作、复测结果","textChars":14,"textLines":1,"bbox":[300,511,430,42]}
+{"kind":"textbox","id":"sh/nq103axw","slide":6,"text":"把问题回溯到产品与批次","textPreview":"把问题回溯到产品与批次","textChars":11,"textLines":1,"bbox":[765,511,385,42]}
+{"kind":"shape","id":"sh/ruxgb6do","slide":6,"bbox":[80,605,1120,42]}
+{"kind":"textbox","id":"sh/6tofi1w3","slide":6,"text":"企业展示时可以直接带一份脱敏 Excel：现场导入，现场看到结果。","textPreview":"企业展示时可以直接带一份脱敏 Excel：现场导入，现场看到结果。","textChars":33,"textLines":1,"bbox":[110,616,1060,24]}
+{"kind":"textbox","id":"sh/dwzydgvu","slide":6,"text":"智能电表全周期质量管控系统  |  企业数据接入与应用指南","textPreview":"智能电表全周期质量管控系统  |  企业数据接入与应用指南","textChars":29,"textLines":1,"bbox":[72,682,850,18]}
+{"kind":"textbox","id":"sh/svqxkbe9","slide":6,"text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[1148,680,58,18]}
+{"kind":"notes","id":"nt/tq6fbi","slide":6,"text":"完成背景和技术路线说明后，再落到企业的数据来源。系统不要求推翻原有系统，而是先接入企业已经在产生的来料、生产、出厂、可靠性和维修数据。\n\n现场可以询问企业：哪些数据有 Excel？哪些在 MES、设备或检测仪器中？是否包含条码、批次和时间字段？\n\n[Sources]\n- 数据类别依据项目现有 ETL、数据库模型与数据管理页面。"}
+{"kind":"slide","id":"sl/ejjkow","slide":7,"title":"06 数据接入","textShapes":19}
+{"kind":"textbox","id":"sh/8nil4nyd","slide":7,"text":"06 数据接入","textPreview":"06 数据接入","textChars":7,"textLines":1,"bbox":[72,40,500,24]}
+{"kind":"textbox","id":"sh/7m9kbihs","slide":7,"text":"三种方式，把真实业务数据送进来","textPreview":"三种方式，把真实业务数据送进来","textChars":15,"textLines":1,"bbox":[72,72,1120,60]}
+{"kind":"textbox","id":"sh/ml0j2dg7","slide":7,"text":"先用最容易落地的 Excel；后续再接入目录监听和系统接口。","textPreview":"先用最容易落地的 Excel；后续再接入目录监听和系统接口。","textChars":30,"textLines":1,"bbox":[74,136,1100,34]}
+{"kind":"shape","id":"sh/lkr298zm","slide":7,"bbox":[74,220,345,235]}
+{"kind":"shape","id":"sh/kjy10ny1","slide":7,"bbox":[98,244,74,30]}
+{"kind":"textbox","id":"sh/zipk7ihg","slide":7,"text":"方式 1","textPreview":"方式 1","textChars":4,"textLines":1,"bbox":[98,249,74,20]}
+{"kind":"textbox","id":"sh/yhgjedgb","slide":7,"text":"Excel 批量上传","textPreview":"Excel 批量上传","textChars":10,"textLines":1,"bbox":[98,294,290,32]}
+{"kind":"textbox","id":"sh/xg7258zq","slide":7,"text":"data/raw/ 或页面上传；适合历史数据、班次汇总和供应商文件","textPreview":"data/raw/ 或页面上传；适合历史数据、班次汇总和供应商文件","textChars":33,"textLines":1,"bbox":[98,345,290,50]}
+{"kind":"textbox","id":"sh/cfy1c3y5","slide":7,"text":"马上可用","textPreview":"马上可用","textChars":4,"textLines":1,"bbox":[98,415,290,25]}
+{"kind":"shape","id":"sh/a1cj29gz","slide":7,"bbox":[459,220,345,235]}
+{"kind":"shape","id":"sh/v2lkvexk","slide":7,"bbox":[483,244,74,30]}
+{"kind":"textbox","id":"sh/w3u14jy5","slide":7,"text":"方式 2","textPreview":"方式 2","textChars":4,"textLines":1,"bbox":[483,249,74,20]}
+{"kind":"textbox","id":"sh/x4n2xofq","slide":7,"text":"本地监听目录","textPreview":"本地监听目录","textChars":6,"textLines":1,"bbox":[483,294,290,32]}
+{"kind":"textbox","id":"sh/mxcjy9g3","slide":7,"text":"watch_dir/；生产系统定时导出文件，系统自动扫描","textPreview":"watch_dir/；生产系统定时导出文件，系统自动扫描","textChars":28,"textLines":1,"bbox":[483,345,290,50]}
+{"kind":"textbox","id":"sh/nylkrexo","slide":7,"text":"减少手工操作","textPreview":"减少手工操作","textChars":6,"textLines":1,"bbox":[483,415,290,25]}
+{"kind":"shape","id":"sh/8zu10jy9","slide":7,"bbox":[844,220,345,235]}
+{"kind":"shape","id":"sh/9032t4fu","slide":7,"bbox":[868,244,74,30]}
+{"kind":"textbox","id":"sh/y9sjupg7","slide":7,"text":"方式 3","textPreview":"方式 3","textChars":4,"textLines":1,"bbox":[868,249,74,20]}
+{"kind":"textbox","id":"sh/za10nuxc","slide":7,"text":"页面手动录入","textPreview":"页面手动录入","textChars":6,"textLines":1,"bbox":[868,294,290,32]}
+{"kind":"textbox","id":"sh/32x8f698","slide":7,"text":"少量补录、复测结果和维修结论","textPreview":"少量补录、复测结果和维修结论","textChars":14,"textLines":1,"bbox":[868,345,290,50]}
+{"kind":"textbox","id":"sh/i1o761sn","slide":7,"text":"保证闭环","textPreview":"保证闭环","textChars":4,"textLines":1,"bbox":[868,415,290,25]}
+{"kind":"shape","id":"sh/436p8bad","slide":7,"bbox":[640,500,560,135]}
+{"kind":"textbox","id":"sh/r6x8j694","slide":7,"text":"接入后的第一件事：核对成功数、失败数、字段映射。","textPreview":"接入后的第一件事：核对成功数、失败数、字段映射。","textChars":24,"textLines":1,"bbox":[680,528,480,30]}
+{"kind":"textbox","id":"sh/q5o7a1sj","slide":7,"text":"核心主键：barcode ↔ meter_no ↔ 批次 / 订单。","textPreview":"核心主键：barcode ↔ meter_no ↔ 批次 / 订单。","textChars":34,"textLines":1,"bbox":[680,575,480,25]}
+{"kind":"textbox","id":"sh/dszqlgra","slide":7,"text":"智能电表全周期质量管控系统  |  企业数据接入与应用指南","textPreview":"智能电表全周期质量管控系统  |  企业数据接入与应用指南","textChars":29,"textLines":1,"bbox":[72,682,850,18]}
+{"kind":"textbox","id":"sh/cr6pcbap","slide":7,"text":"07","textPreview":"07","textChars":2,"textLines":1,"bbox":[1148,680,58,18]}
+{"kind":"image","id":"im/yhw7mtgr","slide":7,"name":"","geometry":"roundRect","bbox":[74,490,520,165]}
+{"kind":"notes","id":"nt/ejjkow","slide":7,"text":"讲解顺序：先用 Excel 批量导入历史数据，最快看到结果；再用 watch_dir 监听生产系统定时导出的文件；少量复测和维修结论可以在页面补录。\n\n现场演示只需要一份脱敏 Excel。先验证数据链路和分析价值，再讨论 MES、QMS 或设备接口改造。\n\n[Sources]\n- data/raw/ 与 watch_dir/ 为项目默认数据目录；截图来自本地数据导入页面。"}
+{"kind":"slide","id":"sl/01t1nj","slide":8,"title":"07 数据关联","textShapes":15}
+{"kind":"textbox","id":"sh/ypkrqh4b","slide":8,"text":"07 数据关联","textPreview":"07 数据关联","textChars":7,"textLines":1,"bbox":[72,40,500,24]}
+{"kind":"textbox","id":"sh/lcva1w32","slide":8,"text":"一块电表，要能串起它的完整质量档案","textPreview":"一块电表，要能串起它的完整质量档案","textChars":17,"textLines":1,"bbox":[72,72,1120,60]}
+{"kind":"textbox","id":"sh/kr29srmh","slide":8,"text":"没有统一身份，数据越多越难用；有了映射，问题才能追到批次和工序。","textPreview":"没有统一身份，数据越多越难用；有了映射，问题才能追到批次和工序。","textChars":32,"textLines":1,"bbox":[74,136,1100,34]}
+{"kind":"shape","id":"sh/alkrmx4f","slide":8,"bbox":[735,205,450,400]}
+{"kind":"textbox","id":"sh/xobaxc3q","slide":8,"text":"建议企业先统一 4 个字段","textPreview":"建议企业先统一 4 个字段","textChars":13,"textLines":1,"bbox":[770,238,360,30]}
+{"kind":"textbox","id":"sh/cn29o7m5","slide":8,"text":"电表编号","textPreview":"电表编号","textChars":4,"textLines":1,"bbox":[770,305,180,24]}
+{"kind":"shape","id":"sh/vids76l4","slide":8,"bbox":[960,303,180,30]}
+{"kind":"textbox","id":"sh/uh4by14j","slide":8,"text":"meter_no","textPreview":"meter_no","textChars":8,"textLines":1,"bbox":[960,308,180,20]}
+{"kind":"textbox","id":"sh/svidsj6p","slide":8,"text":"生产条码","textPreview":"生产条码","textChars":4,"textLines":1,"bbox":[770,363,180,24]}
+{"kind":"shape","id":"sh/twrelona","slide":8,"bbox":[960,361,180,30]}
+{"kind":"textbox","id":"sh/6tgvqtoj","slide":8,"text":"barcode","textPreview":"barcode","textChars":7,"textLines":1,"bbox":[960,366,180,20]}
+{"kind":"textbox","id":"sh/ru9wjy54","slide":8,"text":"批次 / 订单","textPreview":"批次 / 订单","textChars":7,"textLines":1,"bbox":[770,421,180,24]}
+{"kind":"shape","id":"sh/4rydoj6t","slide":8,"bbox":[960,419,180,30]}
+{"kind":"textbox","id":"sh/5s7ehony","slide":8,"text":"batch / order","textPreview":"batch / order","textChars":13,"textLines":1,"bbox":[960,424,180,20]}
+{"kind":"textbox","id":"sh/i5gvm9on","slide":8,"text":"时间戳","textPreview":"时间戳","textChars":3,"textLines":1,"bbox":[770,479,180,24]}
+{"kind":"shape","id":"sh/jqpwfe58","slide":8,"bbox":[960,477,180,30]}
+{"kind":"textbox","id":"sh/w3ydkz6h","slide":8,"text":"test_time","textPreview":"test_time","textChars":9,"textLines":1,"bbox":[960,482,180,20]}
+{"kind":"textbox","id":"sh/h47ed4n2","slide":8,"text":"关联成功后，系统才可以回答：\n“这块表为什么被标红？”","textPreview":"关联成功后，系统才可以回答： | “这块表为什么被标红？”","textChars":27,"textLines":2,"bbox":[770,545,340,55]}
+{"kind":"textbox","id":"sh/xkzuh0fq","slide":8,"text":"智能电表全周期质量管控系统  |  企业数据接入与应用指南","textPreview":"智能电表全周期质量管控系统  |  企业数据接入与应用指南","textChars":29,"textLines":1,"bbox":[72,682,850,18]}
+{"kind":"textbox","id":"sh/cjqt8vy5","slide":8,"text":"08","textPreview":"08","textChars":2,"textLines":1,"bbox":[1148,680,58,18]}
+{"kind":"image","id":"im/i1ory1kf","slide":8,"name":"","geometry":"roundRect","bbox":[72,205,610,400]}
+{"kind":"notes","id":"nt/01t1nj","slide":8,"text":"系统能否落地的关键，是一块表必须有统一身份。请企业确认是否能够提供 meter_no、barcode、批次或订单、检测时间。\n\n如果这些字段无法稳定对应，系统可以做总体统计，但无法可靠追溯到具体电表、批次和工序。\n\n[Sources]\n- 字段名称与关联逻辑依据项目数据管理页面和 data_linkage_service.py。"}
+{"kind":"slide","id":"sl/cb4ddy","slide":9,"title":"08 数据变结果","textShapes":13}
+{"kind":"textbox","id":"sh/on6x47y5","slide":9,"text":"08 数据变结果","textPreview":"08 数据变结果","textChars":8,"textLines":1,"bbox":[72,40,500,24]}
+{"kind":"textbox","id":"sh/nmxwvmx0","slide":9,"text":"数据进来后，企业立刻能看到什么？","textPreview":"数据进来后，企业立刻能看到什么？","textChars":16,"textLines":1,"bbox":[72,72,1120,60]}
+{"kind":"textbox","id":"sh/mlov2hgf","slide":9,"text":"从“文件记录”变成“风险、趋势、责任和下一步动作”。","textPreview":"从“文件记录”变成“风险、趋势、责任和下一步动作”。","textChars":26,"textLines":1,"bbox":[74,136,1100,34]}
+{"kind":"shape","id":"sh/0j6d07y9","slide":9,"bbox":[850,205,340,76]}
+{"kind":"textbox","id":"sh/zidwr2xo","slide":9,"text":"看全局","textPreview":"看全局","textChars":3,"textLines":1,"bbox":[875,220,85,24]}
+{"kind":"textbox","id":"sh/ex4vyxg3","slide":9,"text":"当前批次、正常数、高风险数","textPreview":"当前批次、正常数、高风险数","textChars":13,"textLines":1,"bbox":[970,220,190,42]}
+{"kind":"shape","id":"sh/lgze5wfy","slide":9,"bbox":[850,300,340,76]}
+{"kind":"textbox","id":"sh/kfqxcbed","slide":9,"text":"看重点","textPreview":"看重点","textChars":3,"textLines":1,"bbox":[875,315,85,24]}
+{"kind":"textbox","id":"sh/a9credcn","slide":9,"text":"优先复测哪些电表","textPreview":"优先复测哪些电表","textChars":8,"textLines":1,"bbox":[970,315,190,42]}
+{"kind":"shape","id":"sh/vuls7id8","slide":9,"bbox":[850,395,340,76]}
+{"kind":"textbox","id":"sh/wve9gnut","slide":9,"text":"看原因","textPreview":"看原因","textChars":3,"textLines":1,"bbox":[875,410,85,24]}
+{"kind":"textbox","id":"sh/xwna9sve","slide":9,"text":"误差、时钟、通信、工序线索","textPreview":"误差、时钟、通信、工序线索","textChars":13,"textLines":1,"bbox":[970,410,190,42]}
+{"kind":"shape","id":"sh/m5cradcr","slide":9,"bbox":[850,490,340,76]}
+{"kind":"textbox","id":"sh/n6ls3ydc","slide":9,"text":"看闭环","textPreview":"看闭环","textChars":3,"textLines":1,"bbox":[875,505,85,24]}
+{"kind":"textbox","id":"sh/87u9c3ux","slide":9,"text":"导出处置单，交给班组执行","textPreview":"导出处置单，交给班组执行","textChars":12,"textLines":1,"bbox":[970,505,190,42]}
+{"kind":"textbox","id":"sh/983a58v2","slide":9,"text":"智能电表全周期质量管控系统  |  企业数据接入与应用指南","textPreview":"智能电表全周期质量管控系统  |  企业数据接入与应用指南","textChars":29,"textLines":1,"bbox":[72,682,850,18]}
+{"kind":"textbox","id":"sh/61wrmxcv","slide":9,"text":"09","textPreview":"09","textChars":2,"textLines":1,"bbox":[1148,680,58,18]}
+{"kind":"image","id":"im/o3ypozql","slide":9,"name":"","geometry":"roundRect","bbox":[72,192,750,450]}
+{"kind":"notes","id":"nt/cb4ddy","slide":9,"text":"数据导入和关联后，企业看到的不再只是文件，而是批次质量状态、高风险对象、趋势和问题线索。\n\n可以现场指向看板中的高风险数量，再说明这些对象会进入复测、隔离和处置流程。\n\n[Sources]\n- 截图来自本地质量看板；页面数据为当前本地演示数据。"}
+{"kind":"slide","id":"sl/cepu7d","slide":10,"title":"09 风险预警","textShapes":13}
+{"kind":"textbox","id":"sh/it0nap4z","slide":10,"text":"09 风险预警","textPreview":"09 风险预警","textChars":7,"textLines":1,"bbox":[72,40,500,24]}
+{"kind":"textbox","id":"sh/5wr6lkna","slide":10,"text":"先看高风险，再安排复测","textPreview":"先看高风险，再安排复测","textChars":11,"textLines":1,"bbox":[72,72,1120,60]}
+{"kind":"textbox","id":"sh/4vi5cfmp","slide":10,"text":"预测的价值是排序和分流，让有限的检验资源先用在最该查的对象上。","textPreview":"预测的价值是排序和分流，让有限的检验资源先用在最该查的对象上。","textChars":31,"textLines":1,"bbox":[74,136,1100,34]}
+{"kind":"shape","id":"sh/6x0nep4v","slide":10,"bbox":[845,205,345,410]}
+{"kind":"textbox","id":"sh/t0r6p4nm","slide":10,"text":"企业现场动作","textPreview":"企业现场动作","textChars":6,"textLines":1,"bbox":[875,238,260,30]}
+{"kind":"textbox","id":"sh/szi5gzm1","slide":10,"text":"高风险","textPreview":"高风险","textChars":3,"textLines":1,"bbox":[875,305,100,24]}
+{"kind":"textbox","id":"sh/72p4bq5c","slide":10,"text":"隔离 + 复测","textPreview":"隔离 + 复测","textChars":7,"textLines":1,"bbox":[1000,305,160,24]}
+{"kind":"textbox","id":"sh/m1wn254r","slide":10,"text":"中风险","textPreview":"中风险","textChars":3,"textLines":1,"bbox":[875,370,100,24]}
+{"kind":"textbox","id":"sh/wbid4jm5","slide":10,"text":"安排复核","textPreview":"安排复核","textChars":4,"textLines":1,"bbox":[1000,370,160,24]}
+{"kind":"textbox","id":"sh/xcrudonq","slide":10,"text":"低风险","textPreview":"低风险","textChars":3,"textLines":1,"bbox":[875,435,100,24]}
+{"kind":"textbox","id":"sh/ap0v294z","slide":10,"text":"常规抽检","textPreview":"常规抽检","textChars":4,"textLines":1,"bbox":[1000,435,160,24]}
+{"kind":"textbox","id":"sh/vq9cbe5k","slide":10,"text":"模型是辅助预警器，最终放行仍由检验制度负责。","textPreview":"模型是辅助预警器，最终放行仍由检验制度负责。","textChars":22,"textLines":1,"bbox":[875,515,260,55]}
+{"kind":"textbox","id":"sh/kfid83mh","slide":10,"text":"智能电表全周期质量管控系统  |  企业数据接入与应用指南","textPreview":"智能电表全周期质量管控系统  |  企业数据接入与应用指南","textChars":29,"textLines":1,"bbox":[72,682,850,18]}
+{"kind":"textbox","id":"sh/5gruh8n2","slide":10,"text":"10","textPreview":"10","textChars":2,"textLines":1,"bbox":[1148,680,58,18]}
+{"kind":"image","id":"im/6d87q5cr","slide":10,"name":"","geometry":"roundRect","bbox":[72,198,735,420]}
+{"kind":"notes","id":"nt/cepu7d","slide":10,"text":"风险预测的企业价值是分流检验资源：高风险先隔离复测，中风险安排复核，低风险进入常规抽检。\n\n模型是辅助预警器，不能替代企业现有检验制度和最终放行决定。当前 AUC、F1 仅为样例训练集演示指标，不代表生产泛化效果。\n\n[Sources]\n- 截图来自本地风险预测页面；模型边界依据全流程数据缺口与数量不足分析.md。"}
+{"kind":"slide","id":"sl/h452jo","slide":11,"title":"10 分析定位","textShapes":8}
+{"kind":"textbox","id":"sh/elsve9gb","slide":11,"text":"10 分析定位","textPreview":"10 分析定位","textChars":7,"textLines":1,"bbox":[72,40,500,24]}
+{"kind":"textbox","id":"sh/1o3u9ozm","slide":11,"text":"风险不是结论，分析页面给出复测线索","textPreview":"风险不是结论，分析页面给出复测线索","textChars":17,"textLines":1,"bbox":[72,72,1120,60]}
+{"kind":"textbox","id":"sh/0nudgjyh","slide":11,"text":"把“被标红”拆成可以验证的指标和工序。","textPreview":"把“被标红”拆成可以验证的指标和工序。","textChars":19,"textLines":1,"bbox":[74,136,1100,34]}
+{"kind":"textbox","id":"sh/dkju54zq","slide":11,"text":"根因追溯：看哪些特征推高了风险","textPreview":"根因追溯：看哪些特征推高了风险","textChars":15,"textLines":1,"bbox":[72,580,520,28]}
+{"kind":"textbox","id":"sh/cjadczy5","slide":11,"text":"退化分析：看误差、时钟等指标是否持续变差","textPreview":"退化分析：看误差、时钟等指标是否持续变差","textChars":20,"textLines":1,"bbox":[650,580,520,28]}
+{"kind":"shape","id":"sh/be5wfyh4","slide":11,"bbox":[220,625,830,40]}
+{"kind":"textbox","id":"sh/adcvmtgj","slide":11,"text":"线索 → 复测 → 确认 → 反馈，形成下一轮更可靠的数据。","textPreview":"线索 → 复测 → 确认 → 反馈，形成下一轮更可靠的数据。","textChars":30,"textLines":1,"bbox":[250,633,770,24]}
+{"kind":"textbox","id":"sh/w361krqt","slide":11,"text":"智能电表全周期质量管控系统  |  企业数据接入与应用指南","textPreview":"智能电表全周期质量管控系统  |  企业数据接入与应用指南","textChars":29,"textLines":1,"bbox":[72,682,850,18]}
+{"kind":"textbox","id":"sh/h4zidwry","slide":11,"text":"11","textPreview":"11","textChars":2,"textLines":1,"bbox":[1148,680,58,18]}
+{"kind":"image","id":"im/61cny9sz","slide":11,"name":"","geometry":"roundRect","bbox":[72,205,520,350]}
+{"kind":"image","id":"im/725o7ut4","slide":11,"name":"","geometry":"roundRect","bbox":[650,205,520,350]}
+{"kind":"notes","id":"nt/h452jo","slide":11,"text":"根因追溯告诉质量工程师优先检查哪些指标和工序，退化分析帮助判断误差、时钟等指标是否持续变差。\n\n讲解时强调“线索不是结论”：需要复测确认，并把结果反馈回系统，形成下一轮更可靠的数据。\n\n[Sources]\n- 截图来自本地根因追溯与退化分析页面。"}
+{"kind":"slide","id":"sl/1wznph","slide":12,"title":"11 处置闭环","textShapes":16}
+{"kind":"textbox","id":"sh/2h4ve50v","slide":12,"text":"11 处置闭环","textPreview":"11 处置闭环","textChars":7,"textLines":1,"bbox":[72,40,500,24]}
+{"kind":"textbox","id":"sh/pkvu9kjm","slide":12,"text":"最终交付给班组的，不是一张图，而是一张清单","textPreview":"最终交付给班组的，不是一张图，而是一张清单","textChars":21,"textLines":1,"bbox":[72,72,1120,60]}
+{"kind":"textbox","id":"sh/4jmdgfi1","slide":12,"text":"报告把风险翻译成现场能执行、能签字、能追踪的动作。","textPreview":"报告把风险翻译成现场能执行、能签字、能追踪的动作。","textChars":25,"textLines":1,"bbox":[74,136,1100,34]}
+{"kind":"shape","id":"sh/fetc3q14","slide":12,"bbox":[72,205,1110,380]}
+{"kind":"textbox","id":"sh/udkbal0z","slide":12,"text":"智能电表现场质量处置单","textPreview":"智能电表现场质量处置单","textChars":11,"textLines":1,"bbox":[112,240,500,34]}
+{"kind":"textbox","id":"sh/hgvu50ja","slide":12,"text":"电表编号","textPreview":"电表编号","textChars":4,"textLines":1,"bbox":[112,310,150,24]}
+{"kind":"textbox","id":"sh/gf2dcvip","slide":12,"text":"#196 / #201","textPreview":"#196 / #201","textChars":11,"textLines":1,"bbox":[285,310,710,24]}
+{"kind":"textbox","id":"sh/7qtczq18","slide":12,"text":"发现的问题","textPreview":"发现的问题","textChars":5,"textLines":1,"bbox":[112,366,150,24]}
+{"kind":"textbox","id":"sh/6pkb6l0n","slide":12,"text":"末期误差超限 / 高风险","textPreview":"末期误差超限 / 高风险","textChars":12,"textLines":1,"bbox":[285,366,710,24]}
+{"kind":"textbox","id":"sh/47yhovi1","slide":12,"text":"现在怎么做","textPreview":"现在怎么做","textChars":5,"textLines":1,"bbox":[112,422,150,24]}
+{"kind":"textbox","id":"sh/p87ih0j6","slide":12,"text":"立即复测，必要时隔离","textPreview":"立即复测，必要时隔离","textChars":10,"textLines":1,"bbox":[285,422,710,24]}
+{"kind":"textbox","id":"sh/25wzml0v","slide":12,"text":"现场勾选","textPreview":"现场勾选","textChars":4,"textLines":1,"bbox":[112,478,150,24]}
+{"kind":"textbox","id":"sh/3650fq1g","slide":12,"text":"复测  □   隔离  □   通知  □   记录  □","textPreview":"复测  □   隔离  □   通知  □   记录  □","textChars":29,"textLines":1,"bbox":[285,478,710,24]}
+{"kind":"shape","id":"sh/g3ehkvip","slide":12,"bbox":[112,535,220,30]}
+{"kind":"textbox","id":"sh/h4nid0ja","slide":12,"text":"一键导出现场处置单","textPreview":"一键导出现场处置单","textChars":9,"textLines":1,"bbox":[112,540,220,20]}
+{"kind":"textbox","id":"sh/u1wzil0j","slide":12,"text":"帮助侧栏会根据当前页面提示下一步操作。","textPreview":"帮助侧栏会根据当前页面提示下一步操作。","textChars":19,"textLines":1,"bbox":[390,540,500,24]}
+{"kind":"textbox","id":"sh/f250bq14","slide":12,"text":"智能电表全周期质量管控系统  |  企业数据接入与应用指南","textPreview":"智能电表全周期质量管控系统  |  企业数据接入与应用指南","textChars":29,"textLines":1,"bbox":[72,682,850,18]}
+{"kind":"textbox","id":"sh/0zi1wfi9","slide":12,"text":"12","textPreview":"12","textChars":2,"textLines":1,"bbox":[1148,680,58,18]}
+{"kind":"notes","id":"nt/1wznph","slide":12,"text":"这是企业现场最容易理解的交付物：系统把风险翻译成班组能够执行的清单。\n\n指向“发现的问题”和“现在怎么做”两列，说明处置单可以打印、签字、交接和留档。\n\n[Sources]\n- 处置单内容依据 app/services/report_service.py；页面截图来自本地系统。"}
+{"kind":"slide","id":"sl/zqum7b","slide":13,"title":"12 企业展示","textShapes":21}
+{"kind":"textbox","id":"sh/4va9cvu1","slide":13,"text":"12 企业展示","textPreview":"12 企业展示","textChars":7,"textLines":1,"bbox":[72,40,500,24]}
+{"kind":"textbox","id":"sh/3u18jqdg","slide":13,"text":"现场演示只需要 5 分钟","textPreview":"现场演示只需要 5 分钟","textChars":12,"textLines":1,"bbox":[72,72,1120,60]}
+{"kind":"textbox","id":"sh/2t8ralcb","slide":13,"text":"用一份脱敏 Excel，走完“数据 → 结果 → 动作”。","textPreview":"用一份脱敏 Excel，走完“数据 → 结果 → 动作”。","textChars":29,"textLines":1,"bbox":[74,136,1100,34]}
+{"kind":"shape","id":"sh/dkjap0vy","slide":13,"bbox":[90,200,1050,62]}
+{"kind":"shape","id":"sh/cza9gvud","slide":13,"bbox":[112,216,32,30]}
+{"kind":"textbox","id":"sh/ry1snads","slide":13,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[112,221,32,20]}
+{"kind":"textbox","id":"sh/qxsre5c7","slide":13,"text":"展示数据文件","textPreview":"展示数据文件","textChars":6,"textLines":1,"bbox":[170,214,250,25]}
+{"kind":"textbox","id":"sh/tozqdgve","slide":13,"text":"说明来自哪些业务环节","textPreview":"说明来自哪些业务环节","textChars":10,"textLines":1,"bbox":[465,214,600,25]}
+{"kind":"shape","id":"sh/83q94but","slide":13,"bbox":[90,283,1050,62]}
+{"kind":"shape","id":"sh/mdg7yp83","slide":13,"bbox":[112,299,32,30]}
+{"kind":"textbox","id":"sh/nep87upo","slide":13,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[112,304,32,20]}
+{"kind":"textbox","id":"sh/8fyp0zq9","slide":13,"text":"导入系统","textPreview":"导入系统","textChars":4,"textLines":1,"bbox":[170,297,250,25]}
+{"kind":"textbox","id":"sh/9grq947u","slide":13,"text":"现场核对成功数和字段","textPreview":"现场核对成功数和字段","textChars":10,"textLines":1,"bbox":[465,297,600,25]}
+{"kind":"shape","id":"sh/u107298f","slide":13,"bbox":[90,366,1050,62]}
+{"kind":"shape","id":"sh/v298bepk","slide":13,"bbox":[112,382,32,30]}
+{"kind":"textbox","id":"sh/w3ip4jq5","slide":13,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[112,387,32,20]}
+{"kind":"textbox","id":"sh/h4rqdo7q","slide":13,"text":"打开质量看板","textPreview":"打开质量看板","textChars":6,"textLines":1,"bbox":[170,380,250,25]}
+{"kind":"textbox","id":"sh/i5076t8b","slide":13,"text":"指出高风险数量和批次","textPreview":"指出高风险数量和批次","textChars":10,"textLines":1,"bbox":[465,380,600,25]}
+{"kind":"shape","id":"sh/j698zepw","slide":13,"bbox":[90,449,1050,62]}
+{"kind":"shape","id":"sh/fatony54","slide":13,"bbox":[112,465,32,30]}
+{"kind":"textbox","id":"sh/e9k7ut4j","slide":13,"text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[112,470,32,20]}
+{"kind":"textbox","id":"sh/1cb6ponu","slide":13,"text":"点击风险预测","textPreview":"点击风险预测","textChars":6,"textLines":1,"bbox":[170,463,250,25]}
+{"kind":"textbox","id":"sh/gb2pwjmp","slide":13,"text":"展示排序与风险分流","textPreview":"展示排序与风险分流","textChars":9,"textLines":1,"bbox":[465,463,600,25]}
+{"kind":"shape","id":"sh/r69oje5s","slide":13,"bbox":[90,532,1050,62]}
+{"kind":"shape","id":"sh/6507q9o7","slide":13,"bbox":[112,548,32,30]}
+{"kind":"textbox","id":"sh/t8b6lony","slide":13,"text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[112,553,32,20]}
+{"kind":"textbox","id":"sh/s72psj6d","slide":13,"text":"导出处置单","textPreview":"导出处置单","textChars":5,"textLines":1,"bbox":[170,546,250,25]}
+{"kind":"textbox","id":"sh/ji9ofe5w","slide":13,"text":"让企业看到班组如何执行","textPreview":"让企业看到班组如何执行","textChars":11,"textLines":1,"bbox":[465,546,600,25]}
+{"kind":"shape","id":"sh/ih0nm9ob","slide":13,"bbox":[90,630,1050,34]}
+{"kind":"textbox","id":"sh/8nylwvm9","slide":13,"text":"演示重点：让企业看到自己的数据如何变成可执行的质量动作。","textPreview":"演示重点：让企业看到自己的数据如何变成可执行的质量动作。","textChars":28,"textLines":1,"bbox":[110,637,1010,20]}
+{"kind":"textbox","id":"sh/9o7mp03e","slide":13,"text":"智能电表全周期质量管控系统  |  企业数据接入与应用指南","textPreview":"智能电表全周期质量管控系统  |  企业数据接入与应用指南","textChars":29,"textLines":1,"bbox":[72,682,850,18]}
+{"kind":"textbox","id":"sh/mlw3u543","slide":13,"text":"13","textPreview":"13","textChars":2,"textLines":1,"bbox":[1148,680,58,18]}
+{"kind":"notes","id":"nt/zqum7b","slide":13,"text":"现场演示建议控制在五分钟：展示一份脱敏 Excel，导入并核对字段，打开质量看板，进入风险预测，再导出处置单。\n\n不要把所有菜单逐个讲完。企业需要看到的是一条证据链：数据进入系统，风险得到排序，问题得到解释，现场动作得到明确。\n\n[Sources]\n- 演示流程基于本地系统实际页面与接口。"}
+{"kind":"slide","id":"sl/i5dauu","slide":14,"title":"13 试点落地","textShapes":17}
+{"kind":"textbox","id":"sh/7ydwf6ds","slide":14,"text":"13 试点落地","textPreview":"13 试点落地","textChars":7,"textLines":1,"bbox":[82,58,400,25]}
+{"kind":"textbox","id":"sh/8zmdobud","slide":14,"text":"价值从真实数据开始","textPreview":"价值从真实数据开始","textChars":9,"textLines":1,"bbox":[82,100,820,60]}
+{"kind":"textbox","id":"sh/90vehgvy","slide":14,"text":"建议从一个产线、一个批次、一个班组开始。","textPreview":"建议从一个产线、一个批次、一个班组开始。","textChars":20,"textLines":1,"bbox":[84,170,800,30]}
+{"kind":"shape","id":"sh/y9kvihcb","slide":14,"bbox":[84,250,520,80]}
+{"kind":"textbox","id":"sh/zutcbmdw","slide":14,"text":"第一周","textPreview":"第一周","textChars":3,"textLines":1,"bbox":[110,265,105,25]}
+{"kind":"textbox","id":"sh/kv2dkruh","slide":14,"text":"整理字段与数据来源","textPreview":"整理字段与数据来源","textChars":9,"textLines":1,"bbox":[230,263,330,24]}
+{"kind":"textbox","id":"sh/lwbedwv2","slide":14,"text":"确认 barcode、meter_no、批次、时间戳","textPreview":"确认 barcode、meter_no、批次、时间戳","textChars":26,"textLines":1,"bbox":[230,292,330,22]}
+{"kind":"shape","id":"sh/i5ovulcf","slide":14,"bbox":[84,355,520,80]}
+{"kind":"textbox","id":"sh/jqxwnqd0","slide":14,"text":"第二周","textPreview":"第二周","textChars":3,"textLines":1,"bbox":[110,370,105,25]}
+{"kind":"textbox","id":"sh/7ito3ahs","slide":14,"text":"导入历史数据并试跑","textPreview":"导入历史数据并试跑","textChars":9,"textLines":1,"bbox":[230,368,330,24]}
+{"kind":"textbox","id":"sh/6hk7a5gn","slide":14,"text":"验证风险排序、根因线索和处置单","textPreview":"验证风险排序、根因线索和处置单","textChars":15,"textLines":1,"bbox":[230,397,330,22]}
+{"kind":"shape","id":"sh/tkb65kzy","slide":14,"bbox":[84,460,520,80]}
+{"kind":"textbox","id":"sh/8j2pcfyd","slide":14,"text":"第三周","textPreview":"第三周","textChars":3,"textLines":1,"bbox":[110,475,105,25]}
+{"kind":"textbox","id":"sh/v6to7ah4","slide":14,"text":"接入日常导出文件","textPreview":"接入日常导出文件","textChars":8,"textLines":1,"bbox":[230,473,330,24]}
+{"kind":"textbox","id":"sh/ulk7e5gj","slide":14,"text":"建立班组复测、反馈和复盘节奏","textPreview":"建立班组复测、反馈和复盘节奏","textChars":14,"textLines":1,"bbox":[230,502,330,22]}
+{"kind":"shape","id":"sh/h8vq9kza","slide":14,"bbox":[680,250,500,300]}
+{"kind":"textbox","id":"sh/g72pgfyp","slide":14,"text":"企业得到的结果","textPreview":"企业得到的结果","textChars":7,"textLines":1,"bbox":[720,285,380,30]}
+{"kind":"textbox","id":"sh/3ad8buh0","slide":14,"text":"数据有入口\n风险有排序\n原因有线索\n处置有清单","textPreview":"数据有入口 | 风险有排序 | 原因有线索 | 处置有清单","textChars":23,"textLines":4,"bbox":[720,342,300,170]}
+{"kind":"textbox","id":"sh/i947ipgf","slide":14,"text":"模型辅助判断，制度负责放行。","textPreview":"模型辅助判断，制度负责放行。","textChars":14,"textLines":1,"bbox":[720,560,390,24]}
+{"kind":"textbox","id":"sh/e5orat0n","slide":14,"text":"智能电表全周期质量管控系统  |  企业数据接入与应用指南","textPreview":"智能电表全周期质量管控系统  |  企业数据接入与应用指南","textChars":29,"textLines":1,"bbox":[72,682,850,18]}
+{"kind":"textbox","id":"sh/f6xs3y18","slide":14,"text":"14","textPreview":"14","textChars":2,"textLines":1,"bbox":[1148,680,58,18]}
+{"kind":"notes","id":"nt/i5dauu","slide":14,"text":"收尾给出明确试点：一个产线、一个批次、一个班组。第一周整理字段，第二周导入历史数据，第三周接入日常导出文件并建立复测反馈节奏。\n\n建议企业先验证三件事：风险排序是否有用、根因线索是否可复核、处置单是否能进入班组流程。验证后再扩展数据范围和数字孪生工艺推演。\n\n[Sources]\n- 试点建议依据项目当前数据接入状态、本地运行验证和全流程数据缺口分析。"}

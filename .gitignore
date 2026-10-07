@@ -10,6 +10,7 @@ build/
 
 # 虚拟环境
 .venv/
+.conda/
 venv/
 env/
 
@@ -52,3 +53,13 @@ offline_packages/
 offline_install/
 *.whl
 *.exe
+
+# 本地前端/文档构建依赖
+ppt_build/node_modules/
+
+# 公开老化数据与实验大文件（统一存放在 D 盘本项目目录）
+data/public/
+experiments/unified_degradation/checkpoints/
+experiments/unified_degradation/results/**/*.pt
+experiments/unified_degradation/results/**/*.npz
+experiments/unified_degradation/results/**/.mplconfig/

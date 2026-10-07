@@ -6,7 +6,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from fastapi.responses import RedirectResponse
+from fastapi.responses import JSONResponse, RedirectResponse
 from starlette.middleware.base import BaseHTTPMiddleware
 
 from database import init_db
@@ -35,6 +35,19 @@ class LoginRequiredMiddleware(BaseHTTPMiddleware):
             return await call_next(request)
         if request.cookies.get("meter_quality_login") == "ok":
             return await call_next(request)
+        # API calls must receive a machine-readable error. Redirecting a POST
+        # to the login form turns it into an unrelated validation error.
+        accepts = request.headers.get("accept", "")
+        if request.method != "GET" or "application/json" in accepts or "text/event-stream" in accepts:
+            return JSONResponse(
+                {
+                    "success": False,
+                    "code": "AUTH_REQUIRED",
+                    "error": "登录已失效，请重新登录后再操作。",
+                    "login_url": "/login",
+                },
+                status_code=401,
+            )
         return RedirectResponse(url="/login")
 
 

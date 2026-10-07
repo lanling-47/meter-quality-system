@@ -1,0 +1,2363 @@
+{
+  "protocol": {
+    "name": "paired_confirmatory_cp_udm_ablation",
+    "split_seed": 42,
+    "training_seeds": [
+      17,
+      42,
+      73
+    ],
+    "epochs_requested": 40,
+    "early_stopping_patience": 15,
+    "physics_loss_weight": 0.01,
+    "expected_run_count": 15,
+    "devices": [
+      "capacitor",
+      "igbt",
+      "mosfet"
+    ],
+    "pairing": "identical group split and repeated initialization/data-loader seed for every configuration"
+  },
+  "metric_definitions": {
+    "paired_delta": "ablation_minus_full_for_the_same_training_seed",
+    "mae_delta": "positive_means_component_removal_degraded_accuracy",
+    "physics_rate_spearman": "cross-sample pooled test diagnostic; not the same estimand as the per-sequence centered-log-rate shape training loss"
+  },
+  "configurations": {
+    "full": {
+      "response_dims": {
+        "capacitor": 5,
+        "igbt": 3,
+        "mosfet": 4
+      },
+      "stress_dim": 8,
+      "response_directions": {
+        "capacitor": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "igbt": [
+          1,
+          1,
+          1
+        ],
+        "mosfet": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "d_model": 32,
+      "nhead": 4,
+      "num_layers": 1,
+      "dropout": 0.15,
+      "use_stress_conditioning": true,
+      "domain_loss_weight": 0.1,
+      "monotonicity_loss_weight": 0.1,
+      "smoothness_loss_weight": 0.05,
+      "physics_loss_weight": 0.01,
+      "domain_adversarial_strength": 0.2,
+      "use_latent_dynamics": true,
+      "forecast_loss_weight": 0.1,
+      "ranking_loss_weight": 0.1,
+      "endpoint_consistency_weight": 0.1,
+      "alignment_loss_weight": 0.05,
+      "alignment_temperature": 0.25,
+      "include_absolute_duration": false
+    },
+    "no_physics": {
+      "response_dims": {
+        "capacitor": 5,
+        "igbt": 3,
+        "mosfet": 4
+      },
+      "stress_dim": 8,
+      "response_directions": {
+        "capacitor": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "igbt": [
+          1,
+          1,
+          1
+        ],
+        "mosfet": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "d_model": 32,
+      "nhead": 4,
+      "num_layers": 1,
+      "dropout": 0.15,
+      "use_stress_conditioning": true,
+      "domain_loss_weight": 0.1,
+      "monotonicity_loss_weight": 0.1,
+      "smoothness_loss_weight": 0.05,
+      "physics_loss_weight": 0.0,
+      "domain_adversarial_strength": 0.2,
+      "use_latent_dynamics": true,
+      "forecast_loss_weight": 0.1,
+      "ranking_loss_weight": 0.1,
+      "endpoint_consistency_weight": 0.1,
+      "alignment_loss_weight": 0.05,
+      "alignment_temperature": 0.25,
+      "include_absolute_duration": false
+    },
+    "no_forecast": {
+      "response_dims": {
+        "capacitor": 5,
+        "igbt": 3,
+        "mosfet": 4
+      },
+      "stress_dim": 8,
+      "response_directions": {
+        "capacitor": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "igbt": [
+          1,
+          1,
+          1
+        ],
+        "mosfet": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "d_model": 32,
+      "nhead": 4,
+      "num_layers": 1,
+      "dropout": 0.15,
+      "use_stress_conditioning": true,
+      "domain_loss_weight": 0.1,
+      "monotonicity_loss_weight": 0.1,
+      "smoothness_loss_weight": 0.05,
+      "physics_loss_weight": 0.01,
+      "domain_adversarial_strength": 0.2,
+      "use_latent_dynamics": true,
+      "forecast_loss_weight": 0.0,
+      "ranking_loss_weight": 0.1,
+      "endpoint_consistency_weight": 0.1,
+      "alignment_loss_weight": 0.05,
+      "alignment_temperature": 0.25,
+      "include_absolute_duration": false
+    },
+    "no_ranking_endpoint": {
+      "response_dims": {
+        "capacitor": 5,
+        "igbt": 3,
+        "mosfet": 4
+      },
+      "stress_dim": 8,
+      "response_directions": {
+        "capacitor": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "igbt": [
+          1,
+          1,
+          1
+        ],
+        "mosfet": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "d_model": 32,
+      "nhead": 4,
+      "num_layers": 1,
+      "dropout": 0.15,
+      "use_stress_conditioning": true,
+      "domain_loss_weight": 0.1,
+      "monotonicity_loss_weight": 0.1,
+      "smoothness_loss_weight": 0.05,
+      "physics_loss_weight": 0.01,
+      "domain_adversarial_strength": 0.2,
+      "use_latent_dynamics": true,
+      "forecast_loss_weight": 0.1,
+      "ranking_loss_weight": 0.0,
+      "endpoint_consistency_weight": 0.0,
+      "alignment_loss_weight": 0.05,
+      "alignment_temperature": 0.25,
+      "include_absolute_duration": false
+    },
+    "no_alignment": {
+      "response_dims": {
+        "capacitor": 5,
+        "igbt": 3,
+        "mosfet": 4
+      },
+      "stress_dim": 8,
+      "response_directions": {
+        "capacitor": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "igbt": [
+          1,
+          1,
+          1
+        ],
+        "mosfet": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "d_model": 32,
+      "nhead": 4,
+      "num_layers": 1,
+      "dropout": 0.15,
+      "use_stress_conditioning": true,
+      "domain_loss_weight": 0.0,
+      "monotonicity_loss_weight": 0.1,
+      "smoothness_loss_weight": 0.05,
+      "physics_loss_weight": 0.01,
+      "domain_adversarial_strength": 0.0,
+      "use_latent_dynamics": true,
+      "forecast_loss_weight": 0.1,
+      "ranking_loss_weight": 0.1,
+      "endpoint_consistency_weight": 0.1,
+      "alignment_loss_weight": 0.0,
+      "alignment_temperature": 0.25,
+      "include_absolute_duration": false
+    }
+  },
+  "splits": {
+    "capacitor": {
+      "train_groups": [
+        "ES10.mat::ES10C4",
+        "ES10.mat::ES10C1",
+        "ES14.mat::ES14C5",
+        "ES12.mat::ES12C6",
+        "ES10.mat::ES10C6",
+        "ES12.mat::ES12C5",
+        "ES12.mat::ES12C8",
+        "ES14.mat::ES14C7",
+        "ES10.mat::ES10C3",
+        "ES10.mat::ES10C5",
+        "ES14.mat::ES14C6",
+        "ES10.mat::ES10C2",
+        "ES12.mat::ES12C7",
+        "ES12.mat::ES12C2"
+      ],
+      "validation_groups": [
+        "ES12.mat::ES12C1",
+        "ES10.mat::ES10C7",
+        "ES12.mat::ES12C3"
+      ],
+      "test_groups": [
+        "ES14.mat::ES14C4",
+        "ES12.mat::ES12C4",
+        "ES14.mat::ES14C3",
+        "ES14.mat::ES14C8",
+        "ES14.mat::ES14C2",
+        "ES14.mat::ES14C1"
+      ]
+    },
+    "igbt": {
+      "train_groups": [
+        "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 4/Device4  1.mat",
+        "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 2/Device2b  1.mat",
+        "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 4/Device4b  1.mat",
+        "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 2/Device2  1.mat"
+      ],
+      "validation_groups": [
+        "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 5/Device5  1.mat"
+      ],
+      "test_groups": [
+        "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+        "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat"
+      ]
+    },
+    "mosfet": {
+      "train_groups": [
+        "Test_39",
+        "Test_38",
+        "Test_34",
+        "Test_16",
+        "Test_37",
+        "Test_20",
+        "Test_31",
+        "Test_19",
+        "Test_6",
+        "Test_30",
+        "Test_28",
+        "Test_13",
+        "Test_10",
+        "Test_24",
+        "Test_26",
+        "Test_41",
+        "Test_21",
+        "Test_23",
+        "Test_8",
+        "Test_12",
+        "Test_5",
+        "Test_40",
+        "Test_11",
+        "Test_22",
+        "Test_18"
+      ],
+      "validation_groups": [
+        "Test_3",
+        "Test_29",
+        "Test_42",
+        "Test_32",
+        "Test_2",
+        "Test_35"
+      ],
+      "test_groups": [
+        "Test_4",
+        "Test_17",
+        "Test_9",
+        "Test_27",
+        "Test_14",
+        "Test_7",
+        "Test_25",
+        "Test_15",
+        "Test_33",
+        "Test_36"
+      ]
+    }
+  },
+  "metrics": {
+    "full": {
+      "17": {
+        "overall": {
+          "count": 108,
+          "mae": 0.17258386579622445,
+          "rmse": 0.22908484390269196,
+          "r2": 0.3731572582755658,
+          "spearman": 0.6410061729993284,
+          "gaussian_nll": -0.8465646757897964,
+          "mean_variance": 0.04154373618830168,
+          "normal_95_coverage": 0.9351851851851852,
+          "normal_95_width": 0.7051921130134048,
+          "trajectory_monotonic_violation_rate": 0.0,
+          "physics_rate_spearman": 0.24218985740908275
+        },
+        "devices": {
+          "capacitor": {
+            "count": 36,
+            "mae": 0.06326419777340359,
+            "rmse": 0.07935106150625407,
+            "r2": 0.9057652115350312,
+            "spearman": 0.9705743686057425,
+            "gaussian_nll": -2.0203280160844113,
+            "mean_variance": 0.007442645625107818,
+            "normal_95_coverage": 0.9444444444444444,
+            "normal_95_width": 0.33613638062761425,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": NaN
+          },
+          "igbt": {
+            "count": 12,
+            "mae": 0.12577262272437414,
+            "rmse": 0.157681773962939,
+            "r2": 0.6332715210957731,
+            "spearman": 0.9737317909903014,
+            "gaussian_nll": 2.1525958704396917,
+            "mean_variance": 0.0027536508180977157,
+            "normal_95_coverage": 0.5833333333333334,
+            "normal_95_width": 0.20023594260688019,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": 0.7532985026678145
+          },
+          "mosfet": {
+            "count": 60,
+            "mae": 0.24753791522428703,
+            "rmse": 0.2927679889013412,
+            "r2": 0.11655877744545351,
+            "spearman": 0.424954125878495,
+            "gaussian_nll": -0.7421387808589245,
+            "mean_variance": 0.06976240760025879,
+            "normal_95_coverage": 1.0,
+            "normal_95_width": 1.027616786526184,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": -0.268918787849649
+          }
+        }
+      },
+      "42": {
+        "overall": {
+          "count": 108,
+          "mae": 0.17502839922046945,
+          "rmse": 0.23099484231314593,
+          "r2": 0.36266106182126834,
+          "spearman": 0.6091425670308198,
+          "gaussian_nll": -0.8533559460022985,
+          "mean_variance": 0.04822936844667075,
+          "normal_95_coverage": 0.9537037037037037,
+          "normal_95_width": 0.7889279088709202,
+          "trajectory_monotonic_violation_rate": 0.0,
+          "physics_rate_spearman": 0.3029225309163111
+        },
+        "devices": {
+          "capacitor": {
+            "count": 36,
+            "mae": 0.06188994646072388,
+            "rmse": 0.08933379771076465,
+            "r2": 0.8805634164325391,
+            "spearman": 0.9427512367057114,
+            "gaussian_nll": -1.8589618767107088,
+            "mean_variance": 0.01861986194530295,
+            "normal_95_coverage": 1.0,
+            "normal_95_width": 0.5214071830293343,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": NaN
+          },
+          "igbt": {
+            "count": 12,
+            "mae": 0.11913883810242017,
+            "rmse": 0.14223829321625597,
+            "r2": 0.701589082898785,
+            "spearman": 0.9877423203570683,
+            "gaussian_nll": 1.6812569429207969,
+            "mean_variance": 0.003384129765133063,
+            "normal_95_coverage": 0.5833333333333334,
+            "normal_95_width": 0.21783911397134084,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": 0.7640369881218182
+          },
+          "mosfet": {
+            "count": 60,
+            "mae": 0.2540893830999266,
+            "rmse": 0.29531482871001224,
+            "r2": 0.10112150384728147,
+            "spearman": 0.3363651571112433,
+            "gaussian_nll": -0.7569149653618715,
+            "mean_variance": 0.07496412008379896,
+            "normal_95_coverage": 1.0,
+            "normal_95_width": 1.063658103355788,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": -0.158191926289196
+          }
+        }
+      },
+      "73": {
+        "overall": {
+          "count": 108,
+          "mae": 0.17451052109094303,
+          "rmse": 0.23218322221111767,
+          "r2": 0.35608646437106317,
+          "spearman": 0.5974772306931807,
+          "gaussian_nll": -0.9332125600606596,
+          "mean_variance": 0.05306467992313965,
+          "normal_95_coverage": 0.9537037037037037,
+          "normal_95_width": 0.7924346047914325,
+          "trajectory_monotonic_violation_rate": 0.0,
+          "physics_rate_spearman": 0.3323326061749876
+        },
+        "devices": {
+          "capacitor": {
+            "count": 36,
+            "mae": 0.05593130158053504,
+            "rmse": 0.07101630801101723,
+            "r2": 0.9245217261834721,
+            "spearman": 0.9769154544806335,
+            "gaussian_nll": -2.0760157270035204,
+            "mean_variance": 0.00980407694199433,
+            "normal_95_coverage": 1.0,
+            "normal_95_width": 0.38597321643741195,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": NaN
+          },
+          "igbt": {
+            "count": 12,
+            "mae": 0.12782852600018182,
+            "rmse": 0.16211791158483788,
+            "r2": 0.6123465587187815,
+            "spearman": 0.9877423203570683,
+            "gaussian_nll": 1.546693990665858,
+            "mean_variance": 0.003439273394178599,
+            "normal_95_coverage": 0.5833333333333334,
+            "normal_95_width": 0.22054175264335749,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": 0.7590485833336528
+          },
+          "mosfet": {
+            "count": 60,
+            "mae": 0.25499445181534003,
+            "rmse": 0.2979158514815413,
+            "r2": 0.08521780149448355,
+            "spearman": 0.2784105378076751,
+            "gaussian_nll": -0.7435119700402469,
+            "mean_variance": 0.08894612301761905,
+            "normal_95_coverage": 1.0,
+            "normal_95_width": 1.15069000823346,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": -0.09438337098367754
+          }
+        }
+      }
+    },
+    "no_physics": {
+      "17": {
+        "overall": {
+          "count": 108,
+          "mae": 0.1804117960866144,
+          "rmse": 0.23186197329247407,
+          "r2": 0.3578670704080731,
+          "spearman": 0.5916421750220406,
+          "gaussian_nll": -1.0666142713123736,
+          "mean_variance": 0.048409555825249605,
+          "normal_95_coverage": 0.9444444444444444,
+          "normal_95_width": 0.7585475605078167,
+          "trajectory_monotonic_violation_rate": 0.0,
+          "physics_rate_spearman": 0.21846779556218743
+        },
+        "devices": {
+          "capacitor": {
+            "count": 36,
+            "mae": 0.06306719779968262,
+            "rmse": 0.0752217748105523,
+            "r2": 0.9153176443375407,
+            "spearman": 0.9648803323099221,
+            "gaussian_nll": -2.124180586900872,
+            "mean_variance": 0.007585160421311027,
+            "normal_95_coverage": 1.0,
+            "normal_95_width": 0.33428511186746046,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": NaN
+          },
+          "igbt": {
+            "count": 12,
+            "mae": 0.14061791822314262,
+            "rmse": 0.17598156312058522,
+            "r2": 0.5432106345701545,
+            "spearman": 0.9737317909903014,
+            "gaussian_nll": 0.48986297516375193,
+            "mean_variance": 0.006252943984388064,
+            "normal_95_coverage": 0.5833333333333334,
+            "normal_95_width": 0.30063755564473177,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": 0.7438944780958548
+          },
+          "mosfet": {
+            "count": 60,
+            "mae": 0.25877733063146785,
+            "rmse": 0.2952610083151539,
+            "r2": 0.1014491107434139,
+            "spearman": 0.2901908376468915,
+            "gaussian_nll": -0.7433699312544992,
+            "mean_variance": 0.08133551543578506,
+            "normal_95_coverage": 0.9833333333333333,
+            "normal_95_width": 1.1046870306646475,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": -0.30695888697148
+          }
+        }
+      },
+      "42": {
+        "overall": {
+          "count": 108,
+          "mae": 0.17815405547864632,
+          "rmse": 0.23483726558979376,
+          "r2": 0.3412814158026698,
+          "spearman": 0.5857784693230553,
+          "gaussian_nll": -0.9276325082119179,
+          "mean_variance": 0.05370897867854823,
+          "normal_95_coverage": 0.9444444444444444,
+          "normal_95_width": 0.8316086826521496,
+          "trajectory_monotonic_violation_rate": 0.0,
+          "physics_rate_spearman": 0.32352463843806323
+        },
+        "devices": {
+          "capacitor": {
+            "count": 36,
+            "mae": 0.07268456700775358,
+            "rmse": 0.10497822419529565,
+            "r2": 0.8350682669881125,
+            "spearman": 0.9141516453107954,
+            "gaussian_nll": -1.754877627055227,
+            "mean_variance": 0.018727669983895287,
+            "normal_95_coverage": 0.9722222222222222,
+            "normal_95_width": 0.5299520881809132,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": NaN
+          },
+          "igbt": {
+            "count": 12,
+            "mae": 0.10712973897655804,
+            "rmse": 0.14562662750246388,
+            "r2": 0.6872025336107397,
+            "spearman": 0.9492133645984593,
+            "gaussian_nll": 0.6156543314788844,
+            "mean_variance": 0.004702156254400809,
+            "normal_95_coverage": 0.6666666666666666,
+            "normal_95_width": 0.25165078352181647,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": 0.7434428559463403
+          },
+          "mosfet": {
+            "count": 60,
+            "mae": 0.2556406118615996,
+            "rmse": 0.29734440451566846,
+            "r2": 0.08872381269509722,
+            "spearman": 0.2858741793133725,
+            "gaussian_nll": -0.7399428048440923,
+            "mean_variance": 0.08449912838016947,
+            "normal_95_coverage": 0.9833333333333333,
+            "normal_95_width": 1.128594219160958,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": -0.09639357907021388
+          }
+        }
+      },
+      "73": {
+        "overall": {
+          "count": 108,
+          "mae": 0.17841429777413229,
+          "rmse": 0.2341411552483919,
+          "r2": 0.34518080722551836,
+          "spearman": 0.6125041702979905,
+          "gaussian_nll": -0.07075228376122776,
+          "mean_variance": 0.06003594477456149,
+          "normal_95_coverage": 0.9074074074074074,
+          "normal_95_width": 0.8482704173656658,
+          "trajectory_monotonic_violation_rate": 0.0,
+          "physics_rate_spearman": 0.12300116918731827
+        },
+        "devices": {
+          "capacitor": {
+            "count": 36,
+            "mae": 0.05908159580495623,
+            "rmse": 0.077486465798351,
+            "r2": 0.910141847704421,
+            "spearman": 0.969797909110858,
+            "gaussian_nll": -1.9686361342020733,
+            "mean_variance": 0.014690704947699688,
+            "normal_95_coverage": 1.0,
+            "normal_95_width": 0.4673915652154833,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": NaN
+          },
+          "igbt": {
+            "count": 12,
+            "mae": 0.15593225757280985,
+            "rmse": 0.1823031897324819,
+            "r2": 0.5098035320395522,
+            "spearman": 0.9877423203570683,
+            "gaussian_nll": 9.021154668505396,
+            "mean_variance": 0.0017037545185303316,
+            "normal_95_coverage": 0.16666666666666666,
+            "normal_95_width": 0.1563446465180052,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": 0.6789948281239382
+          },
+          "mosfet": {
+            "count": 60,
+            "mae": 0.25451032699590237,
+            "rmse": 0.2973724315053666,
+            "r2": 0.08855201506506472,
+            "spearman": 0.2924466397437627,
+            "gaussian_nll": -0.7504033639500454,
+            "mean_variance": 0.09890952672188481,
+            "normal_95_coverage": 1.0,
+            "normal_95_width": 1.215182882825307,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": -0.43299248974930166
+          }
+        }
+      }
+    },
+    "no_forecast": {
+      "17": {
+        "overall": {
+          "count": 108,
+          "mae": 0.1792414530915536,
+          "rmse": 0.23271275268804825,
+          "r2": 0.35314602226316194,
+          "spearman": 0.5744139582777908,
+          "gaussian_nll": -0.7897536570136098,
+          "mean_variance": 0.0587340381904074,
+          "normal_95_coverage": 0.9444444444444444,
+          "normal_95_width": 0.8294296225632876,
+          "trajectory_monotonic_violation_rate": 0.0,
+          "physics_rate_spearman": 0.3091304892131076
+        },
+        "devices": {
+          "capacitor": {
+            "count": 36,
+            "mae": 0.07058114475674099,
+            "rmse": 0.08248848995866814,
+            "r2": 0.898166074517895,
+            "spearman": 0.9577627869401468,
+            "gaussian_nll": -1.975361134100963,
+            "mean_variance": 0.010784464021627273,
+            "normal_95_coverage": 0.9722222222222222,
+            "normal_95_width": 0.39944126309664324,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": NaN
+          },
+          "igbt": {
+            "count": 12,
+            "mae": 0.12857722118496895,
+            "rmse": 0.1613723381226818,
+            "r2": 0.6159039634574313,
+            "spearman": 0.9807370556736849,
+            "gaussian_nll": 2.5993014309241915,
+            "mean_variance": 0.0028708460449706763,
+            "normal_95_coverage": 0.5833333333333334,
+            "normal_95_width": 0.20289721916955303,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": 0.7662211371466645
+          },
+          "mosfet": {
+            "count": 60,
+            "mae": 0.2545704844737581,
+            "rmse": 0.2969656353636472,
+            "r2": 0.09104397384220586,
+            "spearman": 0.2726178608181786,
+            "gaussian_nll": -0.7562001883487578,
+            "mean_variance": 0.09867642112076283,
+            "normal_95_coverage": 1.0,
+            "normal_95_width": 1.212729118922021,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": -0.14796015872044926
+          }
+        }
+      },
+      "42": {
+        "overall": {
+          "count": 108,
+          "mae": 0.18288669614574043,
+          "rmse": 0.23637010706929604,
+          "r2": 0.3326541096967752,
+          "spearman": 0.5845417431210707,
+          "gaussian_nll": -0.5428118780630301,
+          "mean_variance": 0.05577804973236872,
+          "normal_95_coverage": 0.9259259259259259,
+          "normal_95_width": 0.8367737473246697,
+          "trajectory_monotonic_violation_rate": 0.0,
+          "physics_rate_spearman": 0.39302728841214635
+        },
+        "devices": {
+          "capacitor": {
+            "count": 36,
+            "mae": 0.07480418019824558,
+            "rmse": 0.10249877321436307,
+            "r2": 0.8427672127356369,
+            "spearman": 0.9446923854429227,
+            "gaussian_nll": -1.7790963357659766,
+            "mean_variance": 0.017005011982594926,
+            "normal_95_coverage": 0.9722222222222222,
+            "normal_95_width": 0.505329743344891,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": NaN
+          },
+          "igbt": {
+            "count": 12,
+            "mae": 0.15444399664799371,
+            "rmse": 0.18097286321871806,
+            "r2": 0.5169316792419993,
+            "spearman": 0.9877423203570683,
+            "gaussian_nll": 4.233538337851422,
+            "mean_variance": 0.0031416296454456947,
+            "normal_95_coverage": 0.4166666666666667,
+            "normal_95_width": 0.21244983289332997,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": 0.7625593370024247
+          },
+          "mosfet": {
+            "count": 60,
+            "mae": 0.2534247456137867,
+            "rmse": 0.29616491179429916,
+            "r2": 0.09593909431833014,
+            "spearman": 0.3059257535077834,
+            "gaussian_nll": -0.7563112466241525,
+            "mean_variance": 0.08956915639961759,
+            "normal_95_coverage": 1.0,
+            "normal_95_width": 1.1605049325988046,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": 0.023495239821867943
+          }
+        }
+      },
+      "73": {
+        "overall": {
+          "count": 108,
+          "mae": 0.17732677308743372,
+          "rmse": 0.23327937273260166,
+          "r2": 0.34999220592859037,
+          "spearman": 0.6038852869212247,
+          "gaussian_nll": -0.8110650402266584,
+          "mean_variance": 0.06520298205281573,
+          "normal_95_coverage": 0.9537037037037037,
+          "normal_95_width": 0.9033476162857018,
+          "trajectory_monotonic_violation_rate": 0.0,
+          "physics_rate_spearman": 0.29039492479786333
+        },
+        "devices": {
+          "capacitor": {
+            "count": 36,
+            "mae": 0.06898769322368833,
+            "rmse": 0.09033881583377566,
+            "r2": 0.8778609422311261,
+            "spearman": 0.967209710794576,
+            "gaussian_nll": -1.7654292442759936,
+            "mean_variance": 0.02124945951315264,
+            "normal_95_coverage": 1.0,
+            "normal_95_width": 0.5667511689450059,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": NaN
+          },
+          "igbt": {
+            "count": 12,
+            "mae": 0.1271806520720323,
+            "rmse": 0.16179692358682882,
+            "r2": 0.6138801204966255,
+            "spearman": 0.9737317909903014,
+            "gaussian_nll": 1.7554322174125938,
+            "mean_variance": 0.0030236837143699327,
+            "normal_95_coverage": 0.5833333333333334,
+            "normal_95_width": 0.20894832061101123,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": 0.7724100404897959
+          },
+          "mosfet": {
+            "count": 60,
+            "mae": 0.25235944520876125,
+            "rmse": 0.2963483903319659,
+            "r2": 0.09481858917019026,
+            "spearman": 0.2686353953878997,
+            "gaussian_nll": -0.7517459693249073,
+            "mean_variance": 0.10401095524430275,
+            "normal_95_coverage": 1.0,
+            "normal_95_width": 1.2441853438250574,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": -0.1916201908940693
+          }
+        }
+      }
+    },
+    "no_ranking_endpoint": {
+      "17": {
+        "overall": {
+          "count": 108,
+          "mae": 0.17309056971054007,
+          "rmse": 0.23271744836928535,
+          "r2": 0.3531199175422488,
+          "spearman": 0.5985229567095306,
+          "gaussian_nll": -1.0711836639901524,
+          "mean_variance": 0.05416621805246299,
+          "normal_95_coverage": 0.9444444444444444,
+          "normal_95_width": 0.8037673298225312,
+          "trajectory_monotonic_violation_rate": 0.0,
+          "physics_rate_spearman": 0.3727431798131179
+        },
+        "devices": {
+          "capacitor": {
+            "count": 36,
+            "mae": 0.054847883267535105,
+            "rmse": 0.06915637164821997,
+            "r2": 0.9284235462624553,
+            "spearman": 0.9730331570062105,
+            "gaussian_nll": -2.0507366912021556,
+            "mean_variance": 0.010163566420993043,
+            "normal_95_coverage": 0.9722222222222222,
+            "normal_95_width": 0.39003162068016844,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": NaN
+          },
+          "igbt": {
+            "count": 12,
+            "mae": 0.11551901698112488,
+            "rmse": 0.15318324277353465,
+            "r2": 0.653897958821292,
+            "spearman": 0.9737317909903014,
+            "gaussian_nll": 0.10932464186369513,
+            "mean_variance": 0.004546435996113966,
+            "normal_95_coverage": 0.5833333333333334,
+            "normal_95_width": 0.2452629042810713,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": 0.7644913657182931
+          },
+          "mosfet": {
+            "count": 60,
+            "mae": 0.2555504921222261,
+            "rmse": 0.29986789754635057,
+            "r2": 0.07319059831550379,
+            "spearman": 0.2679113107642127,
+            "gaussian_nll": -0.7195535088337198,
+            "mean_variance": 0.09049176544261475,
+            "normal_95_coverage": 1.0,
+            "normal_95_width": 1.1637096404162406,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": -0.019005006092057353
+          }
+        }
+      },
+      "42": {
+        "overall": {
+          "count": 108,
+          "mae": 0.17560932057569045,
+          "rmse": 0.23043419114196295,
+          "r2": 0.36575109780858694,
+          "spearman": 0.6128479706321329,
+          "gaussian_nll": -0.6379923532305898,
+          "mean_variance": 0.047010043123952565,
+          "normal_95_coverage": 0.9351851851851852,
+          "normal_95_width": 0.765098063274929,
+          "trajectory_monotonic_violation_rate": 0.0,
+          "physics_rate_spearman": 0.3274779531360006
+        },
+        "devices": {
+          "capacitor": {
+            "count": 36,
+            "mae": 0.06676602611939113,
+            "rmse": 0.09434949260238135,
+            "r2": 0.8667752493077969,
+            "spearman": 0.9494805523280445,
+            "gaussian_nll": -1.8577099481006916,
+            "mean_variance": 0.013915989069371588,
+            "normal_95_coverage": 0.9722222222222222,
+            "normal_95_width": 0.4553986840990503,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": NaN
+          },
+          "igbt": {
+            "count": 12,
+            "mae": 0.12632920344670615,
+            "rmse": 0.15597192055833117,
+            "r2": 0.6411817841767377,
+            "spearman": 0.9667265263069178,
+            "gaussian_nll": 3.766974053781617,
+            "mean_variance": 0.0027320637309458107,
+            "normal_95_coverage": 0.5,
+            "normal_95_width": 0.19264062263423762,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": 0.7474583518161078
+          },
+          "mosfet": {
+            "count": 60,
+            "mae": 0.2507713206752669,
+            "rmse": 0.29218710709393786,
+            "r2": 0.12006097616660383,
+            "spearman": 0.3210201329707983,
+            "gaussian_nll": -0.7871550777109697,
+            "mean_variance": 0.07572207143530249,
+            "normal_95_coverage": 1.0,
+            "normal_95_width": 1.0654091789085944,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": -0.09250244554410655
+          }
+        }
+      },
+      "73": {
+        "overall": {
+          "count": 108,
+          "mae": 0.18040011302434356,
+          "rmse": 0.2342139445137057,
+          "r2": 0.344773606563059,
+          "spearman": 0.5923727507320933,
+          "gaussian_nll": -0.47083082049466385,
+          "mean_variance": 0.05838169094985696,
+          "normal_95_coverage": 0.9351851851851852,
+          "normal_95_width": 0.8781508303283911,
+          "trajectory_monotonic_violation_rate": 0.0,
+          "physics_rate_spearman": 0.35165345156820504
+        },
+        "devices": {
+          "capacitor": {
+            "count": 36,
+            "mae": 0.06856756450401412,
+            "rmse": 0.09162399703745383,
+            "r2": 0.8743610652026546,
+            "spearman": 0.9656567918048069,
+            "gaussian_nll": -1.6672060066890897,
+            "mean_variance": 0.029844363659827247,
+            "normal_95_coverage": 1.0,
+            "normal_95_width": 0.6663915510539711,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": NaN
+          },
+          "igbt": {
+            "count": 12,
+            "mae": 0.13891764233509699,
+            "rmse": 0.1716648748136433,
+            "r2": 0.5653451550253966,
+            "spearman": 0.9737317909903014,
+            "gaussian_nll": 4.50564770024313,
+            "mean_variance": 0.0025235990760847926,
+            "normal_95_coverage": 0.4166666666666667,
+            "normal_95_width": 0.19001272876391462,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": 0.7877228076371575
+          },
+          "mosfet": {
+            "count": 60,
+            "mae": 0.2557961362743905,
+            "rmse": 0.2963281446295242,
+            "r2": 0.09494226392669525,
+            "spearman": 0.2637895982909171,
+            "gaussian_nll": -0.7483014129255667,
+            "mean_variance": 0.08667570569862922,
+            "normal_95_coverage": 1.0,
+            "normal_95_width": 1.1428340182059382,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": -0.08441590450074742
+          }
+        }
+      }
+    },
+    "no_alignment": {
+      "17": {
+        "overall": {
+          "count": 108,
+          "mae": 0.17599592582188994,
+          "rmse": 0.23470874221839003,
+          "r2": 0.34200223467421853,
+          "spearman": 0.6003183584544968,
+          "gaussian_nll": -0.7687696968170521,
+          "mean_variance": 0.056619933945680885,
+          "normal_95_coverage": 0.9444444444444444,
+          "normal_95_width": 0.7945248638812765,
+          "trajectory_monotonic_violation_rate": 0.0,
+          "physics_rate_spearman": 0.3725483402327784
+        },
+        "devices": {
+          "capacitor": {
+            "count": 36,
+            "mae": 0.05727633378571934,
+            "rmse": 0.07063743360485517,
+            "r2": 0.925324936166031,
+            "spearman": 0.968503809952717,
+            "gaussian_nll": -2.134247866797887,
+            "mean_variance": 0.007611397336909754,
+            "normal_95_coverage": 0.9722222222222222,
+            "normal_95_width": 0.3366884782196068,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": NaN
+          },
+          "igbt": {
+            "count": 12,
+            "mae": 0.11490424225727718,
+            "rmse": 0.15241092809940146,
+            "r2": 0.6573790948588734,
+            "spearman": 0.9737317909903014,
+            "gaussian_nll": 3.0555765869207314,
+            "mean_variance": 0.0015651332529766175,
+            "normal_95_coverage": 0.5833333333333334,
+            "normal_95_width": 0.14939423649914238,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": 0.7730726172382865
+          },
+          "mosfet": {
+            "count": 60,
+            "mae": 0.2594460177565149,
+            "rmse": 0.30252130866459176,
+            "r2": 0.05671609965764568,
+            "spearman": 0.30779166388420776,
+            "gaussian_nll": -0.7143520515761086,
+            "mean_variance": 0.0970360160494844,
+            "normal_95_coverage": 1.0,
+            "normal_95_width": 1.1982528207547054,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": -0.027975936772729682
+          }
+        }
+      },
+      "42": {
+        "overall": {
+          "count": 108,
+          "mae": 0.18044103092311328,
+          "rmse": 0.2362297976668212,
+          "r2": 0.33344614819447427,
+          "spearman": 0.5922104005743039,
+          "gaussian_nll": -0.6170427518160433,
+          "mean_variance": 0.05709800675524295,
+          "normal_95_coverage": 0.9074074074074074,
+          "normal_95_width": 0.8398544526869117,
+          "trajectory_monotonic_violation_rate": 0.0,
+          "physics_rate_spearman": 0.3069102345590127
+        },
+        "devices": {
+          "capacitor": {
+            "count": 36,
+            "mae": 0.06618025733364953,
+            "rmse": 0.10248226848455291,
+            "r2": 0.8428178450633161,
+            "spearman": 0.9334337227670962,
+            "gaussian_nll": -1.7942014866375078,
+            "mean_variance": 0.014275570943330726,
+            "normal_95_coverage": 0.9444444444444444,
+            "normal_95_width": 0.4631540004211396,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": NaN
+          },
+          "igbt": {
+            "count": 12,
+            "mae": 0.15350602318843207,
+            "rmse": 0.18083660912190513,
+            "r2": 0.5176588077041127,
+            "spearman": 0.9807370556736849,
+            "gaussian_nll": 3.5260856353932764,
+            "mean_variance": 0.0034560446608035513,
+            "normal_95_coverage": 0.3333333333333333,
+            "normal_95_width": 0.22358282103923813,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": 0.776093253377539
+          },
+          "mosfet": {
+            "count": 60,
+            "mae": 0.2543844966237278,
+            "rmse": 0.2959834219990832,
+            "r2": 0.09704677148516172,
+            "spearman": 0.2773244108721445,
+            "gaussian_nll": -0.7393731883650282,
+            "mean_variance": 0.09351986066127817,
+            "normal_95_coverage": 1.0,
+            "normal_95_width": 1.1891290503759098,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": -0.16227278425951358
+          }
+        }
+      },
+      "73": {
+        "overall": {
+          "count": 108,
+          "mae": 0.17319440900421426,
+          "rmse": 0.22963734790580373,
+          "r2": 0.370129988909359,
+          "spearman": 0.6134066461751145,
+          "gaussian_nll": -0.8293895372912595,
+          "mean_variance": 0.05721306727004789,
+          "normal_95_coverage": 0.9537037037037037,
+          "normal_95_width": 0.8268964948987759,
+          "trajectory_monotonic_violation_rate": 0.0,
+          "physics_rate_spearman": 0.323264474649135
+        },
+        "devices": {
+          "capacitor": {
+            "count": 36,
+            "mae": 0.06373048615124491,
+            "rmse": 0.07835369782358435,
+            "r2": 0.9081191989051094,
+            "spearman": 0.9589274761824738,
+            "gaussian_nll": -1.9766940119527143,
+            "mean_variance": 0.012108822586014867,
+            "normal_95_coverage": 1.0,
+            "normal_95_width": 0.4284443816449221,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": NaN
+          },
+          "igbt": {
+            "count": 12,
+            "mae": 0.10565104335546494,
+            "rmse": 0.14016073279678365,
+            "r2": 0.7102427164384687,
+            "spearman": 0.9807370556736849,
+            "gaussian_nll": 2.2076307908536053,
+            "mean_variance": 0.0021172260070064417,
+            "normal_95_coverage": 0.5833333333333334,
+            "normal_95_width": 0.17280731608533473,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": 0.7827450955513067
+          },
+          "mosfet": {
+            "count": 60,
+            "mae": 0.25238143584574574,
+            "rmse": 0.29547821140411695,
+            "r2": 0.10012662108819814,
+            "spearman": 0.27999795409806594,
+            "gaussian_nll": -0.74841091812336,
+            "mean_variance": 0.095294782333076,
+            "normal_95_coverage": 1.0,
+            "normal_95_width": 1.1967855986137763,
+            "trajectory_monotonic_violation_rate": 0.0,
+            "physics_rate_spearman": -0.13621614625303669
+          }
+        }
+      }
+    }
+  },
+  "history_files": {
+    "full": {
+      "17": "histories\\full_seed17.json",
+      "42": "histories\\full_seed42.json",
+      "73": "histories\\full_seed73.json"
+    },
+    "no_physics": {
+      "17": "histories\\no_physics_seed17.json",
+      "42": "histories\\no_physics_seed42.json",
+      "73": "histories\\no_physics_seed73.json"
+    },
+    "no_forecast": {
+      "17": "histories\\no_forecast_seed17.json",
+      "42": "histories\\no_forecast_seed42.json",
+      "73": "histories\\no_forecast_seed73.json"
+    },
+    "no_ranking_endpoint": {
+      "17": "histories\\no_ranking_endpoint_seed17.json",
+      "42": "histories\\no_ranking_endpoint_seed42.json",
+      "73": "histories\\no_ranking_endpoint_seed73.json"
+    },
+    "no_alignment": {
+      "17": "histories\\no_alignment_seed17.json",
+      "42": "histories\\no_alignment_seed42.json",
+      "73": "histories\\no_alignment_seed73.json"
+    }
+  },
+  "aggregate_statistics": {
+    "full": {
+      "overall": {
+        "mae": {
+          "mean": 0.17404092870254564,
+          "sample_sd": 0.0012881473805404868,
+          "n": 3
+        },
+        "spearman": {
+          "mean": 0.6158753235744429,
+          "sample_sd": 0.02253197089869767,
+          "n": 3
+        },
+        "trajectory_monotonic_violation_rate": {
+          "mean": 0.0,
+          "sample_sd": 0.0,
+          "n": 3
+        },
+        "physics_rate_spearman": {
+          "mean": 0.2924816648334605,
+          "sample_sd": 0.045969419750397936,
+          "n": 3
+        }
+      },
+      "capacitor": {
+        "mae": {
+          "mean": 0.060361815271554174,
+          "sample_sd": 0.0038979777247094972,
+          "n": 3
+        },
+        "spearman": {
+          "mean": 0.9634136865973625,
+          "sample_sd": 0.01817291856477463,
+          "n": 3
+        },
+        "trajectory_monotonic_violation_rate": {
+          "mean": 0.0,
+          "sample_sd": 0.0,
+          "n": 3
+        },
+        "physics_rate_spearman": {
+          "mean": NaN,
+          "sample_sd": NaN,
+          "n": 0
+        }
+      },
+      "igbt": {
+        "mae": {
+          "mean": 0.12424666227565873,
+          "sample_sd": 0.004541374836809797,
+          "n": 3
+        },
+        "spearman": {
+          "mean": 0.9830721439014795,
+          "sample_sd": 0.008088982901392051,
+          "n": 3
+        },
+        "trajectory_monotonic_violation_rate": {
+          "mean": 0.0,
+          "sample_sd": 0.0,
+          "n": 3
+        },
+        "physics_rate_spearman": {
+          "mean": 0.7587946913744285,
+          "sample_sd": 0.00537374295130324,
+          "n": 3
+        }
+      },
+      "mosfet": {
+        "mae": {
+          "mean": 0.25220725004651784,
+          "sample_sd": 0.004069005174054011,
+          "n": 3
+        },
+        "spearman": {
+          "mean": 0.34657660693247117,
+          "sample_sd": 0.07380353027976459,
+          "n": 3
+        },
+        "trajectory_monotonic_violation_rate": {
+          "mean": 0.0,
+          "sample_sd": 0.0,
+          "n": 3
+        },
+        "physics_rate_spearman": {
+          "mean": -0.17383136170750754,
+          "sample_sd": 0.08831249566339558,
+          "n": 3
+        }
+      }
+    },
+    "no_physics": {
+      "overall": {
+        "mae": {
+          "mean": 0.17899338311313098,
+          "sample_sd": 0.0012352542392558116,
+          "n": 3
+        },
+        "spearman": {
+          "mean": 0.5966416048810289,
+          "sample_sd": 0.014046761097727128,
+          "n": 3
+        },
+        "trajectory_monotonic_violation_rate": {
+          "mean": 0.0,
+          "sample_sd": 0.0,
+          "n": 3
+        },
+        "physics_rate_spearman": {
+          "mean": 0.22166453439585632,
+          "sample_sd": 0.1002999490750949,
+          "n": 3
+        }
+      },
+      "capacitor": {
+        "mae": {
+          "mean": 0.06494445353746414,
+          "sample_sd": 0.0069930875308985485,
+          "n": 3
+        },
+        "spearman": {
+          "mean": 0.9496099622438585,
+          "sample_sd": 0.030806084142461804,
+          "n": 3
+        },
+        "trajectory_monotonic_violation_rate": {
+          "mean": 0.0,
+          "sample_sd": 0.0,
+          "n": 3
+        },
+        "physics_rate_spearman": {
+          "mean": NaN,
+          "sample_sd": NaN,
+          "n": 0
+        }
+      },
+      "igbt": {
+        "mae": {
+          "mean": 0.13455997159083685,
+          "sample_sd": 0.024958876044090497,
+          "n": 3
+        },
+        "spearman": {
+          "mean": 0.9702291586486096,
+          "sample_sd": 0.019501831528167087,
+          "n": 3
+        },
+        "trajectory_monotonic_violation_rate": {
+          "mean": 0.0,
+          "sample_sd": 0.0,
+          "n": 3
+        },
+        "physics_rate_spearman": {
+          "mean": 0.7221107207220445,
+          "sample_sd": 0.03734014108891474,
+          "n": 3
+        }
+      },
+      "mosfet": {
+        "mae": {
+          "mean": 0.25630942316298994,
+          "sample_sd": 0.0022107264471509917,
+          "n": 3
+        },
+        "spearman": {
+          "mean": 0.28950388556800893,
+          "sample_sd": 0.003339646148362453,
+          "n": 3
+        },
+        "trajectory_monotonic_violation_rate": {
+          "mean": 0.0,
+          "sample_sd": 0.0,
+          "n": 3
+        },
+        "physics_rate_spearman": {
+          "mean": -0.27878165193033183,
+          "sample_sd": 0.17005932523243236,
+          "n": 3
+        }
+      }
+    },
+    "no_forecast": {
+      "overall": {
+        "mae": {
+          "mean": 0.17981830744157593,
+          "sample_sd": 0.002824492310031562,
+          "n": 3
+        },
+        "spearman": {
+          "mean": 0.587613662773362,
+          "sample_sd": 0.014973887964216955,
+          "n": 3
+        },
+        "trajectory_monotonic_violation_rate": {
+          "mean": 0.0,
+          "sample_sd": 0.0,
+          "n": 3
+        },
+        "physics_rate_spearman": {
+          "mean": 0.33085090080770574,
+          "sample_sd": 0.05465512533278711,
+          "n": 3
+        }
+      },
+      "capacitor": {
+        "mae": {
+          "mean": 0.07145767272622497,
+          "sample_sd": 0.003005678981904808,
+          "n": 3
+        },
+        "spearman": {
+          "mean": 0.9565549610592151,
+          "sample_sd": 0.011307148967225926,
+          "n": 3
+        },
+        "trajectory_monotonic_violation_rate": {
+          "mean": 0.0,
+          "sample_sd": 0.0,
+          "n": 3
+        },
+        "physics_rate_spearman": {
+          "mean": NaN,
+          "sample_sd": NaN,
+          "n": 0
+        }
+      },
+      "igbt": {
+        "mae": {
+          "mean": 0.13673395663499832,
+          "sample_sd": 0.015353232209154709,
+          "n": 3
+        },
+        "spearman": {
+          "mean": 0.9807370556736847,
+          "sample_sd": 0.007005264683383472,
+          "n": 3
+        },
+        "trajectory_monotonic_violation_rate": {
+          "mean": 0.0,
+          "sample_sd": 0.0,
+          "n": 3
+        },
+        "physics_rate_spearman": {
+          "mean": 0.7670635048796283,
+          "sample_sd": 0.004979083986757062,
+          "n": 3
+        }
+      },
+      "mosfet": {
+        "mae": {
+          "mean": 0.253451558432102,
+          "sample_sd": 0.0011057634707562626,
+          "n": 3
+        },
+        "spearman": {
+          "mean": 0.2823930032379539,
+          "sample_sd": 0.020477005620267368,
+          "n": 3
+        },
+        "trajectory_monotonic_violation_rate": {
+          "mean": 0.0,
+          "sample_sd": 0.0,
+          "n": 3
+        },
+        "physics_rate_spearman": {
+          "mean": -0.10536170326421686,
+          "sample_sd": 0.11370854602213618,
+          "n": 3
+        }
+      }
+    },
+    "no_ranking_endpoint": {
+      "overall": {
+        "mae": {
+          "mean": 0.17636666777019136,
+          "sample_sd": 0.00371315727432277,
+          "n": 3
+        },
+        "spearman": {
+          "mean": 0.6012478926912522,
+          "sample_sd": 0.010506075126663902,
+          "n": 3
+        },
+        "trajectory_monotonic_violation_rate": {
+          "mean": 0.0,
+          "sample_sd": 0.0,
+          "n": 3
+        },
+        "physics_rate_spearman": {
+          "mean": 0.35062486150577454,
+          "sample_sd": 0.02265013652652233,
+          "n": 3
+        }
+      },
+      "capacitor": {
+        "mae": {
+          "mean": 0.06339382463031346,
+          "sample_sd": 0.007455616706205589,
+          "n": 3
+        },
+        "spearman": {
+          "mean": 0.9627235003796873,
+          "sample_sd": 0.012047175840005067,
+          "n": 3
+        },
+        "trajectory_monotonic_violation_rate": {
+          "mean": 0.0,
+          "sample_sd": 0.0,
+          "n": 3
+        },
+        "physics_rate_spearman": {
+          "mean": NaN,
+          "sample_sd": NaN,
+          "n": 0
+        }
+      },
+      "igbt": {
+        "mae": {
+          "mean": 0.12692195425430933,
+          "sample_sd": 0.011710569254046631,
+          "n": 3
+        },
+        "spearman": {
+          "mean": 0.9713967027625069,
+          "sample_sd": 0.00404449145069609,
+          "n": 3
+        },
+        "trajectory_monotonic_violation_rate": {
+          "mean": 0.0,
+          "sample_sd": 0.0,
+          "n": 3
+        },
+        "physics_rate_spearman": {
+          "mean": 0.7665575083905195,
+          "sample_sd": 0.020211588502584674,
+          "n": 3
+        }
+      },
+      "mosfet": {
+        "mae": {
+          "mean": 0.2540393163572945,
+          "sample_sd": 0.0028328311096297927,
+          "n": 3
+        },
+        "spearman": {
+          "mean": 0.28424034734197606,
+          "sample_sd": 0.031918828324434476,
+          "n": 3
+        },
+        "trajectory_monotonic_violation_rate": {
+          "mean": 0.0,
+          "sample_sd": 0.0,
+          "n": 3
+        },
+        "physics_rate_spearman": {
+          "mean": -0.06530778537897043,
+          "sample_sd": 0.04030271161821403,
+          "n": 3
+        }
+      }
+    },
+    "no_alignment": {
+      "overall": {
+        "mae": {
+          "mean": 0.1765437885830725,
+          "sample_sd": 0.003654243767550936,
+          "n": 3
+        },
+        "spearman": {
+          "mean": 0.6019784684013051,
+          "sample_sd": 0.01069519427916531,
+          "n": 3
+        },
+        "trajectory_monotonic_violation_rate": {
+          "mean": 0.0,
+          "sample_sd": 0.0,
+          "n": 3
+        },
+        "physics_rate_spearman": {
+          "mean": 0.3342410164803087,
+          "sample_sd": 0.03416801987295632,
+          "n": 3
+        }
+      },
+      "capacitor": {
+        "mae": {
+          "mean": 0.06239569242353793,
+          "sample_sd": 0.004599589042348333,
+          "n": 3
+        },
+        "spearman": {
+          "mean": 0.9536216696340958,
+          "sample_sd": 0.018127091359298915,
+          "n": 3
+        },
+        "trajectory_monotonic_violation_rate": {
+          "mean": 0.0,
+          "sample_sd": 0.0,
+          "n": 3
+        },
+        "physics_rate_spearman": {
+          "mean": NaN,
+          "sample_sd": NaN,
+          "n": 0
+        }
+      },
+      "igbt": {
+        "mae": {
+          "mean": 0.12468710293372472,
+          "sample_sd": 0.02538312522059706,
+          "n": 3
+        },
+        "spearman": {
+          "mean": 0.9784019674458904,
+          "sample_sd": 0.0040444914506960255,
+          "n": 3
+        },
+        "trajectory_monotonic_violation_rate": {
+          "mean": 0.0,
+          "sample_sd": 0.0,
+          "n": 3
+        },
+        "physics_rate_spearman": {
+          "mean": 0.7773036553890441,
+          "sample_sd": 0.004948536546399669,
+          "n": 3
+        }
+      },
+      "mosfet": {
+        "mae": {
+          "mean": 0.25540398340866277,
+          "sample_sd": 0.003640960638620592,
+          "n": 3
+        },
+        "spearman": {
+          "mean": 0.2883713429514727,
+          "sample_sd": 0.01687153244945572,
+          "n": 3
+        },
+        "trajectory_monotonic_violation_rate": {
+          "mean": 0.0,
+          "sample_sd": 0.0,
+          "n": 3
+        },
+        "physics_rate_spearman": {
+          "mean": -0.10882162242842665,
+          "sample_sd": 0.07121626052317664,
+          "n": 3
+        }
+      }
+    }
+  },
+  "paired_deltas_vs_full": {
+    "no_physics": {
+      "overall": {
+        "mae": {
+          "mean": 0.004952454410585357,
+          "sample_sd": 0.0025204442069720247,
+          "n": 3,
+          "by_seed": {
+            "17": 0.007827930290389945,
+            "42": 0.003125656258176873,
+            "73": 0.003903776683189253
+          }
+        },
+        "spearman": {
+          "mean": -0.019233718693414132,
+          "sample_sd": 0.032393567784006684,
+          "n": 3,
+          "by_seed": {
+            "17": -0.049363997977287744,
+            "42": -0.023364097707764486,
+            "73": 0.01502693960480983
+          }
+        },
+        "trajectory_monotonic_violation_rate": {
+          "mean": 0.0,
+          "sample_sd": 0.0,
+          "n": 3,
+          "by_seed": {
+            "17": 0.0,
+            "42": 0.0,
+            "73": 0.0
+          }
+        },
+        "physics_rate_spearman": {
+          "mean": -0.07081713043760418,
+          "sample_sd": 0.12198695765055872,
+          "n": 3,
+          "by_seed": {
+            "17": -0.02372206184689532,
+            "42": 0.020602107521752122,
+            "73": -0.20933143698766934
+          }
+        }
+      },
+      "capacitor": {
+        "mae": {
+          "mean": 0.004582638265909975,
+          "sample_sd": 0.005634060481388014,
+          "n": 3,
+          "by_seed": {
+            "17": -0.00019699997372096822,
+            "42": 0.010794620547029704,
+            "73": 0.003150294224421188
+          }
+        },
+        "spearman": {
+          "mean": -0.013803724353504002,
+          "sample_sd": 0.012833349354368246,
+          "n": 3,
+          "by_seed": {
+            "17": -0.005694036295820437,
+            "42": -0.02859959139491597,
+            "73": -0.007117545369775602
+          }
+        },
+        "trajectory_monotonic_violation_rate": {
+          "mean": 0.0,
+          "sample_sd": 0.0,
+          "n": 3,
+          "by_seed": {
+            "17": 0.0,
+            "42": 0.0,
+            "73": 0.0
+          }
+        },
+        "physics_rate_spearman": {
+          "mean": NaN,
+          "sample_sd": NaN,
+          "n": 0,
+          "by_seed": {
+            "17": NaN,
+            "42": NaN,
+            "73": NaN
+          }
+        }
+      },
+      "igbt": {
+        "mae": {
+          "mean": 0.010313309315178126,
+          "sample_sd": 0.02043682878378208,
+          "n": 3,
+          "by_seed": {
+            "17": 0.01484529549876848,
+            "42": -0.012009099125862122,
+            "73": 0.02810373157262802
+          }
+        },
+        "spearman": {
+          "mean": -0.01284298525286968,
+          "sample_sd": 0.02224470297882811,
+          "n": 3,
+          "by_seed": {
+            "17": 0.0,
+            "42": -0.03852895575860904,
+            "73": 0.0
+          }
+        },
+        "trajectory_monotonic_violation_rate": {
+          "mean": 0.0,
+          "sample_sd": 0.0,
+          "n": 3,
+          "by_seed": {
+            "17": 0.0,
+            "42": 0.0,
+            "73": 0.0
+          }
+        },
+        "physics_rate_spearman": {
+          "mean": -0.036683970652384046,
+          "sample_sd": 0.037973784199846726,
+          "n": 3,
+          "by_seed": {
+            "17": -0.009404024571959657,
+            "42": -0.020594132175477897,
+            "73": -0.08005375520971458
+          }
+        }
+      },
+      "mosfet": {
+        "mae": {
+          "mean": 0.004102173116472041,
+          "sample_sd": 0.006264250688410097,
+          "n": 3,
+          "by_seed": {
+            "17": 0.01123941540718082,
+            "42": 0.0015512287616729625,
+            "73": -0.00048412481943765906
+          }
+        },
+        "spearman": {
+          "mean": -0.05707272136446223,
+          "sample_sd": 0.07461772001241708,
+          "n": 3,
+          "by_seed": {
+            "17": -0.1347632882316035,
+            "42": -0.05049097779787082,
+            "73": 0.01403610193608762
+          }
+        },
+        "trajectory_monotonic_violation_rate": {
+          "mean": 0.0,
+          "sample_sd": 0.0,
+          "n": 3,
+          "by_seed": {
+            "17": 0.0,
+            "42": 0.0,
+            "73": 0.0
+          }
+        },
+        "physics_rate_spearman": {
+          "mean": -0.10495029022282432,
+          "sample_sd": 0.2084208841717451,
+          "n": 3,
+          "by_seed": {
+            "17": -0.038040099121830984,
+            "42": 0.06179834721898213,
+            "73": -0.3386091187656241
+          }
+        }
+      }
+    },
+    "no_forecast": {
+      "overall": {
+        "mae": {
+          "mean": 0.0057773787390302716,
+          "sample_sd": 0.00263374820225778,
+          "n": 3,
+          "by_seed": {
+            "17": 0.006657587295329143,
+            "42": 0.007858296925270986,
+            "73": 0.0028162519964906874
+          }
+        },
+        "spearman": {
+          "mean": -0.028261660801080907,
+          "sample_sd": 0.036637565212999344,
+          "n": 3,
+          "by_seed": {
+            "17": -0.06659221472153753,
+            "42": -0.02460082390974916,
+            "73": 0.006408056228043968
+          }
+        },
+        "trajectory_monotonic_violation_rate": {
+          "mean": 0.0,
+          "sample_sd": 0.0,
+          "n": 3,
+          "by_seed": {
+            "17": 0.0,
+            "42": 0.0,
+            "73": 0.0
+          }
+        },
+        "physics_rate_spearman": {
+          "mean": 0.03836923597424527,
+          "sample_sd": 0.07050563743862098,
+          "n": 3,
+          "by_seed": {
+            "17": 0.06694063180402485,
+            "42": 0.09010475749583524,
+            "73": -0.04193768137712428
+          }
+        }
+      },
+      "capacitor": {
+        "mae": {
+          "mean": 0.011095857454670802,
+          "sample_sd": 0.003273404264721713,
+          "n": 3,
+          "by_seed": {
+            "17": 0.007316946983337402,
+            "42": 0.012914233737521708,
+            "73": 0.013056391643153295
+          }
+        },
+        "spearman": {
+          "mean": -0.006858725538147333,
+          "sample_sd": 0.007777525174203826,
+          "n": 3,
+          "by_seed": {
+            "17": -0.012811581665595706,
+            "42": 0.0019411487372112957,
+            "73": -0.009705743686057589
+          }
+        },
+        "trajectory_monotonic_violation_rate": {
+          "mean": 0.0,
+          "sample_sd": 0.0,
+          "n": 3,
+          "by_seed": {
+            "17": 0.0,
+            "42": 0.0,
+            "73": 0.0
+          }
+        },
+        "physics_rate_spearman": {
+          "mean": NaN,
+          "sample_sd": NaN,
+          "n": 0,
+          "by_seed": {
+            "17": NaN,
+            "42": NaN,
+            "73": NaN
+          }
+        }
+      },
+      "igbt": {
+        "mae": {
+          "mean": 0.01248729435933961,
+          "sample_sd": 0.019836105613623443,
+          "n": 3,
+          "by_seed": {
+            "17": 0.0028045984605948038,
+            "42": 0.03530515854557355,
+            "73": -0.0006478739281495227
+          }
+        },
+        "spearman": {
+          "mean": -0.0023350882277944907,
+          "sample_sd": 0.010700718558268539,
+          "n": 3,
+          "by_seed": {
+            "17": 0.007005264683383472,
+            "42": 0.0,
+            "73": -0.014010529366766944
+          }
+        },
+        "trajectory_monotonic_violation_rate": {
+          "mean": 0.0,
+          "sample_sd": 0.0,
+          "n": 3,
+          "by_seed": {
+            "17": 0.0,
+            "42": 0.0,
+            "73": 0.0
+          }
+        },
+        "physics_rate_spearman": {
+          "mean": 0.008268813505199887,
+          "sample_sd": 0.008443537223484236,
+          "n": 3,
+          "by_seed": {
+            "17": 0.012922634478850004,
+            "42": -0.0014776511193934638,
+            "73": 0.01336145715614312
+          }
+        }
+      },
+      "mosfet": {
+        "mae": {
+          "mean": 0.0012443083855841104,
+          "sample_sd": 0.005108675120713645,
+          "n": 3,
+          "by_seed": {
+            "17": 0.0070325692494710434,
+            "42": -0.0006646374861399296,
+            "73": -0.0026350066065787825
+          }
+        },
+        "spearman": {
+          "mean": -0.06418360369451724,
+          "sample_sd": 0.07703844301367874,
+          "n": 3,
+          "by_seed": {
+            "17": -0.1523362650603164,
+            "42": -0.030439403603459925,
+            "73": -0.009775142419775396
+          }
+        },
+        "trajectory_monotonic_violation_rate": {
+          "mean": 0.0,
+          "sample_sd": 0.0,
+          "n": 3,
+          "by_seed": {
+            "17": 0.0,
+            "42": 0.0,
+            "73": 0.0
+          }
+        },
+        "physics_rate_spearman": {
+          "mean": 0.06846965844329066,
+          "sample_sd": 0.14668321828782585,
+          "n": 3,
+          "by_seed": {
+            "17": 0.12095862912919975,
+            "42": 0.18168716611106395,
+            "73": -0.09723681991039175
+          }
+        }
+      }
+    },
+    "no_ranking_endpoint": {
+      "overall": {
+        "mae": {
+          "mean": 0.0023257390676457157,
+          "sample_sd": 0.0030866101946464184,
+          "n": 3,
+          "by_seed": {
+            "17": 0.0005067039143156205,
+            "42": 0.0005809213552210035,
+            "73": 0.005889591933400523
+          }
+        },
+        "spearman": {
+          "mean": -0.014627430883190703,
+          "sample_sd": 0.02452268536600288,
+          "n": 3,
+          "by_seed": {
+            "17": -0.04248321628979779,
+            "42": 0.0037054036013131064,
+            "73": -0.005104479961087427
+          }
+        },
+        "trajectory_monotonic_violation_rate": {
+          "mean": 0.0,
+          "sample_sd": 0.0,
+          "n": 3,
+          "by_seed": {
+            "17": 0.0,
+            "42": 0.0,
+            "73": 0.0
+          }
+        },
+        "physics_rate_spearman": {
+          "mean": 0.05814319667231402,
+          "sample_sd": 0.06276360354537339,
+          "n": 3,
+          "by_seed": {
+            "17": 0.13055332240403514,
+            "42": 0.024555422219689482,
+            "73": 0.019320845393217434
+          }
+        }
+      },
+      "capacitor": {
+        "mae": {
+          "mean": 0.0030320093587592836,
+          "sample_sd": 0.010646746007955697,
+          "n": 3,
+          "by_seed": {
+            "17": -0.00841631450586848,
+            "42": 0.004876079658667251,
+            "73": 0.01263626292347908
+          }
+        },
+        "spearman": {
+          "mean": -0.0006901862176751742,
+          "sample_sd": 0.009398344092075437,
+          "n": 3,
+          "by_seed": {
+            "17": 0.0024587884004679816,
+            "42": 0.006729315622333143,
+            "73": -0.011258662675826647
+          }
+        },
+        "trajectory_monotonic_violation_rate": {
+          "mean": 0.0,
+          "sample_sd": 0.0,
+          "n": 3,
+          "by_seed": {
+            "17": 0.0,
+            "42": 0.0,
+            "73": 0.0
+          }
+        },
+        "physics_rate_spearman": {
+          "mean": NaN,
+          "sample_sd": NaN,
+          "n": 0,
+          "by_seed": {
+            "17": NaN,
+            "42": NaN,
+            "73": NaN
+          }
+        }
+      },
+      "igbt": {
+        "mae": {
+          "mean": 0.0026752919786506243,
+          "sample_sd": 0.011365182006868353,
+          "n": 3,
+          "by_seed": {
+            "17": -0.010253605743249267,
+            "42": 0.007190365344285979,
+            "73": 0.011089116334915161
+          }
+        },
+        "spearman": {
+          "mean": -0.01167544113897249,
+          "sample_sd": 0.010700718558268587,
+          "n": 3,
+          "by_seed": {
+            "17": 0.0,
+            "42": -0.021015794050150527,
+            "73": -0.014010529366766944
+          }
+        },
+        "trajectory_monotonic_violation_rate": {
+          "mean": 0.0,
+          "sample_sd": 0.0,
+          "n": 3,
+          "by_seed": {
+            "17": 0.0,
+            "42": 0.0,
+            "73": 0.0
+          }
+        },
+        "physics_rate_spearman": {
+          "mean": 0.007762817016090977,
+          "sample_sd": 0.022820588515149617,
+          "n": 3,
+          "by_seed": {
+            "17": 0.011192863050478619,
+            "42": -0.016578636305710437,
+            "73": 0.028674224303504747
+          }
+        }
+      },
+      "mosfet": {
+        "mae": {
+          "mean": 0.0018320663107766106,
+          "sample_sd": 0.005735164508100898,
+          "n": 3,
+          "by_seed": {
+            "17": 0.00801257689793905,
+            "42": -0.003318062424659707,
+            "73": 0.000801684459050489
+          }
+        },
+        "spearman": {
+          "mean": -0.06233625959049512,
+          "sample_sd": 0.08201908204205106,
+          "n": 3,
+          "by_seed": {
+            "17": -0.1570428151142823,
+            "42": -0.01534502414044503,
+            "73": -0.014620939516758025
+          }
+        },
+        "trajectory_monotonic_violation_rate": {
+          "mean": 0.0,
+          "sample_sd": 0.0,
+          "n": 3,
+          "by_seed": {
+            "17": 0.0,
+            "42": 0.0,
+            "73": 0.0
+          }
+        },
+        "physics_rate_spearman": {
+          "mean": 0.10852357632853708,
+          "sample_sd": 0.1255771808960958,
+          "n": 3,
+          "by_seed": {
+            "17": 0.24991378175759166,
+            "42": 0.06568948074508946,
+            "73": 0.00996746648293012
+          }
+        }
+      }
+    },
+    "no_alignment": {
+      "overall": {
+        "mae": {
+          "mean": 0.002502859880526851,
+          "sample_sd": 0.0034552831900866235,
+          "n": 3,
+          "by_seed": {
+            "17": 0.003412060025665492,
+            "42": 0.005412631702643833,
+            "73": -0.0013161120867287712
+          }
+        },
+        "spearman": {
+          "mean": -0.013896855173137915,
+          "sample_sd": 0.028430397814947456,
+          "n": 3,
+          "by_seed": {
+            "17": -0.04068781454483161,
+            "42": -0.016932166456515962,
+            "73": 0.01592941548193383
+          }
+        },
+        "trajectory_monotonic_violation_rate": {
+          "mean": 0.0,
+          "sample_sd": 0.0,
+          "n": 3,
+          "by_seed": {
+            "17": 0.0,
+            "42": 0.0,
+            "73": 0.0
+          }
+        },
+        "physics_rate_spearman": {
+          "mean": 0.04175935164684819,
+          "sample_sd": 0.0770062870287633,
+          "n": 3,
+          "by_seed": {
+            "17": 0.13035848282369564,
+            "42": 0.003987703642701568,
+            "73": -0.009068131525852619
+          }
+        }
+      },
+      "capacitor": {
+        "mae": {
+          "mean": 0.00203387715198376,
+          "sample_sd": 0.0071651445791855485,
+          "n": 3,
+          "by_seed": {
+            "17": -0.005987863987684243,
+            "42": 0.004290310872925654,
+            "73": 0.007799184570709869
+          }
+        },
+        "spearman": {
+          "mean": -0.009792016963266814,
+          "sample_sd": 0.00796931156876987,
+          "n": 3,
+          "by_seed": {
+            "17": -0.0020705586530255227,
+            "42": -0.00931751393861513,
+            "73": -0.01798797829815979
+          }
+        },
+        "trajectory_monotonic_violation_rate": {
+          "mean": 0.0,
+          "sample_sd": 0.0,
+          "n": 3,
+          "by_seed": {
+            "17": 0.0,
+            "42": 0.0,
+            "73": 0.0
+          }
+        },
+        "physics_rate_spearman": {
+          "mean": NaN,
+          "sample_sd": NaN,
+          "n": 0,
+          "by_seed": {
+            "17": NaN,
+            "42": NaN,
+            "73": NaN
+          }
+        }
+      },
+      "igbt": {
+        "mae": {
+          "mean": 0.000440440658066014,
+          "sample_sd": 0.029920593888245767,
+          "n": 3,
+          "by_seed": {
+            "17": -0.01086838046709697,
+            "42": 0.0343671850860119,
+            "73": -0.02217748264471689
+          }
+        },
+        "spearman": {
+          "mean": -0.004670176455588981,
+          "sample_sd": 0.0040444914506960255,
+          "n": 3,
+          "by_seed": {
+            "17": 0.0,
+            "42": -0.007005264683383472,
+            "73": -0.007005264683383472
+          }
+        },
+        "trajectory_monotonic_violation_rate": {
+          "mean": 0.0,
+          "sample_sd": 0.0,
+          "n": 3,
+          "by_seed": {
+            "17": 0.0,
+            "42": 0.0,
+            "73": 0.0
+          }
+        },
+        "physics_rate_spearman": {
+          "mean": 0.018508964014615548,
+          "sample_sd": 0.005922355256182803,
+          "n": 3,
+          "by_seed": {
+            "17": 0.019774114570471957,
+            "42": 0.012056265255720788,
+            "73": 0.023696512217653898
+          }
+        }
+      },
+      "mosfet": {
+        "mae": {
+          "mean": 0.0031967333621449137,
+          "sample_sd": 0.0076831158328306325,
+          "n": 3,
+          "by_seed": {
+            "17": 0.011908102532227849,
+            "42": 0.0002951135238011826,
+            "73": -0.00261301596959429
+          }
+        },
+        "spearman": {
+          "mean": -0.05820526398099842,
+          "sample_sd": 0.05937934759753736,
+          "n": 3,
+          "by_seed": {
+            "17": -0.11716246199428726,
+            "42": -0.05904074623909883,
+            "73": 0.0015874162903908307
+          }
+        },
+        "trajectory_monotonic_violation_rate": {
+          "mean": 0.0,
+          "sample_sd": 0.0,
+          "n": 3,
+          "by_seed": {
+            "17": 0.0,
+            "42": 0.0,
+            "73": 0.0
+          }
+        },
+        "physics_rate_spearman": {
+          "mean": 0.06500973927908087,
+          "sample_sd": 0.15352734832951248,
+          "n": 3,
+          "by_seed": {
+            "17": 0.24094285107691932,
+            "42": -0.00408085797031757,
+            "73": -0.04183277526935915
+          }
+        }
+      }
+    }
+  }
+}

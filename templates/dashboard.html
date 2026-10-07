@@ -3,6 +3,9 @@
 {% block page_title %}质量看板{% endblock %}
 
 {% block topbar_actions %}
+<a class="btn btn-sm btn-outline-primary me-2" href="/predict/report/docx" title="导出当前需要复测和处置的电表清单">
+  <i class="bi bi-file-earmark-arrow-down me-1"></i>导出现场处置单
+</a>
 <button class="btn btn-sm btn-accent" onclick="trainModel()"><i class="bi bi-cpu me-1"></i>训练模型</button>
 {% endblock %}
 
@@ -274,7 +277,12 @@ async function trainModel() {
       new bootstrap.Toast(document.getElementById('resultToast')).show();
       setTimeout(() => location.reload(), 2000);
     } else {
-      alert('训练失败：' + (res.message || res.error));
+      if (res.code === 'AUTH_REQUIRED') {
+        alert(res.error);
+        location.href = res.login_url || '/login';
+        return;
+      }
+      alert('训练失败：' + (res.message || res.error || '服务未返回失败原因，请查看训练日志。'));
     }
   } catch(e) {
     hideLoading();

@@ -680,7 +680,13 @@ def predict_single(features: dict, db: Session) -> dict:
         try:
             from app.services.deep_fusion_service import batch_features_from_key
             batch_key = features.get("batch_key") or features.get("order_no")
-            batch_vec = batch_features_from_key(batch_key, db)
+            mapping_confidence = features.get("mapping_confidence")
+            batch_vec = batch_features_from_key(
+                batch_key,
+                db,
+                feature_names=getattr(model, "batch_feature_names", None),
+                mapping_confidence=mapping_confidence,
+            )
             main_prob = float(model.predict_proba(x, batch_features=batch_vec)[0][1])
         except Exception:
             main_prob = float(model.predict_proba(x_input)[0][1])

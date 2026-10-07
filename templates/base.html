@@ -115,7 +115,7 @@
   </style>
   {% block extra_css %}{% endblock %}
 </head>
-<body>
+<body data-help-page="{{ page|default('general') }}">
 
 <!-- 侧边栏 -->
 <nav id="sidebar">
@@ -190,6 +190,9 @@
     <h1 class="topbar-title">{% block page_title %}质量管控{% endblock %}</h1>
     <div class="d-flex align-items-center gap-3">
       {% block topbar_actions %}{% endblock %}
+      <button class="btn btn-sm btn-outline-secondary help-trigger" type="button" data-bs-toggle="offcanvas" data-bs-target="#helpPanel" aria-controls="helpPanel" title="打开当前页面帮助">
+        <i class="bi bi-question-circle me-1"></i><span>帮助</span>
+      </button>
       <span class="topbar-badge"><i class="bi bi-activity"></i> 在线</span>
     </div>
   </div>
@@ -198,6 +201,18 @@
     {% block content %}{% endblock %}
   </div>
 </div>
+
+<!-- 随页帮助 -->
+<aside class="offcanvas offcanvas-end" tabindex="-1" id="helpPanel" aria-labelledby="helpPanelTitle" style="--bs-offcanvas-width: min(420px, 92vw);">
+  <div class="offcanvas-header border-bottom">
+    <div>
+      <div class="small text-muted">现场操作帮助</div>
+      <h2 class="offcanvas-title fs-5 mb-0" id="helpPanelTitle">当前页面怎么用</h2>
+    </div>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="关闭帮助"></button>
+  </div>
+  <div class="offcanvas-body" id="helpPanelBody"></div>
+</aside>
 
 <!-- 加载遮罩 -->
 <div class="spinner-overlay" id="loadingOverlay">
@@ -222,7 +237,19 @@ async function postJson(url, data) {
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(data)
   });
-  return resp.json();
+  const payload = await resp.json().catch(() => ({}));
+  if (resp.status === 401) {
+    return {
+      success: false,
+      code: 'AUTH_REQUIRED',
+      error: payload.error || '登录已失效，请重新登录后再操作。',
+      login_url: payload.login_url || '/login'
+    };
+  }
+  if (!resp.ok && !payload.error) {
+    payload.error = `请求失败（HTTP ${resp.status}）`;
+  }
+  return payload;
 }
 
 function riskBadge(label, prob) {
@@ -230,6 +257,122 @@ function riskBadge(label, prob) {
   if (prob >= 0.4) return '<span class="badge-risk-mid">中风险</span>';
   return '<span class="badge-risk-low">正常</span>';
 }
+
+const PAGE_HELP = {
+  general: {
+    title: '系统使用帮助',
+    summary: '系统用于集中查看电表质量数据、发现异常并安排复测。',
+    steps: ['先进入部署向导确认数据目录和样本状态。', '把 Excel 导入系统，或放入本地监听目录。', '在质量看板查看风险，再进入对应模块处理。'],
+    result: '看到“待导入”或“未预测”时，先完成数据导入或模型训练，再依据结果安排复测。',
+    note: '系统提示用于辅助安排检查，不替代最终检验结论。'
+  },
+  setup: {
+    title: '部署向导帮助',
+    summary: '这里确认系统是否具备现场运行条件，并提供标准模板。',
+    steps: ['查看“现场准备检查”中的目录和样本状态。', '下载对应 Excel 模板并按字段填写。', '进入“数据导入”完成导入，再回到看板确认数量变化。'],
+    result: '“可训练”表示已有足够的出厂样本；“生产追溯数据：已接入”表示生产数据已经进入系统。',
+    note: '本机监听目录中的文件会按系统设定周期自动扫描。'
+  },
+  dashboard: {
+    title: '质量看板帮助',
+    summary: '这里是班组长每天优先查看的总览页面。',
+    steps: ['先看高风险电表数和质量链路总览。', '打开高风险电表的“追溯”或“退化”查看原因。', '点击“导出现场处置单”安排复测、隔离和交接。'],
+    result: '高风险表示需要优先复测或处置；预测值显示“未预测”时，当前仍只有规则标记或尚未完成模型预测。',
+    note: '模型指标来自训练数据，正式放行前应结合独立批次复核。'
+  },
+  import: {
+    title: '数据导入帮助',
+    summary: '这里负责接收 Excel、手工记录和训练样本。',
+    steps: ['选择正确的数据类型和模板。', '上传文件后查看导入条数和错误提示。', '数据确认无误后再开始训练或批量预测。'],
+    result: '导入成功后，记录数量应在部署向导和看板中同步增加；重复文件应关注去重提示。',
+    note: '字段名称、日期格式和电表编号必须保持一致，否则会影响关联和预测。'
+  },
+  data_management: {
+    title: '全流程数据管理帮助',
+    summary: '这里按数据集维护电表身份、检测、生产和维修记录。',
+    steps: ['先维护电表身份映射，再录入或导入各阶段数据。', '使用筛选和搜索定位异常记录。', '修改记录后回到看板或预测页确认结果是否更新。'],
+    result: '电表身份映射是跨阶段追溯的基础；条码、表号和批次填写不一致会造成数据断链。',
+    note: '删除或批量修改前先核对筛选条件，生产原始数据建议保留备份。'
+  },
+  predict: {
+    title: '质量风险预测帮助',
+    summary: '这里查看模型或规则引擎对电表风险的判断。',
+    steps: ['先确认页面顶部是否显示激活模型。', '需要更新结果时点击“批量重新预测”。', '单块电表可填写关键参数后进行快速判断。'],
+    result: '高风险优先复测，中风险安排复核，低风险按常规抽检；不要只看概率，要同时看标注原因。',
+    note: '没有激活模型时，系统使用规则引擎，不应将结果当作已验证的 AI 结论。'
+  },
+  factory_fault: {
+    title: '出厂故障预测帮助',
+    summary: '这里聚焦出厂检测中的故障风险和待处理样本。',
+    steps: ['先导入或确认出厂检测记录。', '查看故障类型、异常项和风险排序。', '对高风险样本安排复检并记录处置结果。'],
+    result: '故障记录和重复测试记录应回到质量闭环，不能只查看不记录。',
+    note: '样本量过少时，模型结果只适合作为辅助提示。'
+  },
+  rootcause: {
+    title: '根因追溯帮助',
+    summary: '这里回答“为什么被标记为风险”。',
+    steps: ['选择电表编号。', '查看贡献较大的质量特征和原始记录。', '根据建议动作核查来料、老化、通信或生产记录。'],
+    result: '根因解释是排查线索，最终原因需要通过原始检测和复测确认。',
+    note: '当没有激活模型时，页面会使用规则解释，解释范围会更窄。'
+  },
+  degradation: {
+    title: '退化分析帮助',
+    summary: '这里查看误差、时钟等指标随老化时间的变化。',
+    steps: ['选择电表查看时间序列。', '观察末期值、变化趋势和超限点。', '对持续上升或末期超限的样本安排复测。'],
+    result: '趋势上升不等于立即不合格，但应提高抽检优先级并核查试验条件。',
+    note: '时间点缺失或样本未关联时，趋势结论的可信度会降低。'
+  },
+  anomaly: {
+    title: '异常检测帮助',
+    summary: '这里识别用电功率和能耗数据中的异常波动。',
+    steps: ['先查看异常电表列表。', '打开单表趋势核对异常发生时段。', '结合现场工况、通信和计量记录复核。'],
+    result: '异常检测用于筛查，不直接判定设备故障；需要结合现场复测。',
+    note: '数据量不足或时间范围不完整时，异常结果可能为空。'
+  },
+  production: {
+    title: '生产追溯帮助',
+    summary: '这里按条码查看工序、AOI、维修和质量风险。',
+    steps: ['先导入生产过程文件。', '按条码、订单或工序筛选。', '查看重测、缺陷和维修记录，定位异常工位。'],
+    result: '同一条码的多次重测、AOI 缺陷和维修记录应作为一条质量链查看。',
+    note: '条码与老化电表编号未建立映射时，跨阶段追溯会不完整。'
+  },
+  repair: {
+    title: '维修分析帮助',
+    summary: '这里查看故障现象、原因、工序和维修闭环。',
+    steps: ['按时间、故障类型或工序筛选。', '查看高频故障和重复维修记录。', '将结论反馈给生产或质量工程师。'],
+    result: '重复维修或同类故障集中出现时，应优先排查工位、物料批次和工艺参数。',
+    note: '没有维修数据时，页面为空不代表生产没有问题，而是尚未导入记录。'
+  },
+  data_review: {
+    title: '文件扫描与审核帮助',
+    summary: '这里查看本地监听目录中的文件、导入状态和审核队列。',
+    steps: ['把 MES 或检验导出的文件放入监听目录。', '点击立即扫描并查看解析结果。', '审核新记录后，再触发模型训练或预测。'],
+    result: '待审核记录不能直接作为正式训练标签，先确认条码、字段和质量结论。',
+    note: '系统会按文件哈希避免重复导入；解析失败时请下载模板对照字段。'
+  },
+  ablation: {
+    title: '消融实验帮助',
+    summary: '这是质量工程师和研发人员使用的模型对比页面。',
+    steps: ['确认训练数据已打通并完成审核。', '选择特征组和算法运行实验。', '结合交叉验证结果评估模型，而不是只看单次指标。'],
+    result: '实验结果用于模型选择和研发分析，不用于操作工现场直接判定。',
+    note: '生产特征未接入或样本过少时，实验结论不具备代表性。'
+  }
+};
+
+function renderPageHelp() {
+  const pageKey = document.body.dataset.helpPage || 'general';
+  const help = PAGE_HELP[pageKey] || PAGE_HELP.general;
+  document.getElementById('helpPanelTitle').textContent = help.title;
+  document.getElementById('helpPanelBody').innerHTML = `
+    <div class="alert alert-info small mb-4"><i class="bi bi-info-circle me-1"></i>${help.summary}</div>
+    <h3 class="h6 text-primary">现场操作顺序</h3>
+    <ol class="small ps-3 mb-4">${help.steps.map(step => `<li class="mb-2">${step}</li>`).join('')}</ol>
+    <h3 class="h6 text-primary">看到结果后</h3>
+    <p class="small text-muted mb-4">${help.result}</p>
+    <div class="border rounded p-3 bg-light small"><strong><i class="bi bi-exclamation-circle me-1"></i>注意</strong><br>${help.note}</div>
+  `;
+}
+document.getElementById('helpPanel')?.addEventListener('show.bs.offcanvas', renderPageHelp);
 </script>
 {% block extra_js %}{% endblock %}
 </body>

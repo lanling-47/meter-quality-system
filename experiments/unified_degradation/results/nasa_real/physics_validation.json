@@ -1,0 +1,3863 @@
+{
+  "capacitor": {
+    "device_type": "capacitor",
+    "groups": 138,
+    "mean_proxy_physics_mae": 0.31638809440108345,
+    "mean_spearman": 0.12268105316843045,
+    "mean_monotonicity_violation": 0.0,
+    "rows": [
+      {
+        "group": "ES10.mat::ES10C1",
+        "sample_id": "ES10.mat::ES10C1::prefix-0018",
+        "proxy_final": 0.5886106362913527,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.258644087799233,
+        "spearman": 0.4134897360703812,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C1",
+        "sample_id": "ES10.mat::ES10C1::prefix-0029",
+        "proxy_final": 0.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.29167742974036814,
+        "spearman": 0.25549853372434017,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C1",
+        "sample_id": "ES10.mat::ES10C1::prefix-0040",
+        "proxy_final": 0.1404923320285093,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3272304641981679,
+        "spearman": 0.18951612903225803,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C1",
+        "sample_id": "ES10.mat::ES10C1::prefix-0050",
+        "proxy_final": 0.265204556430742,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.33456719411422936,
+        "spearman": -0.04105571847507331,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C1",
+        "sample_id": "ES10.mat::ES10C1::prefix-0061",
+        "proxy_final": 0.8576848153797507,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3014084454477465,
+        "spearman": 0.13343108504398826,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C1",
+        "sample_id": "ES10.mat::ES10C1::prefix-0072",
+        "proxy_final": 0.1553017580224297,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.33182449707019224,
+        "spearman": 0.03189149560117301,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C2",
+        "sample_id": "ES10.mat::ES10C2::prefix-0027",
+        "proxy_final": 0.22342786607845797,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.31735928800893326,
+        "spearman": 0.14699413489736068,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C2",
+        "sample_id": "ES10.mat::ES10C2::prefix-0043",
+        "proxy_final": 0.5714117712873311,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.29803874336285374,
+        "spearman": 0.23900293255131963,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C2",
+        "sample_id": "ES10.mat::ES10C2::prefix-0059",
+        "proxy_final": 0.4977303920459047,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3177186578138127,
+        "spearman": 0.03225806451612903,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C2",
+        "sample_id": "ES10.mat::ES10C2::prefix-0076",
+        "proxy_final": 0.4150171138732827,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.32019255919431544,
+        "spearman": 0.12756598240469205,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C2",
+        "sample_id": "ES10.mat::ES10C2::prefix-0092",
+        "proxy_final": 0.2731998456694147,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.36101382623712663,
+        "spearman": -0.01539589442815249,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C2",
+        "sample_id": "ES10.mat::ES10C2::prefix-0108",
+        "proxy_final": 0.2041777144861488,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.2972306548043036,
+        "spearman": 0.025293255131964804,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C3",
+        "sample_id": "ES10.mat::ES10C3::prefix-0014",
+        "proxy_final": 0.6089687536840993,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.2226051158225984,
+        "spearman": 0.5839442815249266,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C3",
+        "sample_id": "ES10.mat::ES10C3::prefix-0022",
+        "proxy_final": 0.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.2737244546551733,
+        "spearman": 0.29802052785923755,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C3",
+        "sample_id": "ES10.mat::ES10C3::prefix-0030",
+        "proxy_final": 0.20010438739753011,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3321608901208756,
+        "spearman": -0.14626099706744866,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C3",
+        "sample_id": "ES10.mat::ES10C3::prefix-0038",
+        "proxy_final": 0.2039682926085662,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.36034713663016893,
+        "spearman": 0.03482404692082111,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C3",
+        "sample_id": "ES10.mat::ES10C3::prefix-0047",
+        "proxy_final": 0.9053040057396179,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3491529751809681,
+        "spearman": 0.11363636363636363,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C3",
+        "sample_id": "ES10.mat::ES10C3::prefix-0055",
+        "proxy_final": 0.835435533655343,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.31200404746031474,
+        "spearman": 0.11326979472140761,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C4",
+        "sample_id": "ES10.mat::ES10C4::prefix-0008",
+        "proxy_final": 0.3965438630589198,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.2774383168286786,
+        "spearman": 0.3896627565982404,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C4",
+        "sample_id": "ES10.mat::ES10C4::prefix-0009",
+        "proxy_final": 0.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.30873566330928526,
+        "spearman": 0.063049853372434,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C4",
+        "sample_id": "ES10.mat::ES10C4::prefix-0013",
+        "proxy_final": 0.38872727220641917,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.40214538644128217,
+        "spearman": -0.4424486803519062,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C4",
+        "sample_id": "ES10.mat::ES10C4::prefix-0016",
+        "proxy_final": 0.35819471176746287,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.41431808269768017,
+        "spearman": -0.5414222873900293,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C4",
+        "sample_id": "ES10.mat::ES10C4::prefix-0020",
+        "proxy_final": 0.20069683120405188,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3272106474966465,
+        "spearman": -0.059017595307917885,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C4",
+        "sample_id": "ES10.mat::ES10C4::prefix-0023",
+        "proxy_final": 0.3747578158309302,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3013399230612415,
+        "spearman": 0.17412023460410556,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C5",
+        "sample_id": "ES10.mat::ES10C5::prefix-0013",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.25134110845256274,
+        "spearman": 0.49193548387096764,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C5",
+        "sample_id": "ES10.mat::ES10C5::prefix-0020",
+        "proxy_final": 0.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.24915233129202552,
+        "spearman": 0.3225806451612903,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C5",
+        "sample_id": "ES10.mat::ES10C5::prefix-0028",
+        "proxy_final": 0.08302101989123402,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3356807199023971,
+        "spearman": -0.12536656891495598,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C5",
+        "sample_id": "ES10.mat::ES10C5::prefix-0036",
+        "proxy_final": 0.2280586376241326,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3543708703667047,
+        "spearman": -0.03079178885630498,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C5",
+        "sample_id": "ES10.mat::ES10C5::prefix-0043",
+        "proxy_final": 0.7900641796252438,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.33651893081378625,
+        "spearman": 0.0406891495601173,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C5",
+        "sample_id": "ES10.mat::ES10C5::prefix-0051",
+        "proxy_final": 0.10549789795876315,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3459715219239734,
+        "spearman": -0.11840175953079178,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C6",
+        "sample_id": "ES10.mat::ES10C6::prefix-0017",
+        "proxy_final": 0.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.26299647724289094,
+        "spearman": 0.3636363636363636,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C6",
+        "sample_id": "ES10.mat::ES10C6::prefix-0027",
+        "proxy_final": 0.1388077908732318,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.2767963890944334,
+        "spearman": 0.09860703812316715,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C6",
+        "sample_id": "ES10.mat::ES10C6::prefix-0037",
+        "proxy_final": 0.21784898529742405,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.338633735597689,
+        "spearman": -0.10153958944281524,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C6",
+        "sample_id": "ES10.mat::ES10C6::prefix-0047",
+        "proxy_final": 0.20366672261126537,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.34756676478101245,
+        "spearman": 0.02602639296187683,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C6",
+        "sample_id": "ES10.mat::ES10C6::prefix-0057",
+        "proxy_final": 0.9221557526481292,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.32561472019462173,
+        "spearman": 0.12316715542521992,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C6",
+        "sample_id": "ES10.mat::ES10C6::prefix-0067",
+        "proxy_final": 0.13730533687946597,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.29832145550205696,
+        "spearman": 0.06268328445747799,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C7",
+        "sample_id": "ES10.mat::ES10C7::prefix-0014",
+        "proxy_final": 0.6150138115186623,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.22465211966075005,
+        "spearman": 0.5597507331378299,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C7",
+        "sample_id": "ES10.mat::ES10C7::prefix-0022",
+        "proxy_final": 0.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.2809158061082552,
+        "spearman": 0.2796920821114369,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C7",
+        "sample_id": "ES10.mat::ES10C7::prefix-0031",
+        "proxy_final": 0.16576053030685486,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.322750665405804,
+        "spearman": 0.05571847507331378,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C7",
+        "sample_id": "ES10.mat::ES10C7::prefix-0039",
+        "proxy_final": 0.2321562441827584,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3198393146439965,
+        "spearman": 0.038123167155425214,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C7",
+        "sample_id": "ES10.mat::ES10C7::prefix-0048",
+        "proxy_final": 0.9088551066435389,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.34034862558537915,
+        "spearman": 0.15249266862170086,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES10.mat::ES10C7",
+        "sample_id": "ES10.mat::ES10C7::prefix-0056",
+        "proxy_final": 0.8285410522622009,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.30507240782807377,
+        "spearman": 0.03262463343108504,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C1",
+        "sample_id": "ES12.mat::ES12C1::prefix-0028",
+        "proxy_final": 0.12202920636542573,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.36127497404463293,
+        "spearman": -0.13343108504398826,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C1",
+        "sample_id": "ES12.mat::ES12C1::prefix-0045",
+        "proxy_final": 0.697661805303574,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.2915013815017412,
+        "spearman": -0.033357771260997066,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C1",
+        "sample_id": "ES12.mat::ES12C1::prefix-0062",
+        "proxy_final": 0.8915730310728468,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.33460301056417474,
+        "spearman": 0.02382697947214076,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C1",
+        "sample_id": "ES12.mat::ES12C1::prefix-0079",
+        "proxy_final": 0.7871974674874466,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3123601724313333,
+        "spearman": 0.01099706744868035,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C1",
+        "sample_id": "ES12.mat::ES12C1::prefix-0096",
+        "proxy_final": 0.2759469099988979,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3176607784682932,
+        "spearman": 0.13563049853372433,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C1",
+        "sample_id": "ES12.mat::ES12C1::prefix-0113",
+        "proxy_final": 0.07100215001344352,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3551640838392135,
+        "spearman": -0.2445014662756598,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C2",
+        "sample_id": "ES12.mat::ES12C2::prefix-0028",
+        "proxy_final": 0.11392201691636246,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.36103902737522287,
+        "spearman": -0.10850439882697946,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C2",
+        "sample_id": "ES12.mat::ES12C2::prefix-0044",
+        "proxy_final": 0.0761595587080485,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3940038709478722,
+        "spearman": -0.20307917888563048,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C2",
+        "sample_id": "ES12.mat::ES12C2::prefix-0061",
+        "proxy_final": 0.2685644288851343,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.32847938544950506,
+        "spearman": 0.026759530791788853,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C2",
+        "sample_id": "ES12.mat::ES12C2::prefix-0078",
+        "proxy_final": 0.31290658139691513,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3493340940409507,
+        "spearman": 0.07258064516129031,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C2",
+        "sample_id": "ES12.mat::ES12C2::prefix-0094",
+        "proxy_final": 0.29019771620259377,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.27642064038660324,
+        "spearman": 0.3112170087976539,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C2",
+        "sample_id": "ES12.mat::ES12C2::prefix-0111",
+        "proxy_final": 0.0716291437775882,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.323245091880892,
+        "spearman": -0.018695014662756596,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C3",
+        "sample_id": "ES12.mat::ES12C3::prefix-0032",
+        "proxy_final": 0.043766684018833595,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.34678986758445834,
+        "spearman": 0.03702346041055718,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C3",
+        "sample_id": "ES12.mat::ES12C3::prefix-0051",
+        "proxy_final": 0.5843995690071401,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3389506447642821,
+        "spearman": 0.17668621700879764,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C3",
+        "sample_id": "ES12.mat::ES12C3::prefix-0070",
+        "proxy_final": 0.7212506682612004,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.28496207528536965,
+        "spearman": 0.2313049853372434,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C3",
+        "sample_id": "ES12.mat::ES12C3::prefix-0089",
+        "proxy_final": 0.9499250612045205,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.2812858587096573,
+        "spearman": 0.2958211143695014,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C3",
+        "sample_id": "ES12.mat::ES12C3::prefix-0108",
+        "proxy_final": 0.46355907543889924,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3377408637591891,
+        "spearman": 0.13599706744868034,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C3",
+        "sample_id": "ES12.mat::ES12C3::prefix-0127",
+        "proxy_final": 0.2170100510664495,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.2667742248882785,
+        "spearman": 0.2104105571847507,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C4",
+        "sample_id": "ES12.mat::ES12C4::prefix-0028",
+        "proxy_final": 0.1168965055143679,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.36149827210470786,
+        "spearman": -0.10117302052785922,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C4",
+        "sample_id": "ES12.mat::ES12C4::prefix-0045",
+        "proxy_final": 0.6838672588442233,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.2922593456338127,
+        "spearman": -0.010263929618768328,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C4",
+        "sample_id": "ES12.mat::ES12C4::prefix-0062",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.32170482877002915,
+        "spearman": 0.11693548387096771,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C4",
+        "sample_id": "ES12.mat::ES12C4::prefix-0078",
+        "proxy_final": 0.8119950507110223,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3321118793752582,
+        "spearman": 0.07807917888563048,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C4",
+        "sample_id": "ES12.mat::ES12C4::prefix-0095",
+        "proxy_final": 0.2968273905797451,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.26801903969829777,
+        "spearman": 0.24193548387096772,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C4",
+        "sample_id": "ES12.mat::ES12C4::prefix-0112",
+        "proxy_final": 0.09642015367006558,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3206440085531238,
+        "spearman": -0.11473607038123164,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C5",
+        "sample_id": "ES12.mat::ES12C5::prefix-0028",
+        "proxy_final": 0.09745451903846278,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.36595323130975865,
+        "spearman": -0.1191348973607038,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C5",
+        "sample_id": "ES12.mat::ES12C5::prefix-0046",
+        "proxy_final": 0.7396570157289953,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3749971922648526,
+        "spearman": -0.09420821114369501,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C5",
+        "sample_id": "ES12.mat::ES12C5::prefix-0063",
+        "proxy_final": 0.7127004453158409,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3424704137596538,
+        "spearman": 0.03922287390029325,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C5",
+        "sample_id": "ES12.mat::ES12C5::prefix-0080",
+        "proxy_final": 0.8583262064948765,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.29571110584611465,
+        "spearman": 0.19611436950146627,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C5",
+        "sample_id": "ES12.mat::ES12C5::prefix-0097",
+        "proxy_final": 0.4395085002070406,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3357495821030304,
+        "spearman": 0.06781524926686217,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C5",
+        "sample_id": "ES12.mat::ES12C5::prefix-0114",
+        "proxy_final": 0.08077725457686614,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3242337068688292,
+        "spearman": -0.13196480938416422,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C6",
+        "sample_id": "ES12.mat::ES12C6::prefix-0031",
+        "proxy_final": 0.001776420371421969,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3271616347621439,
+        "spearman": 0.12353372434017595,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C6",
+        "sample_id": "ES12.mat::ES12C6::prefix-0050",
+        "proxy_final": 0.5999599179118006,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3309589847058615,
+        "spearman": 0.07991202346041056,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C6",
+        "sample_id": "ES12.mat::ES12C6::prefix-0068",
+        "proxy_final": 0.28810737729136554,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.2923072958807407,
+        "spearman": 0.249633431085044,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C6",
+        "sample_id": "ES12.mat::ES12C6::prefix-0087",
+        "proxy_final": 0.759412856058391,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3175820573634651,
+        "spearman": 0.27382697947214074,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C6",
+        "sample_id": "ES12.mat::ES12C6::prefix-0105",
+        "proxy_final": 0.38466368962426556,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.2803614687097661,
+        "spearman": 0.27052785923753664,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C6",
+        "sample_id": "ES12.mat::ES12C6::prefix-0124",
+        "proxy_final": 0.13700281984617407,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3123685234650555,
+        "spearman": -0.18365102639296185,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C7",
+        "sample_id": "ES12.mat::ES12C7::prefix-0029",
+        "proxy_final": 0.15234891897765115,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.31980095626980987,
+        "spearman": -0.01942815249266862,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C7",
+        "sample_id": "ES12.mat::ES12C7::prefix-0047",
+        "proxy_final": 0.3284896618900913,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3450870800862882,
+        "spearman": -0.14332844574780057,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C7",
+        "sample_id": "ES12.mat::ES12C7::prefix-0064",
+        "proxy_final": 0.3036898157211301,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3118737800182996,
+        "spearman": 0.07881231671554251,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C7",
+        "sample_id": "ES12.mat::ES12C7::prefix-0082",
+        "proxy_final": 0.5783687899623657,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3380548760760575,
+        "spearman": 0.1946480938416422,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C7",
+        "sample_id": "ES12.mat::ES12C7::prefix-0099",
+        "proxy_final": 0.32950003258465055,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.25079666638484116,
+        "spearman": 0.4266862170087976,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C7",
+        "sample_id": "ES12.mat::ES12C7::prefix-0117",
+        "proxy_final": 0.05422172791698225,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.31478657623965234,
+        "spearman": -0.1528592375366569,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C8",
+        "sample_id": "ES12.mat::ES12C8::prefix-0028",
+        "proxy_final": 0.10886106638736892,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.35359129049154003,
+        "spearman": -0.1312316715542522,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C8",
+        "sample_id": "ES12.mat::ES12C8::prefix-0045",
+        "proxy_final": 0.3154713961069063,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.31366535670834145,
+        "spearman": -0.15175953079178883,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C8",
+        "sample_id": "ES12.mat::ES12C8::prefix-0062",
+        "proxy_final": 0.3472940447499443,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.30646544603582127,
+        "spearman": 0.02565982404692082,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C8",
+        "sample_id": "ES12.mat::ES12C8::prefix-0079",
+        "proxy_final": 0.7838857770355719,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.31948932140489106,
+        "spearman": 0.21407624633431083,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C8",
+        "sample_id": "ES12.mat::ES12C8::prefix-0096",
+        "proxy_final": 0.3758900498027272,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.28772503381293874,
+        "spearman": 0.1499266862170088,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES12.mat::ES12C8",
+        "sample_id": "ES12.mat::ES12C8::prefix-0113",
+        "proxy_final": 0.05626725776053053,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.35736205647571184,
+        "spearman": -0.22763929618768325,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C1",
+        "sample_id": "ES14.mat::ES14C1::prefix-0032",
+        "proxy_final": 0.11366084480502742,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.33151176255551074,
+        "spearman": 0.06671554252199413,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C1",
+        "sample_id": "ES14.mat::ES14C1::prefix-0051",
+        "proxy_final": 0.6105249649933528,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3186288628591706,
+        "spearman": 0.25769794721407624,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C1",
+        "sample_id": "ES14.mat::ES14C1::prefix-0070",
+        "proxy_final": 0.7438000218580526,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3175806422406025,
+        "spearman": 0.23680351906158356,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C1",
+        "sample_id": "ES14.mat::ES14C1::prefix-0090",
+        "proxy_final": 0.25191469264610766,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.33576187950170155,
+        "spearman": 0.1000733137829912,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C1",
+        "sample_id": "ES14.mat::ES14C1::prefix-0109",
+        "proxy_final": 0.5301912588922539,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.29220272877828657,
+        "spearman": 0.344574780058651,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C1",
+        "sample_id": "ES14.mat::ES14C1::prefix-0128",
+        "proxy_final": 0.18945958642975788,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.31645573110986375,
+        "spearman": 0.1693548387096774,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C2",
+        "sample_id": "ES14.mat::ES14C2::prefix-0032",
+        "proxy_final": 0.14655009957114676,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3340253139635796,
+        "spearman": 0.016129032258064516,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C2",
+        "sample_id": "ES14.mat::ES14C2::prefix-0051",
+        "proxy_final": 0.6180782070964125,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.32315503195250067,
+        "spearman": 0.22067448680351903,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C2",
+        "sample_id": "ES14.mat::ES14C2::prefix-0070",
+        "proxy_final": 0.7533316599417029,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3294081975943218,
+        "spearman": 0.2063782991202346,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C2",
+        "sample_id": "ES14.mat::ES14C2::prefix-0090",
+        "proxy_final": 0.20426543082653195,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.33786008183416005,
+        "spearman": 0.035923753665689145,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C2",
+        "sample_id": "ES14.mat::ES14C2::prefix-0109",
+        "proxy_final": 0.559972870156504,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.28196707826987893,
+        "spearman": 0.32991202346041054,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C2",
+        "sample_id": "ES14.mat::ES14C2::prefix-0128",
+        "proxy_final": 0.1331201003495225,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3284744538309614,
+        "spearman": 0.1660557184750733,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C3",
+        "sample_id": "ES14.mat::ES14C3::prefix-0032",
+        "proxy_final": 0.16405189757623698,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3320270470553922,
+        "spearman": -0.005865102639296188,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C3",
+        "sample_id": "ES14.mat::ES14C3::prefix-0051",
+        "proxy_final": 0.6439887193394448,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3194153744499701,
+        "spearman": 0.24340175953079177,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C3",
+        "sample_id": "ES14.mat::ES14C3::prefix-0070",
+        "proxy_final": 0.7717529438145666,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.32614450367758696,
+        "spearman": 0.18914956011730205,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C3",
+        "sample_id": "ES14.mat::ES14C3::prefix-0090",
+        "proxy_final": 0.21658664277155307,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3356495420828438,
+        "spearman": 0.04875366568914955,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C3",
+        "sample_id": "ES14.mat::ES14C3::prefix-0109",
+        "proxy_final": 0.5855216834450128,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.2786180314254023,
+        "spearman": 0.32991202346041054,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C3",
+        "sample_id": "ES14.mat::ES14C3::prefix-0128",
+        "proxy_final": 0.12410701820515814,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.32337308226626593,
+        "spearman": 0.17082111436950145,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C4",
+        "sample_id": "ES14.mat::ES14C4::prefix-0032",
+        "proxy_final": 0.17833611766108243,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3176179948416406,
+        "spearman": 0.23680351906158356,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C4",
+        "sample_id": "ES14.mat::ES14C4::prefix-0051",
+        "proxy_final": 0.5404459395074496,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.304965214278654,
+        "spearman": 0.35263929618768325,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C4",
+        "sample_id": "ES14.mat::ES14C4::prefix-0070",
+        "proxy_final": 0.784557112020511,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3056846547590154,
+        "spearman": 0.2668621700879765,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C4",
+        "sample_id": "ES14.mat::ES14C4::prefix-0090",
+        "proxy_final": 0.3766974836178228,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3067667776500719,
+        "spearman": 0.2943548387096774,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C4",
+        "sample_id": "ES14.mat::ES14C4::prefix-0109",
+        "proxy_final": 0.6442517096026246,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.2969379190107637,
+        "spearman": 0.25,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C4",
+        "sample_id": "ES14.mat::ES14C4::prefix-0128",
+        "proxy_final": 0.27793576224973593,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3028965102740967,
+        "spearman": 0.2111436950146627,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C5",
+        "sample_id": "ES14.mat::ES14C5::prefix-0032",
+        "proxy_final": 0.16598315948820472,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3379922477897571,
+        "spearman": -0.004765395894428152,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C5",
+        "sample_id": "ES14.mat::ES14C5::prefix-0051",
+        "proxy_final": 0.5615606093891062,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.32087333680482677,
+        "spearman": 0.25769794721407624,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C5",
+        "sample_id": "ES14.mat::ES14C5::prefix-0070",
+        "proxy_final": 0.7856134049281686,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.32280408388853576,
+        "spearman": 0.20234604105571843,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C5",
+        "sample_id": "ES14.mat::ES14C5::prefix-0090",
+        "proxy_final": 0.25380491842884084,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3226381526879857,
+        "spearman": 0.14369501466275658,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C5",
+        "sample_id": "ES14.mat::ES14C5::prefix-0109",
+        "proxy_final": 0.6315640718061715,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.2789622141272353,
+        "spearman": 0.3222140762463343,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C5",
+        "sample_id": "ES14.mat::ES14C5::prefix-0128",
+        "proxy_final": 0.13397845797439692,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.31613339671953106,
+        "spearman": 0.17961876832844573,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C6",
+        "sample_id": "ES14.mat::ES14C6::prefix-0032",
+        "proxy_final": 0.11916666246637471,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3314689197622272,
+        "spearman": 0.08174486803519061,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C6",
+        "sample_id": "ES14.mat::ES14C6::prefix-0051",
+        "proxy_final": 0.6079661982730178,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.31530478767506187,
+        "spearman": 0.2958211143695014,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C6",
+        "sample_id": "ES14.mat::ES14C6::prefix-0070",
+        "proxy_final": 0.736197120064933,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3135475236621273,
+        "spearman": 0.2525659824046921,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C6",
+        "sample_id": "ES14.mat::ES14C6::prefix-0090",
+        "proxy_final": 0.28707557640165715,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.33137790886970236,
+        "spearman": 0.1528592375366569,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C6",
+        "sample_id": "ES14.mat::ES14C6::prefix-0109",
+        "proxy_final": 0.5493416941617878,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.2901492501106876,
+        "spearman": 0.3247800586510263,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C6",
+        "sample_id": "ES14.mat::ES14C6::prefix-0128",
+        "proxy_final": 0.21317799852181646,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3148047123043677,
+        "spearman": 0.1854838709677419,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C7",
+        "sample_id": "ES14.mat::ES14C7::prefix-0032",
+        "proxy_final": 0.14417198967775838,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3388078201103163,
+        "spearman": -0.06854838709677419,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C7",
+        "sample_id": "ES14.mat::ES14C7::prefix-0051",
+        "proxy_final": 0.6351244584130675,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.325651084810194,
+        "spearman": 0.21151026392961875,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C7",
+        "sample_id": "ES14.mat::ES14C7::prefix-0070",
+        "proxy_final": 0.7410893375504047,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3360275887131474,
+        "spearman": 0.19061583577712607,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C7",
+        "sample_id": "ES14.mat::ES14C7::prefix-0090",
+        "proxy_final": 0.16571070776731042,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3470608727350011,
+        "spearman": 0.027126099706744865,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C7",
+        "sample_id": "ES14.mat::ES14C7::prefix-0109",
+        "proxy_final": 0.5446799864436124,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.2798313370054993,
+        "spearman": 0.29802052785923755,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C7",
+        "sample_id": "ES14.mat::ES14C7::prefix-0128",
+        "proxy_final": 0.09692608193989066,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.33487561515096764,
+        "spearman": 0.13966275659824043,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C8",
+        "sample_id": "ES14.mat::ES14C8::prefix-0031",
+        "proxy_final": 0.37264386564744323,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.31323428659605934,
+        "spearman": 0.3958944281524926,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C8",
+        "sample_id": "ES14.mat::ES14C8::prefix-0050",
+        "proxy_final": 0.31635096100193516,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.27205066645867526,
+        "spearman": 0.34750733137829903,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C8",
+        "sample_id": "ES14.mat::ES14C8::prefix-0068",
+        "proxy_final": 0.18999902842036662,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.33418551975266286,
+        "spearman": 0.27675953079178883,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C8",
+        "sample_id": "ES14.mat::ES14C8::prefix-0087",
+        "proxy_final": 0.7945292354296948,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.22672926266745946,
+        "spearman": 0.6345307917888562,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C8",
+        "sample_id": "ES14.mat::ES14C8::prefix-0105",
+        "proxy_final": 0.3435556897751431,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3117815271202007,
+        "spearman": 0.3280791788856305,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "ES14.mat::ES14C8",
+        "sample_id": "ES14.mat::ES14C8::prefix-0124",
+        "proxy_final": 0.324731759246888,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.21712298657206502,
+        "spearman": 0.4523460410557184,
+        "physics_monotonicity": 0.0
+      }
+    ]
+  },
+  "igbt": {
+    "device_type": "igbt",
+    "groups": 42,
+    "mean_proxy_physics_mae": 0.4272717285212828,
+    "mean_spearman": -0.02840909090909091,
+    "mean_monotonicity_violation": 0.0,
+    "rows": [
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 2/Device2  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 2/Device2  1.mat::prefix-0024",
+        "proxy_final": 0.6041960203684452,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4428873073128011,
+        "spearman": 0.11217008797653959,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 2/Device2  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 2/Device2  1.mat::prefix-0038",
+        "proxy_final": 0.3826836372758758,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3835751055033423,
+        "spearman": -0.09457478005865103,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 2/Device2  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 2/Device2  1.mat::prefix-0053",
+        "proxy_final": 0.5457107283137516,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3884953328077053,
+        "spearman": -0.22507331378299117,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 2/Device2  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 2/Device2  1.mat::prefix-0067",
+        "proxy_final": 0.28830991944584966,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3948145749255594,
+        "spearman": -0.3980938416422287,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 2/Device2  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 2/Device2  1.mat::prefix-0082",
+        "proxy_final": 0.22291156167061493,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.37604935841752796,
+        "spearman": -0.3636363636363636,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 2/Device2  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 2/Device2  1.mat::prefix-0096",
+        "proxy_final": 0.20441532316277536,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.5673599483782398,
+        "spearman": -0.5692815249266862,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 2/Device2b  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 2/Device2b  1.mat::prefix-0024",
+        "proxy_final": 0.4501198019665223,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4110624470487663,
+        "spearman": 0.35960410557184747,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 2/Device2b  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 2/Device2b  1.mat::prefix-0038",
+        "proxy_final": 0.6828497292280108,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.38269633966153116,
+        "spearman": 0.627199413489736,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 2/Device2b  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 2/Device2b  1.mat::prefix-0053",
+        "proxy_final": 0.6739703951471423,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.5048014733750767,
+        "spearman": 0.62866568914956,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 2/Device2b  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 2/Device2b  1.mat::prefix-0067",
+        "proxy_final": 0.8858403270927481,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.45364226530353613,
+        "spearman": 0.6257331378299119,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 2/Device2b  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 2/Device2b  1.mat::prefix-0082",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4640764281933324,
+        "spearman": 0.627199413489736,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 2/Device2b  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 2/Device2b  1.mat::prefix-0096",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.22931643228958798,
+        "spearman": 0.563049853372434,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0024",
+        "proxy_final": 0.7152836011234943,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.38774999607601546,
+        "spearman": -0.008064516129032258,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0038",
+        "proxy_final": 0.39144928401970147,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.42849249256731353,
+        "spearman": -0.18108504398826977,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0053",
+        "proxy_final": 0.26208637375719235,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4100681552013887,
+        "spearman": -0.27932551319648086,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0067",
+        "proxy_final": 0.28047399917755195,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4215462633310567,
+        "spearman": -0.4266862170087976,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0082",
+        "proxy_final": 0.16289695312712213,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4192251712979094,
+        "spearman": -0.6114369501466276,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3  1.mat::prefix-0096",
+        "proxy_final": 0.5068204552258405,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.5486192821939055,
+        "spearman": -0.7514662756598239,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0024",
+        "proxy_final": 0.9101757541413357,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4847719681975771,
+        "spearman": 0.14552785923753664,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0038",
+        "proxy_final": 0.5411421947775038,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.48846113331895236,
+        "spearman": 0.47434017595307915,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0053",
+        "proxy_final": 0.9362371797393859,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.5412535912198071,
+        "spearman": 0.4794721407624633,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0067",
+        "proxy_final": 0.9629684485568276,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.58618325396229,
+        "spearman": 0.5414222873900293,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0082",
+        "proxy_final": 0.8285277047717841,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.5611743908857845,
+        "spearman": 0.19538123167155422,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 3/Device3b  1.mat::prefix-0096",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.363187480846961,
+        "spearman": 0.5861436950146627,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 4/Device4  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 4/Device4  1.mat::prefix-0024",
+        "proxy_final": 0.6386774267884948,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3477654648898572,
+        "spearman": 0.21444281524926684,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 4/Device4  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 4/Device4  1.mat::prefix-0038",
+        "proxy_final": 0.4660853874981174,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4042540243049545,
+        "spearman": -0.005131964809384164,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 4/Device4  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 4/Device4  1.mat::prefix-0053",
+        "proxy_final": 0.44629947443604745,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3859632058499991,
+        "spearman": -0.14772727272727273,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 4/Device4  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 4/Device4  1.mat::prefix-0067",
+        "proxy_final": 0.3569911894201936,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.363525638706532,
+        "spearman": -0.2027126099706745,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 4/Device4  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 4/Device4  1.mat::prefix-0082",
+        "proxy_final": 0.1993565936296962,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3812017389983047,
+        "spearman": -0.4039589442815249,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 4/Device4  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 4/Device4  1.mat::prefix-0096",
+        "proxy_final": 0.0002185028062130294,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.556473000212828,
+        "spearman": -0.5986070381231672,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 4/Device4b  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 4/Device4b  1.mat::prefix-0024",
+        "proxy_final": 0.5139050465172593,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.38538244654419024,
+        "spearman": 0.07587976539589442,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 4/Device4b  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 4/Device4b  1.mat::prefix-0038",
+        "proxy_final": 0.4627216817167644,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.40406739457978574,
+        "spearman": -0.005865102639296188,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 4/Device4b  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 4/Device4b  1.mat::prefix-0053",
+        "proxy_final": 0.27667021185082075,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3291720582746691,
+        "spearman": 0.07038123167155425,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 4/Device4b  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 4/Device4b  1.mat::prefix-0067",
+        "proxy_final": 0.37914806704641113,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.35793046996745415,
+        "spearman": -0.1279325513196481,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 4/Device4b  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 4/Device4b  1.mat::prefix-0082",
+        "proxy_final": 0.43217946063365487,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.32562762671226986,
+        "spearman": -0.08577712609970674,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 4/Device4b  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 4/Device4b  1.mat::prefix-0096",
+        "proxy_final": 0.1485460369962993,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3443281151042737,
+        "spearman": -0.1598240469208211,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 5/Device5  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 5/Device5  1.mat::prefix-0024",
+        "proxy_final": 0.4257467365667344,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.39312128968732846,
+        "spearman": 0.056451612903225805,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 5/Device5  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 5/Device5  1.mat::prefix-0038",
+        "proxy_final": 0.2759907569257322,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4177746819680787,
+        "spearman": -0.014296187683284457,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 5/Device5  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 5/Device5  1.mat::prefix-0053",
+        "proxy_final": 0.3777407793701408,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4262740114524374,
+        "spearman": -0.1502932551319648,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 5/Device5  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 5/Device5  1.mat::prefix-0067",
+        "proxy_final": 0.08154393423714175,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.45554104648778876,
+        "spearman": -0.5282258064516129,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 5/Device5  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 5/Device5  1.mat::prefix-0082",
+        "proxy_final": 0.20991106267211332,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4624260547325164,
+        "spearman": -0.6063049853372433,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 5/Device5  1.mat",
+        "sample_id": "Thermal Overstress Aging with Square Signal at gate and SMU data/Aging Data/Device 5/Device5  1.mat::prefix-0096",
+        "proxy_final": 0.00400286495086317,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.5650741371046364,
+        "spearman": -0.6308651026392961,
+        "physics_monotonicity": 0.0
+      }
+    ]
+  },
+  "mosfet": {
+    "device_type": "mosfet",
+    "groups": 246,
+    "mean_proxy_physics_mae": 0.3556362909633778,
+    "mean_spearman": 0.46278431442672197,
+    "mean_monotonicity_violation": 0.0,
+    "rows": [
+      {
+        "group": "Test_10",
+        "sample_id": "Test_10::prefix-0024",
+        "proxy_final": 0.0032975361061711433,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.2665721876403354,
+        "spearman": 0.5887096774193548,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_10",
+        "sample_id": "Test_10::prefix-0038",
+        "proxy_final": 0.005596500137898307,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4540739840658319,
+        "spearman": -0.024926686217008793,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_10",
+        "sample_id": "Test_10::prefix-0053",
+        "proxy_final": 0.00016495291126315492,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4836943263231946,
+        "spearman": -0.5531524926686217,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_10",
+        "sample_id": "Test_10::prefix-0067",
+        "proxy_final": 0.0012650148589122784,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4610164863739694,
+        "spearman": -0.32991202346041054,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_10",
+        "sample_id": "Test_10::prefix-0082",
+        "proxy_final": 0.007000348167093089,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.33618938006246424,
+        "spearman": 0.18695014662756596,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_10",
+        "sample_id": "Test_10::prefix-0096",
+        "proxy_final": 0.7267601720583818,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3190205160548903,
+        "spearman": 0.23313782991202345,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_11",
+        "sample_id": "Test_11::prefix-0024",
+        "proxy_final": 0.7488982323722061,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.1698216846134799,
+        "spearman": 0.3837976539589442,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_11",
+        "sample_id": "Test_11::prefix-0038",
+        "proxy_final": 0.7424604662103022,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.16099809876607438,
+        "spearman": 0.34970674486803516,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_11",
+        "sample_id": "Test_11::prefix-0053",
+        "proxy_final": 0.42742410136590725,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.19056957138547573,
+        "spearman": 0.3581378299120234,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_11",
+        "sample_id": "Test_11::prefix-0067",
+        "proxy_final": 0.0016627425899165657,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.21194058830733736,
+        "spearman": 0.17631964809384162,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_11",
+        "sample_id": "Test_11::prefix-0082",
+        "proxy_final": 0.00222250029334707,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.31475461783583153,
+        "spearman": -0.10557184750733135,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_11",
+        "sample_id": "Test_11::prefix-0096",
+        "proxy_final": 0.0025140317683859624,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.371486996226454,
+        "spearman": -0.10593841642228738,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_12",
+        "sample_id": "Test_12::prefix-0024",
+        "proxy_final": 0.9680922780231194,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.1622347601426747,
+        "spearman": 0.5905425219941349,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_12",
+        "sample_id": "Test_12::prefix-0038",
+        "proxy_final": 0.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.19173793423947494,
+        "spearman": 0.439149560117302,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_12",
+        "sample_id": "Test_12::prefix-0053",
+        "proxy_final": 0.956489541613639,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.30988914671108136,
+        "spearman": 0.08907624633431084,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_12",
+        "sample_id": "Test_12::prefix-0067",
+        "proxy_final": 0.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3694483787449361,
+        "spearman": -0.18621700879765396,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_12",
+        "sample_id": "Test_12::prefix-0082",
+        "proxy_final": 0.017977522857965608,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.359246441082562,
+        "spearman": -0.05095307917888562,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_12",
+        "sample_id": "Test_12::prefix-0096",
+        "proxy_final": 0.04866814210262785,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3901981956722793,
+        "spearman": -0.2569648093841642,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_13",
+        "sample_id": "Test_13::prefix-0024",
+        "proxy_final": 0.0005941050872362124,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.7658980190468407,
+        "spearman": -0.45014662756598234,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_13",
+        "sample_id": "Test_13::prefix-0038",
+        "proxy_final": 0.001017712996907611,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.5555053889382433,
+        "spearman": -0.019061583577712607,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_13",
+        "sample_id": "Test_13::prefix-0053",
+        "proxy_final": 0.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.6091292009076517,
+        "spearman": -0.1389296187683284,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_13",
+        "sample_id": "Test_13::prefix-0067",
+        "proxy_final": 0.0017743471617633487,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.6068012990406837,
+        "spearman": 0.03225806451612903,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_13",
+        "sample_id": "Test_13::prefix-0082",
+        "proxy_final": 0.002726365854707247,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.5759593720211502,
+        "spearman": 0.06634897360703812,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_13",
+        "sample_id": "Test_13::prefix-0096",
+        "proxy_final": 0.8067757382578897,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.5102786816383449,
+        "spearman": 0.1719208211143695,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_14",
+        "sample_id": "Test_14::prefix-0024",
+        "proxy_final": 0.9488394639962753,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.16666943071001494,
+        "spearman": 0.7558651026392962,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_14",
+        "sample_id": "Test_14::prefix-0038",
+        "proxy_final": 0.004189161013674799,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.22912099392964874,
+        "spearman": 0.3511730205278592,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_14",
+        "sample_id": "Test_14::prefix-0053",
+        "proxy_final": 0.004592453868332671,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.28841808826504156,
+        "spearman": 0.19208211143695011,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_14",
+        "sample_id": "Test_14::prefix-0067",
+        "proxy_final": 0.0045053801707044825,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3330878764692504,
+        "spearman": 0.011363636363636362,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_14",
+        "sample_id": "Test_14::prefix-0082",
+        "proxy_final": 0.004749770801177081,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3316817976651869,
+        "spearman": -0.0219941348973607,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_14",
+        "sample_id": "Test_14::prefix-0096",
+        "proxy_final": 0.6455006375907341,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.34967868422509074,
+        "spearman": 0.14002932551319647,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_15",
+        "sample_id": "Test_15::prefix-0024",
+        "proxy_final": 0.7450968197563507,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.15709675589652644,
+        "spearman": 0.9677419354838709,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_15",
+        "sample_id": "Test_15::prefix-0038",
+        "proxy_final": 0.8078751377648146,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.17541338855111954,
+        "spearman": 0.8368768328445746,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_15",
+        "sample_id": "Test_15::prefix-0053",
+        "proxy_final": 0.8656066988675926,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.23518560416820722,
+        "spearman": 0.5758797653958944,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_15",
+        "sample_id": "Test_15::prefix-0067",
+        "proxy_final": 0.7471751801186617,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.22248623075270405,
+        "spearman": 0.5234604105571847,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_15",
+        "sample_id": "Test_15::prefix-0082",
+        "proxy_final": 0.7904113261579381,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.23862413658753961,
+        "spearman": 0.5861436950146627,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_15",
+        "sample_id": "Test_15::prefix-0096",
+        "proxy_final": 0.5691211050627255,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.17770504073273657,
+        "spearman": 0.8372434017595306,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_16",
+        "sample_id": "Test_16::prefix-0024",
+        "proxy_final": 0.9196118451910641,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.40473989935950627,
+        "spearman": 0.6466275659824046,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_16",
+        "sample_id": "Test_16::prefix-0038",
+        "proxy_final": 0.9558953973737312,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.43288230127959043,
+        "spearman": 0.25843108504398826,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_16",
+        "sample_id": "Test_16::prefix-0053",
+        "proxy_final": 0.989504003156784,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.44751030722955143,
+        "spearman": 0.4021260997067448,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_16",
+        "sample_id": "Test_16::prefix-0067",
+        "proxy_final": 0.9934283611172003,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.44017391378141457,
+        "spearman": 0.38599706744868034,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_16",
+        "sample_id": "Test_16::prefix-0082",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4432225043922835,
+        "spearman": 0.4978005865102638,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_16",
+        "sample_id": "Test_16::prefix-0096",
+        "proxy_final": 0.9799859876845491,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.44231588164743296,
+        "spearman": 0.6620234604105572,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_17",
+        "sample_id": "Test_17::prefix-0024",
+        "proxy_final": 0.9597323059946509,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4094845802526042,
+        "spearman": 0.657258064516129,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_17",
+        "sample_id": "Test_17::prefix-0038",
+        "proxy_final": 0.9283983925351361,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4269708356024377,
+        "spearman": 0.38306451612903225,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_17",
+        "sample_id": "Test_17::prefix-0053",
+        "proxy_final": 0.9378884609343566,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4414336531551831,
+        "spearman": 0.17925219941348972,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_17",
+        "sample_id": "Test_17::prefix-0067",
+        "proxy_final": 0.930425701889043,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4354829553665217,
+        "spearman": 0.13746334310850436,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_17",
+        "sample_id": "Test_17::prefix-0082",
+        "proxy_final": 0.9810778053787795,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.44288910378077817,
+        "spearman": 0.282624633431085,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_17",
+        "sample_id": "Test_17::prefix-0096",
+        "proxy_final": 0.9958108008785572,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.45554773868044157,
+        "spearman": 0.2631964809384164,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_18",
+        "sample_id": "Test_18::prefix-0024",
+        "proxy_final": 0.9174674191979952,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.2293180314642113,
+        "spearman": 0.9699413489736071,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_18",
+        "sample_id": "Test_18::prefix-0038",
+        "proxy_final": 0.6545376679949099,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.21456519812944796,
+        "spearman": 0.8607038123167154,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_18",
+        "sample_id": "Test_18::prefix-0053",
+        "proxy_final": 0.41511673082876777,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.30179758404009305,
+        "spearman": 0.33321114369501464,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_18",
+        "sample_id": "Test_18::prefix-0067",
+        "proxy_final": 0.3613609344643621,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.34858968705457705,
+        "spearman": 0.3086510263929618,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_18",
+        "sample_id": "Test_18::prefix-0082",
+        "proxy_final": 0.35291124397423324,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.2664211841176217,
+        "spearman": 0.26832844574780057,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_18",
+        "sample_id": "Test_18::prefix-0096",
+        "proxy_final": 0.32827004372512353,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.33216072959580695,
+        "spearman": 0.11253665689149558,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_19",
+        "sample_id": "Test_19::prefix-0024",
+        "proxy_final": 0.13521137077745535,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.2890196986793273,
+        "spearman": 0.6019061583577713,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_19",
+        "sample_id": "Test_19::prefix-0038",
+        "proxy_final": 0.13929875237923367,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3145983781044804,
+        "spearman": 0.18035190615835775,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_19",
+        "sample_id": "Test_19::prefix-0053",
+        "proxy_final": 0.13798479770685187,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.35059668115431347,
+        "spearman": 0.03629032258064516,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_19",
+        "sample_id": "Test_19::prefix-0067",
+        "proxy_final": 0.17325399174531905,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4166362387003123,
+        "spearman": -0.09420821114369501,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_19",
+        "sample_id": "Test_19::prefix-0082",
+        "proxy_final": 0.16179808527855774,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3980174287465291,
+        "spearman": 0.03665689149560117,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_19",
+        "sample_id": "Test_19::prefix-0096",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3376338614025248,
+        "spearman": 1.0,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_2",
+        "sample_id": "Test_2::prefix-0024",
+        "proxy_final": 0.9690474831625726,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.34051648346180785,
+        "spearman": 0.469208211143695,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_2",
+        "sample_id": "Test_2::prefix-0038",
+        "proxy_final": 0.8737224244627472,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.38971818773804273,
+        "spearman": -0.12096774193548386,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_2",
+        "sample_id": "Test_2::prefix-0053",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.1244489096035896,
+        "spearman": 0.11253665689149558,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_2",
+        "sample_id": "Test_2::prefix-0067",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.1211199290299125,
+        "spearman": 0.21370967741935482,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_2",
+        "sample_id": "Test_2::prefix-0082",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.1350467974081192,
+        "spearman": 0.16788856304985336,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_2",
+        "sample_id": "Test_2::prefix-0096",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.16058980408513898,
+        "spearman": 0.24743401759530786,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_20",
+        "sample_id": "Test_20::prefix-0024",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.22125711481141938,
+        "spearman": 0.3988269794721407,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_20",
+        "sample_id": "Test_20::prefix-0038",
+        "proxy_final": 0.7134754029277174,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.16603419307355005,
+        "spearman": 0.7661290322580645,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_20",
+        "sample_id": "Test_20::prefix-0053",
+        "proxy_final": 0.7103326534089186,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.2798621468951383,
+        "spearman": -0.12390029325513194,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_20",
+        "sample_id": "Test_20::prefix-0067",
+        "proxy_final": 0.6605831676141544,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.26092482576426257,
+        "spearman": 0.08541055718475073,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_20",
+        "sample_id": "Test_20::prefix-0082",
+        "proxy_final": 0.04916334470004032,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.5072313009477415,
+        "spearman": 0.3027859237536657,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_20",
+        "sample_id": "Test_20::prefix-0096",
+        "proxy_final": 0.018853578110353854,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4921328755504953,
+        "spearman": 0.38159824046920815,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_21",
+        "sample_id": "Test_21::prefix-0024",
+        "proxy_final": 0.9640041364323191,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3968388849981489,
+        "spearman": 0.814516129032258,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_21",
+        "sample_id": "Test_21::prefix-0038",
+        "proxy_final": 0.9827885125946622,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4181918934622506,
+        "spearman": 0.8038856304985336,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_21",
+        "sample_id": "Test_21::prefix-0053",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3044691859556944,
+        "spearman": 0.8530058651026391,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_21",
+        "sample_id": "Test_21::prefix-0067",
+        "proxy_final": 0.9992837016006769,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3217894194373819,
+        "spearman": 0.9098240469208211,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_21",
+        "sample_id": "Test_21::prefix-0082",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.41838235104591404,
+        "spearman": 0.971407624633431,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_21",
+        "sample_id": "Test_21::prefix-0096",
+        "proxy_final": 0.8869703038416864,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.33731318898059043,
+        "spearman": 0.9516129032258064,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_22",
+        "sample_id": "Test_22::prefix-0024",
+        "proxy_final": 0.941028455038194,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.42571950964151967,
+        "spearman": 0.5384897360703812,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_22",
+        "sample_id": "Test_22::prefix-0038",
+        "proxy_final": 0.992747105104353,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4369781638612458,
+        "spearman": 0.2452346041055718,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_22",
+        "sample_id": "Test_22::prefix-0053",
+        "proxy_final": 0.9727884253959347,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.44926165426624787,
+        "spearman": 0.13269794721407624,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_22",
+        "sample_id": "Test_22::prefix-0067",
+        "proxy_final": 0.9644454112876001,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4469839843841241,
+        "spearman": 0.21370967741935482,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_22",
+        "sample_id": "Test_22::prefix-0082",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4384674069859503,
+        "spearman": 0.345307917888563,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_22",
+        "sample_id": "Test_22::prefix-0096",
+        "proxy_final": 0.9935451671934786,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4369328188917303,
+        "spearman": 0.5465542521994133,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_23",
+        "sample_id": "Test_23::prefix-0024",
+        "proxy_final": 0.996232536046486,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4519404084371771,
+        "spearman": 0.5135630498533724,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_23",
+        "sample_id": "Test_23::prefix-0038",
+        "proxy_final": 0.9820957343154451,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4542829365840806,
+        "spearman": 0.690615835777126,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_23",
+        "sample_id": "Test_23::prefix-0053",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.43424473276762615,
+        "spearman": 0.8423753665689148,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_23",
+        "sample_id": "Test_23::prefix-0067",
+        "proxy_final": 0.9877904857000939,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4135134323714288,
+        "spearman": 0.87316715542522,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_23",
+        "sample_id": "Test_23::prefix-0082",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.2335411949779684,
+        "spearman": 0.9303519061583577,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_23",
+        "sample_id": "Test_23::prefix-0096",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3879195532494349,
+        "spearman": -0.03629032258064516,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_24",
+        "sample_id": "Test_24::prefix-0024",
+        "proxy_final": 0.9875916807029917,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.29437770475955394,
+        "spearman": 0.875733137829912,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_24",
+        "sample_id": "Test_24::prefix-0038",
+        "proxy_final": 0.9882874059312002,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.33470833771545105,
+        "spearman": 0.8020527859237536,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_24",
+        "sample_id": "Test_24::prefix-0053",
+        "proxy_final": 0.9918901365025452,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3406560762635681,
+        "spearman": 0.9065249266862169,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_24",
+        "sample_id": "Test_24::prefix-0067",
+        "proxy_final": 0.996111913742181,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.34819187275428853,
+        "spearman": 0.9571114369501464,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_24",
+        "sample_id": "Test_24::prefix-0082",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.30193187944877903,
+        "spearman": 0.9901026392961876,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_24",
+        "sample_id": "Test_24::prefix-0096",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.19646016265637828,
+        "spearman": 0.9681085043988268,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_25",
+        "sample_id": "Test_25::prefix-0024",
+        "proxy_final": 0.981504211207417,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.39637795833035916,
+        "spearman": 0.17815249266862168,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_25",
+        "sample_id": "Test_25::prefix-0038",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.19497653979563404,
+        "spearman": 0.6330645161290323,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_25",
+        "sample_id": "Test_25::prefix-0053",
+        "proxy_final": 0.888314757318302,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.15392410206612822,
+        "spearman": 0.7881231671554252,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_25",
+        "sample_id": "Test_25::prefix-0067",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3368819590978763,
+        "spearman": 0.8526392961876832,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_25",
+        "sample_id": "Test_25::prefix-0082",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4682996025445382,
+        "spearman": 0.8596041055718473,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_25",
+        "sample_id": "Test_25::prefix-0096",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3056832281368819,
+        "spearman": 0.8728005865102637,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_26",
+        "sample_id": "Test_26::prefix-0024",
+        "proxy_final": 0.9880180891934632,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.45213519733227375,
+        "spearman": 0.21517595307917886,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_26",
+        "sample_id": "Test_26::prefix-0038",
+        "proxy_final": 0.9755444611220572,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.45332198040015803,
+        "spearman": 0.5663489736070381,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_26",
+        "sample_id": "Test_26::prefix-0053",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.35202186956209436,
+        "spearman": 0.879765395894428,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_26",
+        "sample_id": "Test_26::prefix-0067",
+        "proxy_final": 0.8113560096090178,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.21849036363803345,
+        "spearman": 0.9402492668621699,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_26",
+        "sample_id": "Test_26::prefix-0082",
+        "proxy_final": 0.7133922451264548,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.2065101682553419,
+        "spearman": 0.9402492668621699,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_26",
+        "sample_id": "Test_26::prefix-0096",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.39362237661458077,
+        "spearman": 0.9626099706744867,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_27",
+        "sample_id": "Test_27::prefix-0024",
+        "proxy_final": 0.011304899517482042,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.2868263791624144,
+        "spearman": 0.8603372434017593,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_27",
+        "sample_id": "Test_27::prefix-0038",
+        "proxy_final": 0.012326375619113778,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.25103050675227495,
+        "spearman": 0.8603372434017593,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_27",
+        "sample_id": "Test_27::prefix-0053",
+        "proxy_final": 0.0116596570777906,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.2319726269278934,
+        "spearman": 0.8522727272727272,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_27",
+        "sample_id": "Test_27::prefix-0067",
+        "proxy_final": 0.012257290513604555,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.24812877901431565,
+        "spearman": 0.658357771260997,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_27",
+        "sample_id": "Test_27::prefix-0082",
+        "proxy_final": 0.01173000595677746,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.24187340854711567,
+        "spearman": 0.7258064516129031,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_27",
+        "sample_id": "Test_27::prefix-0096",
+        "proxy_final": 0.012335139036803312,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.2503064906960869,
+        "spearman": 0.5142961876832844,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_28",
+        "sample_id": "Test_28::prefix-0024",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.19855157309944518,
+        "spearman": 0.6191348973607037,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_28",
+        "sample_id": "Test_28::prefix-0038",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3224422563259953,
+        "spearman": 0.8698680351906158,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_28",
+        "sample_id": "Test_28::prefix-0053",
+        "proxy_final": 0.021977938167197012,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.47316793462469214,
+        "spearman": 0.47104105571847504,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_28",
+        "sample_id": "Test_28::prefix-0067",
+        "proxy_final": 0.05223919329477676,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3933307322168146,
+        "spearman": 0.2785923753665689,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_28",
+        "sample_id": "Test_28::prefix-0082",
+        "proxy_final": 0.3841281823840851,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4003345523942442,
+        "spearman": 0.3255131964809384,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_28",
+        "sample_id": "Test_28::prefix-0096",
+        "proxy_final": 0.5930137922313111,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.39834497268720936,
+        "spearman": 0.468841642228739,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_29",
+        "sample_id": "Test_29::prefix-0024",
+        "proxy_final": 0.9973548734157809,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4445307464098553,
+        "spearman": 0.4321847507331378,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_29",
+        "sample_id": "Test_29::prefix-0038",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.44220141210036523,
+        "spearman": 0.47763929618768325,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_29",
+        "sample_id": "Test_29::prefix-0053",
+        "proxy_final": 0.9916509502280766,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4331850471568449,
+        "spearman": 0.6048387096774194,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_29",
+        "sample_id": "Test_29::prefix-0067",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.34329677521298796,
+        "spearman": 0.8365102639296186,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_29",
+        "sample_id": "Test_29::prefix-0082",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.35535576857829415,
+        "spearman": 0.883797653958944,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_29",
+        "sample_id": "Test_29::prefix-0096",
+        "proxy_final": 0.9617329394346968,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.20855428005834542,
+        "spearman": 0.910923753665689,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_3",
+        "sample_id": "Test_3::prefix-0024",
+        "proxy_final": 0.4489523871859963,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.20093087960512784,
+        "spearman": 0.910190615835777,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_3",
+        "sample_id": "Test_3::prefix-0038",
+        "proxy_final": 0.4748552928189397,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.1948743994294682,
+        "spearman": 0.846407624633431,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_3",
+        "sample_id": "Test_3::prefix-0053",
+        "proxy_final": 0.26259739835019547,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.28102143093109355,
+        "spearman": 0.813049853372434,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_3",
+        "sample_id": "Test_3::prefix-0067",
+        "proxy_final": 0.2574292929316853,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.2733028952532135,
+        "spearman": 0.6363636363636362,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_3",
+        "sample_id": "Test_3::prefix-0082",
+        "proxy_final": 0.16181242429526282,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.29951293245453203,
+        "spearman": 0.5377565982404692,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_3",
+        "sample_id": "Test_3::prefix-0096",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.19478251693921644,
+        "spearman": 0.5476539589442815,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_30",
+        "sample_id": "Test_30::prefix-0024",
+        "proxy_final": 0.8247483002955843,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4012314734258702,
+        "spearman": -0.2965542521994135,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_30",
+        "sample_id": "Test_30::prefix-0038",
+        "proxy_final": 0.7960176723011488,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.39050120806537836,
+        "spearman": -0.21187683284457476,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_30",
+        "sample_id": "Test_30::prefix-0053",
+        "proxy_final": 0.9531923594337604,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3893300790879077,
+        "spearman": 0.17375366568914952,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_30",
+        "sample_id": "Test_30::prefix-0067",
+        "proxy_final": 0.5124410727977105,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4248272510506772,
+        "spearman": 0.5062316715542522,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_30",
+        "sample_id": "Test_30::prefix-0082",
+        "proxy_final": 0.03597232240996205,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.456463839224414,
+        "spearman": 0.75,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_30",
+        "sample_id": "Test_30::prefix-0096",
+        "proxy_final": 0.3960404966242301,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.26266801401670303,
+        "spearman": 0.7562316715542522,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_31",
+        "sample_id": "Test_31::prefix-0024",
+        "proxy_final": 0.0811132780122897,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.6381675211682796,
+        "spearman": -0.8936950146627565,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_31",
+        "sample_id": "Test_31::prefix-0038",
+        "proxy_final": 0.02004695844397019,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.5946523653162287,
+        "spearman": -0.7844574780058651,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_31",
+        "sample_id": "Test_31::prefix-0053",
+        "proxy_final": 0.009573952326815256,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.5829522269600327,
+        "spearman": -0.7932551319648092,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_31",
+        "sample_id": "Test_31::prefix-0067",
+        "proxy_final": 0.013829611887215085,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.5681597751637523,
+        "spearman": -0.6678885630498533,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_31",
+        "sample_id": "Test_31::prefix-0082",
+        "proxy_final": 0.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.5487820418865681,
+        "spearman": -0.8420087976539589,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_31",
+        "sample_id": "Test_31::prefix-0096",
+        "proxy_final": 0.02615131140501072,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.539876070555755,
+        "spearman": -0.8383431085043986,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_32",
+        "sample_id": "Test_32::prefix-0024",
+        "proxy_final": 0.006506864633151551,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.5237429070329157,
+        "spearman": 0.6033724340175952,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_32",
+        "sample_id": "Test_32::prefix-0038",
+        "proxy_final": 0.9630895415289108,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4864809886027609,
+        "spearman": 0.7983870967741934,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_32",
+        "sample_id": "Test_32::prefix-0053",
+        "proxy_final": 0.9502098224158456,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3728844057652806,
+        "spearman": 0.7719941348973607,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_32",
+        "sample_id": "Test_32::prefix-0067",
+        "proxy_final": 0.9456227451452793,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3066193397536217,
+        "spearman": 0.6257331378299119,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_32",
+        "sample_id": "Test_32::prefix-0082",
+        "proxy_final": 0.9442607253460865,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.26786649727628686,
+        "spearman": 0.4945014662756597,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_32",
+        "sample_id": "Test_32::prefix-0096",
+        "proxy_final": 0.9442054129191587,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.24238197638700312,
+        "spearman": 0.4083577712609971,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_33",
+        "sample_id": "Test_33::prefix-0024",
+        "proxy_final": 0.0015444235016266025,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.5286500011171549,
+        "spearman": 0.3049853372434017,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_33",
+        "sample_id": "Test_33::prefix-0038",
+        "proxy_final": 0.11598218117360823,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.5334643364449698,
+        "spearman": 0.7030791788856303,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_33",
+        "sample_id": "Test_33::prefix-0053",
+        "proxy_final": 0.011271445894983599,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.5053756634213794,
+        "spearman": 0.6605571847507331,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_33",
+        "sample_id": "Test_33::prefix-0067",
+        "proxy_final": 0.009278503735501464,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.5109170870651689,
+        "spearman": 0.5172287390029325,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_33",
+        "sample_id": "Test_33::prefix-0082",
+        "proxy_final": 0.006209463416411335,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.5119598995681192,
+        "spearman": 0.3313782991202346,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_33",
+        "sample_id": "Test_33::prefix-0096",
+        "proxy_final": 0.06440689791986985,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.5079065215202831,
+        "spearman": 0.30608504398826974,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_34",
+        "sample_id": "Test_34::prefix-0024",
+        "proxy_final": 0.968294985003251,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.28066597683345534,
+        "spearman": 0.2719941348973607,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_34",
+        "sample_id": "Test_34::prefix-0038",
+        "proxy_final": 0.9865091142836736,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.2365090240868959,
+        "spearman": 0.17008797653958943,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_34",
+        "sample_id": "Test_34::prefix-0053",
+        "proxy_final": 0.9270074540615623,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.18497907044680306,
+        "spearman": 0.42851906158357767,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_34",
+        "sample_id": "Test_34::prefix-0067",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.12336141194656391,
+        "spearman": 0.8049853372434018,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_34",
+        "sample_id": "Test_34::prefix-0082",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3918362977837132,
+        "spearman": 0.8218475073313783,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_34",
+        "sample_id": "Test_34::prefix-0096",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3706222252093918,
+        "spearman": 0.8555718475073313,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_35",
+        "sample_id": "Test_35::prefix-0024",
+        "proxy_final": 0.9777290995179752,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.41893933441660325,
+        "spearman": 0.7976539589442814,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_35",
+        "sample_id": "Test_35::prefix-0038",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.26745590176581074,
+        "spearman": 0.9640762463343108,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_35",
+        "sample_id": "Test_35::prefix-0053",
+        "proxy_final": 0.8515406993984099,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4242202571145317,
+        "spearman": 0.9688416422287388,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_35",
+        "sample_id": "Test_35::prefix-0067",
+        "proxy_final": 0.5126167254266902,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4079442253933482,
+        "spearman": 0.940615835777126,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_35",
+        "sample_id": "Test_35::prefix-0082",
+        "proxy_final": 0.20283231987215103,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.42202200411628876,
+        "spearman": 0.8889296187683284,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_35",
+        "sample_id": "Test_35::prefix-0096",
+        "proxy_final": 0.14463064872962794,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.37834363805550014,
+        "spearman": 0.8038856304985336,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_36",
+        "sample_id": "Test_36::prefix-0024",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.45431207363941273,
+        "spearman": 0.22214076246334308,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_36",
+        "sample_id": "Test_36::prefix-0038",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4440784559544875,
+        "spearman": 0.5876099706744868,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_36",
+        "sample_id": "Test_36::prefix-0053",
+        "proxy_final": 0.9822821415450014,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.43756524633681393,
+        "spearman": 0.8244134897360703,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_36",
+        "sample_id": "Test_36::prefix-0067",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.37677773253812885,
+        "spearman": 0.8966275659824047,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_36",
+        "sample_id": "Test_36::prefix-0082",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.31484803682455964,
+        "spearman": 0.9626099706744867,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_36",
+        "sample_id": "Test_36::prefix-0096",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4081266510362771,
+        "spearman": 0.9571114369501464,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_37",
+        "sample_id": "Test_37::prefix-0024",
+        "proxy_final": 0.9711223081589032,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.42888499295494187,
+        "spearman": 0.8225806451612903,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_37",
+        "sample_id": "Test_37::prefix-0038",
+        "proxy_final": 0.980189861171663,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.39281056796423197,
+        "spearman": 0.9354838709677417,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_37",
+        "sample_id": "Test_37::prefix-0053",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3198039644946464,
+        "spearman": 0.972873900293255,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_37",
+        "sample_id": "Test_37::prefix-0067",
+        "proxy_final": 0.439606360931807,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.2599514020274629,
+        "spearman": 0.9824046920821112,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_37",
+        "sample_id": "Test_37::prefix-0082",
+        "proxy_final": 0.18792782129552651,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3790025630454611,
+        "spearman": 0.9651759530791789,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_37",
+        "sample_id": "Test_37::prefix-0096",
+        "proxy_final": 0.5245245363760682,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.31567635252035875,
+        "spearman": 0.9596774193548386,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_38",
+        "sample_id": "Test_38::prefix-0024",
+        "proxy_final": 0.9674128054813848,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.43495298135834937,
+        "spearman": 0.3918621700879765,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_38",
+        "sample_id": "Test_38::prefix-0038",
+        "proxy_final": 0.9827714674492514,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.44166568107821097,
+        "spearman": 0.43475073313782986,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_38",
+        "sample_id": "Test_38::prefix-0053",
+        "proxy_final": 0.9663508551378429,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4399303550253221,
+        "spearman": 0.7038123167155425,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_38",
+        "sample_id": "Test_38::prefix-0067",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4357149467236885,
+        "spearman": 0.8856304985337244,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_38",
+        "sample_id": "Test_38::prefix-0082",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3546903551627527,
+        "spearman": 0.8713343108504397,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_38",
+        "sample_id": "Test_38::prefix-0096",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.39737273622939784,
+        "spearman": 0.9519794721407623,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_39",
+        "sample_id": "Test_39::prefix-0024",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.23657353553317173,
+        "spearman": 0.9996334310850439,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_39",
+        "sample_id": "Test_39::prefix-0038",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.10361222167454032,
+        "spearman": 1.0,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_39",
+        "sample_id": "Test_39::prefix-0053",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.07986699990119614,
+        "spearman": 1.0,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_39",
+        "sample_id": "Test_39::prefix-0067",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.15589413601840954,
+        "spearman": 0.9996334310850439,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_39",
+        "sample_id": "Test_39::prefix-0082",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.32568310309268905,
+        "spearman": 1.0,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_39",
+        "sample_id": "Test_39::prefix-0096",
+        "proxy_final": 0.6264823313088288,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3117093420289066,
+        "spearman": 0.9967008797653958,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_4",
+        "sample_id": "Test_4::prefix-0024",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.17851429205847497,
+        "spearman": 0.9882697947214076,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_4",
+        "sample_id": "Test_4::prefix-0038",
+        "proxy_final": 0.5718809420982418,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.21747666150029832,
+        "spearman": 0.8185483870967741,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_4",
+        "sample_id": "Test_4::prefix-0053",
+        "proxy_final": 0.08484316156098265,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3986804399886735,
+        "spearman": 0.847140762463343,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_4",
+        "sample_id": "Test_4::prefix-0067",
+        "proxy_final": 0.23906843847227488,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.28885760443141995,
+        "spearman": 0.7459677419354838,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_4",
+        "sample_id": "Test_4::prefix-0082",
+        "proxy_final": 0.2268222209249644,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.28792980854468436,
+        "spearman": 0.7111436950146627,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_4",
+        "sample_id": "Test_4::prefix-0096",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.7892241533317308,
+        "spearman": -0.6477272727272727,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_40",
+        "sample_id": "Test_40::prefix-0024",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3855410810507274,
+        "spearman": -0.4215542521994134,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_40",
+        "sample_id": "Test_40::prefix-0038",
+        "proxy_final": 0.07895119661629492,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.37343921810557984,
+        "spearman": 0.3808651026392961,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_40",
+        "sample_id": "Test_40::prefix-0053",
+        "proxy_final": 0.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4914131677877422,
+        "spearman": -0.12646627565982405,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_40",
+        "sample_id": "Test_40::prefix-0067",
+        "proxy_final": 0.07696688806588889,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.5392934604566779,
+        "spearman": -0.406891495601173,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_40",
+        "sample_id": "Test_40::prefix-0082",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.5341575101106595,
+        "spearman": -0.3387096774193548,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_40",
+        "sample_id": "Test_40::prefix-0096",
+        "proxy_final": 0.3633843788266635,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.49858346490960603,
+        "spearman": -0.13196480938416422,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_41",
+        "sample_id": "Test_41::prefix-0024",
+        "proxy_final": 0.8841239202488452,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4099717206069564,
+        "spearman": -0.2448680351906158,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_41",
+        "sample_id": "Test_41::prefix-0038",
+        "proxy_final": 0.9307255613990484,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.41812005344304554,
+        "spearman": -0.25476539589442815,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_41",
+        "sample_id": "Test_41::prefix-0053",
+        "proxy_final": 0.9535879127489122,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4297778691967477,
+        "spearman": -0.15945747800586507,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_41",
+        "sample_id": "Test_41::prefix-0067",
+        "proxy_final": 0.899269996719752,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.41607211661492305,
+        "spearman": -0.3016862170087976,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_41",
+        "sample_id": "Test_41::prefix-0082",
+        "proxy_final": 0.9811033545615581,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4372024737706236,
+        "spearman": 0.15615835777126097,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_41",
+        "sample_id": "Test_41::prefix-0096",
+        "proxy_final": 0.9702563291020003,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.41852068474617893,
+        "spearman": 0.09677419354838708,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_42",
+        "sample_id": "Test_42::prefix-0024",
+        "proxy_final": 0.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.5079928703821536,
+        "spearman": -0.9758064516129032,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_42",
+        "sample_id": "Test_42::prefix-0038",
+        "proxy_final": 0.17451344885955106,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.49423317931106114,
+        "spearman": -0.7364369501466275,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_42",
+        "sample_id": "Test_42::prefix-0053",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4392481570544037,
+        "spearman": -0.05351906158357771,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_42",
+        "sample_id": "Test_42::prefix-0067",
+        "proxy_final": 0.5757672771899675,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.40993755849781427,
+        "spearman": 0.3174486803519061,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_42",
+        "sample_id": "Test_42::prefix-0082",
+        "proxy_final": 0.5674679720359901,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.42047348285654407,
+        "spearman": 0.4017595307917888,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_42",
+        "sample_id": "Test_42::prefix-0096",
+        "proxy_final": 0.5471747709590332,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.42699648219936426,
+        "spearman": 0.43438416422287385,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_5",
+        "sample_id": "Test_5::prefix-0024",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3217909933668306,
+        "spearman": 0.999266862170088,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_5",
+        "sample_id": "Test_5::prefix-0038",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.21004241708828658,
+        "spearman": 0.9846041055718473,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_5",
+        "sample_id": "Test_5::prefix-0053",
+        "proxy_final": 0.8824731622750481,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.2313988922815905,
+        "spearman": 0.9497800586510262,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_5",
+        "sample_id": "Test_5::prefix-0067",
+        "proxy_final": 0.5989171402419805,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.15610327286706646,
+        "spearman": 0.9142228739002932,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_5",
+        "sample_id": "Test_5::prefix-0082",
+        "proxy_final": 0.8768924013277799,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.17040057065843367,
+        "spearman": 0.8944281524926685,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_5",
+        "sample_id": "Test_5::prefix-0096",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4006620096354887,
+        "spearman": 1.0,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_6",
+        "sample_id": "Test_6::prefix-0024",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.6439656596935281,
+        "spearman": -0.33944281524926684,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_6",
+        "sample_id": "Test_6::prefix-0038",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.6163824714189209,
+        "spearman": -0.0722140762463343,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_6",
+        "sample_id": "Test_6::prefix-0053",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.5931301969375868,
+        "spearman": 0.0469208211143695,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_6",
+        "sample_id": "Test_6::prefix-0067",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.5591421038639353,
+        "spearman": 0.25806451612903225,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_6",
+        "sample_id": "Test_6::prefix-0082",
+        "proxy_final": 0.9924961779758276,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.5308659826451936,
+        "spearman": 0.3504398826979471,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_6",
+        "sample_id": "Test_6::prefix-0096",
+        "proxy_final": 0.9825326211185186,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.5107108050647063,
+        "spearman": 0.43181818181818177,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_7",
+        "sample_id": "Test_7::prefix-0024",
+        "proxy_final": 0.9725986248697644,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.44656283073029,
+        "spearman": 0.45894428152492656,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_7",
+        "sample_id": "Test_7::prefix-0038",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.4286197187637485,
+        "spearman": 0.8401759530791788,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_7",
+        "sample_id": "Test_7::prefix-0053",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.24233495991212134,
+        "spearman": 0.940615835777126,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_7",
+        "sample_id": "Test_7::prefix-0067",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.22514416216219144,
+        "spearman": 0.970674486803519,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_7",
+        "sample_id": "Test_7::prefix-0082",
+        "proxy_final": 0.4671382645101447,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.19143519732053788,
+        "spearman": 0.9615102639296188,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_7",
+        "sample_id": "Test_7::prefix-0096",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3671475778123192,
+        "spearman": 0.9662756598240468,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_8",
+        "sample_id": "Test_8::prefix-0024",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.3483711623108696,
+        "spearman": 0.2320381231671554,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_8",
+        "sample_id": "Test_8::prefix-0038",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.22675442560729464,
+        "spearman": 0.6213343108504398,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_8",
+        "sample_id": "Test_8::prefix-0053",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.2598489867822563,
+        "spearman": 0.9893695014662756,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_8",
+        "sample_id": "Test_8::prefix-0067",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.21462347409189245,
+        "spearman": 0.9794721407624633,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_8",
+        "sample_id": "Test_8::prefix-0082",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.17972742392362873,
+        "spearman": 0.9134897360703812,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_8",
+        "sample_id": "Test_8::prefix-0096",
+        "proxy_final": 1.0,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.21284803973409738,
+        "spearman": 0.8940615835777126,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_9",
+        "sample_id": "Test_9::prefix-0024",
+        "proxy_final": 0.8407754607554154,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.14404693384948042,
+        "spearman": 0.6451612903225806,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_9",
+        "sample_id": "Test_9::prefix-0038",
+        "proxy_final": 0.8491390268662299,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.15570389605304483,
+        "spearman": 0.62683284457478,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_9",
+        "sample_id": "Test_9::prefix-0053",
+        "proxy_final": 0.8827273832909087,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.1548720506742289,
+        "spearman": 0.6374633431085043,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_9",
+        "sample_id": "Test_9::prefix-0067",
+        "proxy_final": 0.8853400778744445,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.15347168921588847,
+        "spearman": 0.6550586510263928,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_9",
+        "sample_id": "Test_9::prefix-0082",
+        "proxy_final": 0.9045401298190595,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.21750627674480377,
+        "spearman": 0.5791788856304985,
+        "physics_monotonicity": 0.0
+      },
+      {
+        "group": "Test_9",
+        "sample_id": "Test_9::prefix-0096",
+        "proxy_final": 0.00725904141163279,
+        "physics_final": 1.0,
+        "proxy_physics_mae": 0.31326497048695134,
+        "spearman": 0.25073313782991197,
+        "physics_monotonicity": 0.0
+      }
+    ]
+  }
+}

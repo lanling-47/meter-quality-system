@@ -38,7 +38,180 @@
     ],
     "unit_unverified_proxy_parameters": [
       "WP4ImpactEnergy"
-    ]
+    ],
+    "tool_counts": {
+      "Rotary Hammer GBH 2-24 RE": 60,
+      "Rotary Hammer GBH 2-24 DRE": 4139,
+      "Rotary Hammer GBH 240": 6258,
+      "Rotary Hammer GBH 2-24 DFR": 202,
+      "Rotary Hammer GBH 240 F": 898
+    },
+    "parameter_quality": {
+      "WP2RunInFullVolt": {
+        "rows": 11557,
+        "numeric_rate": 1.0,
+        "zero_rate": 0.002682,
+        "state_counts": {
+          "1": 11526,
+          "0": 31
+        },
+        "range_violation_rate": 0.180929
+      },
+      "WP2RunInHalfCurrent": {
+        "rows": 11557,
+        "numeric_rate": 1.0,
+        "zero_rate": 0.00225,
+        "state_counts": {
+          "1": 11526,
+          "0": 3,
+          "2": 28
+        },
+        "range_violation_rate": 0.016008
+      },
+      "WP2RunInHalfVolt": {
+        "rows": 11557,
+        "numeric_rate": 1.0,
+        "zero_rate": 0.00026,
+        "state_counts": {
+          "1": 11554,
+          "0": 3
+        },
+        "range_violation_rate": 0.179026
+      },
+      "WP2RunInFullCurrent": {
+        "rows": 11557,
+        "numeric_rate": 1.0,
+        "zero_rate": 0.003115,
+        "state_counts": {
+          "1": 11517,
+          "0": 31,
+          "2": 9
+        },
+        "range_violation_rate": 0.020334
+      },
+      "WP3RunInCurrent": {
+        "rows": 11557,
+        "numeric_rate": 1.0,
+        "zero_rate": 0.006749,
+        "state_counts": {
+          "1": 11479,
+          "0": 44,
+          "2": 34
+        },
+        "range_violation_rate": 0.020594
+      },
+      "WP3RunInVolt": {
+        "rows": 11557,
+        "numeric_rate": 1.0,
+        "zero_rate": 0.003807,
+        "state_counts": {
+          "1": 11513,
+          "0": 44
+        },
+        "range_violation_rate": 0.181448
+      },
+      "WP4ImpactEnergy": {
+        "rows": 11557,
+        "numeric_rate": 1.0,
+        "zero_rate": 0.007441,
+        "state_counts": {
+          "1": 11476,
+          "0": 81
+        },
+        "range_violation_rate": 0.0
+      },
+      "WP1DummyCurrent10": {
+        "rows": 11557,
+        "numeric_rate": 1.0,
+        "zero_rate": 0.007355,
+        "state_counts": {
+          "1": 11440,
+          "0": 84,
+          "2": 33
+        },
+        "range_violation_rate": 1.0
+      },
+      "WP5ClutchTorq": {
+        "rows": 11557,
+        "numeric_rate": 1.0,
+        "zero_rate": 0.010556,
+        "state_counts": {
+          "1": 11264,
+          "0": 84,
+          "2": 209
+        },
+        "range_violation_rate": 0.028381
+      },
+      "WP6NoloadCurrent": {
+        "rows": 11557,
+        "numeric_rate": 1.0,
+        "zero_rate": 0.026304,
+        "state_counts": {
+          "1": 11126,
+          "0": 299,
+          "2": 132
+        },
+        "range_violation_rate": 0.081509
+      },
+      "WP6NoloadVolt": {
+        "rows": 11557,
+        "numeric_rate": 1.0,
+        "zero_rate": 0.025872,
+        "state_counts": {
+          "1": 11258,
+          "0": 299
+        },
+        "range_violation_rate": 0.196937
+      },
+      "WP7LeakageCurrent1": {
+        "rows": 11557,
+        "numeric_rate": 1.0,
+        "zero_rate": 0.046379,
+        "state_counts": {
+          "1": 11021,
+          "0": 536
+        },
+        "range_violation_rate": 0.0
+      },
+      "WP7LeakageCurrent2": {
+        "rows": 11557,
+        "numeric_rate": 1.0,
+        "zero_rate": 0.046379,
+        "state_counts": {
+          "1": 11021,
+          "0": 536
+        },
+        "range_violation_rate": 0.0
+      },
+      "WP7Similarity": {
+        "rows": 11557,
+        "numeric_rate": 1.0,
+        "zero_rate": 0.981397,
+        "state_counts": {
+          "1": 11020,
+          "0": 537
+        },
+        "range_violation_rate": 0.0
+      },
+      "WP7Volt": {
+        "rows": 11557,
+        "numeric_rate": 1.0,
+        "zero_rate": 1.0,
+        "state_counts": {
+          "0": 11557
+        },
+        "range_violation_rate": 1.0
+      },
+      "WP7Current": {
+        "rows": 11557,
+        "numeric_rate": 1.0,
+        "zero_rate": 1.0,
+        "state_counts": {
+          "0": 11557
+        },
+        "range_violation_rate": 1.0
+      }
+    }
   },
   "repair": {
     "rows": 3101,
@@ -255,6 +428,7 @@
       "WP7LeakageCurrent2": 10910
     },
     "test_unseen_types": [],
-    "figure_generated": true
+    "figure_generated": true,
+    "relationship_figure_generated": true
   }
 }

@@ -18,8 +18,11 @@ The script writes aggregate outputs to `experiments/bosch_gbh2_24/results/`:
 - `repair_model_mapping.csv`: MES tool names among matched serials;
 - `report.md`: compact report used by the thesis section.
 - `response_metrics.csv`: held-out same-cycle WP3 reconstruction MAE/RMSE;
+- `response_stratified.csv`: aggregate held-out errors by tool and WP2 operating bands;
+- `response_pair_summary.csv`: WP2-to-WP3 current correlation and paired difference summaries;
 - `fitted_models.json`: training-only preprocessing and frozen ridge coefficients;
-- `response_reconstruction.pdf/.png`: aggregate experimental figure.
+- `response_reconstruction.pdf/.png`: aggregate experimental figure;
+- `response_relationship.pdf/.png`: held-out WP2/WP3 current relationship figure.
 
 The parameter mapping follows the Bosch test description supplied with the data: WP2 half/full-voltage run-in, WP3 post-run test, WP4 impact performance, WP5 clutch torque, WP6 no-load test and WP7 high-voltage leakage test. `WP1DummyCurrent10`, `WP7Similarity`, `WP7Volt` and `WP7Current` remain diagnostic-only until the Bosch test dictionary confirms their semantics and scaling. WP4 is retained as a proxy but masked from physical modeling because m/ss is not an energy unit. Raw state codes are preserved, not interpreted as pass/fail.
 

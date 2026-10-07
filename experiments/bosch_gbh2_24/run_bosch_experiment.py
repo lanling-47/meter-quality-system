@@ -108,6 +108,7 @@ def load_mes(path: Path) -> dict:
             "units": Counter(),
             "out_of_range": 0,
             "numeric": 0,
+            "zeros": 0,
             "values": [],
             "low": Counter(),
             "high": Counter(),
@@ -166,6 +167,8 @@ def load_mes(path: Path) -> dict:
         high = as_float(row[17])
         if value is not None:
             entry["numeric"] += 1
+            if value == 0:
+                entry["zeros"] += 1
             if len(entry["values"]) < 20000:
                 entry["values"].append(value)
             if low is not None and high is not None and (value < low or value > high):
@@ -322,6 +325,49 @@ def reconstruct_response(events: dict, output_dir: Path, linkage_counts: list[in
     rng = np.random.default_rng(20261007)
     boots = np.asarray([rng.choice(difference, len(difference), replace=True).mean() for _ in range(1000)])
     write_csv(output_dir / "response_metrics.csv", [[k,v["mae_A"],v["rmse_A"]] for k,v in metrics.items()], ["model", "test_mae_A", "test_rmse_A"])
+
+    # Keep the held-out association auditable by product and operating strata
+    # without exporting serial numbers or individual source rows.
+    def metric_row(label, subset):
+        indices = [i for i, e in enumerate(groups[2]) if subset(e)]
+        if not indices:
+            return None
+        truth = ys[2][indices]
+        row = [label, len(indices)]
+        for name in ["WP2_full_current_baseline", "ridge_type_voltage", "ridge_type_voltage_current"]:
+            pred = predictions[name][indices]
+            row.extend([float(np.abs(pred-truth).mean()), float(np.sqrt(((pred-truth)**2).mean()))])
+        return row
+
+    strata = [("all", lambda e: True)]
+    for tool in sorted({e.get("tool", "") for e in groups[2]}):
+        strata.append((f"tool:{tool}", lambda e, tool=tool: e.get("tool", "") == tool))
+    strata.extend([
+        ("WP2_full_voltage:<=200V", lambda e: e["values"]["WP2RunInFullVolt"] <= 200),
+        ("WP2_full_voltage:>200V", lambda e: e["values"]["WP2RunInFullVolt"] > 200),
+        ("WP2_full_current:<=2.5A", lambda e: e["values"]["WP2RunInFullCurrent"] <= 2.5),
+        ("WP2_full_current:>2.5A", lambda e: e["values"]["WP2RunInFullCurrent"] > 2.5),
+    ])
+    stratified_rows = [row for label, subset in strata if (row := metric_row(label, subset)) is not None]
+    write_csv(output_dir / "response_stratified.csv", stratified_rows,
+              ["stratum", "n", "baseline_mae_A", "baseline_rmse_A", "type_voltage_mae_A", "type_voltage_rmse_A", "full_mae_A", "full_rmse_A"])
+
+    def correlation(x, y):
+        if len(x) < 2 or float(np.std(x)) < 1e-12 or float(np.std(y)) < 1e-12:
+            return None
+        return float(np.corrcoef(x, y)[0, 1])
+
+    pair_rows = []
+    pair_groups = [("all", groups[2])]
+    pair_groups.extend((f"tool:{tool}", [e for e in groups[2] if e.get("tool", "") == tool])
+                       for tool in sorted({e.get("tool", "") for e in groups[2]}))
+    for label, subset in pair_groups:
+        x = np.asarray([e["values"]["WP2RunInFullCurrent"] for e in subset], dtype=float)
+        y = np.asarray([e["values"]["WP3RunInCurrent"] for e in subset], dtype=float)
+        delta = y - x
+        pair_rows.append([label, len(subset), correlation(x, y), float(delta.mean()), float(np.median(delta)), float(np.quantile(delta, .1)), float(np.quantile(delta, .9))])
+    write_csv(output_dir / "response_pair_summary.csv", pair_rows,
+              ["stratum", "n", "pearson_wp2full_wp3_A", "mean_wp3_minus_wp2_A", "median_wp3_minus_wp2_A", "p10_delta_A", "p90_delta_A"])
     dates_by_serial = defaultdict(list)
     for event in events.values():
         if event["date"] is not None and event["serial"]:
@@ -370,6 +416,23 @@ def reconstruct_response(events: dict, output_dir: Path, linkage_counts: list[in
         fig.savefig(output_dir / "response_reconstruction.png",dpi=160)
         plt.close(fig)
         result["figure_generated"] = True
+
+        fig, ax = plt.subplots(figsize=(4.8, 3.6), layout="constrained")
+        sample = np.arange(len(groups[2]))
+        if len(sample) > 3000:
+            sample = rng.choice(sample, 3000, replace=False)
+        x = np.asarray([e["values"]["WP2RunInFullCurrent"] for e in groups[2]])
+        ax.scatter(x[sample], ys[2][sample], s=7, alpha=.25, color="#397f94", edgecolors="none")
+        lo = float(min(x.min(), ys[2].min())); hi = float(max(x.max(), ys[2].max()))
+        ax.plot([lo, hi], [lo, hi], "--", color="#777777", linewidth=1)
+        ax.set_xlim(lo, hi); ax.set_ylim(lo, hi)
+        ax.set_xlabel("WP2 full-voltage current (A)")
+        ax.set_ylabel("WP3 post-run current (A)")
+        ax.set_title("Held-out same-cycle response")
+        fig.savefig(output_dir / "response_relationship.pdf")
+        fig.savefig(output_dir / "response_relationship.png", dpi=160)
+        plt.close(fig)
+        result["relationship_figure_generated"] = True
     except ImportError as error:
         result["figure_generated"] = False
         result["figure_error"] = str(error)
@@ -400,6 +463,8 @@ def run(mes_path: Path, repair_path: Path, output_dir: Path) -> dict:
                 json.dumps(dict(item["states"]), ensure_ascii=False, sort_keys=True),
                 json.dumps(dict(item["units"]), ensure_ascii=False, sort_keys=True),
                 item["numeric"],
+                item["numeric"] / item["rows"] if item["rows"] else None,
+                item["zeros"],
                 item["out_of_range"],
                 name in DIAGNOSTIC_ONLY,
             ]
@@ -407,7 +472,7 @@ def run(mes_path: Path, repair_path: Path, output_dir: Path) -> dict:
     write_csv(
         output_dir / "parameter_summary.csv",
         parameter_rows,
-        ["parameter", "stage", "inferred_meaning", "source_unit", "rows", "state_counts", "units", "numeric_rows", "raw_range_violations", "diagnostic_only"],
+        ["parameter", "stage", "inferred_meaning", "source_unit", "rows", "state_counts", "units", "numeric_rows", "numeric_rate", "zero_rows", "raw_range_violations", "diagnostic_only"],
     )
     write_csv(
         output_dir / "repair_part_counts.csv",
@@ -444,6 +509,17 @@ def run(mes_path: Path, repair_path: Path, output_dir: Path) -> dict:
             "usable_raw_range_violations": usable_out_of_range,
             "diagnostic_only_parameters": sorted(DIAGNOSTIC_ONLY),
             "unit_unverified_proxy_parameters": ["WP4ImpactEnergy"],
+            "tool_counts": dict(Counter(e["tool"] for e in mes["events"].values() if e.get("tool"))),
+            "parameter_quality": {
+                name: {
+                    "rows": item["rows"],
+                    "numeric_rate": round(item["numeric"] / item["rows"], 6) if item["rows"] else None,
+                    "zero_rate": round(item["zeros"] / item["rows"], 6) if item["rows"] else None,
+                    "state_counts": dict(item["states"]),
+                    "range_violation_rate": round(item["out_of_range"] / item["rows"], 6) if item["rows"] else None,
+                }
+                for name, item in mes["parameter"].items()
+            },
         },
         "repair": {
             "rows": repairs["rows"],

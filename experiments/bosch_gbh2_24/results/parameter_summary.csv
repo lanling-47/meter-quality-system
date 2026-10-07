@@ -1,17 +1,17 @@
-parameter,stage,inferred_meaning,source_unit,rows,state_counts,units,numeric_rows,raw_range_violations,diagnostic_only
-WP2RunInFullVolt,WP2,full-voltage run-in voltage,V,11557,"{""0"": 31, ""1"": 11526}","{""V"": 11557}",11557,2091,False
-WP2RunInHalfCurrent,WP2,half-voltage run-in current,A,11557,"{""0"": 3, ""1"": 11526, ""2"": 28}","{""A"": 11557}",11557,185,False
-WP2RunInHalfVolt,WP2,half-voltage run-in voltage,V,11557,"{""0"": 3, ""1"": 11554}","{""V"": 11557}",11557,2069,False
-WP2RunInFullCurrent,WP2,full-voltage run-in current,A,11557,"{""0"": 31, ""1"": 11517, ""2"": 9}","{""A"": 11557}",11557,235,False
-WP3RunInCurrent,WP3,post-run current,A,11557,"{""0"": 44, ""1"": 11479, ""2"": 34}","{""A"": 11557}",11557,238,False
-WP3RunInVolt,WP3,post-run test voltage,V,11557,"{""0"": 44, ""1"": 11513}","{""V"": 11557}",11557,2097,False
-WP4ImpactEnergy,WP4,impact performance indicator; source unit m/ss,m/ss,11557,"{""0"": 81, ""1"": 11476}","{""m/ss"": 11557}",11557,0,False
-WP1DummyCurrent10,WP1,dummy current channel; dictionary required,mA0,11557,"{""0"": 84, ""1"": 11440, ""2"": 33}","{""mA0"": 11557}",11557,11557,True
-WP5ClutchTorq,WP5,clutch torque,Nm,11557,"{""0"": 84, ""1"": 11264, ""2"": 209}","{""Nm"": 11557}",11557,328,False
-WP6NoloadCurrent,WP6,no-load current,A,11557,"{""0"": 299, ""1"": 11126, ""2"": 132}","{""A"": 11557}",11557,942,False
-WP6NoloadVolt,WP6,no-load test voltage,V,11557,"{""0"": 299, ""1"": 11258}","{""V"": 11557}",11557,2276,False
-WP7LeakageCurrent1,WP7,high-voltage leakage current channel 1,mA,11557,"{""0"": 536, ""1"": 11021}","{""mA"": 11557}",11557,0,False
-WP7LeakageCurrent2,WP7,high-voltage leakage current channel 2,mA,11557,"{""0"": 536, ""1"": 11021}","{""mA"": 11557}",11557,0,False
-WP7Similarity,WP7,similarity / reference matching indicator,-,11557,"{""0"": 537, ""1"": 11020}","{""-"": 11557}",11557,0,True
-WP7Volt,WP7,voltage channel; dictionary required,V,11557,"{""0"": 11557}","{""V"": 11557}",11557,11557,True
-WP7Current,WP7,current channel; dictionary required,A,11557,"{""0"": 11557}","{""A"": 11557}",11557,11557,True
+parameter,stage,inferred_meaning,source_unit,rows,state_counts,units,numeric_rows,numeric_rate,zero_rows,raw_range_violations,diagnostic_only
+WP2RunInFullVolt,WP2,full-voltage run-in voltage,V,11557,"{""0"": 31, ""1"": 11526}","{""V"": 11557}",11557,1.0,31,2091,False
+WP2RunInHalfCurrent,WP2,half-voltage run-in current,A,11557,"{""0"": 3, ""1"": 11526, ""2"": 28}","{""A"": 11557}",11557,1.0,26,185,False
+WP2RunInHalfVolt,WP2,half-voltage run-in voltage,V,11557,"{""0"": 3, ""1"": 11554}","{""V"": 11557}",11557,1.0,3,2069,False
+WP2RunInFullCurrent,WP2,full-voltage run-in current,A,11557,"{""0"": 31, ""1"": 11517, ""2"": 9}","{""A"": 11557}",11557,1.0,36,235,False
+WP3RunInCurrent,WP3,post-run current,A,11557,"{""0"": 44, ""1"": 11479, ""2"": 34}","{""A"": 11557}",11557,1.0,78,238,False
+WP3RunInVolt,WP3,post-run test voltage,V,11557,"{""0"": 44, ""1"": 11513}","{""V"": 11557}",11557,1.0,44,2097,False
+WP4ImpactEnergy,WP4,impact performance indicator; source unit m/ss,m/ss,11557,"{""0"": 81, ""1"": 11476}","{""m/ss"": 11557}",11557,1.0,86,0,False
+WP1DummyCurrent10,WP1,dummy current channel; dictionary required,mA0,11557,"{""0"": 84, ""1"": 11440, ""2"": 33}","{""mA0"": 11557}",11557,1.0,85,11557,True
+WP5ClutchTorq,WP5,clutch torque,Nm,11557,"{""0"": 84, ""1"": 11264, ""2"": 209}","{""Nm"": 11557}",11557,1.0,122,328,False
+WP6NoloadCurrent,WP6,no-load current,A,11557,"{""0"": 299, ""1"": 11126, ""2"": 132}","{""A"": 11557}",11557,1.0,304,942,False
+WP6NoloadVolt,WP6,no-load test voltage,V,11557,"{""0"": 299, ""1"": 11258}","{""V"": 11557}",11557,1.0,299,2276,False
+WP7LeakageCurrent1,WP7,high-voltage leakage current channel 1,mA,11557,"{""0"": 536, ""1"": 11021}","{""mA"": 11557}",11557,1.0,536,0,False
+WP7LeakageCurrent2,WP7,high-voltage leakage current channel 2,mA,11557,"{""0"": 536, ""1"": 11021}","{""mA"": 11557}",11557,1.0,536,0,False
+WP7Similarity,WP7,similarity / reference matching indicator,-,11557,"{""0"": 537, ""1"": 11020}","{""-"": 11557}",11557,1.0,11342,0,True
+WP7Volt,WP7,voltage channel; dictionary required,V,11557,"{""0"": 11557}","{""V"": 11557}",11557,1.0,11557,11557,True
+WP7Current,WP7,current channel; dictionary required,A,11557,"{""0"": 11557}","{""A"": 11557}",11557,1.0,11557,11557,True

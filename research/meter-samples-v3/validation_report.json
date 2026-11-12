@@ -1,0 +1,255 @@
+{
+  "check_count": 38,
+  "passed": true,
+  "checks": [
+    {
+      "check": "1000个唯一表且833正167负",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "双路径配额",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "每批20台抽4台，共50批",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "两路径互斥且覆盖1000台",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "800次出厂与1200次老化检测",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "老化六轮出厂一轮",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "2000次检测标志由数值重新判定，显示通信计数一致",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "强化受应力与恢复后检测条件明确分离",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "主标签与首检时间可从结果复算",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "老化24台新检出和10台基线异常",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "batch_id不跨数据划分",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "source_background_meter不跨数据划分",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "ct_source_sample不跨数据划分",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "crystal_source_sample不跨数据划分",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "来源表仅29条完整轨迹",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "抽样记录与主表一致",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "数据及元件来源身份均完整",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "制造输入无标签来源身份和未来结果",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "无时钟或晶振模型输入",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "无制造过程伪时序",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "模型输入无完全重复向量",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "三项代理消融文件严格移除",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "原始来源哈希一致",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "270条原始来料观测逐单元格一致",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "抗直流80条独立保存且不误作交流",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "互感器6000条曲线仅含已标明的前三相对锚点",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "曲线与模型特征完全一致且补偿未冒充硬件寄存器",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "20000项误差分解可重建",
+      "passed": true,
+      "detail": "4.999325760313145e-07"
+    },
+    {
+      "check": "CT功率响应公式可独立重算",
+      "passed": true,
+      "detail": "3.3306690738754696e-14"
+    },
+    {
+      "check": "多点曲线与补偿量实际参与响应且插值正确",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "check": "未老化样本只用第零轮背景且老化增量范围正确",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "装配未伪造企业型号条码日期频率",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "设置值与模拟读数分开且波峰未编造单位",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "5000条机制与5000条同噪声移除对照完整",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "机制移除对照与主标签一致，通信显示移除不改变计量",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "所有CSV哈希一致",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "固定种子全量重跑CSV逐字节可复现",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "五条机制均有非零结果影响",
+      "passed": true,
+      "detail": "{'CT_RESIDUAL': 41, 'LCD_CONTACT': 32, 'PCB_RESIDUE': 34, 'RS485_JOINT': 46, 'SAMPLING_SOLDER': 6}"
+    }
+  ],
+  "mechanism_removal_with_round_effect": {
+    "CT_RESIDUAL": 41,
+    "LCD_CONTACT": 32,
+    "PCB_RESIDUE": 34,
+    "RS485_JOINT": 46,
+    "SAMPLING_SOLDER": 6
+  },
+  "feature_range_overlap": {
+    "conveyor_reading_sim_cm_min": {
+      "positive_min_max": [
+        95.71292512247969,
+        124.81006470000924
+      ],
+      "negative_min_max": [
+        96.70447637761181,
+        126.8782659266503
+      ],
+      "ranges_overlap": true
+    },
+    "placement_offset_sim_mm": {
+      "positive_min_max": [
+        -0.06378427749210201,
+        0.06449348395029243
+      ],
+      "negative_min_max": [
+        -0.06212060135494743,
+        0.06068282908436408
+      ],
+      "ranges_overlap": true
+    },
+    "gain_compensation_increment_sim_pct": {
+      "positive_min_max": [
+        -1.9918524380638774,
+        2.1478493725805765
+      ],
+      "negative_min_max": [
+        -1.9712590959245722,
+        1.8785099781103431
+      ],
+      "ranges_overlap": true
+    },
+    "ct_up_100_ratio_sim_pct": {
+      "positive_min_max": [
+        -2.811294493712524,
+        2.8622296556739983
+      ],
+      "negative_min_max": [
+        -3.0744387233584933,
+        2.95898528897079
+      ],
+      "ranges_overlap": true
+    }
+  },
+  "positive_near_metering_threshold_80pct": 32,
+  "limitations": [
+    "仅验证仿真内部一致性、来源与可复现性，未验证企业真实因果、精度或故障率。",
+    "相对电流映射、响应参数和判定阈值为仿真假设，轴外CT响应保持端点。",
+    "833/167为条件选样配额；1000条不等于1000台独立实测电表。"
+  ]
+}

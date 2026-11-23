@@ -1,0 +1,245 @@
+{
+  "passed": true,
+  "passed_count": 59,
+  "total": 59,
+  "checks": [
+    {
+      "check": "CUDA RTX4060 training recorded",
+      "passed": true
+    },
+    {
+      "check": "Conda interpreter used",
+      "passed": true
+    },
+    {
+      "check": "24 neural trainings completed",
+      "passed": true
+    },
+    {
+      "check": "protocol hash unchanged",
+      "passed": true
+    },
+    {
+      "check": "training code frozen",
+      "passed": true
+    },
+    {
+      "check": "source CSVs unchanged",
+      "passed": true
+    },
+    {
+      "check": "all checkpoint hashes match",
+      "passed": true
+    },
+    {
+      "check": "mlp_manufacturing probability range and normalization",
+      "passed": true
+    },
+    {
+      "check": "mlp_manufacturing independent macro F1 recomputation",
+      "passed": true
+    },
+    {
+      "check": "mlp_manufacturing independent accuracy recomputation",
+      "passed": true
+    },
+    {
+      "check": "mlp_manufacturing 180 fault predictions 51 known labels",
+      "passed": true
+    },
+    {
+      "check": "mlp_observations probability range and normalization",
+      "passed": true
+    },
+    {
+      "check": "mlp_observations independent macro F1 recomputation",
+      "passed": true
+    },
+    {
+      "check": "mlp_observations independent accuracy recomputation",
+      "passed": true
+    },
+    {
+      "check": "mlp_observations 180 fault predictions 51 known labels",
+      "passed": true
+    },
+    {
+      "check": "mlp_combined probability range and normalization",
+      "passed": true
+    },
+    {
+      "check": "mlp_combined independent macro F1 recomputation",
+      "passed": true
+    },
+    {
+      "check": "mlp_combined independent accuracy recomputation",
+      "passed": true
+    },
+    {
+      "check": "mlp_combined 180 fault predictions 51 known labels",
+      "passed": true
+    },
+    {
+      "check": "tabm_combined probability range and normalization",
+      "passed": true
+    },
+    {
+      "check": "tabm_combined independent macro F1 recomputation",
+      "passed": true
+    },
+    {
+      "check": "tabm_combined independent accuracy recomputation",
+      "passed": true
+    },
+    {
+      "check": "tabm_combined 180 fault predictions 51 known labels",
+      "passed": true
+    },
+    {
+      "check": "grouped_no_response probability range and normalization",
+      "passed": true
+    },
+    {
+      "check": "grouped_no_response independent macro F1 recomputation",
+      "passed": true
+    },
+    {
+      "check": "grouped_no_response independent accuracy recomputation",
+      "passed": true
+    },
+    {
+      "check": "grouped_no_response 180 fault predictions 51 known labels",
+      "passed": true
+    },
+    {
+      "check": "remf_v6 probability range and normalization",
+      "passed": true
+    },
+    {
+      "check": "remf_v6 independent macro F1 recomputation",
+      "passed": true
+    },
+    {
+      "check": "remf_v6 independent accuracy recomputation",
+      "passed": true
+    },
+    {
+      "check": "remf_v6 180 fault predictions 51 known labels",
+      "passed": true
+    },
+    {
+      "check": "remf_no_groups probability range and normalization",
+      "passed": true
+    },
+    {
+      "check": "remf_no_groups independent macro F1 recomputation",
+      "passed": true
+    },
+    {
+      "check": "remf_no_groups independent accuracy recomputation",
+      "passed": true
+    },
+    {
+      "check": "remf_no_groups 180 fault predictions 51 known labels",
+      "passed": true
+    },
+    {
+      "check": "remf_no_mask probability range and normalization",
+      "passed": true
+    },
+    {
+      "check": "remf_no_mask independent macro F1 recomputation",
+      "passed": true
+    },
+    {
+      "check": "remf_no_mask independent accuracy recomputation",
+      "passed": true
+    },
+    {
+      "check": "remf_no_mask 180 fault predictions 51 known labels",
+      "passed": true
+    },
+    {
+      "check": "logistic_combined probability range and normalization",
+      "passed": true
+    },
+    {
+      "check": "logistic_combined independent macro F1 recomputation",
+      "passed": true
+    },
+    {
+      "check": "logistic_combined independent accuracy recomputation",
+      "passed": true
+    },
+    {
+      "check": "logistic_combined 180 fault predictions 51 known labels",
+      "passed": true
+    },
+    {
+      "check": "rf_combined probability range and normalization",
+      "passed": true
+    },
+    {
+      "check": "rf_combined independent macro F1 recomputation",
+      "passed": true
+    },
+    {
+      "check": "rf_combined independent accuracy recomputation",
+      "passed": true
+    },
+    {
+      "check": "rf_combined 180 fault predictions 51 known labels",
+      "passed": true
+    },
+    {
+      "check": "hist_combined probability range and normalization",
+      "passed": true
+    },
+    {
+      "check": "hist_combined independent macro F1 recomputation",
+      "passed": true
+    },
+    {
+      "check": "hist_combined independent accuracy recomputation",
+      "passed": true
+    },
+    {
+      "check": "hist_combined 180 fault predictions 51 known labels",
+      "passed": true
+    },
+    {
+      "check": "majority_prior probability range and normalization",
+      "passed": true
+    },
+    {
+      "check": "majority_prior independent macro F1 recomputation",
+      "passed": true
+    },
+    {
+      "check": "majority_prior independent accuracy recomputation",
+      "passed": true
+    },
+    {
+      "check": "majority_prior 180 fault predictions 51 known labels",
+      "passed": true
+    },
+    {
+      "check": "model selected using validation only",
+      "passed": true
+    },
+    {
+      "check": "finite training losses",
+      "passed": true
+    },
+    {
+      "check": "no >300 epochs",
+      "passed": true
+    },
+    {
+      "check": "unconfirmed not assigned supervision",
+      "passed": true
+    }
+  ],
+  "model_families": 12,
+  "scope": "Software/numeric reproducibility; not real-enterprise validation"
+}

@@ -1,0 +1,72 @@
+{
+  "protocol": {
+    "seeds": [
+      17,
+      43,
+      101
+    ],
+    "lr": 0.001,
+    "weight_decay": 0.03,
+    "max_epochs": 180,
+    "patience": 25,
+    "batch_size": 256,
+    "selection": "minimum validation joint NLL",
+    "architecture": "34-32-16-8 GELU dropout",
+    "targets": "8 joint combinations of metering/communication/display; derived marginals",
+    "test_status": "existing V6 explored holdout; not a fresh external blind test",
+    "device": "cpu"
+  },
+  "metrics": [
+    {
+      "target": "any",
+      "n": 1800,
+      "positives": 180,
+      "prevalence": 0.1,
+      "roc_auc": 0.5462688614540467,
+      "average_precision": 0.14063377820241887,
+      "brier": 0.09005581425452551,
+      "prior_brier": 0.09,
+      "mean_probability": 0.1214868019355668
+    },
+    {
+      "target": "metering",
+      "n": 1800,
+      "positives": 83,
+      "prevalence": 0.04611111111111111,
+      "roc_auc": 0.5296573597827536,
+      "average_precision": 0.07197199969304757,
+      "brier": 0.04400215257461705,
+      "prior_brier": 0.04398572319878473,
+      "mean_probability": 0.054825133658464566
+    },
+    {
+      "target": "communication",
+      "n": 1800,
+      "positives": 62,
+      "prevalence": 0.034444444444444444,
+      "roc_auc": 0.5683952633728052,
+      "average_precision": 0.050296884784974585,
+      "brier": 0.03327779050750573,
+      "prior_brier": 0.033260687934027776,
+      "mean_probability": 0.03962473138621198
+    },
+    {
+      "target": "display",
+      "n": 1800,
+      "positives": 62,
+      "prevalence": 0.034444444444444444,
+      "roc_auc": 0.5198782434388804,
+      "average_precision": 0.045726585976224976,
+      "brier": 0.03349149817487905,
+      "prior_brier": 0.033258314344618053,
+      "mean_probability": 0.042222036252961115
+    }
+  ],
+  "test_joint_nll": 0.4801962543524823,
+  "temperature": 1.06,
+  "limitations": [
+    "Only synthetic manufacturing proxies; no demonstrated real enterprise predictive performance",
+    "Changed inputs show model sensitivity, not experimentally identified causal effects",
+    "10% fault prevalence is set by sampling; absolute probabilities must be recalibrated for enterprise data"
+  ]
+}

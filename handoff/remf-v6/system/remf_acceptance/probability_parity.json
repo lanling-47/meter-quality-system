@@ -1,0 +1,7 @@
+{
+  "cases": 180,
+  "max_absolute_error": 2.3169440110937245e-07,
+  "tolerance": 5e-05,
+  "weights": "real REMF V6, seeds 17/43/101",
+  "device": "CPU"
+}

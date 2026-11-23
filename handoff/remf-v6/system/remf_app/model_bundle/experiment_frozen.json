@@ -1,0 +1,40 @@
+{
+  "protocol_sha256": "fb1dd15f60429b21cd8b2cf0fdcaec97eea92562fade23c19de4f3f98244aba0",
+  "code_sha256": {
+    "data.py": "585b2180be8e312fcc5f403065ccc5070412ed76d85f42e5cc573031de2fed48",
+    "models.py": "d163c8632dc2012889e4532389e1830b40c0717eb8aa0cb51a9c8df06218d88a",
+    "metrics.py": "301be35b2e70959606fadda97c49414113af8a1801002770fcbb75d931cff411",
+    "train.py": "f399579d1ffbfd285638c740c6dc2ec7e51c353b3c2d03d427bf060f879387d5"
+  },
+  "source_csv_sha256": {
+    "diagnosis_confirmed_single.csv": "710506877d76b02ab5d33ea6988659894f0cef9156c97083b799221f88c25e81",
+    "diagnosis_dataset_1000.csv": "eacd0d2f68af22ccc7d4a292357ee1512f635dc76eee3b00d174a98d191071dd",
+    "model_inputs.csv": "9ba08b4a9183b44260d44224f102fd1ace7321a82a1bf8abfd37e380d015659b",
+    "training_dataset_10000.csv": "ea6b521f7b30bd7182893cfcbc7e6f687fd6361226b84b4234abb600f6e0506e",
+    "元件抽检来源.csv": "3ae413149b519b182fb16fdb75abec3a7d52ce1f9923b1dd1f5815e127c3d208",
+    "八类单因标签数量.csv": "300f07eb68e2ae811ac5d12a9845002839cb4382dfa0ace7ec2d6f79e029609e",
+    "八类原因探索基线.csv": "261dd6f48e63b6d0a1652b77fa910cfbf7c99071c8c3d9c2b5eb271c95f30adb",
+    "关键参数区间重叠.csv": "cf2b854cd0f708d9c85e488328cd2802da1f45907bd327b84133fe0e75ee2518",
+    "出厂检测.csv": "ed72672fc2e914f31b2824a7ad993dd2e29f413fafff7117e658de1da6bff72a",
+    "单字段捷径审计.csv": "860ab151ac79d5a96de593a39eaeadffa40fb4769a9615cecf0ecfc1a2c188fc",
+    "复测记录.csv": "f6eacdab155e26ff931e1cdba6c656fbc890a0ec1d539f46f0120e15913d2e2a",
+    "批次配方.csv": "6a6c6d4cc55899a440129c7bb7e3849036fcbd46297786c471e33b1d02ff9f04",
+    "故障确认.csv": "ed1b93b5c9449b2f96959c764cec9841db8d862ce8ff28cb732d0edf83155f6d",
+    "数据字典.csv": "e9ff76701134174ad64eb30cb8a46b62ba9f92d0de4552b2d1328fa22d647c6f",
+    "来源映射.csv": "1933eb924a1ceae40e0922bd9ba829319353bf1a7691e22c1c7a8686641dc4f4",
+    "样本主表.csv": "567f2dacef5e37b2be222781eb36a3431ae448b4c1c667fdc56597c08e5a122d",
+    "根因分层数量.csv": "e7d402db405375a3ea46f64aca653c69624541addfadb4c56c38b5235d51f2ca",
+    "根因可分性基线.csv": "ab69479dd65faabaa18b583c3dbb927ed08b3fcaaf6687a8921f337b3e2abfca",
+    "根因留出预测_审计.csv": "f3744b76b66a1721b7330959248a8017298e8468423c4973ee9c4a7b2564afcf",
+    "检测前预测分数_审计.csv": "92b086e0b962c5014a86b0d8ddb39c75734cd5eb2274c2fa3b44b80ed220e259",
+    "检测前预测基线.csv": "5db5bd949cf6cd4720761a22fcb097040a100559d68bfe0708e49816eef53a41",
+    "检测前预警预算审计.csv": "67eae6386681b4022410e4a2c50987f647db01b262fb94467af1e9fcfd8f3129",
+    "生产与出厂总表_10000.csv": "2c2a46b844163c5323cfc04d9d97c8ef9b82137144c14c642a38fd15c57947cc",
+    "维修记录.csv": "f2c2cbaaad18d6a9f32588d7652d87785d79df67118b2e9f7c3da947d7393854",
+    "诊断检查.csv": "952d6913ed9484a092009cb54d17e03af6228e994735216def865e3481486f04",
+    "质量硬校验.csv": "def944b2d9bd13f70da2e9cfaf14dc7b46fe77dadba62ea7067b64b18d8f0e1b",
+    "闭环病例示例.csv": "f1023819328d7f4bac13ebe1c73b90b1bbed8cd29b08501bf35c746ebde067b1"
+  },
+  "timestamp": "2026-11-16 23:13:46 +0800",
+  "test_feedback_used_for_training": false
+}

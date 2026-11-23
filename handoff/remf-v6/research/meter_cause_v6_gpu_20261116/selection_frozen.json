@@ -1,0 +1,160 @@
+{
+  "selection_basis": "mean validation macroF1 across predeclared seeds; no test scores",
+  "validation_mean_macro_f1": {
+    "grouped_no_response": 0.6470826687931951,
+    "hist_combined": 0.40556077694235587,
+    "logistic_combined": 0.41067193675889335,
+    "majority_prior": 0.04230769230769231,
+    "mlp_combined": 0.5848237910170759,
+    "mlp_manufacturing": 0.12346952815702816,
+    "mlp_observations": 0.742240860990861,
+    "remf_no_groups": 0.6108379393332505,
+    "remf_no_mask": 0.6421145744421607,
+    "remf_v6": 0.6355748179024041,
+    "rf_combined": 0.472078634085213,
+    "tabm_combined": 0.5604344605870158
+  },
+  "selected_model": "mlp_observations",
+  "selected_neural": "mlp_observations",
+  "calibration": {
+    "mlp_manufacturing": {
+      "temperature": 0.6151343854061908,
+      "threshold": 1.000001,
+      "target_validation_precision": 0.8,
+      "min_validation_retained": 10,
+      "eligible_threshold_found": false,
+      "validation_retained": 0,
+      "validation_retained_accuracy": null
+    },
+    "mlp_observations": {
+      "temperature": 0.7744083094562406,
+      "threshold": 0.3881519138813019,
+      "target_validation_precision": 0.8,
+      "min_validation_retained": 10,
+      "eligible_threshold_found": true,
+      "validation_retained": 54,
+      "validation_retained_accuracy": 0.8148148148148148
+    },
+    "mlp_combined": {
+      "temperature": 0.9310435683314338,
+      "threshold": 0.5196242332458496,
+      "target_validation_precision": 0.8,
+      "min_validation_retained": 10,
+      "eligible_threshold_found": true,
+      "validation_retained": 47,
+      "validation_retained_accuracy": 0.8085106382978723
+    },
+    "tabm_combined": {
+      "temperature": 0.7062687723113771,
+      "threshold": 0.5705724358558655,
+      "target_validation_precision": 0.8,
+      "min_validation_retained": 10,
+      "eligible_threshold_found": true,
+      "validation_retained": 48,
+      "validation_retained_accuracy": 0.8125
+    },
+    "grouped_no_response": {
+      "temperature": 0.7395541940841037,
+      "threshold": 0.39287346601486206,
+      "target_validation_precision": 0.8,
+      "min_validation_retained": 10,
+      "eligible_threshold_found": true,
+      "validation_retained": 54,
+      "validation_retained_accuracy": 0.8148148148148148
+    },
+    "remf_v6": {
+      "temperature": 0.7567806242181041,
+      "threshold": 0.38290664553642273,
+      "target_validation_precision": 0.8,
+      "min_validation_retained": 10,
+      "eligible_threshold_found": true,
+      "validation_retained": 54,
+      "validation_retained_accuracy": 0.8148148148148148
+    },
+    "remf_no_groups": {
+      "temperature": 0.7924465962305567,
+      "threshold": 0.5212066769599915,
+      "target_validation_precision": 0.8,
+      "min_validation_retained": 10,
+      "eligible_threshold_found": true,
+      "validation_retained": 51,
+      "validation_retained_accuracy": 0.803921568627451
+    },
+    "remf_no_mask": {
+      "temperature": 0.8491218262308721,
+      "threshold": 0.40432849526405334,
+      "target_validation_precision": 0.8,
+      "min_validation_retained": 10,
+      "eligible_threshold_found": true,
+      "validation_retained": 54,
+      "validation_retained_accuracy": 0.8148148148148148
+    },
+    "logistic_combined": {
+      "temperature": 2.132897594007963,
+      "threshold": 1.000001,
+      "target_validation_precision": 0.8,
+      "min_validation_retained": 10,
+      "eligible_threshold_found": false,
+      "validation_retained": 0,
+      "validation_retained_accuracy": null
+    },
+    "rf_combined": {
+      "temperature": 0.6151343854061908,
+      "threshold": 0.6138858416461037,
+      "target_validation_precision": 0.8,
+      "min_validation_retained": 10,
+      "eligible_threshold_found": true,
+      "validation_retained": 40,
+      "validation_retained_accuracy": 0.8
+    },
+    "hist_combined": {
+      "temperature": 1.227354457842515,
+      "threshold": 0.6788612839581466,
+      "target_validation_precision": 0.8,
+      "min_validation_retained": 10,
+      "eligible_threshold_found": true,
+      "validation_retained": 32,
+      "validation_retained_accuracy": 0.8125
+    },
+    "majority_prior": {
+      "temperature": 1.733684252262658,
+      "threshold": 1.000001,
+      "target_validation_precision": 0.8,
+      "min_validation_retained": 10,
+      "eligible_threshold_found": false,
+      "validation_retained": 0,
+      "validation_retained_accuracy": null
+    }
+  },
+  "checkpoints": {
+    "grouped_no_response_s101.pt": "cd5a7fe0977f3b0350a378e0516daee0236cb91789702e34d0fc27163567605d",
+    "grouped_no_response_s17.pt": "6c74a4ddad4976e01410a636119c9087f7bb26e115644479e1974bfd768e222d",
+    "grouped_no_response_s43.pt": "931775823a28d87b94bea82d8b8dd29a6d61d638b9eff08f6d280ace5fd6d45a",
+    "hist_combined.joblib": "e3399107e81fecf638e410a2dfe17821fa54118c504c5cf3d49098b7cc7b107e",
+    "logistic_combined.joblib": "4ba995e58214ebf0d34d3427fda6db8714d51a9653689adea37e3801248f21db",
+    "majority_prior.joblib": "f4ad2ce0b07879f21d3f730979ef99536d6cbf91cf115539c23ad37f762cd360",
+    "mlp_combined_s101.pt": "78ca0f59fb4c80f133300c24ad79c23eddf49210ea8a42326818a83f12606baf",
+    "mlp_combined_s17.pt": "31d0b89f7fc10cf92ee3ccedcfae3d02bf1b5d081cdeee3a4b3e056e705d7a8c",
+    "mlp_combined_s43.pt": "e7862c311a0d2608c05b222bc0c4e3bee35479288a0a3faeb033c6ef2260c545",
+    "mlp_manufacturing_s101.pt": "e34034571df0a2f168f8f7a5ef93168d321a243ee462e456c982707f1fdfae4c",
+    "mlp_manufacturing_s17.pt": "4bef69996e275bead5d727d6f621d6198afc240a13026ac5b86b483822d0b89b",
+    "mlp_manufacturing_s43.pt": "7cb367876d2b09784ffd0c720f938bb439f166572bc06241ae8bc982224bd6e0",
+    "mlp_observations_s101.pt": "0db9b9cb9e2bfb3cd20b8ac50d097429e67ca808e8ce6f7475b3b4bfb54cb38d",
+    "mlp_observations_s17.pt": "919e837f7bad20461217720f9ec4a6cc9e66f82ff253bb7bbca153148b425af4",
+    "mlp_observations_s43.pt": "78526700c0f7d8f6e06bf0b407d7a3619b8b83c2344ce0eb608335d93ad369ac",
+    "remf_no_groups_s101.pt": "c2d0d66cd8a94d0fc3a664d86c2d9310513b7c41302d6bcc5e1b0c27dac40efb",
+    "remf_no_groups_s17.pt": "53692cef2886a6a55f79ae3fb4989151c680e18a8e16fe8cde1ba82281e0cdf6",
+    "remf_no_groups_s43.pt": "a72113746a6cd2f1cae90f9242bd9ba896e6846247546f429ac1e420962c91ac",
+    "remf_no_mask_s101.pt": "935349ffa0fb93762bd9ec3ccd55d9fc5f7c36ffe5e2bbfdfd06538b136fb4d0",
+    "remf_no_mask_s17.pt": "9918ae8d58a2f01118f955e1d353a28369b7cb9a1395311dc4346fd684da8a79",
+    "remf_no_mask_s43.pt": "f092f1acb53db5c77282d080babba81d35f83f6b939f4e26a6d7538a0afc8f31",
+    "remf_v6_s101.pt": "35506b456798b18256246a9bc30337b091074faf2c9201a2a59afa234acaed74",
+    "remf_v6_s17.pt": "0b741178900ac45dfa805f009bd59cc28d35f06499ab81bddeaceb1489885346",
+    "remf_v6_s43.pt": "5fda7723030dde0a937cd292837896f7d8da9c8ff203f95d617c77cd735a1714",
+    "rf_combined.joblib": "d2e04406e50f0091bbaca527c38ab0f7338441cb4f326a3d517de1ab9283587a",
+    "tabm_combined_s101.pt": "592d08d37b491ab3036a11bd3fe51b5acc40b59da8922080c1e9491dbff7247f",
+    "tabm_combined_s17.pt": "9d241f162d1dfb70e845e05d9a2aa9b1ad4b817a1045de6f1361b71e77b65e3f",
+    "tabm_combined_s43.pt": "6adb3b691e6c3458de5f85503e9b8c7569a802cc45f2dd5644f3907dc49fef71"
+  },
+  "timestamp": "2026-11-16 23:15:08 +0800"
+}

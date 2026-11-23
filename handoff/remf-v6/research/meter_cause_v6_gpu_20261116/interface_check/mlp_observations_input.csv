@@ -1,0 +1,7 @@
+﻿sample_id,model,status,top1,top2,top3,model_confidence,scope
+SIM6-U00001,mlp_observations,首次检测通过不强制归因,,,,,模拟证据训练，仅供辅助；分值不是实际原因发生概率
+SIM6-U00002,mlp_observations,首次检测通过不强制归因,,,,,模拟证据训练，仅供辅助；分值不是实际原因发生概率
+SIM6-U00108,mlp_observations,优先人工复核,CT_CALIBRATION,PCB_RESIDUE,POWER_SUPPLY,0.9999045133590698,模拟证据训练，仅供辅助；分值不是实际原因发生概率
+SIM6-U00145,mlp_observations,优先人工复核,RS485_JOINT,RS485_DEVICE,POWER_SUPPLY,0.8054766058921814,模拟证据训练，仅供辅助；分值不是实际原因发生概率
+SIM6-U00147,mlp_observations,优先人工复核,LCD_CONTACT,LCD_DRIVER,POWER_SUPPLY,0.5354353189468384,模拟证据训练，仅供辅助；分值不是实际原因发生概率
+SIM6-U00148,mlp_observations,优先人工复核,CT_CALIBRATION,SAMPLING_SOLDER,PCB_RESIDUE,0.9997586607933044,模拟证据训练，仅供辅助；分值不是实际原因发生概率

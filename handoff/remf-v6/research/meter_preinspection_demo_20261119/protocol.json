@@ -1,0 +1,17 @@
+{
+  "seeds": [
+    17,
+    43,
+    101
+  ],
+  "lr": 0.001,
+  "weight_decay": 0.03,
+  "max_epochs": 180,
+  "patience": 25,
+  "batch_size": 256,
+  "selection": "minimum validation joint NLL",
+  "architecture": "34-32-16-8 GELU dropout",
+  "targets": "8 joint combinations of metering/communication/display; derived marginals",
+  "test_status": "existing V6 explored holdout; not a fresh external blind test",
+  "device": "cpu"
+}

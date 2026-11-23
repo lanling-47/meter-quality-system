@@ -1,0 +1,18 @@
+{
+  "sample_id": "SIM6-U00037",
+  "device": "cpu",
+  "torch": "2.13.0+cpu",
+  "seeded_units": 10000,
+  "failed_units": 1000,
+  "top": {
+    "code": "RS485_JOINT",
+    "name": "RS485 连接焊接异常",
+    "component": "RS485 接口焊点",
+    "stage": "接口焊接",
+    "family": "生产工艺",
+    "check": "检查接口焊点与连接连续性，并在固定通信参数下复测，区分连接故障与器件故障。",
+    "probability": 0.8619433045387268
+  },
+  "communication_risk_before": 0.021846303505299147,
+  "communication_risk_after": 0.021065874127089046
+}

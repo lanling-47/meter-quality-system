@@ -1,0 +1,13 @@
+﻿view,model,split,n,macro_f1
+manufacturing,logistic,validation,54,0.12048368298368298
+manufacturing,logistic,test,51,0.10575757575757574
+manufacturing,random_forest,validation,54,0.1571095571095571
+manufacturing,random_forest,test,51,0.23427242041372476
+T0_observations,logistic,validation,54,0.673679616774246
+T0_observations,logistic,test,51,0.5558383068081344
+T0_observations,random_forest,validation,54,0.6655069945866909
+T0_observations,random_forest,test,51,0.6887551759834368
+combined,logistic,validation,54,0.39095117845117844
+combined,logistic,test,51,0.44032738095238094
+combined,random_forest,validation,54,0.5348595848595848
+combined,random_forest,test,51,0.6678221288515407

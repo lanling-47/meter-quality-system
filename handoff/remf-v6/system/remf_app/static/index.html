@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>衡序 · 电表质量追溯</title><link rel="stylesheet" href="/static/style.css"><link rel="stylesheet" href="/static/risk.css"></head>
+<body>
+<aside class="sidebar">
+  <a class="brand" href="#workbench"><span class="brand-mark">衡</span><span>衡序<small>METER QUALITY</small></span></a>
+  <div class="side-caption">质量工程工作台</div>
+  <nav aria-label="主导航">
+    <a href="#risk" data-nav="risk"><span data-icon="process"></span>检测前风险试算</a>
+    <a href="#workbench" data-nav="workbench"><span data-icon="grid"></span>检测与根因分析</a>
+    <a href="#intake" data-nav="intake"><span data-icon="upload"></span>数据接入</a>
+    <a href="#history" data-nav="history"><span data-icon="clock"></span>推理记录</a>
+    <div class="nav-divider"></div>
+    <a href="#model" data-nav="model"><span data-icon="layers"></span>模型与运行管理</a>
+    <a href="#help" data-nav="help"><span data-icon="book"></span>使用指南</a>
+  </nav>
+  <div class="side-bottom"><span class="status-dot"></span>本机演示工作区<p>V6 数据协议 · REMF 模型</p><small>制造记录 → 检测 → 原因候选</small></div>
+</aside>
+<div class="app-shell">
+  <header class="topbar"><div>质量管理 <span>/</span> <b id="breadcrumb">检测与根因分析</b></div><div class="top-right"><span id="model-status" class="status-pill">模型状态检查中</span><span class="avatar">工</span><span>工程演示</span></div></header>
+  <main id="app" aria-live="polite"><div class="loading">正在加载电表工作台…</div></main>
+  <footer>衡序 · 电表质量追溯 <span>首次检测后辅助诊断 · 推理结论需复测与维修验证</span></footer>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+<script src="/static/app.js"></script>
+<script src="/static/risk.js"></script>
+<script src="/static/lifecycle.js"></script>
+</body></html>

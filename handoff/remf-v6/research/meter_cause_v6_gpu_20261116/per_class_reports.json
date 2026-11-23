@@ -1,0 +1,758 @@
+{
+  "mlp_manufacturing": {
+    "CT_CALIBRATION": {
+      "precision": 0.18181818181818182,
+      "recall": 0.15384615384615385,
+      "f1-score": 0.16666666666666666,
+      "support": 13.0
+    },
+    "SAMPLING_SOLDER": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 3.0
+    },
+    "PCB_RESIDUE": {
+      "precision": 0.27586206896551724,
+      "recall": 0.5333333333333333,
+      "f1-score": 0.36363636363636365,
+      "support": 15.0
+    },
+    "RS485_JOINT": {
+      "precision": 0.125,
+      "recall": 0.14285714285714285,
+      "f1-score": 0.13333333333333333,
+      "support": 7.0
+    },
+    "LCD_CONTACT": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 5.0
+    },
+    "POWER_SUPPLY": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 4.0
+    },
+    "RS485_DEVICE": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 3.0
+    },
+    "LCD_DRIVER": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 1.0
+    },
+    "accuracy": 0.21568627450980393,
+    "macro avg": {
+      "precision": 0.07283503134796238,
+      "recall": 0.10375457875457876,
+      "f1-score": 0.08295454545454545,
+      "support": 51.0
+    },
+    "weighted avg": {
+      "precision": 0.14463857643370828,
+      "recall": 0.21568627450980393,
+      "f1-score": 0.1677361853832442,
+      "support": 51.0
+    }
+  },
+  "mlp_observations": {
+    "CT_CALIBRATION": {
+      "precision": 0.9285714285714286,
+      "recall": 1.0,
+      "f1-score": 0.9629629629629629,
+      "support": 13.0
+    },
+    "SAMPLING_SOLDER": {
+      "precision": 1.0,
+      "recall": 0.6666666666666666,
+      "f1-score": 0.8,
+      "support": 3.0
+    },
+    "PCB_RESIDUE": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 15.0
+    },
+    "RS485_JOINT": {
+      "precision": 0.7777777777777778,
+      "recall": 1.0,
+      "f1-score": 0.875,
+      "support": 7.0
+    },
+    "LCD_CONTACT": {
+      "precision": 0.4,
+      "recall": 0.4,
+      "f1-score": 0.4,
+      "support": 5.0
+    },
+    "POWER_SUPPLY": {
+      "precision": 0.3333333333333333,
+      "recall": 0.25,
+      "f1-score": 0.2857142857142857,
+      "support": 4.0
+    },
+    "RS485_DEVICE": {
+      "precision": 1.0,
+      "recall": 0.3333333333333333,
+      "f1-score": 0.5,
+      "support": 3.0
+    },
+    "LCD_DRIVER": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 1.0
+    },
+    "accuracy": 0.803921568627451,
+    "macro avg": {
+      "precision": 0.6799603174603175,
+      "recall": 0.58125,
+      "f1-score": 0.6029596560846561,
+      "support": 51.0
+    },
+    "weighted avg": {
+      "precision": 0.82057267351385,
+      "recall": 0.803921568627451,
+      "f1-score": 0.7977720717916796,
+      "support": 51.0
+    }
+  },
+  "mlp_combined": {
+    "CT_CALIBRATION": {
+      "precision": 0.7333333333333333,
+      "recall": 0.8461538461538461,
+      "f1-score": 0.7857142857142857,
+      "support": 13.0
+    },
+    "SAMPLING_SOLDER": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 3.0
+    },
+    "PCB_RESIDUE": {
+      "precision": 0.9333333333333333,
+      "recall": 0.9333333333333333,
+      "f1-score": 0.9333333333333333,
+      "support": 15.0
+    },
+    "RS485_JOINT": {
+      "precision": 0.7777777777777778,
+      "recall": 1.0,
+      "f1-score": 0.875,
+      "support": 7.0
+    },
+    "LCD_CONTACT": {
+      "precision": 0.5,
+      "recall": 0.2,
+      "f1-score": 0.2857142857142857,
+      "support": 5.0
+    },
+    "POWER_SUPPLY": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 4.0
+    },
+    "RS485_DEVICE": {
+      "precision": 1.0,
+      "recall": 0.3333333333333333,
+      "f1-score": 0.5,
+      "support": 3.0
+    },
+    "LCD_DRIVER": {
+      "precision": 0.14285714285714285,
+      "recall": 1.0,
+      "f1-score": 0.25,
+      "support": 1.0
+    },
+    "accuracy": 0.6862745098039216,
+    "macro avg": {
+      "precision": 0.5109126984126984,
+      "recall": 0.5391025641025641,
+      "f1-score": 0.4537202380952381,
+      "support": 51.0
+    },
+    "weighted avg": {
+      "precision": 0.6788359788359787,
+      "recall": 0.6862745098039216,
+      "f1-score": 0.6572128851540617,
+      "support": 51.0
+    }
+  },
+  "tabm_combined": {
+    "CT_CALIBRATION": {
+      "precision": 0.8,
+      "recall": 0.9230769230769231,
+      "f1-score": 0.8571428571428571,
+      "support": 13.0
+    },
+    "SAMPLING_SOLDER": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 3.0
+    },
+    "PCB_RESIDUE": {
+      "precision": 0.9375,
+      "recall": 1.0,
+      "f1-score": 0.967741935483871,
+      "support": 15.0
+    },
+    "RS485_JOINT": {
+      "precision": 0.7,
+      "recall": 1.0,
+      "f1-score": 0.8235294117647058,
+      "support": 7.0
+    },
+    "LCD_CONTACT": {
+      "precision": 0.3333333333333333,
+      "recall": 0.4,
+      "f1-score": 0.36363636363636365,
+      "support": 5.0
+    },
+    "POWER_SUPPLY": {
+      "precision": 0.5,
+      "recall": 0.25,
+      "f1-score": 0.3333333333333333,
+      "support": 4.0
+    },
+    "RS485_DEVICE": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 3.0
+    },
+    "LCD_DRIVER": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 1.0
+    },
+    "accuracy": 0.7254901960784313,
+    "macro avg": {
+      "precision": 0.40885416666666663,
+      "recall": 0.4466346153846154,
+      "f1-score": 0.4181729876701413,
+      "support": 51.0
+    },
+    "weighted avg": {
+      "precision": 0.6476307189542483,
+      "recall": 0.7254901960784313,
+      "f1-score": 0.6779452393918294,
+      "support": 51.0
+    }
+  },
+  "grouped_no_response": {
+    "CT_CALIBRATION": {
+      "precision": 0.8666666666666667,
+      "recall": 1.0,
+      "f1-score": 0.9285714285714286,
+      "support": 13.0
+    },
+    "SAMPLING_SOLDER": {
+      "precision": 1.0,
+      "recall": 0.3333333333333333,
+      "f1-score": 0.5,
+      "support": 3.0
+    },
+    "PCB_RESIDUE": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 15.0
+    },
+    "RS485_JOINT": {
+      "precision": 0.7777777777777778,
+      "recall": 1.0,
+      "f1-score": 0.875,
+      "support": 7.0
+    },
+    "LCD_CONTACT": {
+      "precision": 0.5,
+      "recall": 0.2,
+      "f1-score": 0.2857142857142857,
+      "support": 5.0
+    },
+    "POWER_SUPPLY": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 4.0
+    },
+    "RS485_DEVICE": {
+      "precision": 1.0,
+      "recall": 0.3333333333333333,
+      "f1-score": 0.5,
+      "support": 3.0
+    },
+    "LCD_DRIVER": {
+      "precision": 0.14285714285714285,
+      "recall": 1.0,
+      "f1-score": 0.25,
+      "support": 1.0
+    },
+    "accuracy": 0.7647058823529411,
+    "macro avg": {
+      "precision": 0.6609126984126984,
+      "recall": 0.6083333333333333,
+      "f1-score": 0.5424107142857143,
+      "support": 51.0
+    },
+    "weighted avg": {
+      "precision": 0.7912542794895735,
+      "recall": 0.7647058823529411,
+      "f1-score": 0.7426470588235294,
+      "support": 51.0
+    }
+  },
+  "remf_v6": {
+    "CT_CALIBRATION": {
+      "precision": 0.8666666666666667,
+      "recall": 1.0,
+      "f1-score": 0.9285714285714286,
+      "support": 13.0
+    },
+    "SAMPLING_SOLDER": {
+      "precision": 1.0,
+      "recall": 0.3333333333333333,
+      "f1-score": 0.5,
+      "support": 3.0
+    },
+    "PCB_RESIDUE": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 15.0
+    },
+    "RS485_JOINT": {
+      "precision": 0.7777777777777778,
+      "recall": 1.0,
+      "f1-score": 0.875,
+      "support": 7.0
+    },
+    "LCD_CONTACT": {
+      "precision": 0.3333333333333333,
+      "recall": 0.2,
+      "f1-score": 0.25,
+      "support": 5.0
+    },
+    "POWER_SUPPLY": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 4.0
+    },
+    "RS485_DEVICE": {
+      "precision": 1.0,
+      "recall": 0.3333333333333333,
+      "f1-score": 0.5,
+      "support": 3.0
+    },
+    "LCD_DRIVER": {
+      "precision": 0.16666666666666666,
+      "recall": 1.0,
+      "f1-score": 0.2857142857142857,
+      "support": 1.0
+    },
+    "accuracy": 0.7647058823529411,
+    "macro avg": {
+      "precision": 0.6430555555555555,
+      "recall": 0.6083333333333333,
+      "f1-score": 0.5424107142857143,
+      "support": 51.0
+    },
+    "weighted avg": {
+      "precision": 0.7753812636165577,
+      "recall": 0.7647058823529411,
+      "f1-score": 0.7398459383753501,
+      "support": 51.0
+    }
+  },
+  "remf_no_groups": {
+    "CT_CALIBRATION": {
+      "precision": 0.8125,
+      "recall": 1.0,
+      "f1-score": 0.896551724137931,
+      "support": 13.0
+    },
+    "SAMPLING_SOLDER": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 3.0
+    },
+    "PCB_RESIDUE": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 15.0
+    },
+    "RS485_JOINT": {
+      "precision": 0.7777777777777778,
+      "recall": 1.0,
+      "f1-score": 0.875,
+      "support": 7.0
+    },
+    "LCD_CONTACT": {
+      "precision": 0.3333333333333333,
+      "recall": 0.2,
+      "f1-score": 0.25,
+      "support": 5.0
+    },
+    "POWER_SUPPLY": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 4.0
+    },
+    "RS485_DEVICE": {
+      "precision": 1.0,
+      "recall": 0.3333333333333333,
+      "f1-score": 0.5,
+      "support": 3.0
+    },
+    "LCD_DRIVER": {
+      "precision": 0.16666666666666666,
+      "recall": 1.0,
+      "f1-score": 0.2857142857142857,
+      "support": 1.0
+    },
+    "accuracy": 0.7450980392156863,
+    "macro avg": {
+      "precision": 0.5112847222222222,
+      "recall": 0.5666666666666667,
+      "f1-score": 0.4759082512315271,
+      "support": 51.0
+    },
+    "weighted avg": {
+      "precision": 0.7027505446623094,
+      "recall": 0.7450980392156863,
+      "f1-score": 0.702272288225635,
+      "support": 51.0
+    }
+  },
+  "remf_no_mask": {
+    "CT_CALIBRATION": {
+      "precision": 0.8666666666666667,
+      "recall": 1.0,
+      "f1-score": 0.9285714285714286,
+      "support": 13.0
+    },
+    "SAMPLING_SOLDER": {
+      "precision": 1.0,
+      "recall": 0.3333333333333333,
+      "f1-score": 0.5,
+      "support": 3.0
+    },
+    "PCB_RESIDUE": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 15.0
+    },
+    "RS485_JOINT": {
+      "precision": 0.7777777777777778,
+      "recall": 1.0,
+      "f1-score": 0.875,
+      "support": 7.0
+    },
+    "LCD_CONTACT": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 5.0
+    },
+    "POWER_SUPPLY": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 4.0
+    },
+    "RS485_DEVICE": {
+      "precision": 1.0,
+      "recall": 0.3333333333333333,
+      "f1-score": 0.5,
+      "support": 3.0
+    },
+    "LCD_DRIVER": {
+      "precision": 0.125,
+      "recall": 1.0,
+      "f1-score": 0.2222222222222222,
+      "support": 1.0
+    },
+    "accuracy": 0.7450980392156863,
+    "macro avg": {
+      "precision": 0.5961805555555555,
+      "recall": 0.5833333333333333,
+      "f1-score": 0.5032242063492064,
+      "support": 51.0
+    },
+    "weighted avg": {
+      "precision": 0.7418845315904139,
+      "recall": 0.7450980392156863,
+      "f1-score": 0.7140911920323685,
+      "support": 51.0
+    }
+  },
+  "logistic_combined": {
+    "CT_CALIBRATION": {
+      "precision": 0.5,
+      "recall": 0.6153846153846154,
+      "f1-score": 0.5517241379310345,
+      "support": 13.0
+    },
+    "SAMPLING_SOLDER": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 3.0
+    },
+    "PCB_RESIDUE": {
+      "precision": 0.6428571428571429,
+      "recall": 0.6,
+      "f1-score": 0.6206896551724138,
+      "support": 15.0
+    },
+    "RS485_JOINT": {
+      "precision": 0.7777777777777778,
+      "recall": 1.0,
+      "f1-score": 0.875,
+      "support": 7.0
+    },
+    "LCD_CONTACT": {
+      "precision": 1.0,
+      "recall": 0.2,
+      "f1-score": 0.3333333333333333,
+      "support": 5.0
+    },
+    "POWER_SUPPLY": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 4.0
+    },
+    "RS485_DEVICE": {
+      "precision": 1.0,
+      "recall": 0.3333333333333333,
+      "f1-score": 0.5,
+      "support": 3.0
+    },
+    "LCD_DRIVER": {
+      "precision": 0.125,
+      "recall": 1.0,
+      "f1-score": 0.2222222222222222,
+      "support": 1.0
+    },
+    "accuracy": 0.5294117647058824,
+    "macro avg": {
+      "precision": 0.5057043650793651,
+      "recall": 0.4685897435897436,
+      "f1-score": 0.38787116858237547,
+      "support": 51.0
+    },
+    "weighted avg": {
+      "precision": 0.5825941487706194,
+      "recall": 0.5294117647058824,
+      "f1-score": 0.5097381864623244,
+      "support": 51.0
+    }
+  },
+  "rf_combined": {
+    "CT_CALIBRATION": {
+      "precision": 0.8333333333333334,
+      "recall": 0.7692307692307693,
+      "f1-score": 0.8,
+      "support": 13.0
+    },
+    "SAMPLING_SOLDER": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 3.0
+    },
+    "PCB_RESIDUE": {
+      "precision": 0.7894736842105263,
+      "recall": 1.0,
+      "f1-score": 0.8823529411764706,
+      "support": 15.0
+    },
+    "RS485_JOINT": {
+      "precision": 0.7,
+      "recall": 1.0,
+      "f1-score": 0.8235294117647058,
+      "support": 7.0
+    },
+    "LCD_CONTACT": {
+      "precision": 0.25,
+      "recall": 0.2,
+      "f1-score": 0.2222222222222222,
+      "support": 5.0
+    },
+    "POWER_SUPPLY": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 4.0
+    },
+    "RS485_DEVICE": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 3.0
+    },
+    "LCD_DRIVER": {
+      "precision": 0.2,
+      "recall": 1.0,
+      "f1-score": 0.3333333333333333,
+      "support": 1.0
+    },
+    "accuracy": 0.6666666666666666,
+    "macro avg": {
+      "precision": 0.3466008771929825,
+      "recall": 0.49615384615384617,
+      "f1-score": 0.3826797385620915,
+      "support": 51.0
+    },
+    "weighted avg": {
+      "precision": 0.5691262469900241,
+      "recall": 0.6666666666666666,
+      "f1-score": 0.60479302832244,
+      "support": 51.0
+    }
+  },
+  "hist_combined": {
+    "CT_CALIBRATION": {
+      "precision": 0.8181818181818182,
+      "recall": 0.6923076923076923,
+      "f1-score": 0.75,
+      "support": 13.0
+    },
+    "SAMPLING_SOLDER": {
+      "precision": 0.5,
+      "recall": 0.6666666666666666,
+      "f1-score": 0.5714285714285714,
+      "support": 3.0
+    },
+    "PCB_RESIDUE": {
+      "precision": 1.0,
+      "recall": 0.9333333333333333,
+      "f1-score": 0.9655172413793104,
+      "support": 15.0
+    },
+    "RS485_JOINT": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 7.0
+    },
+    "LCD_CONTACT": {
+      "precision": 0.25,
+      "recall": 0.2,
+      "f1-score": 0.2222222222222222,
+      "support": 5.0
+    },
+    "POWER_SUPPLY": {
+      "precision": 0.5,
+      "recall": 0.25,
+      "f1-score": 0.3333333333333333,
+      "support": 4.0
+    },
+    "RS485_DEVICE": {
+      "precision": 0.75,
+      "recall": 1.0,
+      "f1-score": 0.8571428571428571,
+      "support": 3.0
+    },
+    "LCD_DRIVER": {
+      "precision": 0.2,
+      "recall": 1.0,
+      "f1-score": 0.3333333333333333,
+      "support": 1.0
+    },
+    "accuracy": 0.7450980392156863,
+    "macro avg": {
+      "precision": 0.6272727272727273,
+      "recall": 0.7177884615384615,
+      "f1-score": 0.6291221948549535,
+      "support": 51.0
+    },
+    "weighted avg": {
+      "precision": 0.7811051693404636,
+      "recall": 0.7450980392156863,
+      "f1-score": 0.750906876160426,
+      "support": 51.0
+    }
+  },
+  "majority_prior": {
+    "CT_CALIBRATION": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 13.0
+    },
+    "SAMPLING_SOLDER": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 3.0
+    },
+    "PCB_RESIDUE": {
+      "precision": 0.29411764705882354,
+      "recall": 1.0,
+      "f1-score": 0.45454545454545453,
+      "support": 15.0
+    },
+    "RS485_JOINT": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 7.0
+    },
+    "LCD_CONTACT": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 5.0
+    },
+    "POWER_SUPPLY": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 4.0
+    },
+    "RS485_DEVICE": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 3.0
+    },
+    "LCD_DRIVER": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 1.0
+    },
+    "accuracy": 0.29411764705882354,
+    "macro avg": {
+      "precision": 0.03676470588235294,
+      "recall": 0.125,
+      "f1-score": 0.056818181818181816,
+      "support": 51.0
+    },
+    "weighted avg": {
+      "precision": 0.08650519031141869,
+      "recall": 0.29411764705882354,
+      "f1-score": 0.13368983957219252,
+      "support": 51.0
+    }
+  }
+}

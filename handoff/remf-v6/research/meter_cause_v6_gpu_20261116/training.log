@@ -1,0 +1,41 @@
+{"model": "mlp_manufacturing", "seed": 17, "macro_f1_8": 0.11882891414141414, "best_epoch": 21, "seconds": 0.5821053999999997, "device": "cuda:0"}
+{"model": "mlp_manufacturing", "seed": 43, "macro_f1_8": 0.168246336996337, "best_epoch": 43, "seconds": 0.5789327999999996, "device": "cuda:0"}
+{"model": "mlp_manufacturing", "seed": 101, "macro_f1_8": 0.08333333333333334, "best_epoch": 12, "seconds": 0.31216420000000067, "device": "cuda:0"}
+{"model": "mlp_observations", "seed": 17, "macro_f1_8": 0.7613095238095238, "best_epoch": 264, "seconds": 1.8926745, "device": "cuda:0"}
+{"model": "mlp_observations", "seed": 43, "macro_f1_8": 0.7324585137085137, "best_epoch": 292, "seconds": 1.8833210000000005, "device": "cuda:0"}
+{"model": "mlp_observations", "seed": 101, "macro_f1_8": 0.7329545454545454, "best_epoch": 207, "seconds": 1.5136052000000007, "device": "cuda:0"}
+{"model": "mlp_combined", "seed": 17, "macro_f1_8": 0.5523591174906964, "best_epoch": 81, "seconds": 0.8253283000000007, "device": "cuda:0"}
+{"model": "mlp_combined", "seed": 43, "macro_f1_8": 0.6388186047668807, "best_epoch": 118, "seconds": 0.9393244000000003, "device": "cuda:0"}
+{"model": "mlp_combined", "seed": 101, "macro_f1_8": 0.5632936507936508, "best_epoch": 129, "seconds": 0.9661541000000007, "device": "cuda:0"}
+{"model": "tabm_combined", "seed": 17, "macro_f1_8": 0.5688497291758161, "best_epoch": 112, "seconds": 1.3128881000000003, "device": "cuda:0"}
+{"model": "tabm_combined", "seed": 43, "macro_f1_8": 0.49760322523480416, "best_epoch": 96, "seconds": 1.2391831999999994, "device": "cuda:0"}
+{"model": "tabm_combined", "seed": 101, "macro_f1_8": 0.6148504273504274, "best_epoch": 142, "seconds": 1.490268699999998, "device": "cuda:0"}
+{"model": "grouped_no_response", "seed": 17, "macro_f1_8": 0.6622474747474747, "best_epoch": 59, "seconds": 4.382953100000002, "device": "cuda:0"}
+{"model": "grouped_no_response", "seed": 43, "macro_f1_8": 0.6180555555555556, "best_epoch": 57, "seconds": 3.630453799999998, "device": "cuda:0"}
+{"model": "grouped_no_response", "seed": 101, "macro_f1_8": 0.660944976076555, "best_epoch": 45, "seconds": 2.9619216, "device": "cuda:0"}
+{"model": "remf_v6", "seed": 17, "macro_f1_8": 0.6426282051282051, "best_epoch": 51, "seconds": 5.966691699999998, "device": "cuda:0"}
+{"model": "remf_v6", "seed": 43, "macro_f1_8": 0.6238184708012294, "best_epoch": 56, "seconds": 6.5574169, "device": "cuda:0"}
+{"model": "remf_v6", "seed": 101, "macro_f1_8": 0.6402777777777777, "best_epoch": 52, "seconds": 6.008848200000003, "device": "cuda:0"}
+{"model": "remf_no_groups", "seed": 17, "macro_f1_8": 0.6483115468409586, "best_epoch": 57, "seconds": 4.7794053000000005, "device": "cuda:0"}
+{"model": "remf_no_groups", "seed": 43, "macro_f1_8": 0.6562950937950938, "best_epoch": 72, "seconds": 6.3819415000000035, "device": "cuda:0"}
+{"model": "remf_no_groups", "seed": 101, "macro_f1_8": 0.5279071773636991, "best_epoch": 26, "seconds": 3.3843102999999957, "device": "cuda:0"}
+{"model": "remf_no_mask", "seed": 17, "macro_f1_8": 0.6622474747474747, "best_epoch": 61, "seconds": 5.830774499999997, "device": "cuda:0"}
+{"model": "remf_no_mask", "seed": 43, "macro_f1_8": 0.6238184708012294, "best_epoch": 56, "seconds": 5.236561399999999, "device": "cuda:0"}
+{"model": "remf_no_mask", "seed": 101, "macro_f1_8": 0.6402777777777777, "best_epoch": 52, "seconds": 8.077226199999998, "device": "cuda:0"}
+{"model": "logistic_combined", "macro_f1_8": 0.41067193675889335, "seconds": 0.03609000000000151}
+{"model": "rf_combined", "macro_f1_8": 0.472078634085213, "seconds": 0.9429210999999924}
+D:\biye\outputs\meter_v6_gpu_dependencies\joblib\externals\loky\backend\context.py:136: UserWarning: Could not find the number of physical cores for the following reason:
+[WinError 2] 系统找不到指定的文件。
+Returning the number of logical cores instead. You can silence this warning by setting LOKY_MAX_CPU_COUNT to the number of cores you want to use.
+  warnings.warn(
+  File "D:\biye\outputs\meter_v6_gpu_dependencies\joblib\externals\loky\backend\context.py", line 257, in _count_physical_cores
+    cpu_info = subprocess.run(
+  File "D:\Users\jay\anaconda3\envs\yolov9\lib\subprocess.py", line 505, in run
+    with Popen(*popenargs, **kwargs) as process:
+  File "D:\Users\jay\anaconda3\envs\yolov9\lib\subprocess.py", line 951, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "D:\Users\jay\anaconda3\envs\yolov9\lib\subprocess.py", line 1436, in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+{"model": "hist_combined", "macro_f1_8": 0.40556077694235587, "seconds": 1.4861152999999945}
+{"model": "majority_prior", "macro_f1_8": 0.04230769230769231, "seconds": 0.004456099999998742}
+TRAINING COMPLETE; selection frozen. Run evaluate.py separately.

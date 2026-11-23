@@ -1,0 +1,69 @@
+{
+  "tested_at": "2026-11-21T12:38:20.836621+08:00",
+  "method": "真实模型及隔离临时库；持久化用应用生命周期重开，不等同整机断电测试",
+  "checks": [
+    {
+      "id": "B01",
+      "name": "模板及样本下载",
+      "result": "通过",
+      "details": {
+        "template_columns": 48,
+        "workbook_sha256": "dbbba6d380ea997d94a0234b83cf7a8bfc21e38fe3bf0ecf579cd4ac2dda1f8e"
+      }
+    },
+    {
+      "id": "B02",
+      "name": "检测记录人校验",
+      "result": "通过",
+      "details": {
+        "rejected_lengths": [
+          0,
+          1,
+          81
+        ],
+        "pending_preserved": true
+      }
+    },
+    {
+      "id": "B03",
+      "name": "筛选与空查询",
+      "result": "通过",
+      "details": {
+        "pending": 1,
+        "passed": 1,
+        "enterprise": 1,
+        "unknown": 0,
+        "page_zero": 422
+      }
+    },
+    {
+      "id": "B04",
+      "name": "应用重开后数据持久化",
+      "result": "通过",
+      "details": {
+        "records": 2,
+        "diagnosis_preserved": true,
+        "scenario_preserved": true
+      }
+    },
+    {
+      "id": "B05",
+      "name": "停止应用后备份恢复",
+      "result": "通过",
+      "details": {
+        "sqlite_integrity": "ok",
+        "records": 2,
+        "record_and_diagnosis_equal": true
+      }
+    },
+    {
+      "id": "B06",
+      "name": "企业空库初始化",
+      "result": "通过",
+      "details": {
+        "total": 0,
+        "sample_download_without_file": 404
+      }
+    }
+  ]
+}

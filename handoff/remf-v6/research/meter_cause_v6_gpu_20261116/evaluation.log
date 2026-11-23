@@ -1,0 +1,80 @@
+D:\biye\outputs\meter_v6_gpu_dependencies\joblib\externals\loky\backend\context.py:136: UserWarning: Could not find the number of physical cores for the following reason:
+[WinError 2] 系统找不到指定的文件。
+Returning the number of logical cores instead. You can silence this warning by setting LOKY_MAX_CPU_COUNT to the number of cores you want to use.
+  warnings.warn(
+  File "D:\biye\outputs\meter_v6_gpu_dependencies\joblib\externals\loky\backend\context.py", line 257, in _count_physical_cores
+    cpu_info = subprocess.run(
+  File "D:\Users\jay\anaconda3\envs\yolov9\lib\subprocess.py", line 505, in run
+    with Popen(*popenargs, **kwargs) as process:
+  File "D:\Users\jay\anaconda3\envs\yolov9\lib\subprocess.py", line 951, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "D:\Users\jay\anaconda3\envs\yolov9\lib\subprocess.py", line 1436, in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+{
+  "selected_model": "mlp_observations",
+  "selected_neural": "mlp_observations",
+  "test_single_n": 51,
+  "test_fault_n": 180,
+  "test_metering3_n": 31,
+  "bootstrap_by_batch": {
+    "mlp_manufacturing": {
+      "p025": 0.03736087823774283,
+      "p975": 0.12967008324932539
+    },
+    "mlp_observations": {
+      "p025": 0.417454044117647,
+      "p975": 0.7166928366174055
+    },
+    "mlp_combined": {
+      "p025": 0.31691733162563274,
+      "p975": 0.5610404948312554
+    },
+    "tabm_combined": {
+      "p025": 0.3267931474528282,
+      "p975": 0.5026610926628715
+    },
+    "grouped_no_response": {
+      "p025": 0.37382938675907423,
+      "p975": 0.6574377519886673
+    },
+    "remf_v6": {
+      "p025": 0.3726037644787645,
+      "p975": 0.6576705133634481
+    },
+    "remf_no_groups": {
+      "p025": 0.34373204022988507,
+      "p975": 0.5827492625838214
+    },
+    "remf_no_mask": {
+      "p025": 0.3499597953216374,
+      "p975": 0.6147372742200328
+    },
+    "logistic_combined": {
+      "p025": 0.23814867424242422,
+      "p975": 0.5010718310073322
+    },
+    "rf_combined": {
+      "p025": 0.28909413838849324,
+      "p975": 0.4691645665451277
+    },
+    "hist_combined": {
+      "p025": 0.4728225644122383,
+      "p975": 0.7326388888888888
+    },
+    "majority_prior": {
+      "p025": 0.036361803519061583,
+      "p975": 0.07352941176470588
+    }
+  },
+  "paired_neural_vs_rf": {
+    "comparison": "mlp_observations minus rf_combined",
+    "p025": 0.01656214399635454,
+    "p975": 0.3573306802958337,
+    "note": "fixed 8 labels; rare classes absent from some resamples; exploratory interval"
+  },
+  "multi_n": 7,
+  "multi_top3_all_covered": 0.5714285714285714,
+  "test_single_batches": 42,
+  "source_truth_used": false,
+  "note": "Known-class evidence subset only; no accuracy claim for unconfirmed cases or enterprise data"
+}

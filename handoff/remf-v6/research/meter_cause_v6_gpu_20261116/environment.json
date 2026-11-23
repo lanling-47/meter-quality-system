@@ -1,0 +1,41 @@
+{
+  "python": "3.9.18 | packaged by conda-forge | (main, Dec 23 2023, 16:29:04) [MSC v.1929 64 bit (AMD64)]",
+  "executable": "D:\\Users\\jay\\anaconda3\\envs\\yolov9\\python.exe",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "torch": "2.5.1+cu121",
+  "cuda_runtime": "12.1",
+  "cuda_available": true,
+  "gpu": "NVIDIA GeForce RTX 4060",
+  "gpu_total_bytes": 8585216000,
+  "gpu_probe_mean": 0.06753475219011307,
+  "training_device": "cuda:0",
+  "resolved_packages": {
+    "numpy": {
+      "version": "1.26.4",
+      "path": "D:\\biye\\outputs\\meter_v6_gpu_dependencies\\numpy\\__init__.py"
+    },
+    "pandas": {
+      "version": "2.2.3",
+      "path": "D:\\biye\\outputs\\meter_v6_gpu_dependencies\\pandas\\__init__.py"
+    },
+    "scipy": {
+      "version": "1.13.1",
+      "path": "D:\\biye\\outputs\\meter_v6_gpu_dependencies\\scipy\\__init__.py"
+    },
+    "sklearn": {
+      "version": "1.5.2",
+      "path": "D:\\biye\\outputs\\meter_v6_gpu_dependencies\\sklearn\\__init__.py"
+    },
+    "matplotlib": {
+      "version": "3.9.2",
+      "path": "D:\\biye\\outputs\\meter_v6_gpu_dependencies\\matplotlib\\__init__.py"
+    },
+    "torch": {
+      "version": "2.5.1+cu121",
+      "path": "D:\\Users\\jay\\anaconda3\\envs\\yolov9\\lib\\site-packages\\torch\\__init__.py"
+    }
+  },
+  "nvidia_smi": "NVIDIA GeForce RTX 4060, 610.88, 8188 MiB",
+  "peak_cuda_allocated_bytes": 82188288,
+  "neural_trainings": 24
+}

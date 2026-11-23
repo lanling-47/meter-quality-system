@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "check": "mlp_observations future confirmation/repair fields do not affect inference",
+      "passed": true
+    },
+    {
+      "check": "mlp_observations normal meters not forced into causes; abnormal meters ranked",
+      "passed": true
+    },
+    {
+      "check": "mlp_observations missing required fields rejected",
+      "passed": true
+    }
+  ],
+  "scope": "CSV boundary, normal routing, future field leakage; not system deployment"
+}

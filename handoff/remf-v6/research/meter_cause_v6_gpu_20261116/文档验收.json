@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "document": "电表根因模型训练与测试报告.docx",
+  "pages": 8,
+  "renderer_attempt": "documents/render_docx.py",
+  "renderer_diagnosis": "LibreOffice soffice.exe was not found on PATH",
+  "fallback_renderer": "WPS Writer 12 COM ExportAsFixedFormat PDF; bundled pypdfium2 rasterization",
+  "visual_review": "All 8 final pages reviewed; no clipping or overlap; black text and grayscale tables; repeated table headers; removed inherited blue title border",
+  "qa_images_delivered": false
+}

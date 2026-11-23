@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "gpu": "NVIDIA GeForce RTX 4060",
+  "checks": [
+    {
+      "model": "mlp_combined",
+      "cuda_forward_backward": true,
+      "parameters": 5352
+    },
+    {
+      "model": "tabm_combined",
+      "cuda_forward_backward": true,
+      "parameters": 38048
+    },
+    {
+      "model": "remf_v6",
+      "cuda_forward_backward": true,
+      "parameters": 64152
+    },
+    {
+      "model": "remf_no_groups",
+      "cuda_forward_backward": true,
+      "parameters": 64152
+    },
+    {
+      "model": "remf_no_mask",
+      "cuda_forward_backward": true,
+      "parameters": 64152
+    }
+  ]
+}
